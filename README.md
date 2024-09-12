@@ -9,7 +9,7 @@
 
 ## About IT Proyek
 
-ini adalah proyek tugas matakuliah web lanjut
+ini adalah proyek tugas matakuliah web lanjut, ini perbaikan branch readme
 
 
 ## About Laravel
