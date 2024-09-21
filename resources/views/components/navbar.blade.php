@@ -8,8 +8,10 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/" class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700' }} rounded-md  px-3 py-2 text-sm font-medium " aria-current="page">Home</a>
-              <a href="blog" class="{{ request()->is('blog') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700' }} rounded-md px-3 py-2 text-sm font-medium">Blog</a>
+              
+              <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+              <x-nav-link href="/posts" :active="request()->is('posts')">Blog</x-nav-link>
+
             </div>
           </div>
         </div>
