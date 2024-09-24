@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script src="//unpkg.com/alpinejs" defer></script>
     <title>Bang Raja</title>
-</head>
-<body class="h-full">
-<div class="min-h-full">
+</head class="h-full">
+<body>
+<div class="flex h-screen">
+    
+    <x-navbar></x-navbar>
 
-<x-Navbar></x-Navbar>
-
-<x-Header>{{ $title }}</x-Header>
-
-  <main>
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Your content -->
-       <p>{{ $slot }}</p>
-    </div>
-  </main>
-</div>
+    
+    <main class="flex-1">
+        <header>
+            <div class="bg-yellow-300 shadow m-0">
+                <div class="mx-0 px-4 py-8 sm:px-6 lg:px-8 border-b-2 border-gray-300">
+                    
+                </div>
+            </div>
+        </header>
+            <h1 class="text-3xl font-bold text-gray-800 ml-4 mt-8"> {{ $title }} </h1>
+        {{ $slot }}
+    </main>
 </body>
 </html>

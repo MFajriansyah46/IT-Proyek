@@ -39,9 +39,23 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/', function () {
+    return view('dashboard',['title' => 'Dashboard']);
 });
+
+Route::get('/users', function () {
+    return view('users',['title' => 'Users']);
+});
+
+Route::get('/rooms', function () {
+    return view('rooms',['title' => 'Rooms']);
+});
+
+Route::get('/buildings', function () {
+    return view('buildings',['title' => 'Buildings']);
+});
+
+
 
 
 Route::get('/welcome', function () {
