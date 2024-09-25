@@ -13,11 +13,11 @@
         <tbody class="bg-white divide-y divide-gray-200">
             @foreach ( $users as user)
                 <tr class="border-b-2">
-                    <td class="p-2 text-left"> {{ $user->id }} </td>
-                    <td class="p-2 text-left"> {{ $user->name }} </td>
-                    <td class="p-2 text-left"> {{ $user->email }} </td>
-                    <td class="p-2 text-left"> {{ $user->email_verified-at }} </td>
-                </trc>
+                    <td class="p-2 text-left"> {{ $user['id'] }} </td>
+                    <td class="p-2 text-left"> {{ $user->['name'] }} </td>
+                    <td class="p-2 text-left"> {{ $user->['email'] }} </td>
+                    <td class="p-2 text-left"> {{ $user->['email_verified-at'] }} </td>
+                </tr>
             @endforeach
         </tbody>
     </table>

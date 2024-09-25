@@ -15,22 +15,6 @@
                 <p>Available Products</p>
             </div>
         </div>
-        <div class="mt-8 overflow-x-auto">
-            <table class="min-w-full">
-                <thead>
-                    <tr> 
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Contact</th>
-                        <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                    </tr>
-                </thead>
-
-                <tbody class="bg-white divide-y divide-gray-200">
-
-                </tbody>
-            </table>
-        </div>
+        
     </div>
 </x-layout>
