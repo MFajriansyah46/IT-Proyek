@@ -28,12 +28,7 @@
                 </thead>
 
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <tr>
-                        <td>Adi Prasetya</td>
-                        <td>Manager</td>
-                        <td>Active</td>
-                        <td>6281251960000</td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
