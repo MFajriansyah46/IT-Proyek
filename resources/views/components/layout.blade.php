@@ -23,8 +23,10 @@
                 </div>
             </div>
         </header>
-            <h1 class="text-3xl font-bold text-gray-800 ml-4 mt-8"> {{ $title }} </h1>
-        {{ $slot }}
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-gray-800 mt-8"> {{ $title }} </h1>
+            {{ $slot }}
+        </div>
     </main>
 </body>
 </html>

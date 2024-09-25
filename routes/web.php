@@ -3,6 +3,7 @@
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use  App\Models\Post;
+use  App\Models\User;
 
 Route::get('/', function () {
     return view('home',['title' => 'Home Page']);
@@ -29,7 +30,7 @@ Route::get('/', function () {
 });
 
 Route::get('/users', function () {
-    return view('users',['title' => 'Users']);
+    return view('users',['title' => 'Users' , 'users' => User::all()]);
 });
 
 Route::get('/rooms', function () {
