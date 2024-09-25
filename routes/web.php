@@ -20,21 +20,6 @@ Route::get('/posts/{post:slug}', function(Post $post) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('/login', function () {
     return view('login');
 });
