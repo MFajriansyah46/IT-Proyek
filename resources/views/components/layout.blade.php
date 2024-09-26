@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>Bang Raja</title>
 </head class="h-full">
 <body>
@@ -15,11 +15,8 @@
     <x-navbar></x-navbar>
 
     <main class="flex-1 overflow-auto">
-        <header>
-            <div class="bg-yellow-300 shadow m-0">
-                <div class="mx-0 px-4 py-8 sm:px-6 lg:px-8 border-b-2 border-gray-300">
-                    
-                </div>
+        <header class="shadow-lg">
+            <div class="px-4 py-8 bg-yellow-300 shadow m-0">
             </div>
         </header>
         <div class="container mx-auto px-4">
