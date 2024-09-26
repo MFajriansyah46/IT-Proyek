@@ -5,28 +5,13 @@ use Illuminate\Support\Facades\Route;
 use  App\Models\Post;
 use  App\Models\User;
 
-Route::get('/', function () {
-    return view('home',['title' => 'Home Page']);
-});
-
-Route::get('/posts', function () {
-    return view('posts',['title' => 'Blog','posts' => Post::all()]);
-});
-
-Route::get('/posts/{post:slug}', function(Post $post) {
-
-    return view('post',['title' => 'Single Post','post' => $post]);
-});
-
-
-
-
-Route::get('/login', function () {
-    return view('login');
-});
 
 Route::get('/', function () {
     return view('dashboard',['title' => 'Dashboard']);
+});
+
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/users', function () {
@@ -44,6 +29,12 @@ Route::get('/buildings', function () {
 
 
 
-Route::get('/welcome', function () {
-    return view('welcome');
+
+
+
+
+
+Route::get('/posts/{post:slug}', function(Post $post) {
+
+    return view('post',['title' => 'Single Post','post' => $post]);
 });

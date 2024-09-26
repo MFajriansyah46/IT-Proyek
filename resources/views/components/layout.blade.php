@@ -10,12 +10,11 @@
     <title>Bang Raja</title>
 </head class="h-full">
 <body>
-<div class="flex h-screen">
+<div class="flex h-screen w-screen fixed">
     
     <x-navbar></x-navbar>
 
-    
-    <main class="flex-1">
+    <main class="flex-1 overflow-auto">
         <header>
             <div class="bg-yellow-300 shadow m-0">
                 <div class="mx-0 px-4 py-8 sm:px-6 lg:px-8 border-b-2 border-gray-300">
@@ -24,7 +23,7 @@
             </div>
         </header>
         <div class="container mx-auto px-4">
-            <h1 class="text-3xl font-bold text-gray-800 mt-8"> {{ $title }} </h1>
+            <h1 class="text-4xl font-bold text-gray-800 mt-8 mb-6"> {{ $title }} </h1>
             {{ $slot }}
         </div>
     </main>
