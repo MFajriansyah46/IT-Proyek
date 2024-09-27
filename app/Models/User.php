@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model {
     use HasFactory;
-    protected $fillabel = ['name','email','email_verified_at'];
     protected $casts = ['email_verified_at' => 'datetime'];
 }
