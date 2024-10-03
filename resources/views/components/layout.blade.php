@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <script src="/assets/jquery-3.7.1.js"></script>
+    <script src="/assets/jquery.js"></script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <title>Bang Raja</title>
   </head class="h-full">
