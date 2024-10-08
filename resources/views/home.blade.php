@@ -1,4 +1,6 @@
 <x-Layout>
   <x-slot:title>{{ $title }}</x-slot>
-  Welcome My Home Page
+  <body>
+    <h1>WELCOME MY HOME PAGE</h1>
+  </body>
 </x-Layout>
