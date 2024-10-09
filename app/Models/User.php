@@ -5,7 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model {
+class User extends Model
+{
     use HasFactory;
+    protected $fillable = [
+        'id',
+        'name',
+        'phone_number',
+        'username',
+        'password'
+    ];
     protected $casts = ['email_verified_at' => 'datetime'];
 }

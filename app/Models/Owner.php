@@ -3,12 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable 
-{
+class Owner extends Authenticatable  {
     use HasFactory, Notifiable;
 
     /**
@@ -19,11 +19,13 @@ class User extends Authenticatable
     protected $fillable = [
         'id',
         'name',
-        'email',
-        'email_verified_at',
+        'no_rekening',
+        'phone_number',
+        'username',
+        'password'
     ];
 
-    protected $casts = ['email_verified_at' => 'datetime'];
+    protected $casts = ['account_verified_at' => 'datetime'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,5 +48,8 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function posts(): HasMany {
+        return $this->HasMany(Building::class, 'owner_id');
     }
 }
