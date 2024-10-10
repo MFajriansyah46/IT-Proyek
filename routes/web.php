@@ -1,12 +1,12 @@
 <?php
 
-use  App\Models\User;
-use  App\Models\Owner;
-use  App\Models\Building;
+use App\Models\User;
+use App\Models\Owner;
+use App\Models\Building;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\RoomController;
 
 Route::get('/', function () {
     return view('dashboard',['title' => 'Dashboard']);
@@ -29,27 +29,29 @@ Route::get('/users/update/{id}', [UserController::class,'update']);
 
 Route::get('/users/delete/{id}', [UserController::class,'delete']);
 
+// room controller
+
+// Route untuk menampilkan daftar rooms
+Route::get('/rooms', [RoomController::class, 'read']);
+
+// Route untuk menampilkan form tambah room
+Route::get('/rooms/add', [RoomController::class, 'add']);
+
+// Route untuk menyimpan room baru
+Route::post('/rooms/submit', [RoomController::class, 'submit']);
+
+// Route untuk menampilkan form edit room berdasarkan id
+Route::get('/rooms/edit/{id}', [RoomController::class, 'edit']);
+
+// Route untuk memperbarui data room berdasarkan id
+Route::post('/rooms/update/{id}', [RoomController::class, 'update']);
+
+// Route untuk menghapus room berdasarkan id
+Route::get('/rooms/delete/{id}', [RoomController::class, 'delete']);
 
 
-//room controller
-Route::get('/rooms', function () {
-    return view('rooms',['title' => 'Rooms']);
-});
 
-
-
-
-//building controller
+// building controller
 Route::get('/buildings', function () {
     return view('buildings',['title' => 'Buildings', 'buildings' => Building::all()]);
 });
-
-
-
-
-
-
-
-// Route::get('/posts/{post:slug}', function(Post $post) {
-//     return view('post',['title' => 'Single Post','post' => $post]);
-// });
