@@ -16,6 +16,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/register', function () {
+    return view('register');
+});
+
 // user controller
 Route::get('/users', [UserController::class,'read']);
 
@@ -31,22 +35,16 @@ Route::get('/users/delete/{id}', [UserController::class,'delete']);
 
 // room controller
 
-// Route untuk menampilkan daftar rooms
 Route::get('/rooms', [RoomController::class, 'read']);
 
-// Route untuk menampilkan form tambah room
 Route::get('/rooms/add', [RoomController::class, 'add']);
 
-// Route untuk menyimpan room baru
 Route::post('/rooms/submit', [RoomController::class, 'submit']);
 
-// Route untuk menampilkan form edit room berdasarkan id
 Route::get('/rooms/edit/{id_kamar}', [RoomController::class, 'edit']);
 
-// Route untuk memperbarui data room berdasarkan id
 Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update']);
 
-// Route untuk menghapus room berdasarkan id
 Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
 
 
