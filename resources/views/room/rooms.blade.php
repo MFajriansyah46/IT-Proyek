@@ -10,7 +10,7 @@
 
     <x-table.header :headers="['No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Rating Kamar', 'Aksi']">
         @foreach ($rooms as $i=>$room)
-            <tr class="hover:bg-yellow-200">
+            <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
                 <x-table.data>{{ $room->no_kamar }}</x-table.data>
                 <x-table.data>{{ $room->harga_kamar }}</x-table.data>
