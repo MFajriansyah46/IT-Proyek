@@ -15,9 +15,6 @@
             <label>Rating</label>
             <input type="number" name="rating_kamar" class="mb-4">
 
-        <!-- <label>Konfirmasi password</label>
-        <input type="password" name="password_confirm"> -->
-
         <input type="submit">
     </form>
 </x-layout>

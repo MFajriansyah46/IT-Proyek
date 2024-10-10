@@ -41,13 +41,12 @@ Route::get('/rooms/add', [RoomController::class, 'add']);
 Route::post('/rooms/submit', [RoomController::class, 'submit']);
 
 // Route untuk menampilkan form edit room berdasarkan id
-Route::get('/rooms/edit/{id}', [RoomController::class, 'edit']);
+Route::get('/rooms/edit/{room:id_kamar}', [RoomController::class, 'edit']);
 
 // Route untuk memperbarui data room berdasarkan id
-Route::post('/rooms/update/{id}', [RoomController::class, 'update']);
+Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update']);
 
-// Route untuk menghapus room berdasarkan id
-Route::get('/rooms/delete/{id}', [RoomController::class, 'delete']);
+Route::delete('/rooms/delete/{room:id_kamar}', [RoomController::class, 'delete']);
 
 
 

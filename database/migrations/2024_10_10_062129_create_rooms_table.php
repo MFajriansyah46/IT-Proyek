@@ -16,9 +16,8 @@ return new class extends Migration
             // $table->unsignedBigInteger('id_bangunan'); // ID yang berhubungan dengan tabel bangunan
             $table->string('no_kamar'); // Nomor kamar
             $table->decimal('harga_kamar', 10, 2); // Harga kamar, dengan format desimal
-            $table->integer('kecepatan_internet'); // Kecepatan internet dalam Mbps
+            $table->bigInteger('kecepatan_internet'); // Kecepatan internet dalam Mbps
             $table->decimal('rating_kamar', 3, 2); // Rating kamar (misalnya 4.75)
-
             $table->timestamps();
 
             // // Foreign key constraint (hubungan dengan tabel bangunan jika ada)
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('tenants');
     }
 };

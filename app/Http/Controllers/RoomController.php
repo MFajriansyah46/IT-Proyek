@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Room;
 use Laravel\Sail\Console\AddCommand;
+use Illuminate\Support\Facades\Hash;
 
 class RoomController extends Controller {
     //
     public function read(){
-        $rooms = Room::all();
+        $rooms = Room::get();
         return view('room.rooms',compact('rooms'));
     }    
 
@@ -28,13 +29,14 @@ class RoomController extends Controller {
             return redirect('/rooms');
     }
 
-    public function edit($id){
-        $rooms = Room::find($id);
-        return view('room.editRoom',compact('rooms'));
+    public function edit($id_kamar)
+    {
+        $room = Room::where('id_kamar', $id_kamar)->firstOrFail();
+        return view('room.editRoom', compact('room'));
     }
-    
-    function update(Request $request, $id){
-        $room = Room::find($id);
+        
+    public function update(Request $request, $id_kamar){
+        $room = Room::findOrFail($id_kamar);
         $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;
@@ -44,10 +46,17 @@ class RoomController extends Controller {
         return redirect('/rooms');
     }
     
-    function delete($id){
-        $room = Room::find($id);
+    public function delete($id_kamar)
+    {
+        $room = Room::where('id_kamar', $id_kamar)->firstOrFail();
         $room->delete();
-        
-        return redirect('/rooms');
+        return redirect()->route('/rooms');
     }
+        
+    // function delete($id_kamar){
+    //     $room = Room::find($id_kamar);
+    //     $room->delete();
+        
+    //     return redirect('/rooms');
+    // }
 }
