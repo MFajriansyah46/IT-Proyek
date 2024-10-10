@@ -1,4 +1,5 @@
 <x-layout>
+
     <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Rooms</h1>
     <a href="/rooms/add">
         <button type="button" class="flex mb-2 ml-auto px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
@@ -26,7 +27,7 @@
                         </button>
                     </a>
 
-                    <a href="/rooms/delete/{{ $room->id_kamar }}">
+                    <a href="/rooms/delete/{{ $room->id_kamar }}" onclick="return confirmDelete();">
                         <button type="button" class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                             <!-- Icon Delete -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
@@ -34,9 +35,11 @@
                             </svg>
                         </button>
                     </a>
-                    </div>
+                </div>
                 </x-table.data>
             </tr>
         @endforeach
     </x-table.header>
+    <x-confirmDelete />
+
 </x-layout>
