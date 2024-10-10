@@ -12,14 +12,9 @@ class Room extends Model
     protected $primaryKey = 'id_kamar'; // Kolom primary key yang digunakan
     
     public $timestamps = true; // Jika tabel memiliki kolom timestamps (created_at, updated_at)
+
+    use HasFactory;
+
+    // Kolom-kolom yang bisa diisi secara massal
+    protected $fillable = ['no_kamar', 'harga_kamar', 'kecepatan_internet', 'rating_kamar'];
 }
-
-// class Room extends Model
-// {
-//     use HasFactory;
-
-//     // Kolom-kolom yang bisa diisi secara massal
-//     protected $fillable = ['no_kamar', 'harga_kamar', 'kecepatan_internet', 'rating_kamar'];
-
-
-// }

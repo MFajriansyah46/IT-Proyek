@@ -1,5 +1,4 @@
 <x-layout>
-    
     <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Rooms</h1>
     <a href="/rooms/add">
         <button type="button" class="flex mb-2 ml-auto px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
