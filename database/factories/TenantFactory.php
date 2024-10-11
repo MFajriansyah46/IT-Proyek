@@ -2,16 +2,15 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Owner>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tenant>
  */
-class OwnerFactory extends Factory
+class TenantFactory extends Factory
 {
-
     protected static ?string $password;
     /**
      * Define the model's default state.
@@ -22,13 +21,13 @@ class OwnerFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'rekening_number' => fake()->creditCardNumber(),
             'phone_number' => fake()->phoneNumber(),
             'username' => fake()->userName(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(16),
         ];
     }
+
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [

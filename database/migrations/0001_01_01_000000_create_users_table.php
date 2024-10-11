@@ -11,18 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('owners', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->bigInteger('rekening_number');
-            $table->bigInteger('phone_number');
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->timestamp('account_verified_at')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('username')->primary();
             $table->string('token');

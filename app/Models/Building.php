@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Building extends Model
 {
     use HasFactory;
-    public function author(): BelongsTo {
+    public function building(): BelongsTo {
         return $this->belongsTo(Owner::class);
     }
 
