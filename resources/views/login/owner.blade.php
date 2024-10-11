@@ -1,14 +1,6 @@
 <x-front-layout>
 
-
-
-  @if (session()->has('loginError'))
-    <div class="p-4 mx-auto bg-slate-400 max-w-sm">
-      {{ session('loginError') }}
-    </div>
-  @endif
-
-  <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="flex max-w-md mx-auto mt-16 flex-col justify-center px-6 py-12 lg:px-8 bg-white shadow-md rounded-lg">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <img src="/images/logo bang raja3.png" class="h-32 w-auto mx-auto" alt="">
       <h2 class="mt-4 text-center text-2xl leading-9 tracking-tight text-gray-900">Login into your account as owner</h2>
@@ -40,4 +32,3 @@
     </div>
   </div>
 </x-front-layout>
-

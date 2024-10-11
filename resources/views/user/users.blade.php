@@ -2,7 +2,7 @@
     
     <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Users</h1>
     <button type="button" class="mb-2 px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
-        <a href="/users/add" class="flex">
+        <a href="/register" class="flex">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16"><path fill="white" fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z" clip-rule="evenodd"/></svg>
                 <h1 class="my-auto ml-2 text-lg">Add</h1>
         </a>
@@ -17,7 +17,7 @@
                 <x-table.data>{{ $user->phone_number }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
-                        <a href="/users/edit/{{ $user->id }}">
+                        <a href="/users/edit/{{ $user->remember_token }}">
                             <button type="button"
                                 class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" iewBox="0 0 32 32">
@@ -25,7 +25,7 @@
                                 </svg>
                             </button>
                         </a>
-                        <a href="/users/delete/{{ $user->id }}">
+                        <a href="/users/delete/{{ $user->remember_token }}">
                             <button type="button"
                                 class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">

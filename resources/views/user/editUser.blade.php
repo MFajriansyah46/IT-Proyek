@@ -2,19 +2,35 @@
     
     <div class="px-8 bg-white shadow-md">
         <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-3">Edit Users</h1>
-        <form action="/users/update/ {{ $users->id }}" class=" container flex flex-col">
+        <form action="/users/update/{{ $users->remember_token }}" class=" container flex flex-col gap-4">
             @csrf
-            <label>Nama</label>
-            <input type="text" name="name" value="{{ $users->name }}" class="mb-4">
+            <div>
+                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+                <div class="mt-2">
+                    <input id="name" name="name" type="text" required value="{{ $users->name }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+
+            <div>
+                <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
+                <div class="mt-2">
+                    <input id="phone_number" name="phone_number" type="number" required value="{{ $users->phone_number }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
     
-            <label>Nomor Telepon</label>
-            <input type="number" name="phone_number" value="{{ $users->phone_number }}" class="mb-4">
-    
-            <label>Username</label>
-            <input type="text" name="username" value="{{ $users->username }}" class="mb-4">
-    
-            <label>Password</label>
-            <input type="password" name="password" value="{{ $users->password }}" class="mb-4">
+            <div>
+                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                <div class="mt-2">
+                    <input id="username" name="username" type="text" required value="{{ $users->username }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
+
+            <div>
+                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                <div class="mt-2">
+                    <input id="password" name="password" type="password" required value="{{ $users->password }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+            </div>
     
             <!-- <label>Konfirmasi password</label>
             <input type="password" name="password_confirm"> -->

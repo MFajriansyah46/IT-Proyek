@@ -1,11 +1,12 @@
-function toggleDropdown() {
-    const dropdown = document.getElementById('dropdown-menu');
-    dropdown.classList.toggle('hidden');
-    }
+$(document).ready(function(){
+    $('#button-login-eror').click(function(){
+        $('#login-eror').hide();
+    });
+});
 
-    window.onclick = function(event) {
-    const dropdown = document.getElementById('dropdown-menu');
-    if (!event.target.closest('#menu-button')) {
-    dropdown.classList.add('hidden');
-    }
-}
+$(document).ready(function(){
+    $('#buttonBar').click(function(){
+        $('#fullBar').fadeToggle(10);
+        // $(this).css('background-color', '#e5e7eb');
+    });
+});

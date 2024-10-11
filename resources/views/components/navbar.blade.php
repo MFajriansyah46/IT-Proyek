@@ -20,12 +20,3 @@
     <x-nav-link href="/buildings" :active="request()->is('buildings')"><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#e5e7eb" d="M10 10.111V1l11 6v14H3V7zm2-5.742v8.82l-7-3.111V19h14V8.187z"/></svg></x-nav-link>
 
 </nav> -->
-
-<script>
-    $(document).ready(function(){
-        $('#buttonBar').click(function(){
-            $('#fullBar').fadeToggle(10);
-            // $(this).css('background-color', '#e5e7eb');
-        });
-    });
-</script>

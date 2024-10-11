@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class OwnerLoginController extends Controller
+class OwnerController extends Controller
 {
-    public function read() {
+    public function form() {
         return view('login.owner');
     }
 
@@ -23,6 +23,6 @@ class OwnerLoginController extends Controller
             return redirect()->intended('/');   
         }
 
-        return back()->with('loginError','Login Gagal!');
+        return back()->with('loginError','Login failed!');
     }
 }

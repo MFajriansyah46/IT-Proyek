@@ -4,35 +4,44 @@ use App\Models\Building;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TenantController;
-use App\Http\Controllers\OwnerLoginController;
-use App\Http\Controllers\TenantLoginController;
+use App\Http\Controllers\OwnerController;
+
+
 
 Route::get('/', function () {
     return view('dashboard',['title' => 'Dashboard']);
 });
 
-Route::get('/owner-login', [OwnerLoginController::class, 'read']);
-Route::post('/owner-login', [OwnerLoginController::class, 'authenticate']);
 
 
-
-
-// user controller
+// tenant controller
 Route::get('/users', [TenantController::class,'read']);
-
-Route::get('/users/add', [TenantController::class,'add']);
 
 Route::post('/users/submit', [TenantController::class,'submit']);
 
-Route::get('/users/edit/{id}', [TenantController::class,'edit']);
+Route::get('/users/edit/{remember_token}', [TenantController::class,'edit']);
 
-Route::get('/users/update/{id}', [TenantController::class,'update']);
+Route::get('/users/update/{remember_token}', [TenantController::class,'update']);
 
-Route::get('/users/delete/{id}', [TenantController::class,'delete']);
+Route::get('/users/delete/{remember_token}', [TenantController::class,'delete']);
 
-Route::get('/login', [TenantController::class, 'readLogin']);
+Route::get('/login', [TenantController::class, 'formLogin']);
 
 Route::post('/login', [TenantController::class, 'authenticate']);
+
+Route::get('/register', [TenantController::class, 'formRegister']);
+
+Route::post('/register', [TenantController::class, 'register']);
+
+
+
+// owner controller
+Route::get('/owner-login', [OwnerController::class, 'form']);
+
+Route::post('/owner-login', [OwnerController::class, 'authenticate']);
+
+
+
 
 // room controller
 
