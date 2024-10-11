@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-white-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <script src="//unpkg.com/alpinejs" defer></script>
-    <title>Bang Raja</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  @vite('resources/css/app.css')
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <title>Bang Raja</title>
 </head class="h-full">
 <body>
 <section class="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -17,7 +17,7 @@
     <div class="md:w-1/2 px-8 md:px-16">
         
       <div class="flex justify-center items-center mb-6">
-        <img src="/images/logo bang raja3.png" class="h-20 w-auto" alt="">
+        <img src="/images/logo bang raja3.png" class="h-24 w-auto" alt="">
       </div>
 
       <h2 class="font-bold text-4xl text-center text-[#002D74]">Login</h2>
@@ -43,8 +43,8 @@
 
       <div class="mt-3 text-xs flex justify-between items-center text-[#002D74]">
         <p>Don't have an account?</p>
-        <button class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</button>
-      </div>
+				<a href="/register" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</a>
+				</div>
     </div>
 
     <!-- image -->
