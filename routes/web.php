@@ -34,7 +34,6 @@ Route::get('/users/update/{id}', [UserController::class,'update']);
 Route::get('/users/delete/{id}', [UserController::class,'delete']);
 
 // room controller
-
 Route::get('/rooms', [RoomController::class, 'read']);
 
 Route::get('/rooms/add', [RoomController::class, 'add']);
