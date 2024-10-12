@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot>
+    <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Dashboard</h1>
     <div class="grid grid-cols-4 gap-6">
         <div class="bg-blue-500 rounded-lg p-4 text-white">
             <h2 class="text-2xl">120</h2>

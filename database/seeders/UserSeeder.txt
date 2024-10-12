@@ -1,0 +1,27 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\User;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        User::table('users')->insert([
+            'name' => 'Rusida',
+            'rekening_number' => 4434758688968695,
+            'phone_number' => 6282251964943,
+            'username' => 'rusida',
+            'password' => 'rusida124',
+            'remember_token' => 'adrg5rfeWR',
+        ]);
+
+        User::factory(2)->create();
+    }
+}
