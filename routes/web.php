@@ -25,16 +25,3 @@ Route::get('/rooms', function () {
 Route::get('/buildings', function () {
     return view('buildings',['title' => 'Buildings']);
 });
-
-
-
-
-
-
-
-
-
-Route::get('/posts/{post:slug}', function(Post $post) {
-
-    return view('post',['title' => 'Single Post','post' => $post]);
-});
