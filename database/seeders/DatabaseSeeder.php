@@ -17,10 +17,19 @@ class DatabaseSeeder extends Seeder
     {
 
         Owner::create([
+            'name' => 'M. Fajriansyah',
+            'rekening_number' => 893854483465346695,
+            'phone_number' => 6282251964943,
+            'username' => 'fazzarY',
+            'password' => 'qwertyui',
+            'remember_token' => Str::random(16),
+        ]);
+
+        Owner::create([
             'name' => 'Rusida',
             'rekening_number' => 4434758688968695,
             'phone_number' => 6287845964904,
-            'username' => 'rusida',
+            'username' => 'rusida443',
             'password' => 'rusida123',
             'remember_token' => Str::random(16),
         ]);

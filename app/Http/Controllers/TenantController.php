@@ -16,30 +16,21 @@ class TenantController extends Controller {
         return view('user.users',compact('users'));
     }
 
-    public function submit(Request $request) {
-            $user = new Tenant;
-            $user->name = $request->name;
-            $user->phone_number = $request->phone_number;
-            $user->username = $request->username;
-            $user->password = $request->password;
-            $user->save();
-
-            return redirect('/users');
-    }
-
     public function edit($remember_token){
         $users = Tenant::where('remember_token', $remember_token)->first();
         return view('user.editUser',compact('users'));
     }
     
-    public function update(Request $request, $remember_token){
-        $user = Tenant::where('remember_token', $remember_token)->first();
+    public function update(Request $request){
+
+        // $request->file('image')->store('profile-images');
+        $user = Tenant::where('remember_token', $request->remember_token)->first();
         $user->name = $request->name;
         $user->phone_number = $request->phone_number;
+        $user->image = $request->file('image')->store('profile-images');;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->update();
-
         return redirect('/users');
     }
     

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OwnerController extends Controller
 {
-    public function form() {
+    public function formLogin() {
         return view('login.owner');
     }
 
@@ -20,9 +20,20 @@ class OwnerController extends Controller
 
         if(Auth::guard('owner')->attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/');   
+            return redirect()->intended('/');
         }
 
         return back()->with('loginError','Login failed!');
+    }
+
+    public function logout(Request $request) {
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/home');
     }
 }

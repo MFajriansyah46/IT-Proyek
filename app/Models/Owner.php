@@ -9,16 +9,10 @@ class Owner extends User
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'id',
-    //     'name',
-    //     'rekening_number',
-    //     'phone_number',
-    //     'username',
-    //     'password'
-    // ];
+    protected $guarded = ['id'];
+    
 
-    public function owner(): HasMany {
+    public function buildings(): HasMany {
         return $this->HasMany(Building::class, 'owner_id');
     }
 }

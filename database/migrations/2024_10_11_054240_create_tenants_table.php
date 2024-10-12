@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->bigInteger('phone_number');
+            $table->string('image')->nullable();
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();

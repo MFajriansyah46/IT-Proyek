@@ -3,8 +3,8 @@
     <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Rooms</h1>
     <button type="button" class="mb-2 px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
         <a href="/rooms/add" class="flex">
-                <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16"><path fill="white" fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z" clip-rule="evenodd"/></svg>
-                <h1 class="my-auto ml-2 text-lg">Add</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16"><path fill="white" fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z" clip-rule="evenodd"/></svg>
+            <h1 class="my-auto ml-2 text-lg">Add</h1>
         </a>
     </button>
 
@@ -26,7 +26,6 @@
                             </svg>
                         </button>
                     </a>
-
                     <a href="/rooms/delete/{{ $room->id_kamar }}">
                         <button type="button" class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                             <!-- Icon Delete -->
