@@ -15,6 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Tenant::create([
+            'name' => 'M. Fajriansyah',
+            'phone_number' => 6282251964943,
+            'username' => 'fazzar.yusuf',
+            'password' => 'barabaidangers',
+            'remember_token' => Str::random(16),
+        ]);
+
+        Tenant::factory(60)->create();
 
         Owner::create([
             'name' => 'M. Fajriansyah',
@@ -34,14 +43,11 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(16),
         ]);
 
-        Tenant::create([
-            'name' => 'M. Fajriansyah',
-            'phone_number' => 6282251964943,
-            'username' => 'fazzar.yusuf',
-            'password' => 'barabaidangers',
-            'remember_token' => Str::random(16),
-        ]);
+        
 
-        Tenant::factory(119)->create();
+
+
+
+
     } 
 }

@@ -8,13 +8,6 @@
     <x-nav-link href="/rooms" :active="request()->is('rooms')"><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#e5e7eb" d="m10.821 2.003l.1.017l8.5 2a.75.75 0 0 1 .572.627L20 4.75v14.5a.75.75 0 0 1-.48.7l-.098.03l-8.5 2a.75.75 0 0 1-.915-.628L10 21.25V2.75a.75.75 0 0 1 .723-.75zm.679 1.694v16.606l7-1.647V5.344zM9 4v1.5H5.5v13H9V20H4.75a.75.75 0 0 1-.743-.648L4 19.25V4.75a.75.75 0 0 1 .648-.743L4.75 4zm5 7a1 1 0 1 1 0 2a1 1 0 0 1 0-2"/></svg>Rooms</x-nav-link>
     <x-nav-link href="/buildings" :active="request()->is('buildings')"><svg xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#e5e7eb" d="M10 10.111V1l11 6v14H3V7zm2-5.742v8.82l-7-3.111V19h14V8.187z"/></svg>Buildings</x-nav-link>
     
-    <form method="post" action="/owner-logout">
-        @csrf
-        <button type="submit">
-            <h1 class="text-md text-white ml-8">Logout</h1>
-        </button>
-    </form>
-    
 </nav>
 
 <!-- <nav class="flex flex-col bg-gray-800 w-auto" id="halfBar">
