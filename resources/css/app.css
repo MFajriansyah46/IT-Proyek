@@ -5,3 +5,11 @@
 div[role="menu"] {
     display: none;
 }
+
+.right-3\/8 {
+    right: 38%;
+}
+
+.w-100 {
+    width: 28rem /* 384px */;
+}

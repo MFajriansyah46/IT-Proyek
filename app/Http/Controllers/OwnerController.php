@@ -20,7 +20,7 @@ class OwnerController extends Controller
 
         if(Auth::guard('owner')->attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
         }
 
         return back()->with('loginError','Login failed!');

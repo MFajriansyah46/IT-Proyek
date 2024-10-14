@@ -13,6 +13,7 @@ class TenantController extends Controller {
     //
     public function read(){
         $users = Tenant::get();
+
         return view('user.users',compact('users'));
     }
 
@@ -37,10 +38,9 @@ class TenantController extends Controller {
         return redirect('/users');
     }
     
-    public function delete($remember_token){
-        $user = Tenant::where('remember_token', $remember_token)->first();
+    public function delete(Request $request){
+        $user = Tenant::where('remember_token', $request->remember_token)->first();
         $user->delete();
-        
         return redirect('/users');
     }
 

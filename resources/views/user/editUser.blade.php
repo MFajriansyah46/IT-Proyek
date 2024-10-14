@@ -9,11 +9,12 @@
 
             <div class="flex flex-col items-center justify-center">
                 <div class="relative">
-                    <img class="w-32 h-32 rounded-full border object-cover" id="profileImage" src="/storage/{{ $users->image }}" alt=".">
+                    <img class="w-32 h-32 rounded-full border object-cover" id="profileImage"
+                        src="/storage/{{ $users->image }}" alt=".">
                     <label
-                        class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full cursor-pointer hover:bg-blue-600">
-                        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M16.88 3.55A1.13 1.13 0 0 1 18 4.67v10.67a1.13 1.13 0 0 1-1.13 1.12H3.13A1.13 1.13 0 0 1 2 15.34V4.67a1.13 1.13 0 0 1 1.13-1.12h2.1L6.5 2.9a1.13 1.13 0 0 1 .8-.33h5.41c.31 0 .59.12.8.33l1.27 1.45h2.1zM10 6.67a1.13 1.13 0 1 0 0 2.27 1.13 1.13 0 0 0 0-2.27zm3.33 6.67H6.67a.67.67 0 0 0 0 1.34h6.66a.67.67 0 0 0 0-1.34z" />
+                        class="absolute bottom-0 right-0 bg-gray-800 text-white opacity-55 p-1 rounded-full cursor-pointer hover:bg-gray-400">
+                        <svg class="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill="#ffffff" d="M8.123 2a1.5 1.5 0 0 0-1.34.826L6.193 4h-1.69a2.5 2.5 0 0 0-2.5 2.5v8a2.5 2.5 0 0 0 2.5 2.5h3.5q.012-.171.055-.347l.375-1.498c.116-.464.335-.896.639-1.263A4.002 4.002 0 0 1 9.999 6a4 4 0 0 1 3.888 3.056l.216-.215a2.87 2.87 0 0 1 3.9-.147V6.499a2.5 2.5 0 0 0-2.5-2.5h-1.689l-.585-1.17A1.5 1.5 0 0 0 11.887 2zM13 9.945a3 3 0 1 0-3.055 3.054zm1.81-.397l-4.83 4.83a2.2 2.2 0 0 0-.577 1.02l-.375 1.498a.89.89 0 0 0 1.079 1.078l1.498-.374a2.2 2.2 0 0 0 1.02-.578l4.83-4.83a1.87 1.87 0 0 0-2.645-2.644" />
                         </svg>
                         <input name="image" type="file" class="hidden" accept="image/*" id="fileInput">
                     </label>

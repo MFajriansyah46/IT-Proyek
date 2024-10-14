@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Models\Building;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
@@ -10,9 +11,19 @@ use App\Http\Controllers\OwnerController;
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
     
-    Route::get('/', function () { 
-        return view ('dashboard');
-    });
+    Route::get('/dashboard', [
+
+        DashboardController::class,'read',
+
+    ]);
+    
+    // Route::get('/dashboard', [
+    //     DashboardController::class,'countUser',
+    // ]);
+
+
+
+    
 
 
     Route::post('/owner-logout', [OwnerController::class, 'logout']);
@@ -25,7 +36,7 @@ Route::middleware('auth:owner')->group(function(){
     
     Route::post('/users/update/', [TenantController::class,'update']);
 
-    Route::get('/users/delete/{remember_token}', [TenantController::class,'delete']);
+    Route::post('/users/delete', [TenantController::class,'delete']);
 
     
     // room controller

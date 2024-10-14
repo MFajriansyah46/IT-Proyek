@@ -12,20 +12,29 @@
 </head class="h-full">
   <body class="bg-gray-100">
     @if (session()->has('registration-success'))
-      <div class="flex p-4 mx-auto mt-2 bg-white font-medium shadow-sm max-w-md" id="login-eror">
-        {{ session('registration-success') }}
-        <button class="ml-auto hover:bg-gray-200 rounded-full justify-center" id="button-login-eror">
-          <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="none" stroke="#4b5563" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m7.757 16.243l8.486-8.486m0 8.486L7.757 7.757M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"/></svg>
-        </button>
-      </div>
+      <ul class="fixed top-0 right-3/8 w-96 flex p-4 mt-2 rounded-md bg-white font-medium shadow-sm max-w-md" id="login-eror">
+        <li class="my-auto text-lg">
+          {{ session('registration-success') }}
+        </li>
+        <li class="my-auto ml-auto" >
+          <button class="ml-auto hover:bg-gray-200 rounded-full justify-center" id="button-login-eror">
+            <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="none" stroke="#4b5563" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m7.757 16.243l8.486-8.486m0 8.486L7.757 7.757M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"/></svg>
+          </button>
+        </li>
+      </ul>
     @endif
+
     @if (session()->has('loginError'))
-      <div class="flex p-4 mx-auto mt-2 bg-white font-medium text-red-500 shadow-sm max-w-md" id="login-eror">
+    <ul class="fixed top-0 right-3/8 w-96 flex p-4 mt-2 rounded-md bg-white font-medium text-red-500 shadow-sm max-w-md" id="login-eror">
+      <li class="my-auto text-lg">
         {{ session('loginError') }}
+      </li>
+      <li class="my-auto ml-auto" >
         <button class="ml-auto hover:bg-gray-200 rounded-full justify-center" id="button-login-eror">
           <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="none" stroke="#4b5563" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="m7.757 16.243l8.486-8.486m0 8.486L7.757 7.757M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"/></svg>
         </button>
-      </div>
+      </li>
+    </ul>
     @endif
     {{ $slot }}
   </body>

@@ -41,3 +41,31 @@ $(document).ready(function () {
       }
     });
 });
+
+$('#openProfileBtn').on('click', function() {
+    $('#profileOverlay').removeClass('hidden');
+});
+
+  // Hide the profile overlay
+$('#closeProfileBtn').on('click', function() {
+    $('#profileOverlay').addClass('hidden');
+});
+
+
+// Modal delete user
+$(document).ready(function () {
+    // Saat tombol hapus ditekan, tampilkan modal
+    $('.delete-user-button').on('click', function () {
+        $('#confirmation-delete-user').removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-delete, #close-modal').on('click', function () {
+        $('#confirmation-delete-user').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-delete').on('click', function () {
+        $('#user-delete-form').submit();
+    });
+});
