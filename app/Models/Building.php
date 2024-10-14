@@ -2,16 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Owner;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Building extends Model
 {
     use HasFactory;
-    public function author(): BelongsTo {
-        return $this->belongsTo(Owner::class);
-    }
 
+    protected $table = 'buildings';
+    protected $primaryKey = 'id_bangunan';
+    public $timestamps = true;
+
+    protected $fillable = ['unit', 'address', 'latitude', 'longitude'];
+
+    // public function rooms()
+    // {
+    //     return $this->hasMany(Room::class, 'id_bangunan'); 
+    // }
 }

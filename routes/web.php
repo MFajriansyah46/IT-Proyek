@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\BuildingController;
 
 Route::get('/', function () {
     return view('dashboard',['title' => 'Dashboard']);
@@ -47,8 +48,10 @@ Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update']);
 Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
 
 
-
 // building controller
-Route::get('/buildings', function () {
-    return view('buildings',['title' => 'Buildings', 'buildings' => Building::all()]);
-});
+Route::get('/buildings', [BuildingController::class, 'read']);
+Route::get('/buildings/add', [BuildingController::class, 'add']);
+Route::post('/buildings/submit', [BuildingController::class, 'submit']);
+Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit']);
+Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update']);
+Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete']);
