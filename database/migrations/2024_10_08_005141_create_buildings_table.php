@@ -12,15 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('buildings', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('owner_id')->constrained(
-                table: 'owners',
-                indexName: 'buildings_owner_id'
-            );
+            $table->id('id_bangunan'); 
             $table->char('unit');
             $table->text('address');
             $table->double('latitude');
-            $table->double('longtitude');
+            $table->double('longitude');
             $table->timestamps();
         });
     }

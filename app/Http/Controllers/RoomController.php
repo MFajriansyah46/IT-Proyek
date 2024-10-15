@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Building;
 use App\Models\Room;
 
 class RoomController extends Controller {
@@ -21,7 +22,6 @@ class RoomController extends Controller {
         $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;
-        $room->rating_kamar = $request->rating_kamar;
         $room->save();
 
         return redirect('/rooms')->with('success', 'Kamar berhasil ditambahkan.'); // Menggunakan flash message
@@ -36,7 +36,6 @@ class RoomController extends Controller {
         $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;
-        $room->rating_kamar = $request->rating_kamar;
         $room->save(); // Menyimpan perubahan
 
         return redirect('/rooms')->with('success', 'Kamar berhasil diperbarui.'); // Menggunakan flash message

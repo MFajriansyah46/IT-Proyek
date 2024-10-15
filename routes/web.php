@@ -4,9 +4,10 @@ use App\Http\Controllers\DashboardController;
 use App\Models\Building;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
+
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\OwnerController;
-
+use App\Http\Controllers\BuildingController;
 
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
@@ -60,11 +61,17 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
     
     // building controller
+    Route::get('/buildings', [BuildingController::class, 'read']);
 
-    Route::get('/buildings', function () {
-        return view('buildings',['title' => 'Buildings', 'buildings' => Building::all()]);
+    Route::get('/buildings/add', [BuildingController::class, 'add']);
 
-    });
+    Route::post('/buildings/submit', [BuildingController::class, 'submit']);
+
+    Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit']);
+
+    Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update']);
+    
+    Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete']);
 });
 
 
@@ -75,7 +82,6 @@ Route::middleware('auth:tenant')->group(function(){
 
     
 });
-
 
 // Aktor: pengunjung
 Route::middleware('guest')->group(function(){
@@ -88,22 +94,9 @@ Route::middleware('guest')->group(function(){
 
     Route::post('/login', [TenantController::class, 'authenticate']);
 
+
     Route::get('/owner-login', [OwnerController::class, 'formLogin']);
     
     Route::post('/owner-login', [OwnerController::class, 'authenticate']);
 
 });
-
-
-
-
-
-
-
-
-
-Route::get('/', function(){
-    return view('home');
-});
-
-
