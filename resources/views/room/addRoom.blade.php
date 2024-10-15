@@ -2,7 +2,7 @@
     <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-6">Add Rooms</h1>
 
     <form action="/rooms/submit" method="post" class="mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white shadow-md rounded-lg p-6" onsubmit="return validateForm()">
-        @csrf
+        {{ csrf_field() }}
 
         <label class="text-lg font-semibold mb-2">No Kamar</label>
         <input type="text" name="no_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>

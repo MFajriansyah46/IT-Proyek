@@ -24,7 +24,7 @@ class BuildingController extends Controller
         $building->unit = $request->unit;
         $building->address = $request->address;
         $building->latitude = $request->latitude;
-        $building->longitude = $request->longitude; 
+        $building->longtitude = $request->longtitude; 
         $building->save();
 
         return redirect('/buildings')->with('success', 'Building berhasil ditambahkan.');
@@ -42,7 +42,7 @@ class BuildingController extends Controller
         $building->unit = $request->unit;
         $building->address = $request->address;
         $building->latitude = $request->latitude;
-        $building->longitude = $request->longitude; 
+        $building->longtitude = $request->longtitude; 
         $building->save();
 
         return redirect('/buildings')->with('success', 'Building berhasil diperbarui.');

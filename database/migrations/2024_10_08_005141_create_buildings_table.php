@@ -16,7 +16,7 @@ return new class extends Migration
             $table->char('unit');
             $table->text('address');
             $table->double('latitude');
-            $table->double('longitude');
+            $table->decimal('longtitude',7,10)->nullable();
             $table->timestamps();
         });
     }

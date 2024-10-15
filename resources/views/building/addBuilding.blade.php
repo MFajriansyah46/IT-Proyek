@@ -13,8 +13,8 @@
         <label class="text-lg font-semibold mb-2">Latitude</label>
         <input type="text" name="latitude" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
-        <label class="text-lg font-semibold mb-2">Longitude</label>
-        <input type="text" name="longitude" class="border border-gray-300 rounded-md p-2 mb-4" required>
+        <label class="text-lg font-semibold mb-2">Longtitude</label>
+        <input type="text" name="longtitude" class="border border-gray-300 rounded-md p-2 mb-4" required>
 
         <button type="submit" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700">Submit</button>
     </form>
