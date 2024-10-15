@@ -1,16 +1,16 @@
 <x-layout>
-    
+
     <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Rooms</h1>
-    <button type="button" class="mb-2 px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
-        <a href="/rooms/add" class="flex">
+    <a href="/rooms/add">
+        <button type="button" class="flex mb-2 ml-auto px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
             <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16"><path fill="white" fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z" clip-rule="evenodd"/></svg>
             <h1 class="my-auto ml-2 text-lg">Add</h1>
-        </a>
-    </button>
+        </button>
+    </a>
 
     <x-table.header :headers="['No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Rating Kamar', 'Aksi']">
         @foreach ($rooms as $i=>$room)
-            <tr class="hover:bg-yellow-200">
+            <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
                 <x-table.data>{{ $room->no_kamar }}</x-table.data>
                 <x-table.data>{{ $room->harga_kamar }}</x-table.data>
@@ -26,7 +26,8 @@
                             </svg>
                         </button>
                     </a>
-                    <a href="/rooms/delete/{{ $room->id_kamar }}">
+
+                    <a href="/rooms/delete/{{ $room->id_kamar }}" onclick="return confirmDelete();">
                         <button type="button" class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                             <!-- Icon Delete -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
@@ -34,9 +35,10 @@
                             </svg>
                         </button>
                     </a>
-                    </div>
+                </div>
                 </x-table.data>
             </tr>
         @endforeach
     </x-table.header>
+
 </x-layout>

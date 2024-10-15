@@ -73,6 +73,7 @@ Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/logout', [TenantController::class, 'logout']);
 
+    
 });
 
 
@@ -101,9 +102,8 @@ Route::middleware('guest')->group(function(){
 
 
 
+Route::get('/', function(){
+    return view('home');
+});
 
 
-
-
-
-    

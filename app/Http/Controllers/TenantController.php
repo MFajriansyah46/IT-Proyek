@@ -77,12 +77,12 @@ class TenantController extends Controller {
 
         $credentials = $request->validate([
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         if(Auth::guard('tenant')->attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended('/buildings');   
+            return redirect()->intended('/');   
         }
 
         return back()->with('loginError','Login Gagal!');
@@ -96,6 +96,6 @@ class TenantController extends Controller {
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

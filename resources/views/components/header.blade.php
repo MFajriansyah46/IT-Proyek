@@ -10,9 +10,7 @@
     </ul>
     <ul class="flex ml-auto gap-1">
         <li class="my-auto">
-            <img class="h-9 w-9 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="">
+            <img class="h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
         </li>
         <li class="my-auto mr-2 px-1 hover:rounded-md hover:bg-gray-200 gap-1">
             <!-- Dropdown container -->

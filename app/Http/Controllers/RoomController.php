@@ -31,7 +31,6 @@ class RoomController extends Controller {
         $room = Room::findOrFail($id_kamar); // Menggunakan findOrFail untuk menangani ID tidak ditemukan
         return view('room.editRoom', compact('room'));
     }
-        
     public function update(Request $request, $id_kamar) {
         $room = Room::findOrFail($id_kamar);
         $room->no_kamar = $request->no_kamar;
