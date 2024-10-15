@@ -75,6 +75,13 @@ Route::middleware('auth:owner')->group(function(){
 });
 
 
+
+Route::get('/',function(){
+    return view('home');
+});
+
+
+
 //Aktor: Penyewa
 Route::middleware('auth:tenant')->group(function(){
 
