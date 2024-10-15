@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Owner;
+use App\Models\Room;
 use App\Models\Building;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,10 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('login');
+});
+
+Route::get('/dashboard-public', function () {
+    return view('dashboard-public');
 });
 
 Route::get('/register', function () {
