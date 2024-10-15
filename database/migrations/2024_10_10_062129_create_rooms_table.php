@@ -15,6 +15,7 @@ class CreateRoomsTable extends Migration
             $table->string('harga_kamar'); 
             $table->string('kecepatan_internet'); 
             $table->string('rating_kamar'); 
+            $table->binary('gambar_kamar')->nullable();
             $table->timestamps();
         });
     }

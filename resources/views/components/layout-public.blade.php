@@ -27,7 +27,7 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+            <img class="h-8 w-8" src="/images/logo bang raja3.png"  alt="Your Company">
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
@@ -138,7 +138,7 @@
 
   <header class="bg-white shadow">
     <div class="mx-auto w-full px-4 py-6 sm:px-6 lg:px-20">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Kos Bang Raja</h1>
     </div>
   </header>
   <main>

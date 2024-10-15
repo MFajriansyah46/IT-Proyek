@@ -8,10 +8,17 @@
         </button>
     </a>
 
-    <x-table.header :headers="['No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Rating Kamar', 'Aksi']">
+    <x-table.header :headers="['Gambar Kamar', 'No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Rating Kamar', 'Aksi']">
         @foreach ($rooms as $i=>$room)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
+                <x-table.data>
+                    @if ($room->gambar_kamar)
+                        <img src="data:image/jpeg;base64,{{ base64_encode($room->gambar_kamar) }}" alt="Gambar Kamar" style="max-width: 100px; height: auto;">
+                    @else
+                        Tidak ada gambar
+                    @endif
+                </x-table.data>
                 <x-table.data>{{ $room->no_kamar }}</x-table.data>
                 <x-table.data>{{ $room->harga_kamar }}</x-table.data>
                 <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
