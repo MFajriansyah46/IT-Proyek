@@ -46,7 +46,7 @@ class TenantController extends Controller {
 
     public function formRegister() {
 
-        return view('register.tenant');
+        return view('register');
     }
 
     public function Register(Request $request) {

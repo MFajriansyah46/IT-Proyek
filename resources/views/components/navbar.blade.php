@@ -1,4 +1,4 @@
-<nav class="flex flex-col bg-gray-800 w-auto" id="fullBar" hidden="true">
+<nav class="flex flex-col bg-gray-900 w-auto" id="fullBar" hidden="true">
     <div class="flex flex-row items-center px-4 py-10 gap-3 hover:bg-slate-500">
         <img src="/images/logo bang raja3.png" class="h-20 w-auto" alt="">
         <h3 class="text-gray-200 text-4xl">Bang Raja</h3>

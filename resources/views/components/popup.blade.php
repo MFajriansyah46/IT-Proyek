@@ -11,7 +11,7 @@
     </div>
 
     <form method="post" action="" enctype="multipart/form-data">
-      <div class="flex flex-col items-center justify-center mb-4">
+      <div class="flex flex-col items-center justify-center">
         <div class="relative">
           <img class="w-28 h-28 rounded-full border object-cover" id="profileImage" src="/storage/{{ auth()->user()->image }}" alt=".">
           <label class="absolute bottom-0 right-0 bg-gray-800 text-white opacity-55 p-1 rounded-full cursor-pointer hover:bg-gray-400">
@@ -22,47 +22,27 @@
           </label>
         </div>
       </div>
+
       <div class="flex justify-center items-center">
         <input type="text" class="border-0 focus:disoutline focus:underline text-center text-2xl text-gray-800 font-medium " value="{{auth()->user()->username}}" >
       </div>
-    </form><br>
 
-    <!-- User information -->
-    <div class="space-y-4">
-
-        
-
-
-
-
-
-
-      <!-- Name -->
-      <div>
+      <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Name</label>
-        <p class="text-gray-800 font-medium">{{auth()->user()->name}}</p>
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->name }}">
       </div>
 
-      <!-- Phone Number -->
-      <div>
+      <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Phone Number</label>
-        <p class="text-gray-800 font-medium">{{auth()->user()->phone_number}}</p>
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->phone_number }}">
       </div>
 
-      <!-- Bank Account Number -->
-      <div>
+      <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Bank Account Number</label>
-        <p class="text-gray-800 font-medium">{{auth()->user()->rekening_number}}</p>
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->rekening_number }}">
       </div>
 
-      <!-- Password -->
-      <div>
-        <label class="text-gray-600 text-sm font-semibold">Password</label>
-        <p class="text-gray-800 font-medium">**********</p>
-      </div>
-    </div>
-
-    
+    </form><br>
   </div>
 </div>
 

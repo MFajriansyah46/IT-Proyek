@@ -1,7 +1,7 @@
 <header class="flex flex-row shadow-lg relative pl-3 pr-6 py-3 bg-gray-50">
     <ul>
         <li class="my-auto">
-            <button class="rounded-full hover:bg-gray-300 hover:rounded-full" id="buttonBar">
+            <button class="p-1 rounded-full hover:bg-gray-300 hover:rounded-full bg-gray-200" id="buttonBar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="2.5rem" height="2.5rem" viewBox="0 0 24 24">
                     <path fill="#1f2937" fill-rule="evenodd" d="M3 16h18v2H3zm0-5h18v2H3zm0-5h18v2H3z" />
                 </svg>
@@ -16,11 +16,9 @@
             <!-- Dropdown container -->
             <div class="relative inline-block text-left">
                 <!-- Dropdown toggle button -->
-                <button class="flex" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                    {{ auth()->user()->username }}
-                    <svg class="my-auto" width="20" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <button class="flex hover:mt-1" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                    <p class=" hover:mb-1">{{ auth()->user()->username }}</p>
+                    <svg class="my-auto" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 9l6 6 6-6" />
                     </svg>
                 </button>

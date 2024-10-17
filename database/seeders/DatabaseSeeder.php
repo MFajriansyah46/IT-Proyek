@@ -42,12 +42,5 @@ class DatabaseSeeder extends Seeder
             'password' => 'rusida123',
             'remember_token' => Str::random(16),
         ]);
-
-        
-
-
-
-
-
     } 
 }

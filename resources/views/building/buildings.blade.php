@@ -1,20 +1,32 @@
 <x-layout>
-    <h1 class="text-5xl font-bold text-gray-800 mt-8 mb-3">Buildings</h1>
-    <a href="/buildings/add">
-    <button type="button" class="flex mb-2 ml-auto px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16"><path fill="white" fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z" clip-rule="evenodd"/></svg>
-            <h1 class="my-auto ml-2 text-lg">Add</h1>
-        </button>
-    </a>
 
-    <x-table.header :headers="['Unit', 'Address', 'Latitude', 'Longitude', 'Aksi']">
+    <ul class="flex mt-8 mb-4">
+        <li>
+            <h1 class="text-5xl font-bold text-gray-800">Buildings</h1>
+        </li>
+        <li class="mt-auto my-auto ml-auto">
+            <button type="button"
+                class="mb-2 px-4 py-2 text-sm font-medium text-white bg-yellow-300 rounded-md hover:bg-yellow-400 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                <a href="/buildings/add" class="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 16 16">
+                        <path fill="white" fill-rule="evenodd"
+                            d="M4.5 2a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zM2 4v9.5a.5.5 0 0 0 .5.5H12v-1H3V4zm6.5.5v2h-2v1h2v2h1v-2h2v-1h-2v-2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h1 class="my-auto ml-2 text-lg">Add</h1>
+                </a>
+            </button>
+        </li>
+    </ul>
+
+    <x-table.header :headers="['Unit', 'Address', 'Latitude', 'Longtitude', 'Aksi']">
         @foreach ($buildings as $i => $building)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i + 1 }}</x-table.data>
                 <x-table.data>{{ $building->unit }}</x-table.data>
                 <x-table.data>{{ $building->address }}</x-table.data>
                 <x-table.data>{{ $building->latitude }}</x-table.data>
-                <x-table.data>{{ $building->longitude }}</x-table.data> <!-- Perbaikan ejaan -->
+                <x-table.data>{{ $building->longitude }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                         <a href="/buildings/edit/{{ $building->id_bangunan }}">

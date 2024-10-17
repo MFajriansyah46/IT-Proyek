@@ -12,20 +12,7 @@ use App\Http\Controllers\BuildingController;
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
     
-    Route::get('/dashboard', [
-
-        DashboardController::class,'read',
-
-    ]);
-    
-    // Route::get('/dashboard', [
-    //     DashboardController::class,'countUser',
-    // ]);
-
-
-
-    
-
+    Route::get('/dashboard', [DashboardController::class,'read']);
 
     Route::post('/owner-logout', [OwnerController::class, 'logout']);
 
@@ -94,9 +81,11 @@ Route::middleware('guest')->group(function(){
 
     Route::post('/login', [TenantController::class, 'authenticate']);
 
-
     Route::get('/owner-login', [OwnerController::class, 'formLogin']);
     
     Route::post('/owner-login', [OwnerController::class, 'authenticate']);
 
+    Route::get('/', function(){
+        return view('home');
+    });
 });

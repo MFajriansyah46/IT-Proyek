@@ -11,6 +11,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('#buttonBar').click(function(){
         $('#fullBar').fadeToggle(10);
+        $(this).toggleClass('bg-gray-200');
     });
 });
 
@@ -42,6 +43,21 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    // Toggle dropdown menu when the button is clicked
+    $('#profile-button').on('click', function (event) {
+      event.stopPropagation(); // Prevent the event from bubbling up
+      $(this).next('div[role="menu"]').toggle(); // Show/hide the menu
+    });
+
+    // Close the dropdown menu if clicking outside of it
+    $(document).on('click', function (event) {
+      if (!$(event.target).closest('#profile-button').length) {
+        $('div[role="menu"]').hide(); // Hide the dropdown
+      }
+    });
+});
+
 $('#openProfileBtn').on('click', function() {
     $('#profileOverlay').removeClass('hidden');
 });
@@ -50,7 +66,6 @@ $('#openProfileBtn').on('click', function() {
 $('#closeProfileBtn').on('click', function() {
     $('#profileOverlay').addClass('hidden');
 });
-
 
 // Modal delete user
 $(document).ready(function () {
@@ -67,5 +82,60 @@ $(document).ready(function () {
     // Saat tombol "Yes, I'm sure" ditekan, kirim form
     $('#confirm-delete').on('click', function () {
         $('#user-delete-form').submit();
+    });
+});
+
+$(document).ready(function() {
+    const togglePassword = $("#toggle-password");
+    const passwordField = $("#password-field");
+
+    togglePassword.on("click", function() {
+        // toggle the type attribute
+        const type = passwordField.attr("type") === "password" ? "text" : "password";
+        passwordField.attr("type", type);
+    });
+
+    $("#toggle-password").click(function(){
+        $('.eye-slashed').toggleClass('hidden');
+    });
+});
+
+$(document).ready(function() {
+    const togglePassword = $("#toggle-password-owner-login");
+    const passwordField = $("#password-field-owner-login");
+
+    togglePassword.on("click", function() {
+        // toggle the type attribute
+        const type = passwordField.attr("type") === "password" ? "text" : "password";
+        passwordField.attr("type", type);
+    });
+
+    $("#toggle-password-owner-login").click(function(){
+        $('.eye-slashed').toggleClass('hidden');
+    });
+});
+
+$(document).ready(function() {
+    const togglePassword = document.querySelector("#toggle-password-register");
+    const passwordField = document.querySelector("#password-field-register");
+    
+    const toggleConfirmPassword = document.querySelector("#toggle-confirm-password");
+    const confirmPasswordField = document.querySelector("#confirm-password-field");
+    
+    togglePassword.addEventListener("click", function () {
+        const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        passwordField.setAttribute("type", type);
+    });
+    
+    toggleConfirmPassword.addEventListener("click", function () {
+        const type = confirmPasswordField.getAttribute("type") === "password" ? "text" : "password";
+        confirmPasswordField.setAttribute("type", type);
+    });
+    $("#toggle-password-register").click(function(){
+        $('.eye-slashed').toggleClass('hidden');
+    });
+
+    $("#toggle-confirm-password").click(function(){
+        $('.eye-slashedC').toggleClass('hidden');
     });
 });

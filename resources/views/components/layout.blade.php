@@ -27,6 +27,6 @@
   </div>
 </body>
 
-<x-modal></x-modal>
+<x-popup></x-popup>
 
 </html>
