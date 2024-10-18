@@ -69,3 +69,17 @@ $(document).ready(function () {
         $('#user-delete-form').submit();
     });
 });
+
+$(document).ready(function () {
+    $('#upload-building-Image').on('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-image').attr('src', e.target.result).removeClass('hidden');
+                $('#preview-text').addClass('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});

@@ -18,7 +18,7 @@ class Building extends Model
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
 
-    protected $fillable = ['unit', 'address', 'latitude', 'longitude'];
+    protected $guards = ['id_bangunan'];
     
     public function owner(): BelongsTo {
         return $this->belongsTo(Owner::class);

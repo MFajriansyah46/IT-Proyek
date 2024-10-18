@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('buildings', function (Blueprint $table) {
             $table->id('id_bangunan'); 
-            $table->char('unit');
-            $table->text('address');
-            $table->double('latitude');
-            $table->double('longitude');
+            $table->string('unit_bangunan');
+            $table->string('gambar_bangunan');
+            $table->text ('alamat_bangunan');
+            $table->double('link_gmap');
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('bangunan');
     }
 };

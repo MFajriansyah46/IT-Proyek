@@ -7,14 +7,14 @@
         </button>
     </a>
 
-    <x-table.header :headers="['Unit', 'Address', 'Latitude', 'Longitude', 'Aksi']">
+    <x-table.header :headers="['Unit Bangunan', 'Gambar Bangunan', 'Link Gmap', 'Alamat Bangunan', 'Aksi']">
         @foreach ($buildings as $i => $building)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i + 1 }}</x-table.data>
-                <x-table.data>{{ $building->unit }}</x-table.data>
-                <x-table.data>{{ $building->address }}</x-table.data>
-                <x-table.data>{{ $building->latitude }}</x-table.data>
-                <x-table.data>{{ $building->longitude }}</x-table.data> <!-- Perbaikan ejaan -->
+                <x-table.data>{{ $building->unit_bangunan }}</x-table.data>
+                <x-table.data><img src="/images/{{ $building->gambar_bangunan }}" alt=""></x-table.data>
+                <x-table.data><a href="{{ $building->link_gmap }}">link</a></x-table.data>
+                <x-table.data>{{ $building->alamat_bangunan }}</x-table.data> <!-- Perbaikan ejaan -->
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                         <a href="/buildings/edit/{{ $building->id_bangunan }}">
@@ -34,6 +34,7 @@
                         </button>
 
                         </a>
+                        
                     </div>
                 </x-table.data>
             </tr>

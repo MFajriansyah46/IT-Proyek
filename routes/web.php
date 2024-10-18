@@ -61,17 +61,28 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
     
     // building controller
-    Route::get('/buildings', [BuildingController::class, 'read']);
+    // Route::get('/buildings', [BuildingController::class, 'read']);
 
-    Route::get('/buildings/add', [BuildingController::class, 'add']);
+    // Route::get('/buildings/add', [BuildingController::class, 'add']);
 
-    Route::post('/buildings/submit', [BuildingController::class, 'submit']);
+    // Route::post('/buildings/submit', [BuildingController::class, 'submit']);
 
-    Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit']);
+    // Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit']);
 
-    Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update']);
+    // Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update']);
     
-    Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete']);
+    // Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete']);
+
+  
+
+Route::get('/buildings', [BuildingController::class, 'read'])->name('buildings.read');
+Route::get('/buildings/add', [BuildingController::class, 'add'])->name('buildings.add');
+Route::post('/buildings/submit', [BuildingController::class, 'submit'])->name('buildings.submit');
+Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit'])->name('buildings.edit');
+Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update'])->name('buildings.update');
+Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete'])->name('buildings.delete');
+
+
 });
 
 
