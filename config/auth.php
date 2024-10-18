@@ -84,11 +84,6 @@ return [
             'model' => env('AUTH_MODEL', App\Models\Tenant::class)
         ],
 
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

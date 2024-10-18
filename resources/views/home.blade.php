@@ -49,6 +49,7 @@
           </div>
 
           <div class="hidden md:block">
+            
             @auth('tenant')
 
             <button id="profile-button">
@@ -91,7 +92,7 @@
                 <li>
                   <div class="flex items-center px-4 py-2 -mt-1 text-sm text-gray-700 hover:bg-gray-100">
                       <button id="openProfileUserBtn" class="flex">
-                        <img class="mr-2 h-8 w-auto rounded-full my-auto" src="/storage/profile-images/4aImncH8XgMCDnfl1fS7djWbzBr74MKFtQGsPE8e.jpg" alt="" >
+                        <img class="mr-2 h-8 w-auto rounded-full my-auto" src="/images/default-profile.jpg" alt="" >
                         <div class="flex flex-col justify-start items-start">
                             <h1 class="text-sm ">M. Fajriansyah</h1>
                             <small class="text-gray-500">6282251964943</small>
@@ -105,7 +106,6 @@
             @else
               <a href="/login" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline" aria-current="page">Login</a>     
             @endauth
-
             </div>
             <div class="block md:hidden">
               <div class=" flex flex-col items-baseline space-x-4">       

@@ -34,7 +34,7 @@
                 </svg>
             </div>
 
-            <button class="bg-[#002D74] rounded-xl text-white py-2 mt-4 hover:scale-105 duration-300">Register</button>
+            <button type="submit" class="bg-[#002D74] rounded-xl text-white py-2 mt-4 hover:scale-105 duration-300">Register</button>
         </form>
 
         <div class="mt-6 text-xs flex justify-between items-center text-[#002D74] w-full px-8">

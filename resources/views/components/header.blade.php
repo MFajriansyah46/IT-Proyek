@@ -16,9 +16,9 @@
             <!-- Dropdown container -->
             <div class="relative inline-block text-left">
                 <!-- Dropdown toggle button -->
-                <button class="flex hover:mt-1" id="menu-button" aria-expanded="true" aria-haspopup="true">
-                    <p class=" hover:mb-1">{{ auth()->user()->username }}</p>
-                    <svg class="my-auto" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button class="flex" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                    <p>{{ auth()->user()->username }}</p>
+                    <svg class="my-auto focus:mt-1" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 9l6 6 6-6" />
                     </svg>
                 </button>

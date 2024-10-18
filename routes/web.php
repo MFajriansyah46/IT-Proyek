@@ -66,7 +66,7 @@ Route::middleware('auth:owner')->group(function(){
 Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/logout', [TenantController::class, 'logout']);
-
+    
     
 });
 

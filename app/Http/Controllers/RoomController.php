@@ -19,6 +19,7 @@ class RoomController extends Controller {
 
     public function submit(Request $request) {
         $room = new Room;
+        $room->id_bangunan = $request->id_bangunan;
         $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;

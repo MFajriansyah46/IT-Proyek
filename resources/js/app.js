@@ -139,3 +139,46 @@ $(document).ready(function() {
         $('.eye-slashedC').toggleClass('hidden');
     });
 });
+
+$(document).ready(function () {
+    // For the traditional file input
+    $('#upload-building-Image').on('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-building-image').attr('src', e.target.result).removeClass('hidden');
+                $('#preview-building-text').addClass('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Drag-and-Drop functionality
+    const dropArea = $('#drop-area');
+
+    dropArea.on('dragover', function (event) {
+        event.preventDefault();
+        dropArea.addClass('border-blue-500'); // Optional: Highlight border when dragging over
+    });
+
+    dropArea.on('dragleave', function (event) {
+        event.preventDefault();
+        dropArea.removeClass('border-blue-500'); // Optional: Remove highlight border
+    });
+
+    dropArea.on('drop', function (event) {
+        event.preventDefault();
+        dropArea.removeClass('border-blue-500'); // Optional: Remove highlight border
+
+        const file = event.originalEvent.dataTransfer.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-building-image').attr('src', e.target.result).removeClass('hidden');
+                $('#preview-building-text').addClass('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});

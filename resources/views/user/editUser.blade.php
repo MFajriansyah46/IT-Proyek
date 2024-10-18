@@ -38,8 +38,7 @@
                     </div>
                 </div>
                 <div>
-                    <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone
-                        Number</label>
+                    <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                     <div class="mt-2">
                         <input id="phone_number" name="phone_number" type="number" required
                             value="{{ $users->phone_number }}"
@@ -55,9 +54,8 @@
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
-
-            <button type="submit"
-                class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400">Save</button>
+ 
+            <button type="submit" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400">Save</button>
         </form>
     </div>
 </x-layout>

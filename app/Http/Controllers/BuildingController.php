@@ -21,10 +21,15 @@ class BuildingController extends Controller
     public function submit(Request $request)
     {
         $building = new Building();
+        $building->owner_id = $request->owner_id;
         $building->unit = $request->unit;
         $building->address = $request->address;
-        $building->latitude = $request->latitude;
-        $building->longitude = $request->longitude; 
+        $building->gmap_link = $request->gmap_link;
+
+        if($request->image){
+            $building->image = $request->file('image')->store('profile-images');
+        }
+
         $building->save();
 
         return redirect('/buildings')->with('success', 'Building berhasil ditambahkan.');

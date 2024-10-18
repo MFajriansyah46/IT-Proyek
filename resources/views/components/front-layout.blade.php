@@ -12,7 +12,7 @@
 </head class="h-full">
   <body class="bg-gray-100">
     @if (session()->has('registration-success'))
-      <ul class="fixed top-0 right-3/8 w-96 flex p-4 mt-2 rounded-md bg-white font-medium shadow-sm max-w-md" id="login-eror">
+      <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white font-medium text-red-500 shadow-sm max-w-md flex p-4 gap-4" id="login-eror">
         <li class="my-auto text-lg">
           {{ session('registration-success') }}
         </li>
@@ -25,8 +25,8 @@
     @endif
 
     @if (session()->has('loginError'))
-    <ul class="fixed top-0 right-3/8 w-96 flex p-4 mt-2 rounded-md bg-white font-medium text-red-500 shadow-sm max-w-md" id="login-eror">
-      <li class="my-auto text-lg">
+    <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white font-medium text-red-500 shadow-sm max-w-md flex p-4" id="login-eror">
+      <li class="my-auto text-lg w-80 hover:bg-gray-300">
         {{ session('loginError') }}
       </li>
       <li class="my-auto ml-auto" >

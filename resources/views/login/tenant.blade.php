@@ -37,10 +37,9 @@
           <a href="/register" class="py-2 px-5 bg-white border rounded-xl hover:scale-110 duration-300">Register</a>
           </div>
       </div>
-
       <!-- image -->
       <div class="md:block hidden w-1/2">
-        <img class="rounded-2xl" src="https://images.unsplash.com/photo-1616606103915-dea7be788566?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80">
+        <img class="rounded-2xl" id="login-image" src="/images/loginImage.JPG">
       </div>
     </div>
   </section>

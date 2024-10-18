@@ -18,13 +18,13 @@ class Building extends Model
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
 
-    protected $fillable = ['unit', 'address', 'latitude', 'longitude'];
+    protected $guard = ['id_bangunan'];
     
     public function owner(): BelongsTo {
         return $this->belongsTo(Owner::class);
     }
 
     public function rooms(): HasMany {
-        return $this->HasMany(Room::class, 'building_id');
+        return $this->HasMany(Room::class, 'id_bangunan');
     }
 }

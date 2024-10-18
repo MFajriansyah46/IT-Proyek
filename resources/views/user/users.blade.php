@@ -49,24 +49,6 @@
                                 </svg>
                             </button>
                         </a>
-
-                        <!-- <form method="post" action="/users/delete" id="user-delete-form" onsubmit="return confirmDelete()">
-                                @csrf
-                                <input type="hidden" name="remember_token" value="{{ $user->remember_token }}">
-
-                                <button type="submit"
-                                    class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
-                                        <path fill="white"
-                                            d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                                    </svg>
-                                </button>
-                            </form> -->
-
-
-
-
-
                         <form method="post" action="/users/delete" id="user-delete-form">
                             @csrf
                             <input type="hidden" name="remember_token" value="{{ $user->remember_token }}">
@@ -79,41 +61,6 @@
                                 </div>
                             </button>
                         </form>
-
-                        
-
-                        <!-- <script>
-                            $(document).ready(function () {
-                                // Saat tombol hapus ditekan, tampilkan modal
-                                $('#delete-user-button').on('click', function () {
-                                    $('#confirmation-delete-user').removeClass('hidden');
-                                });
-
-                                // Saat tombol "No, cancel" ditekan, sembunyikan modal
-                                $('#cancel-delete, #close-modal').on('click', function () {
-                                    $('#confirmation-delete-user').addClass('hidden');
-                                });
-
-                                // Saat tombol "Yes, I'm sure" ditekan, kirim form
-                                $('#confirm-delete').on('click', function () {
-                                    $('#user-delete-form').submit();
-                                });
-                            });
-                        </script> -->
-
-
-
-
-
-
-
-
-                        <script>
-                            function confirmDelete() {
-                                return confirm('Are you sure you want to delete this user? This action cannot be undone.');
-                            }
-                        </script>
-
                     </div>
                 </x-table.data>
             </tr>

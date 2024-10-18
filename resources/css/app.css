@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#login-image{
+    height: 580px;
+    width:  365px;
+}
+
 div[role="menu"] {
     display: none;
 }

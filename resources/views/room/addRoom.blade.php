@@ -5,7 +5,14 @@
         @csrf
 
         <label class="text-lg font-semibold mb-2">No Kamar</label>
-        <input type="text" name="no_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <input type="number" name="no_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        
+        <label class="text-lg font-semibold mb-2">Unit Bangunan</label>
+        <select type="text" name="id_bangunan" class="border border-gray-300 rounded-md p-2 mb-6" required>       
+            @foreach(auth()->user()->buildings as $building )
+                <option value="{{ $building->id_bangunan }}">{{ $building->unit }} - {{ $building->address }}</option>
+            @endforeach
+        </select>
 
         <label class="text-lg font-semibold mb-2">Harga Kamar</label>
         <input type="number" name="harga_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>

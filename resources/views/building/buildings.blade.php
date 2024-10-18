@@ -19,14 +19,18 @@
         </li>
     </ul>
 
-    <x-table.header :headers="['Unit', 'Address', 'Latitude', 'Longtitude', 'Aksi']">
+    <x-table.header :headers="['Unit', 'Address', 'Gmap Link','owner', 'Aksi']">
         @foreach ($buildings as $i => $building)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i + 1 }}</x-table.data>
                 <x-table.data>{{ $building->unit }}</x-table.data>
                 <x-table.data>{{ $building->address }}</x-table.data>
-                <x-table.data>{{ $building->latitude }}</x-table.data>
-                <x-table.data>{{ $building->longitude }}</x-table.data>
+                <x-table.data> 
+                    <a href="{{ $building->gmap_link }}" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20"><path fill="#999999" d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25"/></svg>
+                    </a> 
+                </x-table.data>
+                <x-table.data>{{ $building->owner->name }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                         <a href="/buildings/edit/{{ $building->id_bangunan }}">
