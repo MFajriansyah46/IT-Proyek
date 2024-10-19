@@ -29,7 +29,7 @@
                 <x-table.data>{{ $building->alamat_bangunan }}</x-table.data> <!-- Perbaikan ejaan -->
                 <x-table.data>
                     <div class="flex gap-1 my-1">
-                        <a href="/buildings/edit/{{ $building->id_bangunan }}">
+                        <a href="/buildings/edit/{{ $building->token }}">
                         <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                             <!-- Icon Edit -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" viewBox="0 0 32 32">
@@ -37,15 +37,15 @@
                             </svg>
                         </button>
                         </a>
-                        <a href="/buildings/delete/{{ $building->id_bangunan }}" onclick="return confirm('Are you sure you want to delete this building?');">
-                        <button type="button" class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
-                            <!-- Icon Delete -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
-                                <path fill="white" d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-                            </svg>
-                        </button>
-
-                        </a>
+                        <form action="/buildings/delete/" method="post" onclick="return confirm('Are you sure you want to delete this building?');">
+                            @csrf    
+                            <input type="hidden" name="token" value="{{ $building->token }}">
+                            <button type="submit" class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
+                                    <path fill="white" d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z" />
+                                </svg>
+                            </button>
+                        </form>
                         
                     </div>
                 </x-table.data>

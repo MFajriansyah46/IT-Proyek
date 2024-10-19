@@ -1,6 +1,7 @@
 <x-layout>
-    <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-6">Tambah Bangunan</h1>
-
+    
+<div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
+    <h1 class="text-5xl font-bold text-center text-gray-800">Add Building</h1>
     <form action="/buildings/submit" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white shadow-md rounded-lg p-6" onsubmit="return validateForm()"  enctype="multipart/form-data">
         @csrf
 
@@ -9,7 +10,7 @@
         <div class="container mt-10">
             <div class="flex justify-center">
                 <label for="upload-building-Image" class="border-2 border-dashed border-gray-300 p-10 w-full max-w-lg text-center cursor-pointer" id="drop-area">
-                    <p id="preview-building-text" class="text-gray-500">Click or drag building image here to upload</p>
+                    <p id="preview-added-building-text" class="text-gray-500 py-12">Click or drag building image here to upload</p>
                     <img id="preview-building-image" src="" alt="" class="hidden w-full h-auto">
                     <input type="file" id="upload-building-Image" name="gambar_bangunan" accept="image/*" class="hidden">
                 </label>
@@ -30,4 +31,5 @@
 
         <button type="submit" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700">Submit</button>
     </form>
+</div>
 </x-layout>

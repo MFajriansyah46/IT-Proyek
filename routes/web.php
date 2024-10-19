@@ -54,11 +54,11 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/buildings/submit', [BuildingController::class, 'submit']);
 
-    Route::get('/buildings/edit/{id_bangunan}', [BuildingController::class, 'edit']);
+    Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
 
-    Route::post('/buildings/update/{id_bangunan}', [BuildingController::class, 'update']);
+    Route::post('/buildings/update/', [BuildingController::class, 'update']);
     
-    Route::get('/buildings/delete/{id_bangunan}', [BuildingController::class, 'delete']);
+    Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
 });
 
 

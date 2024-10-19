@@ -17,6 +17,7 @@ class BuildingController extends Controller
     public function add()
     {
         return view('building.addBuilding');
+        
     }
 
     public function submit(Request $request)
@@ -38,30 +39,31 @@ class BuildingController extends Controller
         return redirect('/buildings')->with('success', 'Building berhasil ditambahkan.');
     }
 
-    public function edit($id_bangunan)
+    public function edit($token)
     {
-        $building = Building::findOrFail($id_bangunan);
+        $building = Building::where('token',$token)->first();
+
         return view('building.editBuilding', compact('building'));
     }
 
-    public function update(Request $request, $id_bangunan)
+    public function update(Request $request)
     {
-        $building = Building::findOrFail($id_bangunan);
+        $building = Building::where('token',$request->token)->first();
         $building->unit_bangunan = $request->unit_bangunan;
         $building->alamat_bangunan = $request->alamat_bangunan;
         $building->link_gmap = $request->link_gmap;
 
-        if($request->image){
-            $building->gambar_bangunan = $request->file('image')->store('gambar-bangunan-images');
+        if($request->gambar_bangunan){
+            $building->gambar_bangunan = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
         }
         $building->save();
 
-        return redirect('/buildings')->with('success', 'Building berhasil diperbarui.');
+        return redirect('/buildings')->with('success', 'Bangunan berhasil diperbarui.');
     }
 
-    public function delete($id_bangunan)
+    public function delete(Request $request)
     {
-        $building = Building::findOrFail($id_bangunan);
+        $building = Building::where('token',$request->token)->first();
         $building->delete();
 
         return redirect('/buildings')->with('success', 'Building berhasil dihapus.');

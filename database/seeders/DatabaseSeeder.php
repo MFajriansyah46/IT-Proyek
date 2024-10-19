@@ -48,31 +48,31 @@ class DatabaseSeeder extends Seeder
             'owner_id' => 1,
             'unit_bangunan' => 'A',
             'alamat_bangunan' => 'Jl. Pemuda no.2 Blok f KNPI',
-            'remember_token' => Str::random(16),
+            'token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'B',
             'alamat_bangunan' => 'Jl. Pemuda no.8 Blok B KNPI',
-            'remember_token' => Str::random(16),
+            'token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'C',
             'alamat_bangunan' => 'Jl. A. Yani samping samsat',
-            'remember_token' => Str::random(16),
+            'token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'D',
             'alamat_bangunan' => 'Jl. Karamantih',
-            'remember_token' => Str::random(16),
+            'token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 2,
             'unit_bangunan' => 'A',
             'alamat_bangunan' => 'Jl. Swadaya no.100G RT.07 RW.03 desa Lorem',
-            'remember_token' => Str::random(16),
+            'token' => Str::random(16),
         ]);
     } 
 }
