@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(16),
         ]);
 
-        Tenant::factory(64)->create();
+        Tenant::factory(24)->create();
 
         Owner::create([
             'name' => 'Rusida',
@@ -45,29 +45,34 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Building::create([
-            'unit' => 'A',
             'owner_id' => 1,
-            'address' => 'Jl. Pemuda no.2 Blok f KNPI',
+            'unit_bangunan' => 'A',
+            'alamat_bangunan' => 'Jl. Pemuda no.2 Blok f KNPI',
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
-            'unit' => 'B',
             'owner_id' => 1,
-            'address' => 'Jl. Pemuda no.8 Blok B KNPI',
+            'unit_bangunan' => 'B',
+            'alamat_bangunan' => 'Jl. Pemuda no.8 Blok B KNPI',
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
-            'unit' => 'C',
             'owner_id' => 1,
-            'address' => 'Jl. A. Yani samping samsat',
+            'unit_bangunan' => 'C',
+            'alamat_bangunan' => 'Jl. A. Yani samping samsat',
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
-            'unit' => 'D',
             'owner_id' => 1,
-            'address' => 'Jl. Karamantih',
+            'unit_bangunan' => 'D',
+            'alamat_bangunan' => 'Jl. Karamantih',
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
-            'unit' => 'A',
             'owner_id' => 2,
-            'address' => 'Jl. Swadaya no.100G RT.07 RW.03 desa Lorem',
+            'unit_bangunan' => 'A',
+            'alamat_bangunan' => 'Jl. Swadaya no.100G RT.07 RW.03 desa Lorem',
+            'remember_token' => Str::random(16),
         ]);
     } 
 }

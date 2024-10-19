@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Building;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class BuildingController extends Controller
 {
@@ -22,12 +23,14 @@ class BuildingController extends Controller
     {
         $building = new Building();
         $building->owner_id = $request->owner_id;
-        $building->unit = $request->unit;
-        $building->address = $request->address;
-        $building->gmap_link = $request->gmap_link;
+        $building->unit_bangunan = $request->unit_bangunan;
+        $building->gambar_bangunan = $request->gambar_bangunan;
+        $building->link_gmap = $request->link_gmap;
+        $building->alamat_bangunan = $request->alamat_bangunan;
+        $building->remember_token = Str::random(16);
 
-        if($request->image){
-            $building->image = $request->file('image')->store('profile-images');
+        if($request->gambar_bangunan){
+            $building->gambar_bangunan = $request->file('gambar_bangunan')->store('building-images');
         }
 
         $building->save();
@@ -44,10 +47,13 @@ class BuildingController extends Controller
     public function update(Request $request, $id_bangunan)
     {
         $building = Building::findOrFail($id_bangunan);
-        $building->unit = $request->unit;
-        $building->address = $request->address;
-        $building->latitude = $request->latitude;
-        $building->longitude = $request->longitude; 
+        $building->unit_bangunan = $request->unit_bangunan;
+        $building->alamat_bangunan = $request->alamat_bangunan;
+        $building->link_gmap = $request->link_gmap;
+
+        if($request->image){
+            $building->gambar_bangunan = $request->file('image')->store('gambar-bangunan-images');
+        }
         $building->save();
 
         return redirect('/buildings')->with('success', 'Building berhasil diperbarui.');

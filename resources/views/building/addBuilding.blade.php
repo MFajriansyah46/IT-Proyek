@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-6">Add Buildings</h1>
+    <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-6">Tambah Bangunan</h1>
 
     <form action="/buildings/submit" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white shadow-md rounded-lg p-6" onsubmit="return validateForm()"  enctype="multipart/form-data">
         @csrf
@@ -11,19 +11,19 @@
                 <label for="upload-building-Image" class="border-2 border-dashed border-gray-300 p-10 w-full max-w-lg text-center cursor-pointer" id="drop-area">
                     <p id="preview-building-text" class="text-gray-500">Click or drag building image here to upload</p>
                     <img id="preview-building-image" src="" alt="" class="hidden w-full h-auto">
-                    <input type="file" id="upload-building-Image" name="image" accept="image/*" class="hidden">
+                    <input type="file" id="upload-building-Image" name="gambar_bangunan" accept="image/*" class="hidden">
                 </label>
             </div>
         </div>
 
         <label class="text-lg font-semibold mb-2">Unit</label>
-        <input type="text" name="unit" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <input type="text" name="unit_bangunan" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
-        <label class="text-lg font-semibold mb-2">Address</label>
-        <input type="text" name="address" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <label class="text-lg font-semibold mb-2">Alamat Bangunan</label>
+        <input type="text" name="alamat_bangunan" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
         <label class="text-lg font-semibold mb-2">Gmap Link</label>
-        <input type="text" name="gmap_link" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <input type="text" name="link_gmap" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
         <label class="text-lg font-semibold mb-2">Description</label>
         <textarea type="text" name="description" class="border border-gray-300 rounded-md p-2 mb-6" required></textarea>

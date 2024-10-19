@@ -17,10 +17,11 @@ return new class extends Migration
                 table: 'owners',
                 indexName: 'buildings_owner_id'
             );
-            $table->char('unit');
-            $table->text('address');
-            $table->text('gmap_link')->nullable();
-            $table->string('image')->nullable();
+            $table->char('unit_bangunan');
+            $table->text ('alamat_bangunan');
+            $table->string('gambar_bangunan')->nullable();
+            $table->text('link_gmap')->nullable();
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }

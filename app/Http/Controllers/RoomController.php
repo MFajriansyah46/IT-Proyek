@@ -18,9 +18,12 @@ class RoomController extends Controller {
     }
 
     public function submit(Request $request) {
+        
+        $building = Building::where('id_bangunan',$request->id_bangunan)->first();
+
         $room = new Room;
         $room->id_bangunan = $request->id_bangunan;
-        $room->no_kamar = $request->no_kamar;
+        $room->no_kamar = $building->unit_bangunan.$request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;
         $room->save();

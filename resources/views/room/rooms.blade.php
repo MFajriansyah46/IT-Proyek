@@ -19,14 +19,13 @@
         </li>
     </ul>
 
-    <x-table.header :headers="['No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Rating Kamar', 'Aksi']">
+    <x-table.header :headers="['No Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Aksi']">
         @foreach ($rooms as $i=>$room)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
                 <x-table.data>{{ $room->no_kamar }}</x-table.data>
                 <x-table.data>{{ $room->harga_kamar }}</x-table.data>
                 <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
-                <x-table.data>{{ $room->rating_kamar }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                     <a href="/rooms/edit/{{ $room->id_kamar }}">
