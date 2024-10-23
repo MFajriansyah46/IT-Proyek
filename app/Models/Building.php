@@ -17,8 +17,9 @@ class Building extends Model
     protected $table = 'buildings';
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
-
     protected $guard = ['id_bangunan'];
+    protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','token'];
+
     
     public function owner(): BelongsTo {
         return $this->belongsTo(Owner::class);

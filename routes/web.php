@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ValidasiController;
 use App\Models\Building;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
-
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\BuildingController;
@@ -14,10 +14,9 @@ Route::middleware('auth:owner')->group(function(){
     
     Route::get('/dashboard', [DashboardController::class,'read']);
 
-    Route::post('/owner-logout', [OwnerController::class, 'logout']);
+    Route::post('/owner-logout', [ValidasiController::class, 'logoutOwner']);
 
     // tenant/user controller
-    
     Route::get('/users', [TenantController::class,'read']);
 
     Route::get('/users/edit/{remember_token}', [TenantController::class,'edit']);
@@ -28,7 +27,7 @@ Route::middleware('auth:owner')->group(function(){
 
     
     // room controller
-    
+
     // Route untuk menampilkan daftar rooms
     Route::get('/rooms', [RoomController::class, 'read']);
     
@@ -65,7 +64,7 @@ Route::middleware('auth:owner')->group(function(){
 //Aktor: Penyewa
 Route::middleware('auth:tenant')->group(function(){
 
-    Route::post('/logout', [TenantController::class, 'logout']);
+    Route::post('/logout', [ValidasiController::class, 'logout']);
     
     
 });
@@ -73,19 +72,17 @@ Route::middleware('auth:tenant')->group(function(){
 // Aktor: pengunjung
 Route::middleware('guest')->group(function(){
 
-    Route::get('/register', [TenantController::class, 'formRegister']);
+    Route::get('/register', [ValidasiController::class, 'formRegister']);
 
-    Route::post('/register', [TenantController::class, 'register']);
+    Route::post('/register', [ValidasiController::class, 'register']);
 
-    Route::get('/login', [TenantController::class, 'formLogin'])->name('login');
+    Route::get('/login', [ValidasiController::class, 'formLogin'])->name('login');
 
-    Route::post('/login', [TenantController::class, 'authenticate']);
+    Route::post('/login', [ValidasiController::class, 'authenticate']);
 
-    Route::get('/owner-login', [OwnerController::class, 'formLogin']);
+    Route::get('/owner-login', [ValidasiController::class, 'formLoginOwner']);
     
-    Route::post('/owner-login', [OwnerController::class, 'authenticate']);
+    Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
-    Route::get('/', function(){
-        return view('home');
-    });
+    Route::get('/', function(){return view('home');});
 });

@@ -8,12 +8,13 @@
         <input type="number" name="no_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>
         
         <label class="text-lg font-semibold mb-2">Unit Bangunan</label>
-        <select type="text" name="id_bangunan" class="border border-gray-300 rounded-md p-2 mb-6" required>       
+        <select type="text" name="id_bangunan" class="border border-gray-300 rounded-md p-2 mb-6" required>
+            <option></option>
             @foreach(auth()->user()->buildings as $building )
                 <option value="{{ $building->id_bangunan }}">{{ $building->unit_bangunan }} - {{ $building->alamat_bangunan }}</option>
             @endforeach
         </select>
-
+        
         <label class="text-lg font-semibold mb-2">Harga Kamar</label>
         <input type="number" name="harga_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>
     

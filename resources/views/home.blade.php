@@ -8,6 +8,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script src="/assets/jquery-3.7.1.js"></script>
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
   <title>Bang Raja</title>
 </head class="h-full">
 
@@ -27,23 +28,19 @@
     <nav class="bg-gray-900">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
-
           <div class="flex items-center">
             <div class="flex-shrink-0 mr-1">
               <img class="h-10 w-auto" src="/images/logo bang raja3.png" alt="Your Company">
             </div>
             
             <div class="rounded-md px-4 py-2 text-sm font-medium text-white">
-              <svg width="10" height="24" xmlns="http://www.w3.org/2000/svg"> <rect x="4" y="0" width="1" height="100" fill="white" /> </svg>
+              <svg width="10" height="24" xmlns="http://www.w3.org/2000/svg"> <rect x="4" y="0" width="1" height="100" fill="white" /></svg>
             </div>
             <div class="hidden md:block">
               <div class=" flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline" aria-current="page">Home</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline">Team</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline">Projects</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline">Calendar</a>
-                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline">Reports</a>
+                <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline">Rooms</a>
               </div>
             </div>
           </div>

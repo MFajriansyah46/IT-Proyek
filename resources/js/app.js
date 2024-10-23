@@ -67,11 +67,30 @@ $('#closeProfileBtn').on('click', function() {
     $('#profileOverlay').addClass('hidden');
 });
 
+// Modal edit user
+$(document).ready(function () {
+    // Saat tombol edit ditekan, tampilkan modal
+    $('#edit-user-button').on('click', function () {
+        $('#confirmation-edit-user').removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-edit-user, #close-modal').on('click', function () {
+        $('#confirmation-edit-user').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-edit-user').on('click', function () {
+        $('#user-edit-form').submit();
+    });
+});
+
 // Modal delete user
 $(document).ready(function () {
     // Saat tombol hapus ditekan, tampilkan modal
     $('.delete-user-button').on('click', function () {
-        $('#confirmation-delete-user').removeClass('hidden');
+        var userId = $(this).data('user-id');
+        $('#confirmation-delete-user').data('user-id', userId).removeClass('hidden');
     });
 
     // Saat tombol "No, cancel" ditekan, sembunyikan modal
@@ -79,9 +98,30 @@ $(document).ready(function () {
         $('#confirmation-delete-user').addClass('hidden');
     });
 
-    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form berdasarkan user id
     $('#confirm-delete').on('click', function () {
-        $('#user-delete-form').submit();
+        var userId = $('#confirmation-delete-user').data('user-id');
+        $('form[data-user-id="' + userId + '"]').submit();
+    });
+});
+
+// Modal delete building
+$(document).ready(function () {
+    // Saat tombol hapus ditekan, tampilkan modal
+    $('.delete-building-button').on('click', function () {
+        var buildingId = $(this).data('building-id');
+        $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-delete-building, #close-modal-building').on('click', function () {
+        $('#confirmation-delete-building').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form yang sesuai
+    $('#confirm-delete-building').on('click', function () {
+        var buildingId = $('#confirmation-delete-building').data('building-id');
+        $('form[data-building-id="' + buildingId + '"]').submit();
     });
 });
 
@@ -148,7 +188,7 @@ $(document).ready(function () {
             const reader = new FileReader();
             reader.onload = function (e) {
                 $('#preview-building-image').attr('src', e.target.result).removeClass('hidden');
-                $('#preview-building-text').addClass('hidden');
+                $('#preview-added-building-text').addClass('hidden');
             };
             reader.readAsDataURL(file);
         }

@@ -10,7 +10,7 @@ class RoomController extends Controller {
     
     public function read(){
         $rooms = Room::all();
-        return view('room.rooms', compact('rooms'));
+        return view('room.rooms', compact('rooms',));
     }    
 
     public function add() {
@@ -19,11 +19,10 @@ class RoomController extends Controller {
 
     public function submit(Request $request) {
         
-        $building = Building::where('id_bangunan',$request->id_bangunan)->first();
-
+        $building = Building::findOrFail($request->id_bangunan);
         $room = new Room;
         $room->id_bangunan = $request->id_bangunan;
-        $room->no_kamar = $building->unit_bangunan.$request->no_kamar;
+        $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;
         $room->save();
@@ -36,7 +35,10 @@ class RoomController extends Controller {
         return view('room.editRoom', compact('room'));
     }
     public function update(Request $request, $id_kamar) {
+
+        $building = Building::findOrFail($request->id_bangunan);
         $room = Room::findOrFail($id_kamar);
+        $room->id_bangunan = $request->id_bangunan;
         $room->no_kamar = $request->no_kamar;
         $room->harga_kamar = $request->harga_kamar;
         $room->kecepatan_internet = $request->kecepatan_internet;

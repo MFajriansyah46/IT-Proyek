@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         Tenant::create([
             'name' => 'M. Fajriansyah',
             'phone_number' => 6282251964943,
+            'image' => 'profile-images/pi1.jpg',
             'username' => 'fazzar.yusuf',
             'password' => 'barabaidangers',
             'remember_token' => Str::random(16),

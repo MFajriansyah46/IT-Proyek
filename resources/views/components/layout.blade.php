@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/assets/jquery-3.7.1.js"></script>
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
   <title>Bang Raja</title>
 </head class="h-full">
 
@@ -17,9 +18,8 @@
     <x-navbar></x-navbar>
     <main class="flex-1">
 
-
       <x-header></x-header>
-
+      
       <div class="mx-auto px-4 h-screen overflow-scroll">
         {{ $slot }}
       </div>

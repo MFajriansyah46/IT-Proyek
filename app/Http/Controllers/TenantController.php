@@ -41,51 +41,7 @@ class TenantController extends Controller {
     public function delete(Request $request){
         $user = Tenant::where('remember_token', $request->remember_token)->first();
         $user->delete();
-        return redirect('/users');
-    }
-
-    public function formRegister() {
-
-        return view('register');
-    }
-
-    public function Register(Request $request) {
-
-        $validatedData = $request->validate([
-            'name' => 'required|min:3|max:255',
-            'phone_number' => 'required|min:11',
-            'username' => 'required|unique:tenants|min:6|max:255',
-            'password' => 'required|min:8',
-        ]);
-
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        $validatedData['remember_token'] = Str::random(16);
-
-        if($request->password == $request->confirm_password){
-            Tenant::create($validatedData);
-            $request->session()->flash('registration-success','Registration successfull! Please login');
-            return redirect('/login');
-        }
-        return back()->with('password-confirm-error','password and confirm password is not same!');
-    }
-
-    public function formLogin() {
-        return view('login.tenant');
-    }
-
-    public function authenticate(Request $request) {
-
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
-        if(Auth::guard('tenant')->attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->intended('/');   
-        }
-
-        return back()->with('loginError','Login Gagal!');
+        return redirect('/users')->with('deleted-user', "User ''$user->name'' had been deleted");
     }
 
     public function logout(Request $request) {

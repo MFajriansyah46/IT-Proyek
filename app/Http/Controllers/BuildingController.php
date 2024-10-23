@@ -22,21 +22,23 @@ class BuildingController extends Controller
 
     public function submit(Request $request)
     {
-        $building = new Building();
-        $building->owner_id = $request->owner_id;
-        $building->unit_bangunan = $request->unit_bangunan;
-        $building->gambar_bangunan = $request->gambar_bangunan;
-        $building->link_gmap = $request->link_gmap;
-        $building->alamat_bangunan = $request->alamat_bangunan;
-        $building->remember_token = Str::random(16);
+        $building = $request->validate([
+            'owner_id' => 'required',
+            'unit_bangunan' => 'required|max:1',
+            'gambar_bangunan' => 'required|image',
+            'link_gmap' => 'required',
+            'alamat_bangunan' => 'required|max:255',
+        ]);
 
+        $building['token'] = Str::random(16);
+        
         if($request->gambar_bangunan){
-            $building->gambar_bangunan = $request->file('gambar_bangunan')->store('building-images');
+            $building['gambar_bangunan'] = $request->file('gambar_bangunan')->store('building-images');
         }
-
-        $building->save();
-
-        return redirect('/buildings')->with('success', 'Building berhasil ditambahkan.');
+        
+        Building::create($building);
+        $request->session()->flash('building-add-success','Building data has been successfully added.');
+        return redirect('/buildings');
     }
 
     public function edit($token)
@@ -65,7 +67,6 @@ class BuildingController extends Controller
     {
         $building = Building::where('token',$request->token)->first();
         $building->delete();
-
-        return redirect('/buildings')->with('success', 'Building berhasil dihapus.');
+        return redirect('/buildings')->with('deleted-building', "Building ''$building->unit_bangunan - $building->alamat_bangunan'' had been deleted.");
     }
 }
