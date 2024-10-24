@@ -11,7 +11,7 @@ use App\Http\Controllers\BuildingController;
 
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
-    
+
     Route::get('/dashboard', [DashboardController::class,'read']);
 
     Route::post('/owner-logout', [ValidasiController::class, 'logoutOwner']);
@@ -20,32 +20,26 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/users', [TenantController::class,'read']);
 
     Route::get('/users/edit/{remember_token}', [TenantController::class,'edit']);
-    
+
     Route::post('/users/update/', [TenantController::class,'update']);
 
     Route::post('/users/delete', [TenantController::class,'delete']);
 
-    
+
     // room controller
 
-    // Route untuk menampilkan daftar rooms
     Route::get('/rooms', [RoomController::class, 'read']);
-    
-    // Route untuk menampilkan form tambah room
+
     Route::get('/rooms/add', [RoomController::class, 'add']);
-    
-    // Route untuk menyimpan room baru
-    Route::post('/rooms/submit', [RoomController::class, 'submit']);
-    
-    // Route untuk menampilkan form edit room berdasarkan id
-    Route::get('/rooms/edit/{id_kamar}', [RoomController::class, 'edit']);
-    
-    // Route untuk memperbarui data room berdasarkan id
-    Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update']);
-    
-    // Route untuk menghapus room berdasarkan id
+
+    Route::post('/rooms/submit', [RoomController::class, 'submit'])->name('rooms.submit');
+
+    Route::get('/rooms/edit/{id_kamar}', [RoomController::class, 'edit'])->name('rooms.edit');
+
+    Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update'])->name('rooms.update');
+
     Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
-    
+
     // building controller
     Route::get('/buildings', [BuildingController::class, 'read']);
 

@@ -158,15 +158,15 @@ $(document).ready(function() {
 $(document).ready(function() {
     const togglePassword = document.querySelector("#toggle-password-register");
     const passwordField = document.querySelector("#password-field-register");
-    
+
     const toggleConfirmPassword = document.querySelector("#toggle-confirm-password");
     const confirmPasswordField = document.querySelector("#confirm-password-field");
-    
+
     togglePassword.addEventListener("click", function () {
         const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
         passwordField.setAttribute("type", type);
     });
-    
+
     toggleConfirmPassword.addEventListener("click", function () {
         const type = confirmPasswordField.getAttribute("type") === "password" ? "text" : "password";
         confirmPasswordField.setAttribute("type", type);
@@ -189,6 +189,20 @@ $(document).ready(function () {
             reader.onload = function (e) {
                 $('#preview-building-image').attr('src', e.target.result).removeClass('hidden');
                 $('#preview-added-building-text').addClass('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    })});
+
+    $(document).ready(function () {
+    // For the traditional file input
+    $('#upload-room-Image').on('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview-room-image').attr('src', e.target.result).removeClass('hidden');
+                $('#preview-room-text').addClass('hidden');
             };
             reader.readAsDataURL(file);
         }
@@ -262,6 +276,27 @@ $(document).ready(function () {
                 $('#preview-added-building-text').addClass('hidden');
             };
             reader.readAsDataURL(file);
+
         }
+    });
+});
+
+// Modal delete room
+$(document).ready(function () {
+    // Saat tombol hapus ditekan, tampilkan modal
+    $('.delete-room-button').on('click', function () {
+        // const roomId = $(this).data('room-id');
+        // $('#room-delete-form').attr('action', '/rooms/delete/' + roomId);
+        $('#confirmation-delete-room').removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-delete-room, #close-modal').on('click', function () {
+        $('#confirmation-delete-room').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-delete-room').on('click', function () {
+        $('#room-delete-form').submit();
     });
 });
