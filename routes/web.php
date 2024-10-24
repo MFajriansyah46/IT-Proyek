@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ValidasiController;
+use App\Models\Room;
 use App\Models\Building;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\TenantController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\TenantController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\ValidasiController;
+use App\Http\Controllers\DashboardController;
 
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
@@ -79,4 +80,13 @@ Route::middleware('guest')->group(function(){
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
     Route::get('/', function(){return view('home');});
+
+
+    Route::get('/rooms-list',[function(){
+
+            $rooms = Room::all();
+
+            return view('roomPublicList',['rooms' => $rooms]);
+        }
+    ]);
 });

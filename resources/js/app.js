@@ -291,7 +291,7 @@ $(document).ready(function () {
     });
 
     // Saat tombol "No, cancel" ditekan, sembunyikan modal
-    $('#cancel-delete-room, #close-modal').on('click', function () {
+    $('#cancel-delete-room, #close-modal-room').on('click', function () {
         $('#confirmation-delete-room').addClass('hidden');
     });
 

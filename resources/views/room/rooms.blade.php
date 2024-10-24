@@ -29,11 +29,13 @@
         </div>
     @endif
 
-    <x-table.header :headers="['No Kamar', 'Gambar Kamar', 'Harga Kamar', 'Kecepatan Internet', 'Aksi']">
+    <x-table.header :headers="['No Kamar',  'Harga Kamar', 'Kecepatan Internet','Gambar Kamar', 'Aksi']">
         @foreach ($rooms as $i=>$room)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
-                <x-table.data>{{ $room->no_kamar }}</x-table.data>
+                <x-table.data>{{ $room->building->unit_bangunan }}{{ $room->no_kamar }}</x-table.data>
+                <x-table.data>{{ $room->harga_kamar }}</x-table.data>
+                <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
                 <x-table.data class="text-center">
                     @if ($room->gambar_kamar)
                         <img src="{{ asset('storage/' . $room->gambar_kamar) }}" class="w-20 h-12 object-cover" alt="Gambar Kamar">
@@ -41,8 +43,6 @@
                         <span>Tidak ada</span>
                     @endif
                 </x-table.data>
-                <x-table.data>{{ $room->harga_kamar }}</x-table.data>
-                <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                     <a href="/rooms/edit/{{ $room->id_kamar }}">
@@ -53,7 +53,7 @@
                             </svg>
                         </button>
                     </a>
-                    <form method="post" action="{{ route('rooms.delete', $room->id_kamar) }}" id="room-delete-form">
+                    <form action="{{ route('rooms.delete', $room->id_kamar) }}" id="room-delete-form">
                         @csrf
 
                         <button type="button" class="delete-room-button" data-room-id="{{ $room->id_kamar }}">
@@ -64,7 +64,6 @@
                             </div>
                         </button>
                     </form>
-
                 </div>
                 </x-table.data>
             </tr>
