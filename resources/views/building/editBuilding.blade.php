@@ -2,7 +2,7 @@
     
 <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 mb-20 rounded-md"><br>
 <h1 class="text-5xl font-bold text-center text-gray-800">Edit Building</h1>
-    <form action="/buildings/update/" method="post" enctype="multipart/form-data" class="mx-auto max-w-xl sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6">
+    <form action="/buildings/update/" method="post" id="building-edit-form" enctype="multipart/form-data" class="mx-auto max-w-xl sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6">
         @csrf
         <input type="hidden" name="token" value="{{ $building->token }}">
         <div class="container mt-10">
@@ -28,7 +28,7 @@
         <label class="text-lg font-semibold mb-2">Link Gmap</label>
         <input type="text" name="link_gmap" value="{{ $building->link_gmap }}" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
-        <button type="submit" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400" onclick="return confirm('Are you sure you want to edit this building?');">Save</button>
+        <button type="button" id="edit-building-button" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400">Save</button>
     </form>
 </div>
 </x-layout>

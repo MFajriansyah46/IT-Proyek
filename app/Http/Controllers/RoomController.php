@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Building;
 use App\Models\Room;
+use App\Models\Building;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 
@@ -29,6 +30,7 @@ class RoomController extends Controller {
             'kecepatan_internet' => 'required|integer',
             'gambar_kamar' => 'required|image|max:100000',
         ]);
+        $building['token'] = Str::random(16);
 ;
         if($request->gambar_kamar){
             $room['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');

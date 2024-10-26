@@ -83,6 +83,7 @@ class DatabaseSeeder extends Seeder
             'harga_kamar' => '425000',
             'kecepatan_internet' => '100',
             'gambar_kamar' => 'room-images/k1.jpg',
+            'token' => Str::random(16),
         ]);
 
         Room::create([
@@ -91,6 +92,7 @@ class DatabaseSeeder extends Seeder
             'harga_kamar' => '450000',
             'kecepatan_internet' => '78',
             'gambar_kamar' => 'room-images/k2.jpg',
+            'token' => Str::random(16),
         ]);
 
         Room::create([
@@ -99,6 +101,7 @@ class DatabaseSeeder extends Seeder
             'harga_kamar' => '400000',
             'kecepatan_internet' => '12',
             'gambar_kamar' => 'room-images/k3.jpg',
+            'token' => Str::random(16),
         ]);
 
         Room::create([
@@ -107,6 +110,7 @@ class DatabaseSeeder extends Seeder
             'harga_kamar' => '425000',
             'kecepatan_internet' => '81',
             'gambar_kamar' => 'room-images/k4.jpg',
+            'token' => Str::random(16),
         ]);
 
         Room::create([
@@ -115,6 +119,7 @@ class DatabaseSeeder extends Seeder
             'harga_kamar' => '400000',
             'kecepatan_internet' => '8',
             'gambar_kamar' => 'room-images/k5.jpeg',
+            'token' => Str::random(16),
         ]);
     }
 }

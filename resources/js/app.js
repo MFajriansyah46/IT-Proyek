@@ -105,23 +105,65 @@ $(document).ready(function () {
     });
 });
 
-// Modal delete building
+// Modal edit building
 $(document).ready(function () {
-    // Saat tombol hapus ditekan, tampilkan modal
-    $('.delete-building-button').on('click', function () {
-        var buildingId = $(this).data('building-id');
-        $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
+    // Saat tombol edit ditekan, tampilkan modal
+    $('#edit-building-button').on('click', function () {
+        $('#confirmation-edit-building').removeClass('hidden');
     });
 
     // Saat tombol "No, cancel" ditekan, sembunyikan modal
-    $('#cancel-delete-building, #close-modal-building').on('click', function () {
-        $('#confirmation-delete-building').addClass('hidden');
+    $('#cancel-edit-building, #close-modal-edit-building').on('click', function () {
+        $('#confirmation-edit-building').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-edit-building').on('click', function () {
+        $('#building-edit-form').submit();
+    });
+});
+
+// Modal delete building
+$(document).ready(function () {
+    // Saat tombol hapus ditekan, tampilkan modal
+    $('.delete-room-button').on('click', function () {
+        var roomId = $(this).data('room-id');
+        $('#confirmation-delete-room').data('room-id', roomId).removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-delete-room, #close-modal-delete-room').on('click', function () {
+        $('#confirmation-delete-room').addClass('hidden');
     });
 
     // Saat tombol "Yes, I'm sure" ditekan, kirim form yang sesuai
-    $('#confirm-delete-building').on('click', function () {
-        var buildingId = $('#confirmation-delete-building').data('building-id');
-        $('form[data-building-id="' + buildingId + '"]').submit();
+    $('#confirm-delete-room').on('click', function () {
+        var roomId = $('#confirmation-delete-room').data('room-id');
+        $('form[data-room-id="' + roomId + '"]').submit();
+    });
+});
+
+// Modal delete room
+$(document).ready(function () {
+    let roomId = null;
+
+    // Tampilkan modal dan ambil ID kamar yang dipilih
+    $('.delete-room-button').on('click', function () {
+        roomId = $(this).data('room-id');
+        $('#confirmation-delete-room').removeClass('hidden');
+    });
+
+    // Sembunyikan modal saat tombol "No, cancel" atau "Close" ditekan
+    $('#cancel-delete-room, #close-modal-room').on('click', function () {
+        $('#confirmation-delete-room').addClass('hidden');
+        roomId = null;
+    });
+
+    // Submit form dengan ID kamar yang dipilih saat "Yes, I'm sure" diklik
+    $('#confirm-delete-room').on('click', function () {
+        if (roomId) {
+            $(`#form-delete-${roomId}`).submit();
+        }
     });
 });
 
@@ -281,22 +323,4 @@ $(document).ready(function () {
     });
 });
 
-// Modal delete room
-$(document).ready(function () {
-    // Saat tombol hapus ditekan, tampilkan modal
-    $('.delete-room-button').on('click', function () {
-        // const roomId = $(this).data('room-id');
-        // $('#room-delete-form').attr('action', '/rooms/delete/' + roomId);
-        $('#confirmation-delete-room').removeClass('hidden');
-    });
 
-    // Saat tombol "No, cancel" ditekan, sembunyikan modal
-    $('#cancel-delete-room, #close-modal-room').on('click', function () {
-        $('#confirmation-delete-room').addClass('hidden');
-    });
-
-    // Saat tombol "Yes, I'm sure" ditekan, kirim form
-    $('#confirm-delete-room').on('click', function () {
-        $('#room-delete-form').submit();
-    });
-});

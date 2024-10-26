@@ -51,8 +51,7 @@
                                 </svg>
                             </button>
                         </a>
-                        <form action="/buildings/delete/" method="post" class="building-delete-form"
-                            data-building-id="{{ $building->id }}">
+                        <form action="/buildings/delete/" method="post" class="building-delete-form" data-building-id="{{ $building->id }}">
                             @csrf
                             <input type="hidden" name="token" value="{{ $building->token }}">
                             <button type="button" class="delete-building-button" data-building-id="{{ $building->id }}">
