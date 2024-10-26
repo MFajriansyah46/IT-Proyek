@@ -37,7 +37,7 @@
                         {{ $building->alamat_bangunan }}
                     </div>
                 </x-table.data> <!-- Perbaikan ejaan -->
-                <x-table.data><img class="h-36 w-auto" src="/storage/{{ $building->gambar_bangunan }}"
+                <x-table.data><img class="w-36 h-24" src="/storage/{{ $building->gambar_bangunan }}"
                         alt=""></x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">

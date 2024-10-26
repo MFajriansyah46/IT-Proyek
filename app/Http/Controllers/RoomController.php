@@ -27,7 +27,7 @@ class RoomController extends Controller {
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
             'kecepatan_internet' => 'required|integer',
-            'gambar_kamar' => 'required|imag|mimes:png,jpg,jpeg|max:100000',
+            'gambar_kamar' => 'required|image|max:100000',
         ]);
 ;
         if($request->gambar_kamar){
@@ -43,7 +43,7 @@ class RoomController extends Controller {
         return view('room.editRoom', compact('room'));
     }
     public function update(Request $request, $id_kamar) {
-        
+
         $room = Room::findOrFail($id_kamar);
     
         $validatedData = $request->validate([

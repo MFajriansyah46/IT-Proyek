@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Building;
+use App\Models\Room;
 use App\Models\Owner;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Tenant;
+use App\Models\Building;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
@@ -75,5 +76,45 @@ class DatabaseSeeder extends Seeder
             'alamat_bangunan' => 'Jl. Swadaya no.100G RT.07 RW.03 desa Lorem',
             'token' => Str::random(16),
         ]);
-    } 
+
+        Room::create([
+            'no_kamar' => '1',
+            'id_bangunan' => '1',
+            'harga_kamar' => '425000',
+            'kecepatan_internet' => '100',
+            'gambar_kamar' => 'room-images/k1.jpg',
+        ]);
+
+        Room::create([
+            'no_kamar' => '2',
+            'id_bangunan' => '1',
+            'harga_kamar' => '450000',
+            'kecepatan_internet' => '78',
+            'gambar_kamar' => 'room-images/k2.jpg',
+        ]);
+
+        Room::create([
+            'no_kamar' => '1',
+            'id_bangunan' => '2',
+            'harga_kamar' => '400000',
+            'kecepatan_internet' => '12',
+            'gambar_kamar' => 'room-images/k3.jpg',
+        ]);
+
+        Room::create([
+            'no_kamar' => '1',
+            'id_bangunan' => '3',
+            'harga_kamar' => '425000',
+            'kecepatan_internet' => '81',
+            'gambar_kamar' => 'room-images/k4.jpg',
+        ]);
+
+        Room::create([
+            'no_kamar' => '2',
+            'id_bangunan' => '2',
+            'harga_kamar' => '400000',
+            'kecepatan_internet' => '8',
+            'gambar_kamar' => 'room-images/k5.jpeg',
+        ]);
+    }
 }

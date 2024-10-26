@@ -38,7 +38,7 @@
                 <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
                 <x-table.data class="text-center">
                     @if ($room->gambar_kamar)
-                        <img src="{{ asset('storage/' . $room->gambar_kamar) }}" class="w-20 h-12 object-cover" alt="Gambar Kamar">
+                        <img src="{{ asset('storage/' . $room->gambar_kamar) }}" class="w-28 h-16 object-cover" alt="Gambar Kamar">
                     @else
                         <span>Tidak ada</span>
                     @endif
