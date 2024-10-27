@@ -16,8 +16,9 @@ class PaymentController extends Controller
         $token = $_GET['r'];
 
         $room = Room::where('token', $token)->first();
+        $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
 
-        return view('roomDetail', ['room' => $room]);
+        return view('roomDetail', ['room' => $room , 'rent' => $rent]);
     }
 
     public function process(Request $request)
@@ -72,7 +73,7 @@ class PaymentController extends Controller
             $rent = new Rent();
             $rent->id_kamar = $transaction->id_kamar;
             $rent->id_penyewa = $transaction->id_penyewa;
-            $rent->tanggal_masuk = now();
+            $rent->tanggal_masuk = now('Asia/Makassar');
             $rent->save();
         }
 

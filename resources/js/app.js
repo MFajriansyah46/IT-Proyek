@@ -167,6 +167,31 @@ $(document).ready(function () {
     });
 });
 
+// Modal discard rent
+$(document).ready(function () {
+    let roomId = null;
+
+    // Tampilkan modal dan ambil ID kamar yang dipilih
+    $('.discard-rent-button').on('click', function () {
+        roomId = $(this).data('room-id');
+        $('#confirmation-discard-rent').removeClass('hidden');
+    });
+
+    // Sembunyikan modal saat tombol "No, cancel" atau "Close" ditekan
+    $('#cancel-discard-rent, #close-modal-rent').on('click', function () {
+        $('#confirmation-discard-rent').addClass('hidden');
+        roomId = null;
+    });
+
+    // Submit form dengan ID kamar yang dipilih saat "Yes, I'm sure" diklik
+    $('#confirm-discard-rent').on('click', function () {
+        if (roomId) {
+            $(`#form-delete-${roomId}`).submit(); // Tambahkan backtick untuk template literal
+        }
+    });
+});
+
+
 $(document).ready(function() {
     const togglePassword = $("#toggle-password");
     const passwordField = $("#password-field");

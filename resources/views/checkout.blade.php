@@ -17,12 +17,13 @@
             <p class="text-gray-600">: 30 Days</p>
         </div>
         <div class="flex">
-            <p class="text-gray-600 w-72"><strong>Total Harga</strong></p>
+            <p class="text-gray-600 w-72"><strong>Total</strong></p>
             <p class="text-gray-600">: Rp {{ number_format($transaction->room->harga_kamar, 2, ',', '.') }}</p>
         </div>
     </div>
     <button type="button" id="pay-button" class="mt-20 w-full bg-green-500 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition duration-300">Confirm Payment</button>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+    
     <script type="text/javascript">
       document.getElementById('pay-button').onclick = function(){
         // SnapToken acquired from previous step
@@ -33,7 +34,7 @@
           },
           // Optional
           onPending: function(result){
-            /* You may add your own js here, this is just example */ document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+            
           },
           // Optional
           onError: function(result){

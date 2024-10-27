@@ -7,4 +7,5 @@
     @endauth
   </div>
 
+
 </x-public-layout>

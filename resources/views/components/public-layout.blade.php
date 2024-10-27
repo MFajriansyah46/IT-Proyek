@@ -120,8 +120,8 @@
     </main>
   </body>
 
-  @if (session()->has('payment-success'))
-  <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
+@if (session()->has('payment-success'))
+  <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg max-w-md flex px-4 py-6 gap-8" id="login-eror">
     <li class="my-auto text-lg">
       {{ session('payment-success') }}
     </li>

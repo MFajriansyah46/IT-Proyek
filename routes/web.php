@@ -3,6 +3,7 @@
 use App\Models\Rent;
 use App\Models\Room;
 use App\Models\Building;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\OwnerController;
@@ -55,8 +56,48 @@ Route::middleware('auth:owner')->group(function(){
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
     
     Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
-});
 
+    Route::get('/active-rental', function() {
+
+        $rents = Rent::all();
+
+        return view('rent.rents',['rents' => $rents]);
+    });
+    
+    Route::get('/transactions', function() {
+
+        $transactions = Transaction::all();
+
+        return view('transaction.transactions',['transactions' => $transactions]);
+    });
+
+    Route::get('/timeout/{id}', function($id) {
+
+        $rent = Rent::find($id);
+
+        $rent->delete();
+        
+        return redirect('/active-rental');
+    });
+
+    Route::get('/confirm/payment/{snap_token}', function($snap_token){
+
+        $transaction = Transaction::where('snap_token',$snap_token)->first();
+        $transaction->lunas = true;
+        $transaction->update();
+
+        if($transaction->lunas) {
+
+            $rent = new Rent();
+            $rent->id_kamar = $transaction->id_kamar;
+            $rent->id_penyewa = $transaction->id_penyewa;
+            $rent->tanggal_masuk = now('Asia/Makassar');
+            $rent->save();
+        }
+
+        return redirect('/transactions')->with('payment-success','Payment Confirmed');
+    });
+});
 
 //Aktor: Penyewa
 Route::middleware('auth:tenant')->group(function(){
@@ -68,7 +109,6 @@ Route::middleware('auth:tenant')->group(function(){
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
     Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'paymentSuccess']);
-
 
 });
 
@@ -88,9 +128,9 @@ Route::middleware('guest')->group(function(){
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
     Route::get('/', function(){
-        
+
         return view('home');
-    
+
     });
 
     Route::get('/rooms-list',[function(){

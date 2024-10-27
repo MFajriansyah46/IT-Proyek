@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,19 @@ class Rent extends Model
 
     protected $guard = ['id'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        // Event yang dijalankan saat record akan dibuat
+        static::creating(function ($rent) {
+            if ($rent->tanggal_masuk) {
+                // Set tanggal_keluar menjadi satu bulan setelah tanggal_masuk
+                $rent->tanggal_keluar = Carbon::parse($rent->tanggal_masuk)->addMonth();
+            }
+        });
+    }
+
     public function room(): BelongsTo {
         return $this->BelongsTo(Room::class,'id_kamar');
     }
@@ -22,3 +36,4 @@ class Rent extends Model
     }
     
 }
+
