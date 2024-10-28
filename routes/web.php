@@ -54,7 +54,7 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
     
-    Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
+    Route::delete('/buildings/delete/', [BuildingController::class, 'delete'])->name('buildings.delete');
 });
 
 

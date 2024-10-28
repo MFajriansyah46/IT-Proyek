@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Models\Owner;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,11 +12,10 @@ class Building extends Model
 {
     use HasFactory;
 
-
     protected $table = 'buildings';
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
-    protected $guard = ['id_bangunan'];
+    protected $guarded = ['id_bangunan'];
     protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','token'];
 
     

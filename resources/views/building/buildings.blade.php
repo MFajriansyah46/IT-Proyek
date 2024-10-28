@@ -19,26 +19,29 @@
         </li>
     </ul>
 
-    <x-table.header :headers="['Unit', 'Alamat', 'Gambar', 'Aksi']">
+    <x-table.header :headers="['Unit', 'Alamat', 'Link Gmap','Gambar', 'Aksi']">
         @foreach ($buildings as $i => $building)
             <tr class="hover:bg-yellow-100">
                 <x-table.data>{{ $i + 1 }}</x-table.data>
                 <x-table.data>{{ $building->unit_bangunan }}</x-table.data>
-                <x-table.data>
-                    <div class="flex flex-row gap-4">
-                        @if ($building->link_gmap)
-                            <a href="{{ $building->link_gmap }}" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20">
-                                    <path fill="#999999"
-                                        d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25" />
-                                </svg>
-                            </a>
-                        @endif
-                        {{ $building->alamat_bangunan }}
-                    </div>
-                </x-table.data> <!-- Perbaikan ejaan -->
-                <x-table.data><img class="w-36 h-24" src="/storage/{{ $building->gambar_bangunan }}"
-                        alt=""></x-table.data>
+
+                <x-table.data><img class="w-36 h-24" src="/storage/{{ $building->gambar_bangunan }}"></x-table.data>
+
+                 <!-- kolom link Gmap -->
+                 <x-table.data>    
+                    @if ($building->link_gmap)
+                        <a href="{{ $building->link_gmap }}" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20">
+                                <path fill="#999999"
+                                    d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25" />
+                            </svg>
+                        </a>
+                    @endif
+                </x-table.data>
+
+                <x-table.data>{{ $building->alamat_bangunan }}</x-table.data>
+                    
+                <!-- Perbaikan ejaan -->
                 <x-table.data>
                     <div class="flex gap-1 my-1">
                         <a href="/buildings/edit/{{ $building->token }}">
@@ -53,8 +56,9 @@
                         </a>
                         <form action="/buildings/delete/" method="post" class="building-delete-form" data-building-id="{{ $building->id }}">
                             @csrf
+                            @method('DELETE')
                             <input type="hidden" name="token" value="{{ $building->token }}">
-                            <button type="button" class="delete-building-button" data-building-id="{{ $building->id }}">
+                            <button type="submit" class="building-delete-button" data-building-id="{{ $building->id }}">
                                 <div
                                     class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem"
