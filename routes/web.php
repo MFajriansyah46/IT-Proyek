@@ -39,7 +39,7 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update'])->name('rooms.update');
 
-    Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
+    Route::post('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
 
     // building controller
     Route::get('/buildings', [BuildingController::class, 'read']);

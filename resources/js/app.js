@@ -245,8 +245,8 @@ $(document).ready(function () {
 $(document).ready(function () {
     // Saat tombol hapus ditekan, tampilkan modal
     $('.delete-room-button').on('click', function () {
-        // const roomId = $(this).data('room-id');
-        // $('#room-delete-form').attr('action', '/rooms/delete/' + roomId);
+        const roomId = $(this).data('room-id'); // Ambil ID kamar dari data atribut
+        $('#room-delete-form').attr('action', '/rooms/delete/' + roomId); // Set action form
         $('#confirmation-delete-room').removeClass('hidden');
     });
 
@@ -257,6 +257,91 @@ $(document).ready(function () {
 
     // Saat tombol "Yes, I'm sure" ditekan, kirim form
     $('#confirm-delete-room').on('click', function () {
+        console.log('Delete confirmed');
+        console.log($('#room-delete-form').attr('action'));
         $('#room-delete-form').submit();
     });
 });
+
+//drag image room
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area');
+    const uploadInput = document.getElementById('upload-room-Image');
+    const previewImage = document.getElementById('preview-room-image');
+    const previewText = document.getElementById('preview-added-room-text');
+
+    // Mencegah perilaku default saat drag over
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Menambahkan kelas saat drag masuk
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    // Menghapus kelas saat drag keluar
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Menghandle drop event
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('bg-gray-200');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-gray-200');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+                previewText.classList.add('hidden');
+            };
+
+            reader.readAsDataURL(file);
+            uploadInput.files = files;
+        }
+    }
+});
+
+// resources/js/app.js
+function previewImage(event) {
+    const image = document.getElementById('preview-room-image');
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        image.src = reader.result; // Mengatur src gambar dengan hasil upload
+        image.classList.remove('hidden'); // Menampilkan gambar yang di-upload
+    };
+
+    if (event.target.files.length > 0) {
+        reader.readAsDataURL(event.target.files[0]); // Membaca file
+    }
+}
+document.getElementById('upload-room-Image').addEventListener('change', previewImage);
