@@ -19,7 +19,7 @@
         </li>
     </ul>
 
-    @if ($errors->any())
+    <!-- @if ($errors->any())
         <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -27,7 +27,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
 
     <x-table.header :headers="['No Kamar',  'Harga Kamar', 'Kecepatan Internet','Gambar Kamar', 'Aksi']">
         @foreach ($rooms as $i=>$room)

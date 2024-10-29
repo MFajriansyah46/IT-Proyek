@@ -3,15 +3,15 @@
     <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
         <div class="bg-blue-500 rounded-lg p-4 text-white">
         <h2 class="text-2xl">{{ $countUser }}</h2>
-            <p>Users total</p>
+            <p>Users</p>
         </div>
         <div class="bg-green-500 rounded-lg p-4 text-white">
             <h2 class="text-2xl">{{ $countRoom }}</h2>
-            <p>Rooms total</p>
+            <p>Rooms</p>
         </div>
         <div class="bg-red-500 rounded-lg p-4 text-white">
             <h2 class="text-2xl">{{ $countBuilding }}</h2>
-            <p>Buildings total</p>
+            <p>Buildings</p>
         </div>
         <div class="bg-yellow-500 rounded-lg p-4 text-white">
             <h2 class="text-xl">Rp {{ number_format($countTotalRevenue, 2, ',', '.') }}</h2>

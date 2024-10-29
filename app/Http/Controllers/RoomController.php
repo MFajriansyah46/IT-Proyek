@@ -30,7 +30,7 @@ class RoomController extends Controller {
             'kecepatan_internet' => 'required|integer',
             'gambar_kamar' => 'required|image|max:100000',
         ]);
-        $building['token'] = Str::random(16);
+        $room['token'] = Str::random(16);
 ;
         if($request->gambar_kamar){
             $room['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
@@ -41,15 +41,17 @@ class RoomController extends Controller {
     }
 
     public function edit($id_kamar) {
-        $room = Room::find($id_kamar);
+        $room = Room::where('id_kamar',$id_kamar)->first();
         return view('room.editRoom', compact('room'));
     }
+
     public function update(Request $request, $id_kamar) {
 
         $room = Room::findOrFail($id_kamar);
     
         $validatedData = $request->validate([
             'no_kamar' => 'required|integer',
+            'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
             'kecepatan_internet' => 'required|integer',
             'gambar_kamar' => 'nullable|image|mimes:png,jpg,jpeg|max:100000',

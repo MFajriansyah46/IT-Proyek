@@ -12,7 +12,9 @@
                 <!-- gambar 3 -->
                 <img id="image3" class="w-48 h-24 px-1 rounded-md" src="https://wpcms.kanggo.id/wp-content/uploads/2022/06/220622-7-Ide-Desain-Kamar-Mandi-yang-Nyaman-dan-Memikat-02.jpg" alt="">
                 <!-- gambar 4 -->
-                <img id="image4" class="w-48 h-24 px-1 rounded-md" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/97/MTA-146183326/no_brand_meja_belajar_lipat_serbaguna_-_meja_belajar_anak_-_laptop_portable_desk_full15_fnq9kyhx.jpg" alt="">
+                <img id="image4" class="w-48 h-24 px-1 rounded-md" src="https://static.mooimom.id/media/mamapedia/Ohmb3VGQ--main-image.JPG" alt="">
+                <!-- gambar 5 -->                
+                <img id="image5" class="w-48 h-24 px-1 rounded-md" src="https://wpcms.kanggo.id/wp-content/uploads/2022/06/220622-7-Ide-Desain-Kamar-Mandi-yang-Nyaman-dan-Memikat-02.jpg" alt="">
             </div>
             <script>
                 $(document).ready(function() {
@@ -21,7 +23,7 @@
                     $('#main_image1').attr('src', firstImageSrc);
 
                     // Saat salah satu gambar diklik
-                    $('#image1, #image2, #image3, #image4').on('click', function() {
+                    $('#image1, #image2, #image3, #image4, #image5').on('click', function() {
                         let clickedImageSrc = $(this).attr('src');
                         $('#main_image1').attr('src', clickedImageSrc);
                     });

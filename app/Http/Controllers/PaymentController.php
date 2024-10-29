@@ -17,9 +17,17 @@ class PaymentController extends Controller
         $token = $_GET['r'];
 
         $room = Room::where('token', $token)->first();
-        $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
+        // $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
+        // dd(auth('tenant')->user()->id);
 
-        return view('roomDetail', ['room' => $room , 'rent' => $rent]);
+        if(auth('tenant')->user()){
+            $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
+            return view('roomDetail', ['room' => $room , 'rent' => $rent]);
+        } else {
+
+            $rent = Rent::where('id_penyewa', $room->id_penyewa)->first();
+            return view('roomDetail', ['room' => $room , 'rent' => $rent]);
+        }
     }
 
     public function process(Request $request)

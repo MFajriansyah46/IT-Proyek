@@ -15,12 +15,12 @@ class CreateRoomsTable extends Migration
             $table->bigInteger('harga_kamar');
             $table->integer('kecepatan_internet');
             $table->string('gambar_kamar')->nullable();
-            $table->string('token');
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('rooms');
     }

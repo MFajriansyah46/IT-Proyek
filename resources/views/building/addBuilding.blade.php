@@ -1,5 +1,5 @@
 <x-layout>
-    
+
 <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
     <h1 class="text-5xl font-bold text-center text-gray-800">Add Building</h1>
     <form action="/buildings/submit" method="post" enctype="multipart/form-data" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" onsubmit="return validateForm()"  >
