@@ -1,5 +1,4 @@
 <x-layout>
-
     <ul class="flex mt-8 mb-4">
         <li>
             <h1 class="text-5xl font-bold text-gray-800">Buildings</h1>
@@ -19,46 +18,62 @@
         </li>
     </ul>
 
-    <x-table.header :headers="['Unit', 'Alamat', 'Gambar', 'Aksi']">
-        @foreach ($buildings as $i => $building)
+    <!-- Header Tabel -->
+    <x-table.header :headers="['Unit', 'Gambar Bangunan', 'Link Gmap', 'Alamat Bangunan', 'Aksi']">
+        @foreach ($buildings as $i=> $building)
             <tr class="hover:bg-yellow-100">
+                <!--kolom no-->
                 <x-table.data>{{ $i + 1 }}</x-table.data>
+
+                <!-- Kolom Unit -->
                 <x-table.data>{{ $building->unit_bangunan }}</x-table.data>
-                <x-table.data>
-                    <div class="flex flex-row gap-4">
-                        @if ($building->link_gmap)
-                            <a href="{{ $building->link_gmap }}" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20">
-                                    <path fill="#999999"
-                                        d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25" />
-                                </svg>
-                            </a>
+
+                <!-- Kolom Gambar Bangunan -->
+
+                    <x-table.data>
+                        @if($building->gambar_bangunan)
+                            <img class="w-36 max-h-24 mb-2" src="{{ asset('storage/' . $building->gambar_bangunan) }}" alt="Building Image">
+                        @else
+                            <p>No image available.</p>
                         @endif
-                        {{ $building->alamat_bangunan }}
-                    </div>
-                </x-table.data> <!-- Perbaikan ejaan -->
-                <x-table.data><img class="w-36 h-24" src="/storage/{{ $building->gambar_bangunan }}"
-                        alt=""></x-table.data>
+                    </x-table.data>
+                
+
+                <!-- Kolom Link Gmap -->
                 <x-table.data>
-                    <div class="flex gap-1 my-1">
+                    <div class="flex items-center gap-2">
+                        @if ($building->link_gmap)
+                            <a href="{{ $building->link_gmap }}" target="_blank" class="text-blue-500 hover:underline">
+                                View on Map
+                            </a>
+                        @else
+                            <span class="text-gray-400">No Link</span>
+                        @endif
+                    </div>
+                </x-table.data>
+
+                <!-- Kolom Alamat Bangunan -->
+                <x-table.data>{{ $building->alamat_bangunan }}</x-table.data>
+
+                <!-- Kolom Aksi -->
+                <x-table.data>
+                    <div class="flex gap-2">
+                        <!-- Tombol Edit -->
                         <a href="/buildings/edit/{{ $building->token }}">
-                            <button type="button"
-                                class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                            <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                                 <!-- Icon Edit -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" viewBox="0 0 32 32">
-                                    <path fill="white"
-                                        d="M25 4.031c-.766 0-1.516.297-2.094.875L13 14.781l-.219.219l-.062.313l-.688 3.5l-.312 1.468l1.469-.312l3.5-.688l.312-.062l.219-.219l9.875-9.906A2.968 2.968 0 0 0 25 4.03zm0 1.938c.234 0 .465.12.688.343c.445.446.445.93 0 1.375L16 17.376l-1.719.344l.344-1.719l9.688-9.688c.222-.222.453-.343.687-.343zM4 8v20h20V14.812l-2 2V26H6V10h9.188l2-2z" />
+                                    <path fill="white" d="M25 4.031c-.766 0-1.516.297-2.094.875L13 14.781l-.219.219l-.062.313l-.688 3.5l-.312 1.468l1.469-.312l3.5-.688l.312-.062l.219-.219l9.875-9.906A2.968 2.968 0 0 0 25 4.03zm0 1.938c.234 0 .465.12.688.343c.445.446.445.93 0 1.375L16 17.376l-1.719.344l.344-1.719l9.688-9.688c.222-.222.453-.343.687-.343zM4 8v20h20V14.812l-2 2V26H6V10h9.188l2-2z" />
                                 </svg>
                             </button>
                         </a>
-                        <form action="/buildings/delete/" method="post" class="building-delete-form" data-building-id="{{ $building->id }}">
+                        <!-- Tombol Hapus -->
+                        <form action="/buildings/delete/{{ $building->id }}" method="post">
                             @csrf
-                            <input type="hidden" name="token" value="{{ $building->token }}">
+                            @method('DELETE')
                             <button type="button" class="delete-building-button" data-building-id="{{ $building->id }}">
-                                <div
-                                    class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem"
-                                        viewBox="0 0 24 24">
+                                <div class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
                                         <path fill="white"
                                             d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z" />
                                     </svg>

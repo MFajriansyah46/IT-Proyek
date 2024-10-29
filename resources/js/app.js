@@ -105,41 +105,23 @@ $(document).ready(function () {
     });
 });
 
-// Modal edit building
-$(document).ready(function () {
-    // Saat tombol edit ditekan, tampilkan modal
-    $('#edit-building-button').on('click', function () {
-        $('#confirmation-edit-building').removeClass('hidden');
-    });
-
-    // Saat tombol "No, cancel" ditekan, sembunyikan modal
-    $('#cancel-edit-building, #close-modal-edit-building').on('click', function () {
-        $('#confirmation-edit-building').addClass('hidden');
-    });
-
-    // Saat tombol "Yes, I'm sure" ditekan, kirim form
-    $('#confirm-edit-building').on('click', function () {
-        $('#building-edit-form').submit();
-    });
-});
-
 // Modal delete building
 $(document).ready(function () {
     // Saat tombol hapus ditekan, tampilkan modal
-    $('.delete-room-button').on('click', function () {
-        var roomId = $(this).data('room-id');
-        $('#confirmation-delete-room').data('room-id', roomId).removeClass('hidden');
+    $('.delete-building-button').on('click', function () {
+        var buildingId = $(this).data('building-id');
+        $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
     });
 
     // Saat tombol "No, cancel" ditekan, sembunyikan modal
-    $('#cancel-delete-room, #close-modal-delete-room').on('click', function () {
-        $('#confirmation-delete-room').addClass('hidden');
+    $('#cancel-delete-building, #close-modal-delete-building').on('click', function () {
+        $('#confirmation-delete-building').addClass('hidden');
     });
 
     // Saat tombol "Yes, I'm sure" ditekan, kirim form yang sesuai
-    $('#confirm-delete-room').on('click', function () {
-        var roomId = $('#confirmation-delete-room').data('room-id');
-        $('form[data-room-id="' + roomId + '"]').submit();
+    $('#confirm-delete-building').on('click', function () {
+        var bubblingId = $('#confirmation-delete-building').data('building-id');
+        $('form[data-building-id="' + buildingId + '"]').submit();
     });
 });
 

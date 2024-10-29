@@ -29,11 +29,9 @@
         <label class="text-lg font-semibold mb-2">Gmap Link</label>
         <input type="text" name="link_gmap" class="border border-gray-300 rounded-md p-2 mb-6" required>
         @error('link_gmap') <small class="text-red-500 -mt-6">{{ $message }}</small> @enderror
-        
-        <label class="text-lg font-semibold mb-2">Description</label>
-        <textarea type="text" name="description" class="border border-gray-300 rounded-md p-2 mb-6" required></textarea>
 
-        <button type="submit" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400" onclick="return confirm('Are you sure you want to save this building?');">Save</button>
+
+        <button type="submit" class="mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400" >Save</button>
     </form>
 </div>
 </x-layout>

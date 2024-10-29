@@ -12,17 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('buildings', function (Blueprint $table) {
-            $table->id('id_bangunan');
-            $table->foreignId('owner_id')->constrained(
-                table: 'owners',
-                indexName: 'buildings_owner_id'
-            );
-            $table->char('unit_bangunan');
-            $table->text ('alamat_bangunan');
-            $table->string('gambar_bangunan')->nullable();
-            $table->text('link_gmap')->nullable();
-            $table->string('token')->nullable();
-            $table->timestamps();
+            $table->id('id_bangunan'); // Kolom ID bangunan
+            $table->foreignId('owner_id')->constrained('owners'); // Foreign key yang mengacu pada tabel owners
+            $table->string('unit_bangunan'); // Kolom unit bangunan, menggunakan string untuk fleksibilitas
+            $table->text('alamat_bangunan'); // Kolom alamat bangunan
+            $table->string('gambar_bangunan')->nullable(); // Kolom gambar bangunan, nullable
+            $table->text('link_gmap')->nullable(); // Kolom link Google Maps, nullable
+            $table->string('token')->unique(); // Kolom token, ditandai sebagai unique
+            $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buildings');
+        Schema::dropIfExists('buildings'); // Menghapus tabel buildings saat rollback
     }
 };

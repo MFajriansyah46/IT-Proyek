@@ -49,7 +49,9 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::get('/buildings/add', [BuildingController::class, 'add']);
 
-    Route::post('/buildings/submit', [BuildingController::class, 'submit']);
+    Route::post('/buildings/submit', [BuildingController::class, 'submit'])->name('buildings.submit');
+
+  
 
     Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
 
