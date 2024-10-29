@@ -14,16 +14,15 @@
         </div>
         <div class="flex mb-2">
             <p class="text-gray-600 w-72"><strong>Duration</strong></p>
-            <p class="text-gray-600">: 30 Days</p>
+            <p class="text-gray-600">: 1 Month</p>
         </div>
         <div class="flex">
-            <p class="text-gray-600 w-72"><strong>Total</strong></p>
+            <p class="text-gray-600 w-72"><strong>Total Price</strong></p>
             <p class="text-gray-600">: Rp {{ number_format($transaction->room->harga_kamar, 2, ',', '.') }}</p>
         </div>
     </div>
     <button type="button" id="pay-button" class="mt-20 w-full bg-green-500 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition duration-300">Confirm Payment</button>
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
-    
     <script type="text/javascript">
       document.getElementById('pay-button').onclick = function(){
         // SnapToken acquired from previous step
@@ -43,5 +42,14 @@
         });
       };
     </script>
+    <script>
+      if({{ $transaction->lunas }}) {
+        window.location.href= '/checkout/success/{{ $transaction->snap_token }}';
+      }
+    </script>
+  </div>
+  <div class=" max-w-xl py-4 px-2 mt-6 text-sm text-gray-600 h-96 mx-auto">
+      <h1>Note:</h1>
+      <p>To make a payment via bank transfer or e-wallet, click <strong class="font-medium">confirm payment</strong>. If paying in cash, ask the owner to confirm the payment.</p>
   </div>
 </x-public-layout>

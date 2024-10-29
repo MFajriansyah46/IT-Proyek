@@ -66,17 +66,15 @@ Route::middleware('auth:owner')->group(function(){
     
     Route::get('/transactions', function() {
 
-        $transactions = Transaction::all();
+        $transactions = Transaction::orderBy('id', 'desc')->get();
 
         return view('transaction.transactions',['transactions' => $transactions]);
     });
 
-    Route::get('/timeout/{id}', function($id) {
+    Route::get('/active-rental/timeout/{token}', function($token) {
 
-        $rent = Rent::find($id);
-
+        $rent = Rent::where('token',$token)->first();
         $rent->delete();
-        
         return redirect('/active-rental');
     });
 
@@ -92,6 +90,7 @@ Route::middleware('auth:owner')->group(function(){
             $rent->id_kamar = $transaction->id_kamar;
             $rent->id_penyewa = $transaction->id_penyewa;
             $rent->tanggal_masuk = now('Asia/Makassar');
+            $rent->token = Str::random(16);
             $rent->save();
         }
 
@@ -130,7 +129,6 @@ Route::middleware('guest')->group(function(){
     Route::get('/', function(){
 
         return view('home');
-
     });
 
     Route::get('/rooms-list',[function(){

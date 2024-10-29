@@ -6,6 +6,7 @@ use Redirect;
 use App\Models\Rent;
 use App\Models\Room;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -74,9 +75,9 @@ class PaymentController extends Controller
             $rent->id_kamar = $transaction->id_kamar;
             $rent->id_penyewa = $transaction->id_penyewa;
             $rent->tanggal_masuk = now('Asia/Makassar');
+            $rent->token = Str::random(16);
             $rent->save();
         }
-
         return redirect('/')->with('payment-success','Payment Successfull! Check your room now.');
     }
 }

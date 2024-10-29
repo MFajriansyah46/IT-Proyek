@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_kamar')->constrained('rooms','id_kamar')->indexName('rooms_id_kamar');
             $table->foreignId('id_penyewa')->constrained('tenants')->indexName('rooms_id_tenant');
-            $table->integer('jumlah_pennghuni')->nullable();
+            $table->string('token');
             $table->dateTime('tanggal_masuk')->nullable();
             $table->dateTime('tanggal_keluar')->nullable();
             $table->timestamps();

@@ -62,6 +62,14 @@
                   </div>
                 </li>
                 <li>
+                  <div class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      <button id="openProfileUserBtn" class="flex pr-14">
+                        <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" viewBox="0 0 24 24"><path fill="#969696" d="m10.821 2.003l.1.017l8.5 2a.75.75 0 0 1 .572.627L20 4.75v14.5a.75.75 0 0 1-.48.7l-.098.03l-8.5 2a.75.75 0 0 1-.915-.628L10 21.25V2.75a.75.75 0 0 1 .723-.75zm.679 1.694v16.606l7-1.647V5.344zM9 4v1.5H5.5v13H9V20H4.75a.75.75 0 0 1-.743-.648L4 19.25V4.75a.75.75 0 0 1 .648-.743L4.75 4zm5 7a1 1 0 1 1 0 2a1 1 0 0 1 0-2"/></svg>
+                        <h1 class="text-base ">My Room</h1>
+                      </button>
+                  </div>
+                </li>
+                <li>
                   <form method="post" action="/logout" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">
                       @csrf
                       <button type="submit" class="flex pr-28">                           
@@ -95,7 +103,8 @@
                       </button>
                   </div>
                 </li>
-              <!-- @ endif -->
+
+                <!-- @ endif -->
               </ul>
             </div>
             @else
@@ -110,7 +119,6 @@
                  </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -121,7 +129,7 @@
   </body>
 
 @if (session()->has('payment-success'))
-  <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg max-w-md flex px-4 py-6 gap-8" id="login-eror">
+  <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg border max-w-md flex px-4 py-6 gap-8" id="login-eror">
     <li class="my-auto text-lg">
       {{ session('payment-success') }}
     </li>
