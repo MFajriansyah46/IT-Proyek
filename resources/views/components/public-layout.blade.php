@@ -1,3 +1,4 @@
+<?php use App\Models\Rent; $rent = Rent::firstWhere('id_penyewa', auth('tenant')->user()->id);?>
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
 <head>
@@ -98,7 +99,8 @@
                         <img class="mr-2 h-8 w-auto rounded-full my-auto" src="/images/default-profile.jpg" alt="" >
                         <div class="flex flex-col justify-start items-start">
                             <h1 class="text-sm ">M. Fajriansyah</h1>
-                            <small class="text-gray-500">6282251964943</small>
+                            <!-- <small class="text-gray-500">6282251964943</small> -->
+                             <!-- <span id="countdownPublic"></span> -->
                         </div>
                       </button>
                   </div>
@@ -127,20 +129,58 @@
       {{ $slot }}
     </main>
   </body>
+  @if($rent)
+    <script>
+      $(document).ready(function() {
+        // Set tanggal keluar dari variabel Blade ke dalam JavaScript
+        const tanggalKeluar = new Date("{{ $rent->tanggal_keluar }}").getTime();
 
-@if (session()->has('payment-success'))
-  <ul class="absolute top-16 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg border max-w-md flex px-4 py-6 gap-8" id="login-eror">
-    <li class="my-auto text-lg">
-      {{ session('payment-success') }}
-    </li>
-    <li class="my-auto ml-auto" >
-      <button class="ml-auto hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
-        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </li>
-  </ul>
-@endif
+        // Update hitungan mundur setiap 1 detik
+        const countdownInterval = setInterval(function() {
+          // Dapatkan waktu saat ini
+          const now = new Date().getTime();
 
+          // Hitung selisih waktu
+          const distance = tanggalKeluar - now;
+
+          // Hitung hari, jam, menit, dan detik
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Tampilkan hasil hitung mundur
+          $('#countdownPublic').text(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+
+          // Jika hitungan mundur selesai
+          if (distance < 0) {
+              clearInterval(countdownInterval);
+              $('#countdownPublic').text("Waktu telah habis!");
+              window.location.href='/timeout/{{ $rent->token }}';
+          }
+        }, 1000);
+      });
+    </script>
+  @endif
+
+  @if (session()->has('payment-success')) 
+    <ul class="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg border max-w-lg flex px-4 py-6 gap-8" id="login-eror">
+      <li class="my-auto text-lg">
+        {{ session('payment-success') }}
+        <div class="w-full flex justify-center">
+            <a href="#" class="w-32 px-3 py-1.5 text-lg text-blue-400 hover:text-blue-300 font-semibold">My Room &raquo;</a>
+        </div>
+      </li>
+      <li class="my-auto ml-auto" >
+        <button class="ml-auto hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
+          <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </li>
+    </ul>
+
+  @endif
 </html>
+
+

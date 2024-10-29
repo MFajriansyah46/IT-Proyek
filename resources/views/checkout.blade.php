@@ -44,12 +44,12 @@
     </script>
     <script>
       if({{ $transaction->lunas }}) {
-        window.location.href= '/checkout/success/{{ $transaction->snap_token }}';
+        window.location.href= '/?c=1';
       }
     </script>
   </div>
   <div class=" max-w-xl py-4 px-2 mt-6 text-sm text-gray-600 h-96 mx-auto">
       <h1>Note:</h1>
-      <p>To make a payment via bank transfer or e-wallet, click <strong class="font-medium">confirm payment</strong>. If paying in cash, ask the owner to confirm the payment.</p>
+      <p>To make a payment via bank transfer or e-wallet, click <strong class="font-bold">confirm payment</strong>. If paying in cash, ask the owner to confirm the payment.</p>
   </div>
 </x-public-layout>

@@ -93,7 +93,6 @@ Route::middleware('auth:owner')->group(function(){
             $rent->token = Str::random(16);
             $rent->save();
         }
-
         return redirect('/transactions')->with('payment-success','Payment Confirmed');
     });
 });
@@ -108,6 +107,19 @@ Route::middleware('auth:tenant')->group(function(){
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
     Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'paymentSuccess']);
+
+    Route::get('/timeout/{token}', function($token) {
+
+        $rent = Rent::where('token',$token)->first();
+        $rent->delete();
+        return redirect('/');
+    });
+
+    Route::get('/myroom', function(){
+
+        $rent = Rent::firstWhere('id_penyewa',auth('tenant')->user()->id);
+        return view('myRoom',['rent' => $rent]);
+    });
 
 });
 
@@ -128,7 +140,12 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/', function(){
 
-        return view('home');
+        if(isset($_GET['c'])) {
+            return redirect('/')->with('payment-success','Payment Confirmed! Check your room now.');
+        }
+        else {
+            return view('home');
+        }
     });
 
     Route::get('/rooms-list',[function(){

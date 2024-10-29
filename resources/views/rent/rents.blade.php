@@ -37,7 +37,7 @@
                             if (distance < 0) {
                                 clearInterval(countdownInterval);
                                 $('#countdown{{ $rent->id }}').text("Waktu telah habis!");
-                                window.location.href='/timeout/{{ $rent->token }}';
+                                window.location.href='/active-rental/timeout/{{ $rent->token }}';
                             }
                         }, 1000);
                     });
