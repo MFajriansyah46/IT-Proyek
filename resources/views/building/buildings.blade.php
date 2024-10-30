@@ -19,9 +19,9 @@
     </ul>
 
     <!-- Header Tabel -->
-    <x-table.header :headers="['Unit', 'Gambar Bangunan', 'Link Gmap', 'Alamat Bangunan', 'Aksi']">
+    <x-table.header :headers="['Unit', 'Gambar Bangunan','Alamat Bangunan', 'Aksi']">
         @foreach ($buildings as $i=> $building)
-            <tr class="hover:bg-yellow-100">
+            <tr class="hover:bg-yellow-100 border-b border-gray-200 ">
                 <!--kolom no-->
                 <x-table.data>{{ $i + 1 }}</x-table.data>
 
@@ -30,34 +30,26 @@
 
                 <!-- Kolom Gambar Bangunan -->
 
-                    <x-table.data>
-                        @if($building->gambar_bangunan)
-                            <img class="w-36 max-h-24 mb-2" src="{{ asset('storage/' . $building->gambar_bangunan) }}" alt="Building Image">
-                        @else
-                            <p>No image available.</p>
-                        @endif
-                    </x-table.data>
-                
-
-                <!-- Kolom Link Gmap -->
                 <x-table.data>
-                    <div class="flex items-center gap-2">
-                        @if ($building->link_gmap)
-                            <a href="{{ $building->link_gmap }}" target="_blank" class="text-blue-500 hover:underline">
-                                View on Map
-                            </a>
-                        @else
-                            <span class="text-gray-400">No Link</span>
-                        @endif
-                    </div>
+                    @if($building->gambar_bangunan)
+                        <img class="w-36 max-h-24 mb-2" src="{{ asset('storage/' . $building->gambar_bangunan) }}" alt="Building Image">
+                    @else
+                        <p>No image available.</p>
+                    @endif
+                </x-table.data>
+                
+                <!-- Kolom Alamat Bangunan -->
+                <x-table.data class="px-4 py-2">    
+                <div class="flex jus">
+                    <a href="{{ $building->link_gmap }}" target="_blank" class="text-blue-500 hover:underline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20"><path fill="#999999" d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25"/></svg>
+                    </a> {{ $building->alamat_bangunan }}
+                </div>       
                 </x-table.data>
 
-                <!-- Kolom Alamat Bangunan -->
-                <x-table.data>{{ $building->alamat_bangunan }}</x-table.data>
-
                 <!-- Kolom Aksi -->
-                <x-table.data>
-                    <div class="flex gap-2">
+                <x-table.data class="px-4 py-2">
+                    <div class="flex gap-1">
                         <!-- Tombol Edit -->
                         <a href="/buildings/edit/{{ $building->token }}">
                             <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
