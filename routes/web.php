@@ -9,6 +9,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
@@ -99,6 +100,8 @@ Route::middleware('auth:owner')->group(function(){
 
 //Aktor: Penyewa
 Route::middleware('auth:tenant')->group(function(){
+
+    Route::post('/edit-profile', [ProfileController::class, 'editProfile']);
 
     Route::post('/logout', [ValidasiController::class, 'logout']);
 

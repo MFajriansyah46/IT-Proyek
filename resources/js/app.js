@@ -67,6 +67,36 @@ $('#closeProfileBtn').on('click', function() {
     $('#profileOverlay').addClass('hidden');
 });
 
+$(document).ready(function() {
+    // Show profile modal
+    $('#tenantProfileBtn').on('click', function() {
+        $('#tenantProfile').show();
+    });
+
+    // Close profile modal
+    $('#closeTenantProfileBtn').on('click', function() {
+        $('#tenantProfile').hide();
+    });
+});
+
+// Modal edit profile
+$(document).ready(function () {
+    // Saat tombol edit ditekan, tampilkan modal
+    $('#edit-profile-button').on('click', function () {
+        $('#confirmation-edit-profile').removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-edit-profile, #close-modal-edit-profile').on('click', function () {
+        $('#confirmation-edit-profile').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-edit-profile').on('click', function () {
+        $('#edit-profile-form').submit();
+    });
+});
+
 // Modal edit user
 $(document).ready(function () {
     // Saat tombol edit ditekan, tampilkan modal
