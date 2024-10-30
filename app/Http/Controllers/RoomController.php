@@ -16,48 +16,64 @@ class RoomController extends Controller {
     }
 
     public function add() {
-        return view('room.addRoom');
+        $buildings = Building::all(); // Ambil semua bangunan
+        return view('room.addRoom', compact('buildings'));
     }
+    
 
     public function submit(Request $request)
     {
         Log::info('Received request data: ', $request->all());
-
+    
         $request->validate([
+            'id_bangunan' => 'required|exists:buildings,id_bangunan', // Validasi bangunan yang valid
             'no_kamar' => 'required|integer',
             'harga_kamar' => 'required|numeric',
             'kecepatan_internet' => 'required|integer',
             'gambar_kamar' => 'required|image|mimes:png,jpg,jpeg|max:100000',
         ]);
-
-        $building = Building::where('id_bangunan', $request->id_bangunan)->first();
-        if(!$building){
-            return back()->withErrors(['id_bangunan'=>'Bangunan tidak ditemukan']);
-        }
-
-        $room = new Room();
-        $room->id_bangunan = $request->id_bangunan;
-        $room->no_kamar = $building->unit_bangunan.$request->no_kamar;
-        // $building->gambar_kamar = $request->gambar_kamar;
-        $room->harga_kamar = $request->harga_kamar;
-        $room->kecepatan_internet = $request->kecepatan_internet;
-
-        if($request->hasFile('gambar_kamar')){
+    
+        // Inisialisasi Room baru dengan atribut yang sudah divalidasi
+        $room = new Room($request->only(['id_bangunan', 'no_kamar', 'harga_kamar', 'kecepatan_internet']));
+    
+        if ($request->hasFile('gambar_kamar')) {
             $path = $request->file('gambar_kamar')->store('room-images', 'public');
             $room->gambar_kamar = $path;
         }
-
+    
         $room->save();
-
         return redirect('/rooms')->with('success', 'Kamar berhasil ditambahkan.');
     }
+    
+    public function update(Request $request, $id_kamar) {
+        $request->validate([
+            'id_bangunan' => 'required|exists:buildings,id_bangunan',
+            'no_kamar' => 'required|integer',
+            'harga_kamar' => 'required|numeric',
+            'kecepatan_internet' => 'required|integer',
+            'gambar_kamar' => 'image|mimes:png,jpg,jpeg|max:100000',
+        ]);
+    
+        $room = Room::findOrFail($id_kamar);
+    
+        $room->fill($request->only(['id_bangunan', 'no_kamar', 'harga_kamar', 'kecepatan_internet']));
+    
+        if ($request->hasFile('gambar_kamar')) {
+            $path = $request->file('gambar_kamar')->store('room-images', 'public');
+            $room->gambar_kamar = $path;
+        }
+    
+        $room->save();
+        return redirect('/rooms')->with('success', 'Kamar berhasil diperbarui.');
+    }
+    
 
     public function edit($id_kamar) {
         $room = Room::where('id_kamar',$id_kamar)->first();
         return view('room.editRoom', compact('room'));
     }
 
-    public function update(Request $request, $id_kamar) {
+    public function updates(Request $request, $id_kamar) {
 
         $request->validate([
             'no_kamar' => 'required|integer',

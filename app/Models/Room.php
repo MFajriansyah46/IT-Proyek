@@ -17,6 +17,6 @@ class Room extends Model
     protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'rating_kamar'];
 
     public function building(): BelongsTo {
-        return $this->belongsTo(Building::class);
+        return $this->belongsTo(Building::class, 'id_bangunan', 'id_bangunan');
     }
 }
