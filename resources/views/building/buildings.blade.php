@@ -60,10 +60,10 @@
                             </button>
                         </a>
                         <!-- Tombol Hapus -->
-                        <form action="/buildings/delete/{{ $building->id }}" method="post">
+                        <form action="/buildings/delete/{{ $building->token}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="delete-building-button" data-building-id="{{ $building->id }}">
+                            <button type="submit" class="delete-building-button" data-building-id="{{ $building->token}}">
                                 <div class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
                                         <path fill="white"

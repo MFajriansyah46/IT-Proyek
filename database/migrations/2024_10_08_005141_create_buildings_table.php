@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('link_gmap')->nullable(); // Kolom link Google Maps, nullable
             $table->string('token')->unique(); // Kolom token, ditandai sebagai unique
             $table->timestamps(); // Kolom timestamps untuk created_at dan updated_at
+            $table->foreign('id_bangunan')->references('id_bangunan')->on('buildings')->onDelete('cascade');
+
         });
     }
 

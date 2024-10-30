@@ -84,14 +84,27 @@ class BuildingController extends Controller
         return redirect('/buildings')->with('success', 'Building has been successfully updated.');
     }
 
-    public function delete(Request $request)
-    {
+    public function delete($token)
+    {   
+        if(!$token){
+            return redirect('/buildings')->with('error','token tidak ditemukan');
+        }
         // Ambil building berdasarkan token
-        $building = Building::where('token', $request->token)->firstOrFail();
+        $building = Building::where('token', $token)->first();
+
+        // Cek jika tidak ditemukan
+        if (!$building) {
+            return redirect('/buildings')->with('error', "Building not found or already deleted.");
+        }
+
+        // Hapus semua room yang terkait
+        $building->rooms()->delete();
 
         // Hapus building dari database
         $building->delete();
-        
+
         return redirect('/buildings')->with('deleted-building', "Building '$building->unit_bangunan - $building->alamat_bangunan' has been deleted.");
     }
+
+
 }

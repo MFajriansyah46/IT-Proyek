@@ -126,28 +126,29 @@ $(document).ready(function () {
 });
 
 // Modal delete room
+// Modal delete room
 $(document).ready(function () {
-    let roomId = null;
-
-    // Tampilkan modal dan ambil ID kamar yang dipilih
+    // Saat tombol hapus ditekan, tampilkan modal
     $('.delete-room-button').on('click', function () {
-        roomId = $(this).data('room-id');
+        const roomId = $(this).data('room-id'); // Ambil ID kamar dari data atribut
+        $('#room-delete-form').attr('action', '/rooms/delete/' + roomId); // Set action form
         $('#confirmation-delete-room').removeClass('hidden');
     });
 
-    // Sembunyikan modal saat tombol "No, cancel" atau "Close" ditekan
-    $('#cancel-delete-room, #close-modal-room').on('click', function () {
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-delete-room, #close-modal').on('click', function () {
         $('#confirmation-delete-room').addClass('hidden');
-        roomId = null;
     });
 
-    // Submit form dengan ID kamar yang dipilih saat "Yes, I'm sure" diklik
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
     $('#confirm-delete-room').on('click', function () {
-        if (roomId) {
-            $(`#form-delete-${roomId}`).submit();
-        }
+        console.log('Delete confirmed');
+        console.log($('#room-delete-form').attr('action'));
+        $('#room-delete-form').submit();
     });
 });
+
+
 
 // Modal discard rent
 $(document).ready(function () {

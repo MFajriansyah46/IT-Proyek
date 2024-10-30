@@ -17,7 +17,7 @@ class Building extends Model
     protected $table = 'buildings';
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
-    protected $guard = ['id_bangunan'];
+    protected $guarded = ['id_bangunan'];
     protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','token'];
 
     
@@ -26,6 +26,6 @@ class Building extends Model
     }
 
     public function rooms(): HasMany {
-        return $this->HasMany(Room::class, 'id_bangunan');
+        return $this->hasMany(Room::class, 'id_bangunan');
     }
 }

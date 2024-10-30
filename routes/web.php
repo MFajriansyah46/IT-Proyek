@@ -42,7 +42,7 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update'])->name('rooms.update');
 
-    Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
+    Route::post('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
 
     // building controller
     Route::get('/buildings', [BuildingController::class, 'read']);
@@ -51,13 +51,11 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/buildings/submit', [BuildingController::class, 'submit'])->name('buildings.submit');
 
-  
-
     Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
 
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
     
-    Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
+    Route::delete('/buildings/delete/{token}', [BuildingController::class, 'delete'])->name('buildings.delete');
 
     Route::get('/active-rental', function() {
 
