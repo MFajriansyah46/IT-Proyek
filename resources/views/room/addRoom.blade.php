@@ -10,13 +10,13 @@
                 <label for="upload-room-Image" class="border-2 border-dashed border-gray-300 p-10 w-full max-w-lg text-center cursor-pointer" id="drop-area">
                     <p id="preview-added-room-text" class="text-gray-500 py-12">Click or drag room image here to upload</p>
                     <img id="preview-room-image" src="" alt="" class="hidden w-full h-auto">
-                    <input type="file" id="upload-room-Image" name="gambar_kamar" accept="image/*" class="hidden">
+                    <input type="file" id="upload-room-Image" name="images" accept="image/*" class="hidden">
                 </label>
             </div>
         </div>
 
         <label class="text-lg font-semibold mb-2">No Kamar</label>
-        <input type="number" name="no_kamar" class="border border-gray-300 rounded-md p-2 mb-6" value="{{ old('no_kamar') }}" required>
+        <input type="number" name="room_number" class="border border-gray-300 rounded-md p-2 mb-6" value="{{ old('room_number') }}" required>
 
         <input type="hidden" name="owner_id" value="{{ auth('owner')->user()->id }}">
 
@@ -29,13 +29,13 @@
         </select>
 
         <label class="text-lg font-semibold mb-2">Harga Kamar</label>
-        <input type="number" name="harga_kamar" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <input type="number" name="price" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
         <label class="text-lg font-semibold mb-2">Kecepatan Internet</label>
-        <input type="text" name="kecepatan_internet" class="border border-gray-300 rounded-md p-2 mb-6" required>
+        <input type="text" name="internet_speed" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
         <!-- <label class="text-lg font-semibold mb-2">Gambar Kamar</label>
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="file" name="gambar_kamar" accept="image/png, image/jpeg" required>
+        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" type="file" name="images" accept="image/png, image/jpeg" required>
         <div class="mt-1 mb-6 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">Gambar kamar dalam format PNG, JPG, atau JPEG.</div> -->
 
         @if ($errors->any())

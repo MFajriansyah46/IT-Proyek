@@ -33,19 +33,19 @@
         @foreach ($rooms as $i=>$room)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
-                <x-table.data>{{ $room->no_kamar }}</x-table.data>
+                <x-table.data>{{ $room->room_number }}</x-table.data>
                 <x-table.data class="text-center">
-                @if ($room->gambar_kamar)
-                    <img src="{{ asset('storage/' . $room->gambar_kamar) }}" alt="Gambar Kamar" class="w-20 h-12 object-cover">
+                @if ($room->images)
+                    <img src="{{ asset('storage/' . $room->images) }}" alt="Gambar Kamar" class="w-20 h-12 object-cover">
                 @else
                     <span>Tidak ada</span>
                 @endif
                 </x-table.data>
-                <x-table.data>Rp{{ number_format($room->harga_kamar, 0, ',', '.') }}</x-table.data>
-                <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
+                <x-table.data>Rp{{ number_format($room->price, 0, ',', '.') }}</x-table.data>
+                <x-table.data>{{ $room->internet_speed }}</x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
-                    <a href="/rooms/edit/{{ $room->id_kamar }}">
+                    <a href="/rooms/edit/{{ $room->room_id }}">
                         <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                             <!-- Icon Edit -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" viewBox="0 0 32 32">
@@ -53,10 +53,10 @@
                             </svg>
                         </button>
                     </a>
-                    <form method="POST" action="/rooms/delete/{{ $room->id_kamar }}" id="room-delete-form">
+                    <form method="POST" action="/rooms/delete/{{ $room->room_id }}" id="room-delete-form">
                     @csrf
 
-                    <button type="button" class="delete-room-button" data-room-id="{{ $room->id_kamar }}">
+                    <button type="button" class="delete-room-button" data-room-id="{{ $room->room_id }}">
                         <div class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">
                                 <path fill="white" d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z" />

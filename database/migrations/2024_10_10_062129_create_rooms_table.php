@@ -9,12 +9,12 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->id('id_kamar');
+            $table->id('room_id');
             $table->foreignId('id_bangunan')->constrained('buildings', 'id_bangunan')->indexName('rooms_id_bangunan');
-            $table->integer('no_kamar');
-            $table->bigInteger('harga_kamar');
-            $table->integer('kecepatan_internet');
-            $table->string('gambar_kamar')->nullable();
+            $table->integer('room_number');
+            $table->bigInteger('price');
+            $table->integer('internet_speed');
+            $table->string('images')->nullable();
             $table->string('token')->nullable();
             $table->timestamps();
         });
