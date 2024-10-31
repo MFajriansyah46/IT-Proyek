@@ -1,5 +1,18 @@
 <x-public-layout>
-    <h1 class="text-2xl font-bold text-center mt-8">Recomendation</h1>
+<!--<h1 class="text-2xl font-bold text-center mt-8">Recomendation</h1>
+     <div class="container mx-auto py-8">
+        <div class="flex overflow-x-auto space-x-4">
+            @foreach ($rooms as $room)
+                @if (!isset($room->rent[0]))
+                    <div class="min-w-[480px] border rounded-lg bg-gray-50 shadow-lg p-4">
+                    </div>
+                @endif
+            @endforeach
+        </div>
+    </div> -->
+
+
+    <h1 class="text-2xl font-bold text-center mt-8">All Room</h1>
     <div class="container mx-auto py-8">
         <div class="grid grid-cols-1 mx-1 sm:mx-0 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ( $rooms as $room)

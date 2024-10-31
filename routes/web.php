@@ -109,7 +109,7 @@ Route::middleware('auth:tenant')->group(function(){
     
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
-    Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'paymentSuccess']);
+    Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
 
     Route::get('/timeout/{token}', function($token) {
 
@@ -151,12 +151,7 @@ Route::middleware('guest')->group(function(){
         }
     });
 
-    Route::get('/rooms-list',[function(){
-
-            $rooms = Room::all();
-            return view('roomPublicList',['rooms' => $rooms]);
-        }
-    ]);
+    Route::get('/rooms-list', [RoomController::class,'publicList']);
 
     Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
 });

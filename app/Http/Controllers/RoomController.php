@@ -7,6 +7,7 @@ use App\Models\Building;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Expr\List_;
 
 
 class RoomController extends Controller {
@@ -75,5 +76,97 @@ class RoomController extends Controller {
             $room->delete();
         }
         return redirect('/rooms')->with('success', 'Kamar berhasil dihapus.'); // Menggunakan flash message
+    }
+
+    public function publicList() {
+
+        $rooms = Room::all();
+        
+        // $roomsArray = $rooms->toArray();
+
+        // // Bobot untuk setiap kriteria
+        // $criteriaWeights = [
+        //     'harga_kamar' => 0.5,    // Harga (cost) - semakin murah semakin baik
+        //     'luas_kamar' => 0.35,     // Luas (benefit) - semakin luas semakin baik
+        //     'rating' => 0.15          // Rating (benefit) - semakin tinggi semakin baik
+        // ];
+    
+        // // Hitung total kuadrat untuk setiap kriteria
+        // $squareSums = [
+        //     'harga_kamar' => sqrt(array_sum(array_map(fn($room) => pow($room['harga_kamar'], 2), $roomsArray))),
+        //     'luas_kamar' => sqrt(array_sum(array_map(fn($room) => pow($room['luas_kamar'], 2), $roomsArray))),
+        //     'rating' => sqrt(array_sum(array_map(fn($room) => pow($room['rating'], 2), $roomsArray))),
+        // ];
+    
+        // // Normalisasi matriks
+        // $normalizedMatrix = [];
+        // foreach ($roomsArray as $room) {
+        //     $normalizedMatrix[] = [
+        //         'id' => $room['id'],
+        //         'harga_kamar' => $room['harga_kamar'] / $squareSums['harga_kamar'],
+        //         'luas_kamar' => $room['luas_kamar'] / $squareSums['luas_kamar'],
+        //         'rating' => $room['rating'] / $squareSums['rating']
+        //     ];
+        // }
+    
+        // // Bobot matriks normalisasi
+        // $weightedMatrix = [];
+        // foreach ($normalizedMatrix as $room) {
+        //     $weightedMatrix[] = [
+        //         'id' => $room['id'],
+        //         'harga_kamar' => $room['harga_kamar'] * $criteriaWeights['harga_kamar'],
+        //         'luas_kamar' => $room['luas_kamar'] * $criteriaWeights['luas_kamar'],
+        //         'rating' => $room['rating'] * $criteriaWeights['rating']
+        //     ];
+        // }
+    
+        // // Solusi ideal positif dan negatif
+        // $idealPositive = [
+        //     'harga_kamar' => min(array_column($weightedMatrix, 'harga_kamar')),
+        //     'luas_kamar' => max(array_column($weightedMatrix, 'luas_kamar')),
+        //     'rating' => max(array_column($weightedMatrix, 'rating'))
+        // ];
+    
+        // $idealNegative = [
+        //     'harga_kamar' => max(array_column($weightedMatrix, 'harga_kamar')),
+        //     'luas_kamar' => min(array_column($weightedMatrix, 'luas_kamar')),
+        //     'rating' => min(array_column($weightedMatrix, 'rating'))
+        // ];
+    
+        // // Hitung jarak solusi positif dan negatif
+        // $distancePositive = [];
+        // $distanceNegative = [];
+        // foreach ($weightedMatrix as $room) {
+        //     $distancePositive[$room['id']] = sqrt(
+        //         pow($room['harga_kamar'] - $idealPositive['harga_kamar'], 2) +
+        //         pow($room['luas_kamar'] - $idealPositive['luas_kamar'], 2) +
+        //         pow($room['rating'] - $idealPositive['rating'], 2)
+        //     );
+        //     $distanceNegative[$room['id']] = sqrt(
+        //         pow($room['harga_kamar'] - $idealNegative['harga_kamar'], 2) +
+        //         pow($room['luas_kamar'] - $idealNegative['luas_kamar'], 2) +
+        //         pow($room['rating'] - $idealNegative['rating'], 2)
+        //     );
+        // }
+    
+        // // Hitung skor preferensi
+        // $preferences = [];
+        // foreach ($distancePositive as $id => $dPos) {
+        //     $dNeg = $distanceNegative[$id];
+        //     $preferences[$id] = $dNeg / ($dPos + $dNeg);
+        // }
+    
+        // // Urutkan kamar berdasarkan preferensi tertinggi ke terendah
+        // arsort($preferences);
+    
+        // // Ambil 3 kamar teratas
+        // $topRoomIds = array_slice(array_keys($preferences), 0, 3);
+    
+        // // Dapatkan detail kamar teratas
+        // $topRoomsData = Room::whereIn('id', $topRoomIds)->get();
+    
+        // Return view dengan data kamar teratas
+
+        return view('roomPublicList', ['rooms' => $rooms]);
     }
 }

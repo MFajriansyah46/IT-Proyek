@@ -71,7 +71,7 @@ class PaymentController extends Controller
         return view('checkout',['transaction' => $transaction]);
     }
 
-    public function paymentSuccess($snap_token) {
+    public function rent($snap_token) {
 
         $transaction = Transaction::where('snap_token',$snap_token)->first();
         $transaction->lunas = true;
