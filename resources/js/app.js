@@ -127,25 +127,42 @@ $(document).ready(function () {
 // });
 
 $(document).ready(function () {
-    // Tampilkan modal konfirmasi saat tombol hapus ditekan
-    $('.delete-building-button').on('click', function (e) {
-        // e.preventDefault(); // Mencegah form submit langsung
+    // Saat tombol hapus ditekan, tampilkan modal
+    $('.delete-building-button').on('click', function () {
         var buildingId = $(this).data('building-id');
         $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
     });
 
-    // Sembunyikan modal saat tombol batal ditekan
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
     $('#cancel-delete-building, #close-modal-delete-building').on('click', function () {
         $('#confirmation-delete-building').addClass('hidden');
     });
 
-    // Kirim form hapus saat tombol konfirmasi ditekan
+    // Saat tombol "Yes, I'm sure" ditekan, kirim permintaan AJAX
     $('#confirm-delete-building').on('click', function () {
-        var buildingId = $('#confirmation-delete-building').data('building-id'); // Ambil ID bangunan dari modal
-        $('form[data-building-id="' + buildingId + '"]').submit(); // Submit form yang sesuai
-        $('#confirmation-delete-building').addClass('hidden'); // Sembunyikan modal setelah submit
+        var buildingId = $('#confirmation-delete-building').data('building-id');
+
+        $.ajax({
+            url: '/buildings/delete/' + buildingId, // URL penghapusan data
+            type: 'POST',
+            data: {
+                _method: 'DELETE',
+                _token: $('meta[name="csrf-token"]').attr('content') // Token CSRF
+            },
+            success: function (response) {
+                // Jika berhasil, tampilkan notifikasi dan sembunyikan modal
+                $('#confirmation-delete-building').addClass('hidden');
+                // Hapus baris tabel terkait, atau refresh data
+                $('form[data-building-id="' + buildingId + '"]').closest('tr').remove();
+            },
+            error: function (xhr) {
+                // Jika gagal, tampilkan pesan kesalahan
+                alert('Failed to delete building: ' + xhr.responseText);
+            }
+        });
     });
-});1
+});
+
 
 // Modal delete room
 $(document).ready(function () {

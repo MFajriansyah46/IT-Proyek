@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
   <title>Bang Raja</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head class="h-full">
 
 <body>
