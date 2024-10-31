@@ -106,26 +106,47 @@ $(document).ready(function () {
 });
 
 // Modal delete building
+// $(document).ready(function () {
+//     // Tampilkan modal konfirmasi saat tombol hapus ditekan
+//     $('.delete-building-button').on('click', function () {
+//         var buildingId = $(this).data('building-id');
+//         $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
+//     });
+
+//     // Sembunyikan modal saat tombol batal ditekan
+//     $('#cancel-delete-building, #close-modal-delete-building').on('click', function () {
+//         $('#confirmation-delete-building').addClass('hidden');
+//     });
+
+//     // Kirim form hapus saat tombol konfirmasi ditekan
+//     $('#confirm-delete-building').on('click', function () {
+//         var buildingId = $('#confirmation-delete-building').data('building-id'); // Ambil ID bangunan
+//         $('form[data-building-id="' + buildingId + '"]').submit(); // Submit form yang sesuai
+//         $('#confirmation-delete-building').addClass('hidden'); // Sembunyikan modal setelah submit
+//     });
+// });
+
 $(document).ready(function () {
-    // Saat tombol hapus ditekan, tampilkan modal
-    $('.delete-building-button').on('click', function () {
+    // Tampilkan modal konfirmasi saat tombol hapus ditekan
+    $('.delete-building-button').on('click', function (e) {
+        // e.preventDefault(); // Mencegah form submit langsung
         var buildingId = $(this).data('building-id');
         $('#confirmation-delete-building').data('building-id', buildingId).removeClass('hidden');
     });
 
-    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    // Sembunyikan modal saat tombol batal ditekan
     $('#cancel-delete-building, #close-modal-delete-building').on('click', function () {
         $('#confirmation-delete-building').addClass('hidden');
     });
 
-    // Saat tombol "Yes, I'm sure" ditekan, kirim form yang sesuai
+    // Kirim form hapus saat tombol konfirmasi ditekan
     $('#confirm-delete-building').on('click', function () {
-        var bubblingId = $('#confirmation-delete-building').data('building-id');
-        $('form[data-building-id="' + buildingId + '"]').submit();
+        var buildingId = $('#confirmation-delete-building').data('building-id'); // Ambil ID bangunan dari modal
+        $('form[data-building-id="' + buildingId + '"]').submit(); // Submit form yang sesuai
+        $('#confirmation-delete-building').addClass('hidden'); // Sembunyikan modal setelah submit
     });
-});
+});1
 
-// Modal delete room
 // Modal delete room
 $(document).ready(function () {
     // Saat tombol hapus ditekan, tampilkan modal

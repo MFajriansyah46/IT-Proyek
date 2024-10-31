@@ -40,7 +40,7 @@
                 
                 <!-- Kolom Alamat Bangunan -->
                 <x-table.data class="px-4 py-2">    
-                <div class="flex jus">
+                <div class="flex justify">
                     <a href="{{ $building->link_gmap }}" target="_blank" class="text-blue-500 hover:underline">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 20 20"><path fill="#999999" d="M10 0a7.65 7.65 0 0 0-8 8c0 2.52 2 5 3 6s5 6 5 6s4-5 5-6s3-3.48 3-6a7.65 7.65 0 0 0-8-8m0 11.25A3.25 3.25 0 1 1 13.25 8A3.25 3.25 0 0 1 10 11.25"/></svg>
                     </a> {{ $building->alamat_bangunan }}
@@ -60,7 +60,7 @@
                             </button>
                         </a>
                         <!-- Tombol Hapus -->
-                        <form action="/buildings/delete/{{ $building->token}}" method="post">
+                        <form action="/buildings/delete/{{ $building->token}}" method="post" data-buildng-id="{{ $building->token }}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="delete-building-button" data-building-id="{{ $building->token}}">
