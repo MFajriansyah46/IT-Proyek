@@ -19,7 +19,7 @@
         </li>
     </ul>
 
-    <x-table.header :headers="['Unit', 'Alamat', 'Gambar', 'Aksi']">
+    <x-table.header :headers="['Unit', 'Address', 'Image', 'Action']">
         @foreach ($buildings as $i => $building)
             <tr class="hover:bg-yellow-100">
                 <x-table.data>{{ $i + 1 }}</x-table.data>

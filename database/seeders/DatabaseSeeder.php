@@ -37,15 +37,6 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(16),
         ]);
 
-        Owner::create([
-            'name' => 'M. Fajriansyah',
-            'rekening_number' => 893854483465346695,
-            'phone_number' => 6282251964943,
-            'username' => 'fazzarY',
-            'password' => 'qwertyui',
-            'remember_token' => Str::random(16),
-        ]);
-
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'A',
@@ -68,12 +59,6 @@ class DatabaseSeeder extends Seeder
             'owner_id' => 1,
             'unit_bangunan' => 'D',
             'alamat_bangunan' => 'Jl. Karamantih',
-            'token' => Str::random(16),
-        ]);
-        Building::create([
-            'owner_id' => 2,
-            'unit_bangunan' => 'A',
-            'alamat_bangunan' => 'Jl. Swadaya no.100G RT.07 RW.03 desa Lorem',
             'token' => Str::random(16),
         ]);
 
