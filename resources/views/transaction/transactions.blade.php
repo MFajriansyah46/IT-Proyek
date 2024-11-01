@@ -11,9 +11,10 @@
                     @if($transaction->lunas) 
                         <p class="font-medium w-20 text-sm text-center">Success</p>
                     @else
-                        <a href="/confirm/payment/{{ $transaction->snap_token }}">
-                            <div class="border- border-opacity-40 bg-orange-300 hover:bg-orange-200 font-medium rounded-xl w-20 text-sm text-gray-800 text-center cursor-pointer">Confirm</div>
-                        </a>
+                    <form action="/confirm/payment/{{ $transaction->snap_token }}" class="confirmation-transaction-form" data-transaction-id="{{ $transaction->id }}">
+                        @csrf
+                        <button type="button" class="border border-opacity-40 bg-orange-300 hover:bg-orange-200 font-medium rounded-xl w-20 text-sm text-gray-800 text-center cursor-pointer">Confirm</button>
+                    </form>
                     @endif
                 </x-table.data>
             </tr>

@@ -237,6 +237,30 @@ $(document).ready(function () {
     });
 });
 
+// Modal confirmation transaction
+$(document).ready(function () {
+    let transactionId = null;
+
+    // Show modal and get the selected room ID
+    $('.confirmation-transaction-form button').on('click', function () {
+        transactionId = $(this).closest('.confirmation-transaction-form').data('transaction-id');
+        $('#confirmation-transaction').removeClass('hidden');
+    });
+
+    // Hide modal when "No, cancel" or "Close" is clicked
+    $('#cancel-transaction, #close-modal-transaction').on('click', function () {
+        $('#confirmation-transaction').addClass('hidden');
+        transactionId = null;
+    });
+
+    // Submit form with the selected room ID when "Yes, I'm sure" is clicked
+    $('#confirm-transaction').on('click', function () {
+        if (transactionId) {
+            $(`.confirmation-transaction-form[data-transaction-id="${transactionId}"]`).submit(); // Use the data attribute to find the correct form
+        }
+    });
+});
+
 // Modal discard rent
 $(document).ready(function () {
     let roomId = null;

@@ -79,10 +79,10 @@
                 </script>
             <br><br>
             </p>
-            <form method="post" action="/checkout">
+            <form method="post" action="/timeout/{{ $rent->token }}">
                 @csrf
-                <input type="hidden" name="id_kamar" value="">
-                <input type="hidden" name="id_kamar" value="">
+                <input type="hidden" name="id_kamar" value="{{ $rent->room->id }}">
+                <input type="hidden" name="id_penyewa" value="{{ auth()->user()->id }}">
                 <div class="flex justify-center px-52">
                     <button type="submit" class="mb-6 w-full rounded-md bg-red-600 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Discard</button>
                 </div>
