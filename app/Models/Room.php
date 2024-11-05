@@ -21,11 +21,15 @@ class Room extends Model
         return $this->BelongsTo(Building::class,'id_bangunan');
     }
 
-    public function rent(): HasMany {
+    public function rents(): HasMany {
         return $this->HasMany(Rent::class,'id_kamar');
     }
 
     public function transaction(): HasMany {
         return $this->HasMany(Transaction::class,'id_kamar');
+    }
+    
+    public function rates(): HasMany {
+        return $this->HasMany(Rate::class,'id_kamar');
     }
 }

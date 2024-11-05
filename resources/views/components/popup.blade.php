@@ -191,9 +191,7 @@
         </svg>
         <span class="sr-only">Close modal</span>
       </button>
-      <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#969696" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z" />
-      </svg>
+      <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" viewBox="0 0 16 16"><path fill="#969696" fill-rule="evenodd" d="M3.5 2v3.5L4 6h3.5V5H4.979l.941-.941a3.552 3.552 0 1 1 5.023 5.023L5.746 14.28l.72.72l5.198-5.198A4.57 4.57 0 0 0 5.2 3.339l-.7.7V2z" clip-rule="evenodd"/></svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to discard this rental?</p>
       <div class="flex justify-center items-center space-x-4">
         <button id="confirm-discard-rent" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
@@ -215,7 +213,7 @@
         <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12c0 -4.97 4.03 -9 9 -9c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9c-4.97 0 -9 -4.03 -9 -9Z"/><path stroke-dasharray="14" stroke-dashoffset="14" d="M8 12l3 3l5 -5"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="14;0"/></path></g></svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to confirm this transaction?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-transaction" type="button" class="py-2 px-3 text-sm font-medium rounded-lg text-center text-white bg-blue-500  hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-transaction" type="button" class="py-2 px-3 text-sm font-medium rounded-lg text-center text-white bg-blue-500  hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-400 dark:hover:bg-blue-500 dark:focus:ring-blue-800">Yes, I'm sure</button>
         <button id="cancel-transaction" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>

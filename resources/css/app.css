@@ -19,6 +19,10 @@ div[role="menu"] {
     width: 30rem;
 }
 
+.max-h-22 {
+    max-height: 5.4rem /* 96px */;
+}
+
 .focus\:disoutline:focus {
     border-width: 0px;
     outline: 0; /* Pastikan outline tetap hilang saat fokus */

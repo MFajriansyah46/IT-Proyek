@@ -5,4 +5,5 @@
       <h1 class="font-bold text-2xl">Selamat datang {{ auth('tenant')->user()->name }} di Bang raja!</h1>
     @endauth
   </div>
+
 </x-public-layout>

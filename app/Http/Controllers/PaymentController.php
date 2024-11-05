@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Redirect;
+use App\Models\Rate;
 use App\Models\Rent;
 use App\Models\Room;
 use App\Models\Transaction;
@@ -30,14 +31,14 @@ class PaymentController extends Controller
         }
     }
 
-    public function process(Request $request)
+    public function pay(Request $request)
     {
 
         $transaction = new Transaction;
-        $transaction->id_kamar = $request->id_kamar;
-        $transaction->id_penyewa = $request->id_penyewa;
-        $transaction->biaya = $request->biaya;
-        $transaction->lunas = false;
+        $transaction->room_id = $request->room_id;
+        $transaction->tenant_id = $request->tenant_id;
+        $transaction->price = $request->price;
+        $transaction->status = false;
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
@@ -51,7 +52,7 @@ class PaymentController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $request->biaya,
+                'gross_amount' => $request->price,
             )
         );
 
@@ -74,18 +75,29 @@ class PaymentController extends Controller
     public function rent($snap_token) {
 
         $transaction = Transaction::where('snap_token',$snap_token)->first();
-        $transaction->lunas = true;
+        $transaction->status = true;
         $transaction->update();
 
-        if($transaction->lunas) {
+        if($transaction->status) {
 
             $rent = new Rent();
-            $rent->id_kamar = $transaction->id_kamar;
-            $rent->id_penyewa = $transaction->id_penyewa;
+            $rent->id_kamar = $transaction->room_id;
+            $rent->id_penyewa = $transaction->tenant_id;
             $rent->tanggal_masuk = now('Asia/Makassar');
             $rent->token = Str::random(16);
             $rent->save();
         }
         return redirect('/')->with('payment-success','Payment Successfull! Check your room now.');
     }
-}
+
+    public function rate(Request $request) {
+        
+        $rating = new Rate;
+        $rating->id_kamar = $request->id_kamar;
+        $rating->id_penyewa = $request->id_penyewa;
+        $rating->rate = $request->rate;
+        $rating->commentary = $request->commentary;
+        $rating->save();
+        return redirect('/myroom');
+    }
+} 

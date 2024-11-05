@@ -58,6 +58,16 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function(){
+    $('#desc-area-my-room').addClass('max-h-22');
+    $('#buttom-arrow').addClass('hidden');
+    $('#more-desc-my-room').click(function(){
+        $('#desc-area-my-room').toggleClass('max-h-22 -mb-4');
+        $('#right-arrow').toggleClass('hidden');
+        $('#buttom-arrow').toggleClass('hidden');
+    });
+});
+
 $('#openProfileBtn').on('click', function() {
     $('#profileOverlay').removeClass('hidden');
 });
@@ -282,6 +292,24 @@ $(document).ready(function () {
         if (roomId) {
             $(`#form-delete-${roomId}`).submit(); // Tambahkan backtick untuk template literal
         }
+    });
+});
+
+// Modal discard rent tenant
+$(document).ready(function () {
+    // Tampilkan modal edit saat tombol edit ditekan
+    $('#discard-button').on('click', function () {
+        $('#confirmation-discard').removeClass('hidden');
+    });
+
+    // Sembunyikan modal saat tombol "No, cancel" atau "Close" ditekan
+    $('#cancel-discard, #close-modal-discard').on('click', function () {
+        $('#confirmation-discard').addClass('hidden');
+    });
+
+    // Kirim form saat tombol "Yes, I'm sure" ditekan
+    $('#confirm-discard').on('click', function () {
+        $('#discard-form').submit();
     });
 });
 

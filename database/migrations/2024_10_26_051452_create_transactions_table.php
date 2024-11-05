@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kamar')->constrained('rooms','id_kamar')->indexName('rooms_id_kamar');
-            $table->foreignId('id_penyewa')->constrained('tenants')->indexName('rooms_id_tenant');
-            $table->bigInteger('biaya');
-            $table->boolean('lunas');
-            $table->STRING('snap_token')->nullable();
+            $table->foreignId('room_id')->constrained('rooms','id_kamar')->indexName('rooms_id_kamar');
+            $table->foreignId('tenant_id')->constrained('tenants')->indexName('rooms_id_tenant');
+            $table->bigInteger('price');
+            $table->boolean('status');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }

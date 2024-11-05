@@ -8,7 +8,7 @@
                 <x-table.data>{{ $transaction->room->building->unit_bangunan }}{{ $transaction->room->no_kamar }} - {{ $transaction->room->building->alamat_bangunan }}</x-table.data>
                 <x-table.data>Rp {{ number_format($transaction->room->harga_kamar, 2, ',', '.') }} </x-table.data>
                 <x-table.data>
-                    @if($transaction->lunas) 
+                    @if($transaction->status) 
                         <p class="font-medium w-20 text-sm text-center">Success</p>
                     @else
                     <form action="/confirm/payment/{{ $transaction->snap_token }}" class="confirmation-transaction-form" data-transaction-id="{{ $transaction->id }}">

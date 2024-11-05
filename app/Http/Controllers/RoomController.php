@@ -19,7 +19,7 @@ class RoomController extends Controller {
 
     public function add() {
         $room = Room::all();
-        return view('room.addRoom',['room' => $room ]);
+        return view('room.addRoom',['room' => $room]);
     }
 
     public function submit(Request $request) {
@@ -32,7 +32,7 @@ class RoomController extends Controller {
             'gambar_kamar' => 'required|image|max:100000',
         ]);
         $room['token'] = Str::random(16);
-;
+        
         if($request->gambar_kamar){
             $room['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
         }
@@ -80,14 +80,21 @@ class RoomController extends Controller {
 
     public function publicList() {
 
-        $rooms = Room::all();
-        
-        // $roomsArray = $rooms->toArray();
+        $rooms = Room::doesntHave('rents')->get();
+
+        // $roomRanking = Room::with(['ratings', 'fasilitas'])
+        // ->doesntHave('rents') // Mengambil Room yang tidak memiliki entri Rent
+        // ->withAvg('ratings', 'score') // Mengambil rata-rata score ratings
+        // ->withAvg('fasilitas', 'index_fasilitas') // Mengambil rata-rata index_fasilitas
+        // ->get();
+                
+        // $roomsArray = $roomRanking->toArray();
 
         // // Bobot untuk setiap kriteria
         // $criteriaWeights = [
-        //     'harga_kamar' => 0.5,    // Harga (cost) - semakin murah semakin baik
-        //     'luas_kamar' => 0.35,     // Luas (benefit) - semakin luas semakin baik
+        //     'harga_kamar' => 0.4,    // Harga (cost) - semakin murah semakin baik
+        //     'kecepatan_internet' => 0.2,    // kecepatan_internet (benefit) - semakin cepat semakin baik
+        //     'index_fasilitas' => 0.25,     // index fasilitas (benefit) - semakin tinggi semakin baik
         //     'rating' => 0.15          // Rating (benefit) - semakin tinggi semakin baik
         // ];
     
@@ -163,7 +170,7 @@ class RoomController extends Controller {
         // $topRoomIds = array_slice(array_keys($preferences), 0, 3);
     
         // // Dapatkan detail kamar teratas
-        // $topRoomsData = Room::whereIn('id', $topRoomIds)->get();
+        // $topRooms= Room::whereIn('id', $topRoomIds)->get();
     
         // Return view dengan data kamar teratas
 

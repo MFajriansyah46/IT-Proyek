@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\Rate;
 use App\Models\Rent;
 use App\Models\Room;
 use App\Models\Building;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\OwnerController;
@@ -82,14 +84,13 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/confirm/payment/{snap_token}', function($snap_token){
 
         $transaction = Transaction::where('snap_token',$snap_token)->first();
-        $transaction->lunas = true;
+        $transaction->status = true;
         $transaction->update();
 
-        if($transaction->lunas) {
-
+        if($transaction->status) {
             $rent = new Rent();
-            $rent->id_kamar = $transaction->id_kamar;
-            $rent->id_penyewa = $transaction->id_penyewa;
+            $rent->id_kamar = $transaction->room_id;
+            $rent->id_penyewa = $transaction->tenant_id;
             $rent->tanggal_masuk = now('Asia/Makassar');
             $rent->token = Str::random(16);
             $rent->save();
@@ -105,7 +106,7 @@ Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/logout', [ValidasiController::class, 'logout']);
 
-    Route::post('/checkout', [PaymentController::class, 'process']);
+    Route::post('/checkout', [PaymentController::class, 'pay']);
     
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
@@ -120,11 +121,21 @@ Route::middleware('auth:tenant')->group(function(){
 
     Route::get('/myroom', function(){
 
-        $rent = Rent::firstWhere('id_penyewa',auth('tenant')->user()->id);
-        return view('myRoom',['rent' => $rent]);
+        $id_penyewa = auth('tenant')->user()->id;
+
+        $rent = Rent::firstWhere('id_penyewa', $id_penyewa);
+
+        $id_kamar = $rent->room->id_kamar;
+
+        $avgRoomRate = number_format(Rate::where('id_kamar', $id_kamar)->avg('rate'),1);
+
+        $hasRate = Rate::where('id_kamar', $id_kamar)->where('id_penyewa',$id_penyewa)->first();
+
+        return view('myRoom',['rent' => $rent, 'hasRate' => $hasRate ,'avgRoomRate' => $avgRoomRate]);
     });
 
-});
+    Route::post('/myroom/rate', [PaymentController::class,'rate']);
+}); 
 
 // Aktor: pengunjung
 Route::middleware('guest')->group(function(){
