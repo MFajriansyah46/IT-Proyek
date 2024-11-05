@@ -10,7 +10,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_kamar', 'id_penyewa', 'biaya', 'lunas', 'snap_token'];
+    protected $fillable = ['room_id', 'tenant_id', 'price', 'status', 'snap_token'];
 
     public function room(): BelongsTo {
         return $this->BelongsTo(Room::class,'room_id');
