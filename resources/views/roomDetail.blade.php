@@ -31,10 +31,11 @@
             </script>
         <br>
 
-        <!-- <img id="main_image1" class="w-full h-64 px-1 rounded-md" src="/storage/" alt="">
+        <!--         
+        <img id="main_image1" class="w-full h-64 px-1 rounded-md" src="/storage/{{ $room->gambar_kamar }}" alt="">
         <br>
         <div class="flex overflow-x-scroll">
-            @ - foreach($images as $image)
+            @ - foreach($images as $image) 
                 <img class="thumbnail1 w-48 h-24 px-1 rounded-md" src="/storage/" alt="">
             @ - endforeach
         </div>
