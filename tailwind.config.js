@@ -43,4 +43,12 @@ export default {
     },
   },
   plugins: [require('flowbite/plugin')],
+  safelist: [
+    'bg-gradient-blue',
+    'bg-gradient-light-blue',
+    'bg-gradient-green',
+    'bg-gradient-yellow',
+    'bg-gradient-orange',
+    'bg-gradient-red'
+  ],
 };

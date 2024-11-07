@@ -2,6 +2,26 @@ import 'flowbite';
 import './bootstrap';
 
 
+$(document).ready(function() {
+    $('#room-description').on('keydown', function(event) {
+    if (event.key === 'Tab') {
+        event.preventDefault(); // Mencegah fungsi Tab default
+
+        // Mendapatkan posisi kursor
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+
+        // Menyisipkan karakter Tab
+        $(this).val(function(index, value) {
+        return value.substring(0, start) + '\t' + value.substring(end);
+        });
+
+        // Menempatkan kembali kursor setelah karakter Tab
+        this.selectionStart = this.selectionEnd = start + 1;
+    }
+    });
+});
+
 $(document).ready(function(){
     $('#button-login-eror').click(function(){
         $('#login-eror').hide();

@@ -63,7 +63,7 @@
             <div class="flex items-center justify-center bg-gray-900 hover:bg-gray-600 rounded-2xl gap-1 w-16 px-2 py-1">
                 <button id="rate-button" class="flex items-center justify-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" viewBox="0 0 64 64"><path fill="#ffc70f" d="M62 25.2H39.1L32 3l-7.1 22.2H2l18.5 13.7l-7 22.1L32 47.3L50.5 61l-7.1-22.2z"/></svg>
-                    <p class="text-white text-sm">{{ $room->rates->average('rate') }}</p>
+                    <p class="text-white text-sm">{{ number_format($room->rates->average('rate'),1) }}</p>
                 </button>
             </div>
             <div class="w-60 flex items-center justify-end">

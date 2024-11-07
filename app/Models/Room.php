@@ -15,7 +15,7 @@ class Room extends Model
 
     use HasFactory;
 
-    protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'gambar_kamar','token'];
+    protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'gambar_kamar','deskripsi','token'];
 
     public function building(): BelongsTo {
         return $this->BelongsTo(Building::class,'id_bangunan');
@@ -31,5 +31,9 @@ class Room extends Model
     
     public function rates(): HasMany {
         return $this->HasMany(Rate::class,'id_kamar');
+    }
+
+    public function facilities(): HasMany {
+        return $this->HasMany(Facility::class, 'room_id');
     }
 }
