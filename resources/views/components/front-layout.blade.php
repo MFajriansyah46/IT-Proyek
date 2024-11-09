@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white-100">
+<html lang="en" class="h-full bg-gray-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="/assets/jquery-3.7.1.js"></script>
-    <script src="/assets/jquery.js"></script>
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-    <title>Bang Raja</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/assets/jquery-3.7.1.js"></script>
+  <script src="/assets/jquery.js"></script>
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+  <title>Bang Raja</title>
 </head class="h-full">
   <body class="bg-gray-100">
     @if (session()->has('registration-success'))

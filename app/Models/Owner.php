@@ -14,4 +14,7 @@ class Owner extends User
     public function buildings(): HasMany {
         return $this->HasMany(Building::class, 'owner_id');
     }
+    public function criteries(): HasMany {
+        return $this->HasMany(Criteria::class, 'owner_id');
+    }
 }

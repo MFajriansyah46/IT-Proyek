@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Condition;
+use App\Models\Criteria;
 use App\Models\Facility;
 use App\Models\Room;
 use App\Models\Building;
@@ -33,8 +34,8 @@ class RoomController extends Controller {
             'harga_kamar' => 'required|numeric',
             'kecepatan_internet' => 'required|integer',
             'gambar_kamar' => 'required|image|max:100000',
+            'deskripsi' => 'required',
         ]);
-        $room['deskripsi'] = $request->deskripsi;
         $room['token'] = Str::random(16);
         
         if($request->gambar_kamar){
@@ -46,27 +47,34 @@ class RoomController extends Controller {
         $data = [
             [
                 'condition' => $request->bedroom_condition_id,
-                'name' => 'Bedroom'
+                'name' => 'Bedroom',
+                'image' => $request->file('bedroom_image')->store('room-images'),
             ],
             [
                 'condition' => $request->bathroom_condition_id,
-                'name' => 'Bathroom'
+                'name' => 'Bathroom',
+                'image' => $request->file('bathroom_image')->store('room-images'),
             ],
             [
                 'condition' => $request->kitchen_condition_id,
-                'name' => 'Kitchen'
+                'name' => 'Kitchen',
+                'image' => $request->file('kitchen_image')->store('room-images'),
             ],
             [
                 'condition' => $request->security_condition_id,
-                'name' => 'Security'
+                'name' => 'Security',
+                'image' => $request->file('security_image')->store('room-images'),
             ]
         ];
         
         foreach ($data as $i) {
             $facility = new Facility();
             $facility->room_id = Room::firstWhere('token', $room['token'])->id_kamar;
-            $facility->condition_id = $i['condition']; // Menggunakan kunci 'condition' yang konsisten
-            $facility->name = $i['name']; // Nama ruangan seperti Bedroom, Bathroom, dll.
+            $facility->condition_id = $i['condition'];
+            $facility->name = $i['name'];
+            if($i['image']) {
+                $facility->image = $i['image'];
+            }
             $facility->save();
         }
 
@@ -131,33 +139,48 @@ class RoomController extends Controller {
     
         // Bobot untuk setiap kriteria
         $criteriaWeights = [
-            'harga_kamar' => 0.4,    
-            'kecepatan_internet' => 0.2,    
-            'average_condition_index' => 0.25,     
-            'rates_avg_rate' => 0.15          
+            'harga_kamar' => Criteria::firstWhere('criteria_name','harga_kamar')->weight,    
+            'kecepatan_internet' => Criteria::firstWhere('criteria_name','kecepatan_internet')->weight,
+            'rates_avg_rate' => Criteria::firstWhere('criteria_name','rates_avg_rate')->weight,
+            'average_condition_index' => Criteria::firstWhere('criteria_name','average_condition_index')->weight,
         ];
     
-        // Hitung total kuadrat untuk setiap kriteria
+        // Hitung total kuadrat (pembagi) untuk setiap kriteria
         $squareSums = [
             'harga_kamar' => sqrt(array_sum(array_map(fn($room) => pow($room['harga_kamar'], 2), $roomsArray))),
             'kecepatan_internet' => sqrt(array_sum(array_map(fn($room) => pow($room['kecepatan_internet'], 2), $roomsArray))),
             'rates_avg_rate' => sqrt(array_sum(array_map(fn($room) => pow($room['rates_avg_rate'], 2), $roomsArray))),
             'average_condition_index' => sqrt(array_sum(array_map(fn($room) => pow($room['average_condition_index'], 2), $roomsArray))),
-        ];
+        ];  
 
         if( !$squareSums['rates_avg_rate']) {
             $squareSums['rates_avg_rate'] = 1;
         }
+        if( !$squareSums['average_condition_index']) {
+            $squareSums['average_condition_index'] = 1;
+        }
     
-        // Normalisasi matriks dan bobotnya
-        $weightedMatrix = [];
+        // Normalisasi matriks
+        $normalizedMatrix = [];
         foreach ($roomsArray as $room) {
-            $weightedMatrix[] = [
+            $normalizedMatrix[] = [
                 'id_kamar' => $room['id_kamar'],
-                'harga_kamar' => ($room['harga_kamar'] / $squareSums['harga_kamar']) * $criteriaWeights['harga_kamar'],
-                'kecepatan_internet' => ($room['kecepatan_internet'] / $squareSums['kecepatan_internet']) * $criteriaWeights['kecepatan_internet'],
-                'rates_avg_rate' => ($room['rates_avg_rate'] / $squareSums['rates_avg_rate']) * $criteriaWeights['rates_avg_rate'],
-                'average_condition_index' => ($room['average_condition_index'] / $squareSums['average_condition_index']) * $criteriaWeights['average_condition_index'],
+                'harga_kamar' => $room['harga_kamar'] / $squareSums['harga_kamar'],
+                'kecepatan_internet' => $room['kecepatan_internet'] / $squareSums['kecepatan_internet'],
+                'rates_avg_rate' => $room['rates_avg_rate'] / $squareSums['rates_avg_rate'],
+                'average_condition_index' => $room['average_condition_index'] / $squareSums['average_condition_index'],
+            ];
+        }
+
+        // Normalisasi matriks * bobot
+        $weightedMatrix = [];
+        foreach ($normalizedMatrix as $normalizedRoom) {
+            $weightedMatrix[] = [
+                'id_kamar' => $normalizedRoom['id_kamar'],
+                'harga_kamar' => $normalizedRoom['harga_kamar'] * $criteriaWeights['harga_kamar'],
+                'kecepatan_internet' => $normalizedRoom['kecepatan_internet'] * $criteriaWeights['kecepatan_internet'],
+                'rates_avg_rate' => $normalizedRoom['rates_avg_rate'] * $criteriaWeights['rates_avg_rate'],
+                'average_condition_index' => $normalizedRoom['average_condition_index'] * $criteriaWeights['average_condition_index'],
             ];
         }
     

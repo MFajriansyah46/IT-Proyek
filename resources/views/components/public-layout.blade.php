@@ -1,6 +1,6 @@
 <?php use App\Models\Rent; ?> 
 <!DOCTYPE html>
-<x lang="en" class="h-full bg-gray-100">
+<html lang="en" class="h-full bg-gray-100">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,12 +23,12 @@
       </div>
     </header>
     
-    <nav class="bg-gray-900">
+    <nav class="bg-gray-900 py-2">
       <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0 mr-1">
-              <img class="h-10 w-auto" src="/images/logo bang raja3.png" alt="Your Company">
+              <img class="h-14 w-auto" src="/images/logo bang raja3.png" alt="Your Company">
             </div>
             <div class="rounded-md px-4 py-2 text-sm font-medium text-white">
               <svg width="10" height="24" xmlns="http://www.w3.org/2000/svg"> <rect x="4" y="0" width="1" height="100" fill="white" /></svg>

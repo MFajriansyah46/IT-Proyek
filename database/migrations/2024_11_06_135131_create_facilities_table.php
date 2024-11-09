@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('room_id')->constrained('rooms','id_kamar')->indexName('rooms_id_kamar');
             $table->foreignId('condition_id')->constrained('conditions')->indexName('rooms_id_conditions');
             $table->string('name');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

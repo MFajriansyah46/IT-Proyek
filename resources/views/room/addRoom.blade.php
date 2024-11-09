@@ -52,7 +52,7 @@
                                 <option value="{{ $condition->id }}">{{ $condition->name }}</option>
                             @endforeach
                         </select>
-                        <input type="file">
+                        <input type="file" name="bedroom_image">
                     </div>
                     <div class="flex flex-col w-80">
                         <label>Bathroom</label>
@@ -62,7 +62,7 @@
                                 <option value="{{ $condition->id }}">{{ $condition->name }}</option>
                             @endforeach
                         </select>
-                        <input type="file">
+                        <input type="file" name="bathroom_image">
                     </div>
                 </div>
                 <div class="flex gap-8">
@@ -75,7 +75,7 @@
                             @endforeach
                             
                         </select>
-                        <input type="file">
+                        <input type="file" name="kitchen_image">
                     </div>
                     <div class="flex flex-col w-80">
                         <label>Security</label>
@@ -85,7 +85,7 @@
                                 <option value="{{ $condition->id }}">{{ $condition->name }}</option>
                             @endforeach
                         </select>
-                        <input type="file">
+                        <input type="file" name="security_image">
                     </div>
                 </div>
             </div>

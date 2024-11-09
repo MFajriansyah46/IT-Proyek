@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('criteries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->constrained('owners')->indexName('criteries_id_owners');
-            $table->string('criteria_name');
+            $table->string('criteria_name')->unique();
             $table->float('weight');
             $table->timestamps();
         });

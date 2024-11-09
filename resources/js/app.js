@@ -381,11 +381,11 @@ $(document).ready(function() {
         confirmPasswordField.setAttribute("type", type);
     });
     $("#toggle-password-register").click(function(){
-        $('.eye-slashed').toggleClass('hidden');
+        $('.eye-slashed-password').toggleClass('hidden');
     });
 
     $("#toggle-confirm-password").click(function(){
-        $('.eye-slashedC').toggleClass('hidden');
+        $('.eye-slashed-confirm-password').toggleClass('hidden');
     });
 });
 

@@ -10,7 +10,7 @@ class Facility extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['room_id','condition_id','name'];
+    protected $fillable = ['room_id','condition_id','name','image'];
 
     public function room(): BelongsTo {
         return $this->BelongsTo(Room::class,'room_id');

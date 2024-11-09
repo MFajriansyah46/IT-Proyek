@@ -10,7 +10,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" viewBox="0 0 64 64"><path fill="#ffc70f" d="M62 25.2H39.1L32 3l-7.1 22.2H2l18.5 13.7l-7 22.1L32 47.3L50.5 61l-7.1-22.2z"/></svg>
                         <small class="font-medium">{{ number_format($topRoom->rates->average('rate'),1) }}</small>
                     </div>
-                    <p class="text-gray-600 mt-2">Description of the product goes here. Keep it concise and informative.</p>
+                    <p class="text-gray-600 mt-2">{{ Str::limit($topRoom->deskripsi,62) }}</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-xl font-semibold">Rp {{ number_format($topRoom->harga_kamar, 2, ',', '.') }} <small>/month</small></span>
                         <a href="rooms-list/detail?r={{ $topRoom->token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>
@@ -20,7 +20,7 @@
             </div>
         </div>
         
-        <!-- Str :: limit(,62) -->
+        <!-- Str :: limit($room->deskripsi,62) -->
     <h1 class="text-2xl font-bold text-center mt-8">All Room</h1>
     <div class="container mx-auto py-8">
         <div class="grid grid-cols-1 mx-1 sm:mx-0 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -32,7 +32,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" viewBox="0 0 64 64"><path fill="#ffc70f" d="M62 25.2H39.1L32 3l-7.1 22.2H2l18.5 13.7l-7 22.1L32 47.3L50.5 61l-7.1-22.2z"/></svg>
                         <small class="font-medium">{{ number_format($room->rates->average('rate'),1) }}</small>
                     </div>
-                    <p class="text-gray-600 mt-2">Description of the product goes here. Keep it concise and informative.</p>
+                    <p class="text-gray-600 mt-2">{{ Str::limit($room->deskripsi,62) }}</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-xl font-semibold">Rp {{ number_format($room->harga_kamar, 2, ',', '.') }} <small>/month</small></span>
                         <a href="rooms-list/detail?r={{ $room->token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>

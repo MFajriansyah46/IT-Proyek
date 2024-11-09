@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             TenantSeeder::class,
             ConditionSeeder::class,
+            CriteriaSeeder::class,
         ]);
     }
 }
