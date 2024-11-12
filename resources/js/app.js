@@ -599,3 +599,37 @@ $(document).ready(function() {
     });
 });
 
+// Function to toggle modal visibility
+function toggleModal() {
+    const modal = document.getElementById("addRoommateModal");
+    modal.classList.toggle("hidden");
+}
+
+// Event listener for the "Add Roommate" button
+document.getElementById("addRoommate").addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent accidental clicks from closing modal
+    toggleModal();
+});
+
+// Close modal when clicking outside of it
+document.getElementById("addRoommateModal").addEventListener("click", function(event) {
+    if (event.target === this) { // Check if clicked outside the modal content
+        toggleModal();
+    }
+});
+
+// Event listener for the "X" button to close modal
+document.getElementById("closeModalButton").addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent event propagation
+    toggleModal();
+});
+
+// Preview image function for profile photo
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById("previewProfilePhoto");
+        preview.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Tenant extends User
@@ -24,4 +25,10 @@ class Tenant extends User
     public function rates(): HasMany {
         return $this->HasMany(Rate::class,'id_kamar');
     }
+
+    public function roommate(): HasOne
+    {
+        return $this->hasOne(Roommate::class);
+    }
+
 }

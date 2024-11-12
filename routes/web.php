@@ -15,6 +15,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RoommateController;
 
 // Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
@@ -57,7 +58,7 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
 
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
-    
+
     Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
 
     Route::get('/active-rental', function() {
@@ -66,7 +67,7 @@ Route::middleware('auth:owner')->group(function(){
 
         return view('rent.rents',['rents' => $rents]);
     });
-    
+
     Route::get('/transactions', function() {
 
         $transactions = Transaction::orderBy('id', 'desc')->get();
@@ -107,7 +108,7 @@ Route::middleware('auth:tenant')->group(function(){
     Route::post('/logout', [ValidasiController::class, 'logout']);
 
     Route::post('/checkout', [PaymentController::class, 'pay']);
-    
+
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
     Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
@@ -135,7 +136,7 @@ Route::middleware('auth:tenant')->group(function(){
     });
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
-}); 
+});
 
 // Aktor: pengunjung
 Route::middleware('guest')->group(function(){
@@ -149,7 +150,7 @@ Route::middleware('guest')->group(function(){
     Route::post('/login', [ValidasiController::class, 'authenticate']);
 
     Route::get('/owner-login', [ValidasiController::class, 'formLoginOwner']);
-    
+
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
     Route::get('/', function(){
@@ -165,4 +166,11 @@ Route::middleware('guest')->group(function(){
     Route::get('/rooms-list', [RoomController::class,'publicList']);
 
     Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
+});
+
+//Roommate Aktor: Penyewa
+Route::middleware('auth:tenant')->group(function () {
+    Route::get('/roommate/add', [RoommateController::class, 'create'])->name('roommate.add');
+
+    Route::post('/roommate/store', [RoommateController::class, 'store'])->name('roommate.store');
 });
