@@ -92,6 +92,6 @@ class ValidasiController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/owner-login');
+        return redirect('/ownerrr-login');
     }
 }
