@@ -1,15 +1,14 @@
 <x-public-layout>
     <div class="max-w-xl shadow-md min-h-screen bg-white mx-auto"> 
-        <br>
-
-
-                
+        <br>    
         <img id="main_image" class="w-full h-64 px-1 rounded-md" src="/storage/{{ $room->gambar_kamar }}" alt="">
         <br>
         <div class="flex overflow-x-scroll">
             <img class="thumbnail1 w-48 h-24 px-1 rounded-md" src="/storage/{{ $room->gambar_kamar }}" alt="">
-            @foreach($room->facilities as $facility) 
-                <img class="thumbnail1 w-48 h-24 px-1 rounded-md" src="/storage/{{ $facility->image }}" alt="">
+            @foreach($room->facilities as $facility)
+                @if($facility->image)
+                    <img class="thumbnail1 w-48 h-24 px-1 rounded-md" src="/storage/{{ $facility->image }}" alt="">
+                @endif
             @endforeach
             <img class="thumbnail1 w-48 h-24 px-1 rounded-md" src="/storage/{{ $room->building->gambar_bangunan }}" alt="">
         </div>
@@ -27,7 +26,6 @@
             });
         </script> 
         <br>
-       
 
         <h1 class="px-4 my-6 text-2xl text-gray-900 font-medium">{{ $room->building->unit_bangunan }}{{ $room->no_kamar }} - {{ $room->building->alamat_bangunan }}</h1>
             

@@ -579,6 +579,274 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+//drag image bedroom
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area1');
+    const uploadInput = document.getElementById('upload-room-Image1');
+    const previewImage = document.getElementById('preview-room-image1');
+    const previewText = document.getElementById('preview-added-room-text1');
+
+    // Mencegah perilaku default saat drag over
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Menambahkan kelas saat drag masuk
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    // Menghapus kelas saat drag keluar
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Menghandle drop event
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('bg-gray-200');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-gray-200');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+                previewText.classList.add('hidden');
+            };
+
+            reader.readAsDataURL(file);
+            uploadInput.files = files;
+        }
+    }
+});
+
+//drag image bathroom
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area2');
+    const uploadInput = document.getElementById('upload-room-Image2');
+    const previewImage = document.getElementById('preview-room-image2');
+    const previewText = document.getElementById('preview-added-room-text2');
+
+    // Mencegah perilaku default saat drag over
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Menambahkan kelas saat drag masuk
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    // Menghapus kelas saat drag keluar
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Menghandle drop event
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('bg-gray-200');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-gray-200');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+                previewText.classList.add('hidden');
+            };
+
+            reader.readAsDataURL(file);
+            uploadInput.files = files;
+        }
+    }
+});
+
+//drag image kitchen
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area3');
+    const uploadInput = document.getElementById('upload-room-Image3');
+    const previewImage = document.getElementById('preview-room-image3');
+    const previewText = document.getElementById('preview-added-room-text3');
+
+    // Mencegah perilaku default saat drag over
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Menambahkan kelas saat drag masuk
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    // Menghapus kelas saat drag keluar
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Menghandle drop event
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('bg-gray-200');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-gray-200');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+                previewText.classList.add('hidden');
+            };
+
+            reader.readAsDataURL(file);
+            uploadInput.files = files;
+        }
+    }
+});
+
+//drag image security
+document.addEventListener('DOMContentLoaded', function () {
+    const dropArea = document.getElementById('drop-area4');
+    const uploadInput = document.getElementById('upload-room-Image4');
+    const previewImage = document.getElementById('preview-room-image4');
+    const previewText = document.getElementById('preview-added-room-text4');
+
+    // Mencegah perilaku default saat drag over
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    // Menambahkan kelas saat drag masuk
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    // Menghapus kelas saat drag keluar
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    // Menghandle drop event
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight() {
+        dropArea.classList.add('bg-gray-200');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('bg-gray-200');
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+        if (files.length) {
+            const file = files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                previewImage.src = reader.result;
+                previewImage.classList.remove('hidden');
+                previewText.classList.add('hidden');
+            };
+
+            reader.readAsDataURL(file);
+            uploadInput.files = files;
+        }
+    }
+});
+
 // resources/js/app.js
 $(document).ready(function() {
     $('#upload-room-Image').on('change', function(event) {

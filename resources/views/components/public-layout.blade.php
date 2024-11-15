@@ -37,7 +37,7 @@
               <div class=" flex items-baseline space-x-4">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline" aria-current="page">Home</a>
-                <a href="/rooms-list" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Rooms</a>
+                <a href="/rooms" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Rooms</a>
                 <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
                 <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Help</a>
               </div>

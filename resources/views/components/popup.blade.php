@@ -13,8 +13,8 @@
     <form method="post" action="" enctype="multipart/form-data">
       <div class="flex flex-col items-center justify-center">
         <div class="relative">
-          @if (auth()->user()->image)
-            <img class="w-28 h-28 rounded-full border object-cover" id="profileImage" src="/storage/{{ auth()->user()->image }}" alt=".">
+          @if (auth('owner')->user()->image)
+            <img class="w-28 h-28 rounded-full border object-cover" id="profileImage" src="/storage/{{ auth('owner')->user()->image }}" alt=".">
           @else
             <img class="w-32 h-32 rounded-full border object-cover" id="profileImage" src="/images/default-profile.jpg" alt="">
           @endif
@@ -28,22 +28,22 @@
       </div>
 
       <div class="flex justify-center items-center">
-        <input type="text" class="border-0 focus:disoutline focus:underline text-center text-2xl text-gray-800 font-medium " value="{{auth()->user()->username}}" >
+        <input type="text" class="border-0 focus:disoutline focus:underline text-center text-2xl text-gray-800 font-medium " value="{{auth('owner')->user()->username}}" >
       </div>
 
       <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Nama</label>
-        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->name }}">
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth('owner')->user()->name }}">
       </div>
 
       <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Nomor Telepon</label>
-        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->phone_number }}">
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth('owner')->user()->phone_number }}">
       </div>
 
       <div class="flex justify-between items-center">
         <label class="text-gray-600 text-sm font-semibold">Nomor Rekening</label>
-        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth()->user()->rekening_number }}">
+        <input type="text" class="border-0 focus:disoutline focus:underline text-gray-800 font-medium" value="{{ auth('owner')->user()->rekening_number }}">
       </div>
 
     </form><br>

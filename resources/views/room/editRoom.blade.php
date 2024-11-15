@@ -18,7 +18,6 @@
                 </div>
             </div>
 
-
             <label class="text-lg font-semibold mb-2">No Kamar</label>
             <input type="number" name="no_kamar" value="{{ $room->no_kamar }}" class="border border-gray-300 rounded-md p-2 mb-6" required>
             

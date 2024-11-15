@@ -16,7 +16,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 
-// Aktor: Pemilik Kost
+
 Route::middleware('auth:owner')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'read']);
@@ -34,9 +34,6 @@ Route::middleware('auth:owner')->group(function(){
 
 
     // room controller
-
-    Route::get('/rooms', [RoomController::class, 'read']);
-
     Route::get('/rooms/add', [RoomController::class, 'add']);
 
     Route::post('/rooms/submit', [RoomController::class, 'submit'])->name('rooms.submit');
@@ -99,7 +96,7 @@ Route::middleware('auth:owner')->group(function(){
     });
 });
 
-//Aktor: Penyewa
+
 Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/edit-profile', [ProfileController::class, 'editProfile']);
@@ -137,7 +134,7 @@ Route::middleware('auth:tenant')->group(function(){
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
 }); 
 
-// Aktor: pengunjung
+
 Route::middleware('guest')->group(function(){
 
     Route::get('/register', [ValidasiController::class, 'formRegister']);
@@ -162,7 +159,7 @@ Route::middleware('guest')->group(function(){
         }
     });
 
-    Route::get('/rooms-list', [RoomController::class,'publicList']);
+    Route::get('/rooms', [RoomController::class,'read']);
 
     Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
 });
