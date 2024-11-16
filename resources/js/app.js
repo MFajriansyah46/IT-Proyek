@@ -599,37 +599,46 @@ $(document).ready(function() {
     });
 });
 
-// Function to toggle modal visibility
+// Modal AddRoommate
 function toggleModal() {
-    const modal = document.getElementById("addRoommateModal");
-    modal.classList.toggle("hidden");
+    const modal = document.getElementById('addRoommateModal');
+    modal.classList.toggle('hidden');
 }
 
-// Event listener for the "Add Roommate" button
+// Event listener button "Add Roommate"
 document.getElementById("addRoommate").addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent accidental clicks from closing modal
+    event.stopPropagation();
     toggleModal();
 });
 
-// Close modal when clicking outside of it
+// Clonse modal, ketika user klik bukan area modal
 document.getElementById("addRoommateModal").addEventListener("click", function(event) {
-    if (event.target === this) { // Check if clicked outside the modal content
+    if (event.target === this) {
         toggleModal();
     }
 });
 
-// Event listener for the "X" button to close modal
+// cole modal icon exit
 document.getElementById("closeModalButton").addEventListener("click", (event) => {
-    event.stopPropagation(); // Prevent event propagation
+    event.stopPropagation();
     toggleModal();
 });
 
-// Preview image function for profile photo
 function previewImage(event) {
-    const reader = new FileReader();
-    reader.onload = function() {
-        const preview = document.getElementById("previewProfilePhoto");
-        preview.src = reader.result;
+    const input = event.target;
+    const preview = document.getElementById('previewProfilePhoto');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        // Ketika file berhasil dibaca, tampilkan preview gambar
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(input.files[0]);
     }
-    reader.readAsDataURL(event.target.files[0]);
 }
+
+// Event listener for the file input to trigger preview
+document.getElementById("profile_photo").addEventListener("change", previewImage);

@@ -122,43 +122,41 @@
 
                     <!-- Modal AddRoommate-->
                     <div id="addRoommateModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
-                        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
-                            <h2 class="text-xl font-semibold text-center mb-4">Add Roommate</h2>
-                            <form method="post" action="/add-roommate" enctype="multipart/form-data">
-                                @csrf
-                                <!-- Profile Photo -->
-                                <div class="flex justify-center mb-4">
-                                    <label for="profile_photo" class="relative cursor-pointer">
-                                        <img id="previewProfilePhoto" class="w-28 h-28 rounded-full border object-cover"
-                                            src="/images/default-profile.jpg" alt="Profile Photo">
-                                        <input type="file" name="profile_photo" id="profile_photo" accept="image/*" class="hidden"
-                                            onchange="previewImage(event)">
-                                    </label>
-                                </div>
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative" onclick="event.stopPropagation()">
+        <h2 class="text-xl font-semibold text-center mb-4">Add Roommate</h2>
+        <form method="POST" action="{{ route('roommate.store') }}" enctype="multipart/form-data">
+        @csrf
 
-                                <!-- Name Field -->
-                                <div class="mb-4">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-1" for="name">Name</label>
-                                    <input type="text" name="name" id="name" class="w-full border px-3 py-2 rounded-lg" required>
-                                </div>
+            <!-- Profile Photo -->
+            <div class="flex justify-center mb-4">
+                <label for="profile_photo" class="relative cursor-pointer">
+                    <!-- Preview Image -->
+                    <img id="previewProfilePhoto" class="w-28 h-28 rounded-full border object-cover" src="/images/default-profile.jpg" alt="Profile Photo">
+                    <!-- Input File -->
+                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*" class="hidden" onchange="previewImage(event)">
+                </label>
+            </div>
 
-                                <!-- Phone Number Field -->
-                                <div class="mb-4">
-                                    <label class="block text-sm font-semibold text-gray-700 mb-1" for="phone_number">Phone Number</label>
-                                    <input type="text" name="phone_number" id="phone_number" class="w-full border px-3 py-2 rounded-lg" required>
-                                </div>
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1" for="name">Name</label>
+                <input type="text" name="name" id="name" class="w-full border px-3 py-2 rounded-lg" required>
+            </div>
 
-                                <!-- Submit Button -->
-                                <div class="text-center">
-                                    <button type="submit" class="w-full rounded-md bg-blue-500 py-2 text-sm font-semibold text-white hover:bg-blue-600">Add Roommate</button>
-                                </div>
+            <div class="mb-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-1" for="phone_number">Phone Number</label>
+                <input type="text" name="phone_number" id="phone_number" class="w-full border px-3 py-2 rounded-lg" required>
+            </div>
 
-                                <!-- Icon X Button to close modal -->
-                                <button onclick="toggleModal()" id="closeModalButton" class="absolute top-2 right-6 text-gray-500 text-3xl hover:text-gray-700">
-                                    &times;
-                                </button>
-                            </form>
-                        </div>
+            <div class="text-center">
+                <button type="submit" class="w-full rounded-md bg-blue-500 py-2 text-sm font-semibold text-white hover:bg-blue-600">Add Roommate</button>
+            </div>
+
+            <button onclick="toggleModal()" id="closeModalButton" class="absolute top-2 right-6 text-gray-500 text-3xl hover:text-gray-700">
+                &times;
+            </button>
+        </form>
+    </div>
+</div>
                     </div>
                 </ul>
               </div>

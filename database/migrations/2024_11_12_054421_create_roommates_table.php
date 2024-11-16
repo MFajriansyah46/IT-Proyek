@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('roommates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tenant_id')->unique()->constrained('tenants')->onDelete('cascade'); 
+            $table->foreignId('tenant_id')->unique()->constrained('tenants')->onDelete('cascade');
             $table->string('name');
             $table->bigInteger('phone_number');
-            $table->string('image')->nullable();
+            $table->string('profile_photo_url')->nullable();
             $table->timestamps();
         });
     }

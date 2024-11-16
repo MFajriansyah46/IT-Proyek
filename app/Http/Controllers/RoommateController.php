@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Roommate;
-use App\Models\Tenant;
 use Illuminate\Http\Request;
 
 class RoommateController extends Controller
@@ -17,37 +16,25 @@ class RoommateController extends Controller
     // Menyimpan roommate yang baru ditambahkan
     public function store(Request $request)
     {
-        // Validasi input dari formulir
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|numeric',
-            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+            'phone_number' => 'required|string|max:20',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // Mencari tenant yang sedang login
-        $tenant = auth()->user(); // Pastikan tenant yang sedang login
-
-        // Cek apakah tenant sudah memiliki roommate
-        if ($tenant->roommate) {
-            return back()->with('error', 'You already have a roommate.');
-        }
-
-        // Membuat instance baru Roommate
-        $roommate = new Roommate();
-        $roommate->tenant_id = $tenant->id; // Menghubungkan dengan tenant
+        $roommate = new Roommate;
         $roommate->name = $request->name;
         $roommate->phone_number = $request->phone_number;
 
-        // Jika ada gambar profil, simpan gambar ke folder 'profile_photos'
+        // Menangani file foto profil jika ada
         if ($request->hasFile('profile_photo')) {
-            $path = $request->file('profile_photo')->store('profile_photos', 'public');
-            $roommate->image = $path;
+            $imagePath = $request->file('profile_photo')->store('profile_photos', 'public');
+            $roommate->profile_photo_url = $imagePath;
         }
 
-        // Simpan roommate ke database
+        $roommate->tenant_id = auth()->id();  // Pastikan tenant_id diisi dengan ID tenant yang sedang login
         $roommate->save();
 
-        // Mengarahkan kembali ke halaman tenant dengan pesan sukses
-        return redirect()->route('myroom')->with('success', 'Roommate added successfully.');
+        return redirect()->back()->with('success', 'Roommate added successfully!');
     }
 }
