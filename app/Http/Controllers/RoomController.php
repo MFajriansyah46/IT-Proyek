@@ -201,8 +201,15 @@ class RoomController extends Controller {
     }
 
     public function edit($id_kamar) {
+        
         $room = Room::where('id_kamar',$id_kamar)->first();
-        return view('room.editRoom', compact('room'));
+        $bathroom = Facility::where('room_id',$id_kamar)->where('name','Bathroom')->first();
+        $bedroom = Facility::where('room_id',$id_kamar)->where('name','Bedroom')->first();
+        $kitchen = Facility::where('room_id',$id_kamar)->where('name','Kitchen')->first();
+        $security = Facility::where('room_id',$id_kamar)->where('name','Security')->first();
+        $conditions = Condition::all();
+        
+        return view('room.editRoom', compact('room','bedroom','bathroom','kitchen','security','conditions'));
     }
 
     public function update(Request $request, $id_kamar) {
@@ -214,7 +221,8 @@ class RoomController extends Controller {
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
             'kecepatan_internet' => 'required|integer',
-            'gambar_kamar' => 'nullable|image|mimes:png,jpg,jpeg|max:100000',
+            'gambar_kamar' => 'nullable|image',
+            'deskripsi'=> 'nullable',
         ]);
     
         if ($request->hasFile('gambar_kamar')) {
@@ -222,16 +230,61 @@ class RoomController extends Controller {
             $path = $file->store('room-images', 'public');
             $validatedData['gambar_kamar'] = $path;
         }
-    
         $room->update($validatedData);
-    
-        return redirect('/rooms')->with('success', 'Kamar berhasil diperbarui.');
+
+        $facilities = [
+            [
+                'condition' => $request->bedroom_condition_id,
+                'name' => 'Bedroom',
+                'image' => $request->file('bedroom_image'),
+            ],
+            [
+                'condition' => $request->bathroom_condition_id,
+                'name' => 'Bathroom',
+                'image' => $request->file('bathroom_image'),
+            ],
+            [
+                'condition' => $request->kitchen_condition_id,
+                'name' => 'Kitchen',
+                'image' => $request->file('kitchen_image'),
+            ],
+            [
+                'condition' => $request->security_condition_id,
+                'name' => 'Security',
+                'image' => $request->file('security_image'),
+            ]
+        ];
+
+        foreach ($facilities as $data) {
+            $facility = Facility::where('room_id',$room->id_kamar)->where('name',$data['name'])->first();
+            if($facility) {
+                $facility->condition_id = $data['condition'];
+                if($data['image']) {
+                    $facility->image = $data['image']->store('room-images');
+                }
+                $facility->update();
+            }
+            else {
+                $facility = new Facility();
+                $facility->room_id = $room->id_kamar;
+                $facility->condition_id = $data['condition'];
+                $facility->name = $data['name'];
+                if($data['image']) {
+                    $facility->image = $data['image']->store('room-images');
+                }
+                $facility->save();
+            }
+        }
+        return redirect('/rooms')->with('success-room-update', 'Room Successfully Update.');
     }
-    
 
     public function delete($id_kamar) {
         $room = Room::findOrFail($id_kamar);
         if ($room) {
+            $facilities = Facility::where('room_id',$room->id_kamar);
+            if($facilities){
+                $facilities->delete();
+            }
             $room->delete();
         }
         return redirect('/rooms')->with('success', 'Kamar berhasil dihapus.'); // Menggunakan flash message

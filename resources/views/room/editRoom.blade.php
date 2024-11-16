@@ -2,11 +2,12 @@
     <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
 
         <h1 class="text-5xl font-bold text-center text-gray-800 mt-4">Edit Room</h1>
-        <form action="/rooms/update/{{ $room->id_kamar }}" id="form-edit-room" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white shadow-md rounded-lg p-6" enctype="multipart/form-data">
+        <form action="/rooms/update/{{ $room->id_kamar }}" id="form-edit-room" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" enctype="multipart/form-data">
             @csrf
+            <h2 class="text-2xl font-medium">Main Information</h2>
             <div class="container mt-5 mb-5">
                 <div class="flex justify-center">
-                    <label for="upload-room-Image" class="border-2 border-dashed border-gray-300 p-10 w-full max-w-lg text-center cursor-pointer" id="drop-area">
+                    <label for="upload-room-Image" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer" id="drop-area">
                         @if($room->gambar_kamar)
                             <img id="preview-room-image" src="{{ asset('/storage/' . $room->gambar_kamar) }}" alt="Gambar Kamar" class="w-full h-auto">
                         @else
@@ -48,10 +49,141 @@
                 </div>
             @endif
 
+            <h2 class="text-2xl font-medium mt-4 mb-2">Facilities</h2>
+            <div class="mb-8">
+                <div class="flex gap-12 mb-6">
+                    <div class="flex flex-col w-80">
+                        <label>Bedroom</label>
+                        <select name="bedroom_condition_id" class="border border-gray-300 rounded-md p-2 mt-1 mb-4" required>
+                            @if(isset($bedroom))
+                                <option value="{{ $bedroom->condition->id }}">{{ $bedroom->condition->name }}</option>
+                            @else
+                                <option value=""></option>
+                            @endif
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="container mb-5">
+                            <div class="flex justify-center">
+                                <label for="upload-room-Image1" id="drop-area1" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer">
+                                    @if(isset($bedroom))
+                                        @if($bedroom->image)
+                                            <img id="preview-room-image1" src="{{ asset('/storage/' . $bedroom->image) }}" alt="" class="w-full h-auto">
+                                        @else
+                                            <p id="preview-added-room-text1" class="text-gray-500 py-8">+</p>
+                                            <img id="preview-room-image1" src="" alt="Gambar Kamar" class="hidden w-full h-auto">
+                                        @endif
+                                    @else
+                                        <p id="preview-added-room-text1" class="text-gray-500 py-8">+</p>
+                                        <img id="preview-room-image1" src="" alt="Gambar Kamar" class="hidden w-full h-auto">
+                                    @endif
+                                    <input type="file" id="upload-room-Image1" name="bedroom_image" accept="image/*" class="hidden" onchange="previewImage(event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-80">
+                        <label>Bathroom</label>
+                        <select name="bathroom_condition_id" class="border border-gray-300 rounded-md p-2 mt-1 mb-4" required>
+                            @if(isset($bathroom))
+                                <option value="{{ $bathroom->condition->id }}">{{ $bathroom->condition->name }}</option>
+                            @else
+                                <option value=""></option>
+                            @endif
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="container mb-5">
+                            <div class="flex justify-center">
+                                <label for="upload-room-Image2" id="drop-area2" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer">
+                                    @if(isset($bathroom))
+                                        @if($bathroom->image)
+                                            <img id="preview-room-image2" src="{{ asset('/storage/' . $bathroom->image) }}" alt="" class="w-full h-auto">
+                                        @else
+                                            <p id="preview-added-room-text2" class="text-gray-500 py-8">+</p>
+                                            <img id="preview-room-image2" src="" alt="bathroom" class="hidden w-full h-auto">
+                                        @endif
+                                    @else
+                                        <p id="preview-added-room-text2" class="text-gray-500 py-8">+</p>
+                                        <img id="preview-room-image2" src="" alt="bathroom" class="hidden w-full h-auto">
+                                    @endif
+                                    <input type="file" id="upload-room-Image2" name="bathroom_image" accept="image/*" class="hidden" onchange="previewImage(event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-12">
+                    <div class="flex flex-col w-80">
+                        <label>Kitchen</label>
+                        <select name="kitchen_condition_id" class="border border-gray-300 rounded-md p-2 mt-1 mb-4" required>
+                            @if(isset($kitchen))
+                                <option value="{{ $kitchen->condition->id }}">{{ $kitchen->condition->name }}</option>
+                            @else
+                                <option value=""></option>
+                            @endif
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="container mb-5">
+                            <div class="flex justify-center">
+                                <label for="upload-room-Image3" id="drop-area3" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer">
+                                    @if(isset($kitchen))
+                                        @if($kitchen->image)
+                                            <img id="preview-room-image3" src="{{ asset('/storage/' . $kitchen->image) }}" alt="" class="w-full h-auto">
+                                        @else
+                                            <p id="preview-added-room-text3" class="text-gray-500 py-8">+</p>
+                                            <img id="preview-room-image3" src="" alt="kitchen" class="hidden w-full h-auto">
+                                        @endif
+                                    @else
+                                        <p id="preview-added-room-text3" class="text-gray-500 py-8">+</p>
+                                        <img id="preview-room-image3" src="" alt="kitchen" class="hidden w-full h-auto">
+                                    @endif
+                                    <input type="file" id="upload-room-Image3" name="kitchen_image" accept="image/*" class="hidden" onchange="previewImage(event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-80">
+                        <label>Security</label>
+                        <select name="security_condition_id" class="border border-gray-300 rounded-md p-2 mt-1 mb-4" required>
+                            @if(isset($kitchen))
+                                <option value="{{ $security->condition->id }}">{{ $security->condition->name }}</option>
+                            @else
+                                <option value=""></option>
+                            @endif
+                            @foreach ($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            @endforeach
+                        </select>
+                        <div class="container mb-5">
+                            <div class="flex justify-center">
+                                <label for="upload-room-Image4" id="drop-area4" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer">
+                                    @if(isset($security))
+                                        @if($security->image)
+                                            <img id="preview-room-image4" src="{{ asset('/storage/' . $security->image) }}" alt="" class="w-full h-auto">
+                                        @else
+                                            <p id="preview-added-room-text4" class="text-gray-500 py-8">+</p>
+                                            <img id="preview-room-image4" src="" alt="kitchen" class="hidden w-full h-auto">
+                                        @endif
+                                    @else
+                                        <p id="preview-added-room-text4" class="text-gray-500 py-8">+</p>
+                                        <img id="preview-room-image4" src="" alt="kitchen" class="hidden w-full h-auto">
+                                    @endif
+                                    <input type="file" id="upload-room-Image4" name="security_image" accept="image/*" class="hidden" onchange="previewImage(event)">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-2xl font-medium mb-2">Description</h2>
+            <textarea name="deskripsi" id="room-description" class="min-h-32 border border-gray-300 rounded-md p-2 mb-6" placeholder="Enter a more detailed description of this room">{{ $room->deskripsi }}</textarea>
             <button type="button" id="edit-room-button" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">Update</button>
-
         </form>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
-
 </x-layout>
