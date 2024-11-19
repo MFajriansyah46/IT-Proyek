@@ -122,13 +122,17 @@ Route::middleware('auth:tenant')->group(function(){
 
         $rent = Rent::firstWhere('id_penyewa', $id_penyewa);
 
-        $id_kamar = $rent->room->id_kamar;
+        if($rent){
 
-        $avgRoomRate = number_format(Rate::where('id_kamar', $id_kamar)->avg('rate'),1);
+            $avgRoomRate = number_format(Rate::where('id_kamar', $$rent->room->id_kamar)->avg('rate'),1);
+    
+            $hasRate = Rate::where('id_kamar', $$rent->room->id_kamar)->where('id_penyewa',$id_penyewa)->first();
+    
+            return view('myRoom',['rent' => $rent, 'hasRate' => $hasRate ,'avgRoomRate' => $avgRoomRate]);
+        } else {
+            return view('myRoom',['rent' => $rent]);
+        }
 
-        $hasRate = Rate::where('id_kamar', $id_kamar)->where('id_penyewa',$id_penyewa)->first();
-
-        return view('myRoom',['rent' => $rent, 'hasRate' => $hasRate ,'avgRoomRate' => $avgRoomRate]);
     });
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);

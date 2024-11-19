@@ -219,7 +219,7 @@
         </div>
     @else
         <div class="pt-20 max-w-xl shadow-md min-h-screen bg-white mx-auto">
-            <h1 class=" text-center text-lg font-medium" >The room you rented is displayed here.</h1> 
+            <h1 class=" text-center text-xl text-gray-500 font-medium" >The room you rented is displayed here.</h1> 
         </div>
     @endif
 </x-public-layout>
