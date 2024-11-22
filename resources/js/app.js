@@ -669,4 +669,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Your existing event listeners...
+// Roommate Delete Modal Functionality
+$(document).ready(function() {
+    // Show modal
+    $('#deleteRoommateBtn').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent event bubbling
+        $('#deleteRoommateModal').removeClass('hidden');
+    });
+
+    // Hide modal when clicking Cancel button
+    $('#cancelDelete').on('click', function() {
+        $('#deleteRoommateModal').addClass('hidden');
+    });
+
+    // Hide modal when clicking outside
+    $('#deleteRoommateModal').on('click', function(e) {
+        if (e.target === this) {
+            $(this).addClass('hidden');
+        }
+    });
+
+    // Prevent modal content clicks from closing modal
+    $('#deleteRoommateModal .bg-white').on('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Optional: Add keyboard support to close modal with Escape key
+    $(document).on('keydown', function(e) {
+        if (e.key === 'Escape') {
+            $('#deleteRoommateModal').addClass('hidden');
+        }
+    });
+
+    // Prevent dropdown from closing when clicking delete button
+    $('#deleteRoommateBtn').parent().on('click', function(e) {
+        e.stopPropagation();
+    });
+});

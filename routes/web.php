@@ -136,6 +136,10 @@ Route::middleware('auth:tenant')->group(function(){
     });
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
+
+    Route::post('/roommate', [RoommateController::class, 'store'])->name('roommate.store');
+    Route::delete('/roommate', [RoommateController::class, 'delete'])->name('roommate.delete');
+
 });
 
 // Aktor: pengunjung
@@ -168,7 +172,3 @@ Route::middleware('guest')->group(function(){
     Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
 });
 
-//Roommate Aktor: Penyewa Aktor: Penyewa
-Route::middleware(['auth:tenant'])->group(function () {
-    Route::post('/roommate', [RoommateController::class, 'store'])->name('roommate.store')->middleware('auth:tenant');
-});

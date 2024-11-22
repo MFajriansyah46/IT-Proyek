@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Roommate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoommateController extends Controller
 {
@@ -32,6 +33,26 @@ class RoommateController extends Controller
 
         Roommate::create($data);
 
-        return back()->with('success', 'Roommate added successfully');
+        return back();
     }
+
+    public function delete()
+    {
+        $tenant = auth('tenant')->user();
+
+        if (!$tenant->roommate) {
+            return back()->with('error', 'No roommate found');
+        }
+
+        // Delete roommate photo if exists
+        if ($tenant->roommate->profile_photo) {
+            Storage::disk('public')->delete($tenant->roommate->profile_photo);
+        }
+
+        // Delete roommate
+        $tenant->roommate->delete();
+
+        return back();
+    }
+
 }
