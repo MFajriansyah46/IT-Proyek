@@ -669,36 +669,69 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Delete Roommate Modal Functionality
-$(document).ready(function() {
-    // Show modal
-    $('#deleteRoommateBtn').on('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent event bubbling
-        $('#deleteRoommateModal').removeClass('hidden');
-    });
-    // Hide modal when clicking Cancel button
-    $('#cancelDelete').on('click', function() {
-        $('#deleteRoommateModal').addClass('hidden');
-    });
-    // Hide modal when clicking outside
-    $('#deleteRoommateModal').on('click', function(e) {
-        if (e.target === this) {
-            $(this).addClass('hidden');
-        }
-    });
-    // Prevent modal content clicks from closing modal
-    $('#deleteRoommateModal .bg-white').on('click', function(e) {
-        e.stopPropagation();
-    });
-    // Optional: Add keyboard support to close modal with Escape key
-    $(document).on('keydown', function(e) {
-        if (e.key === 'Escape') {
-            $('#deleteRoommateModal').addClass('hidden');
-        }
-    });
-    // Prevent dropdown from closing when clicking delete button
-    $('#deleteRoommateBtn').parent().on('click', function(e) {
-        e.stopPropagation();
-    });
+// Roommate Delete Modal Management
+const DeleteRoommateModal = {
+    elements: {
+        modal: '#deleteRoommateModal',
+        deleteBtn: '#deleteRoommateBtn',
+        cancelBtn: '#cancelDelete',
+        closeBtn: '#closeDeleteModal',
+        modalContent: '.bg-white'
+    },
+
+    init() {
+        // Show modal
+        $(this.elements.deleteBtn).on('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.showModal();
+        });
+
+        // Hide modal - Cancel button
+        $(this.elements.cancelBtn).on('click', () => {
+            this.hideModal();
+        });
+
+        // Hide modal - Close (X) button
+        $(this.elements.closeBtn).on('click', () => {
+            this.hideModal();
+        });
+
+        // Hide modal - Click outside
+        $(this.elements.modal).on('click', (e) => {
+            if (e.target === e.currentTarget) {
+                this.hideModal();
+            }
+        });
+
+        // Prevent modal content clicks from closing modal
+        $(`${this.elements.modal} ${this.elements.modalContent}`).on('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Escape key to close modal
+        $(document).on('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.hideModal();
+            }
+        });
+
+        // Prevent dropdown from closing
+        $(this.elements.deleteBtn).parent().on('click', (e) => {
+            e.stopPropagation();
+        });
+    },
+
+    showModal() {
+        $(this.elements.modal).removeClass('hidden');
+    },
+
+    hideModal() {
+        $(this.elements.modal).addClass('hidden');
+    }
+};
+
+// Initialize when document is ready
+$(document).ready(() => {
+    DeleteRoommateModal.init();
 });
