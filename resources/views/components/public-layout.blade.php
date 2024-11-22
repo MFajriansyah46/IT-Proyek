@@ -91,14 +91,14 @@
                 @auth('tenant')
                 @if(auth('tenant')->user()->roommate)
                     <li class="pt-2">
-                        <small class="pl-4 text-gray-700">My roommate</small>
+                        <small class="pl-4 text-gray-700">My Roommate</small>
                     </li>
                     <li>
                         <button class="flex items-center px-4 pb-2 text-sm text-gray-700 hover:bg-gray-100">
                             <img class="w-8 h-8 rounded-full mr-2"
                                  src="{{ auth('tenant')->user()->roommate->profile_photo ? Storage::url(auth('tenant')->user()->roommate->profile_photo) : '/images/default-profile.jpg' }}"
                                  alt="Roommate photo">
-                            <div class="flex flex-col">
+                            <div class="flex flex-col text-left">
                                 <span class="font-medium">{{ auth('tenant')->user()->roommate->name }}</span>
                                 <span class="text-xs text-gray-500">{{ auth('tenant')->user()->roommate->phone_number }}</span>
                             </div>
