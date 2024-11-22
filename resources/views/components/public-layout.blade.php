@@ -88,37 +88,37 @@
                     </li>
 
                 <!-- Add Roommate -->
-                  @if(isset($tenant) && $tenant->roommate)
-                    <li>
+                @auth('tenant')
+                @if(auth('tenant')->user()->roommate)
+                    <li class="pt-2">
                         <small class="pl-4 text-gray-700">My roommate</small>
                     </li>
                     <li>
-                        <div class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <button id="addRoommate" class="flex pr-10 pl-10 py-2">
-                            <img class="mr-2 h-8 w-auto rounded-full my-auto"
-                                src="{{ $tenant->roommate->profile_photo_url ?? '/images/default-profile.jpg' }}" alt="">
-                            <div class="flex flex-col justify-start items-start">
-                            <h1 class="text-sm ">{{ $tenant->roommate->name }}</h1>
-                            <small class="text-gray-500">{{ $tenant->roommate->phone_number }}</small>
+                        <button class="flex items-center px-4 pb-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <img class="w-8 h-8 rounded-full mr-2"
+                                 src="{{ auth('tenant')->user()->roommate->profile_photo ? Storage::url(auth('tenant')->user()->roommate->profile_photo) : '/images/default-profile.jpg' }}"
+                                 alt="Roommate photo">
+                            <div class="flex flex-col">
+                                <span class="font-medium">{{ auth('tenant')->user()->roommate->name }}</span>
+                                <span class="text-xs text-gray-500">{{ auth('tenant')->user()->roommate->phone_number }}</span>
                             </div>
                         </button>
-                        </div>
                     </li>
-                    @else
+                @else
                     <li>
-                        <div class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                        <button id="addRoommate" class="flex pr-14">
-                            <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 48 48">
-                            <g fill="none" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
-                                <circle cx="24" cy="12" r="8"/>
-                                <path d="M42 44c0-9.941-8.059-18-18-18S6 34.059 6 44m13-5h10m-5-5v10"/>
-                            </g>
+                        <button id="addRoommate" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                                    <circle cx="24" cy="12" r="8"/>
+                                    <path d="M42 44c0-9.941-8.059-18-18-18S6 34.059 6 44m13-5h10m-5-5v10"/>
+                                </g>
                             </svg>
-                            <h1 class="text-base ">Add roommate</h1>
+                            <h1 class="text-base">Add roommate</h1>
                         </button>
-                        </div>
                     </li>
-                    @endif
+                @endif
+                @endauth
+            </div>
 
                     <!-- Modal AddRoommate-->
                     @if (session('success'))

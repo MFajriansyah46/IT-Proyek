@@ -9,16 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('roommates', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('tenant_id')->unique()->constrained('tenants')->onDelete('cascade');
-            $table->string('name');
-            $table->bigInteger('phone_number');
-            $table->string('profile_photo_url')->nullable();
-            $table->timestamps();
-        });
+    public function up()
+{
+    Schema::create('roommates', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('tenant_id')->constrained('tenants')->onDelete('cascade');
+        $table->string('name');
+        $table->string('phone_number');
+        $table->string('profile_photo')->nullable();
+        $table->timestamps();
+    });
+
     }
 
     /**

@@ -599,46 +599,74 @@ $(document).ready(function() {
     });
 });
 
-// Modal AddRoommate
 function toggleModal() {
-    const modal = document.getElementById('addRoommateModal');
-    modal.classList.toggle('hidden');
-}
-
-// Event listener button "Add Roommate"
-document.getElementById("addRoommate").addEventListener("click", (event) => {
-    event.stopPropagation();
-    toggleModal();
-});
-
-// Clonse modal, ketika user klik bukan area modal
-document.getElementById("addRoommateModal").addEventListener("click", function(event) {
-    if (event.target === this) {
-        toggleModal();
-    }
-});
-
-// cole modal icon exit
-document.getElementById("closeModalButton").addEventListener("click", (event) => {
-    event.stopPropagation();
-    toggleModal();
-});
-
-function previewImage(event) {
-    const input = event.target;
-    const preview = document.getElementById('previewProfilePhoto');
-
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-
-        // Ketika file berhasil dibaca, tampilkan preview gambar
-        reader.onload = function (e) {
-            preview.src = e.target.result;
-        };
-
-        reader.readAsDataURL(input.files[0]);
+    const modal = document.getElementById("addRoommateModal");
+    if (modal) {
+        modal.classList.toggle("hidden");
     }
 }
+// Modal AddRoommate Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Modal toggle function
+    function toggleModal() {
+        const modal = document.getElementById('addRoommateModal');
+        if (modal) {
+            modal.classList.toggle('hidden');
+        }
+    }
 
-// Event listener for the file input to trigger preview
-document.getElementById("profile_photo").addEventListener("change", previewImage);
+    const addRoommateBtn = document.getElementById("addRoommate");
+    if (addRoommateBtn) {
+        addRoommateBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // Mencegah link dari reload halaman
+            event.stopPropagation();
+            toggleModal();
+        });
+    }
+
+    // Event listener untuk menutup modal ketika klik di luar
+    const modal = document.getElementById("addRoommateModal");
+    if (modal) {
+        modal.addEventListener("click", function(event) {
+            if (event.target === this) {
+                toggleModal();
+            }
+        });
+    }
+
+    // Event listener untuk tombol close
+    const closeBtn = document.getElementById("closeModalButton");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleModal();
+        });
+    }
+
+    // Preview image functionality
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('previewProfilePhoto');
+
+        if (input.files && input.files[0] && preview) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Event listener untuk preview foto
+    const photoInput = document.getElementById("profile_photo");
+    if (photoInput) {
+        photoInput.addEventListener("change", previewImage);
+    }
+
+
+});
+
+
+// Your existing event listeners...

@@ -10,7 +10,7 @@ class Roommate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tenant_id', 'name', 'phone_number', 'image'
+        'tenant_id', 'name', 'phone_number', 'profile_photo_url'
     ];
 
     public function tenant()
