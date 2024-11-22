@@ -89,90 +89,78 @@
 
                 <!-- Add Roommate -->
                 @auth('tenant')
-                @if(auth('tenant')->user()->roommate)
-                <li class="pt-2">
-                    <small class="pl-4 text-gray-700">My Roommate</small>
-                </li>
-                <li class="group relative">
-                    <div class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 justify-between w-full">
-                        <!-- Roommate Info -->
-                        <div class="flex items-center">
-                            <img class="w-8 h-8 rounded-full mr-2"
-                                 src="{{ auth('tenant')->user()->roommate->profile_photo ? Storage::url(auth('tenant')->user()->roommate->profile_photo) : '/images/default-profile.jpg' }}"
-                                 alt="Roommate photo">
-                            <div class="flex flex-col text-left">
-                                <span class="font-medium">{{ auth('tenant')->user()->roommate->name }}</span>
-                                <span class="text-xs text-gray-500">{{ auth('tenant')->user()->roommate->phone_number }}</span>
-                            </div>
-                        </div>
-
-                        <!-- Delete Button -->
-                        <button type="button" id="deleteRoommateBtn" class="hidden group-hover:block text-gray-400 hover:text-red-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zm0 5h2v9H9zm4 0h2v9h-2z"/>
-                            </svg>
-                        </button>
-                    </div>
-                </li>
-
-                <!-- Delete Confirmation Modal -->
-                <div id="deleteRoommateModal" class="fixed inset-0 z-50 hidden">
-                    <div class="fixed inset-0 bg-black opacity-50"></div>
-                    <div class="fixed inset-0 flex items-center justify-center">
-                        <div class="bg-white rounded-lg p-6 max-w-sm mx-auto z-50">
-                            <h3 class="text-lg font-medium mb-4">Delete Roommate</h3>
-                            <p class="text-gray-600 mb-6">Are you sure you want to remove this roommate?</p>
-                            <div class="flex justify-end space-x-4">
-                                <button id="cancelDelete" class="px-4 py-2 text-gray-500 hover:text-gray-700">
-                                    Cancel
-                                </button>
-                                <form action="{{ route('roommate.delete') }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                        Delete
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                @else
-                    <li>
-                        <button id="addRoommate" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
-                            <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
-                                    <circle cx="24" cy="12" r="8"/>
-                                    <path d="M42 44c0-9.941-8.059-18-18-18S6 34.059 6 44m13-5h10m-5-5v10"/>
-                                </g>
-                            </svg>
-                            <h1 class="text-base">Add Roommate</h1>
-                        </button>
+                    @if(auth('tenant')->user()->roommate)
+                    <li class="pt-2">
+                        <small class="pl-4 text-gray-700">My Roommate</small>
                     </li>
-                @endif
+                    <li class="group relative">
+                        <div class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 justify-between w-full">
+                            <div class="flex items-center">
+                                <img class="w-8 h-8 rounded-full mr-2"
+                                src="{{ auth('tenant')->user()->roommate->profile_photo ? asset('storage/' . auth('tenant')->user()->roommate->profile_photo): asset('images/default-profile.jpg') }}" alt="{{ auth('tenant')->user()->roommate->name }}">
+                                            <div class="flex flex-col text-left">
+                                    <span class="font-medium">{{ auth('tenant')->user()->roommate->name }}</span>
+                                    <span class="text-xs text-gray-500">{{ auth('tenant')->user()->roommate->phone_number }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Delete Button -->
+                            <button type="button" id="deleteRoommateBtn" class="hidden group-hover:block text-gray-400 hover:text-red-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3zm0 5h2v9H9zm4 0h2v9h-2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div id="deleteRoommateModal" class="fixed inset-0 z-50 hidden">
+                        <div class="fixed inset-0 bg-black opacity-50"></div>
+                        <div class="fixed inset-0 flex items-center justify-center">
+                            <div class="bg-white rounded-lg p-6 max-w-sm mx-auto z-50">
+                                <h3 class="text-lg font-medium mb-4">Delete Roommate</h3>
+                                <p class="text-gray-600 mb-6">Are you sure you want to remove this roommate?</p>
+                                <div class="flex justify-end space-x-4">
+                                    <button id="cancelDelete" class="px-4 py-2 text-gray-500 hover:text-gray-700">
+                                        Cancel
+                                    </button>
+                                    <form action="{{ route('roommate.delete') }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @else
+                        <li>
+                            <button id="addRoommate" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full">
+                                <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                                        <circle cx="24" cy="12" r="8"/>
+                                        <path d="M42 44c0-9.941-8.059-18-18-18S6 34.059 6 44m13-5h10m-5-5v10"/>
+                                    </g>
+                                </svg>
+                                <h1 class="text-base">Add Roommate</h1>
+                            </button>
+                        </li>
+                    @endif
                 @endauth
-            </div>
 
                 <!-- Modal AddRoommate-->
-                @if (session('success'))
-                    <script>
-                        alert("{{ session('success') }}");
-                    </script>
-                @endif
-
                 <div id="addRoommateModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
                     <div class="bg-white p-6 rounded-lg shadow-lg w-100 relative" onclick="event.stopPropagation()">
                         <h2 class="text-xl font-semibold text-center mb-4">Add Roommate</h2>
                         <form method="POST" action="{{ route('roommate.store') }}" enctype="multipart/form-data">
-                        @csrf
-                            <!-- Profile Photo -->
+                            @csrf
                             <div class="flex justify-center mb-4">
                                 <label for="profile_photo" class="relative cursor-pointer">
-                                    <!-- Preview Image -->
                                     <img id="previewProfilePhoto" class="w-28 h-28 rounded-full border object-cover" src="/images/default-profile.jpg" alt="Profile Photo">
-                                    <!-- Input File -->
-                                    <input type="file" name="profile_photo" id="profile_photo" accept="image/*" class="hidden" onchange="previewImage(event)">
+                                    <input type="file"
+                                        name="profile_photo" id="profile_photo" accept="image/*" class="hidden" onchange="previewImage(event)">
                                 </label>
                             </div>
                             <div class="mb-4">

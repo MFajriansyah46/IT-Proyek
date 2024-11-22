@@ -605,6 +605,8 @@ function toggleModal() {
         modal.classList.toggle("hidden");
     }
 }
+
+
 // Modal AddRoommate Functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Modal toggle function
@@ -614,16 +616,14 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.classList.toggle('hidden');
         }
     }
-
     const addRoommateBtn = document.getElementById("addRoommate");
     if (addRoommateBtn) {
         addRoommateBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // Mencegah link dari reload halaman
+            event.preventDefault();
             event.stopPropagation();
             toggleModal();
         });
     }
-
     // Event listener untuk menutup modal ketika klik di luar
     const modal = document.getElementById("addRoommateModal");
     if (modal) {
@@ -633,7 +633,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
     // Event listener untuk tombol close
     const closeBtn = document.getElementById("closeModalButton");
     if (closeBtn) {
@@ -642,34 +641,35 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleModal();
         });
     }
-
     // Preview image functionality
     function previewImage(event) {
         const input = event.target;
         const preview = document.getElementById('previewProfilePhoto');
-
         if (input.files && input.files[0] && preview) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 preview.src = e.target.result;
             };
-
             reader.readAsDataURL(input.files[0]);
         }
     }
-
     // Event listener untuk preview foto
     const photoInput = document.getElementById("profile_photo");
     if (photoInput) {
         photoInput.addEventListener("change", previewImage);
     }
-
-
+    // Image preview function
+    window.previewImage = function(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById('previewProfilePhoto');
+        preview.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+    }
 });
 
-
-// Roommate Delete Modal Functionality
+// Delete Roommate Modal Functionality
 $(document).ready(function() {
     // Show modal
     $('#deleteRoommateBtn').on('click', function(e) {
@@ -677,31 +677,26 @@ $(document).ready(function() {
         e.stopPropagation(); // Prevent event bubbling
         $('#deleteRoommateModal').removeClass('hidden');
     });
-
     // Hide modal when clicking Cancel button
     $('#cancelDelete').on('click', function() {
         $('#deleteRoommateModal').addClass('hidden');
     });
-
     // Hide modal when clicking outside
     $('#deleteRoommateModal').on('click', function(e) {
         if (e.target === this) {
             $(this).addClass('hidden');
         }
     });
-
     // Prevent modal content clicks from closing modal
     $('#deleteRoommateModal .bg-white').on('click', function(e) {
         e.stopPropagation();
     });
-
     // Optional: Add keyboard support to close modal with Escape key
     $(document).on('keydown', function(e) {
         if (e.key === 'Escape') {
             $('#deleteRoommateModal').addClass('hidden');
         }
     });
-
     // Prevent dropdown from closing when clicking delete button
     $('#deleteRoommateBtn').parent().on('click', function(e) {
         e.stopPropagation();
