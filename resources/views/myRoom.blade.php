@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="flex justify-center mb-2">
-                <div>
+                <div id="countDownDayArea">
                     <span class="text-4xl font-medium text-gray-900" id="countDownDayPublic"></span>
                     <small>days</small>
                 </div>
@@ -198,22 +198,34 @@
                       $('#countDownTimePublic').text(`${hours}:${minutes}:${seconds}`);
        
                       if(days<=5){
-                        $('#countDownDayPublic').addClass('bg-red-600 text-white');
+                        $('#countDownDayPublic').addClass('px-2 bg-red-600 text-white');
                       }
                       if (distance < 0) {
-                        $('#countDownDayPublic').text("0");
-                        $('#countDownTimePublic').text("0:0:0");
-                      }
+                        clearInterval(countdownInterval);
+                        $('#countDownTimePublic').text("The rental has expired");
+                        $('#countDownTimePublic').addClass("text-red-600");
+                        $('#countDownDayArea').addClass("hidden");
+                        $('#rent-again-form').removeClass("hidden");
+                    }
                     }, 1000);
                   });
                 </script>
-            <br><br>
-            <form id="discard-form" action="/timeout/{{ $rent->token }}">
+            <br>
+            <form id="rent-again-form" method="post" class="hidden" action="/checkout">
+                @csrf
+                <input type="hidden" name="room_id" value="{{ $rent->room->id_kamar }}">
+                <input type="hidden" name="tenant_id" value="{{ auth('tenant')->user()->id }}">
+                <input type="hidden" name="price" value="{{ $rent->room->harga_kamar }}">
+                <div class="flex justify-center px-52">
+                    <button type="submit" id="rent-again-button" class="mb-4 w-full rounded-md min-w-28 bg-primary-500 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rent again</button>
+                </div>
+            </form>
+            <form id="discard-form" action="/discard/{{ $rent->token }}">
                 @csrf
                 <input type="hidden" name="id_kamar" value="{{ $rent->room->id }}">
                 <input type="hidden" name="id_penyewa" value="{{ auth()->user()->id }}">
                 <div class="flex justify-center px-52">
-                    <button type="button" id="discard-button" class="mb-6 w-full rounded-md min-w-28 bg-red-600 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Discard</button>
+                    <button type="button" id="discard-button" class="mb-6 w-full rounded-md min-w-28 bg-red-600 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">Discard</button>
                 </div>
             </form>
         </div>

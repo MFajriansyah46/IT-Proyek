@@ -36,15 +36,14 @@
                             // Jika hitungan mundur selesai
                             if (distance < 0) {
                                 clearInterval(countdownInterval);
-                                $('#countdown{{ $rent->id }}').text("Waktu telah habis!");
-                                window.location.href='/active-rental/timeout/{{ $rent->token }}';
+                                $('#countdown{{ $rent->id }}').text("Expired");
                             }
                         }, 1000);
                     });
                 </script>
             </x-table.data>
             <x-table.data>
-                <form action="/active-rental/timeout/{{ $rent->token }}" class="rent-discard-form" id="form-delete-{{ $rent->id }}" data-rent-id="{{ $rent->id }}">
+                <form action="/discard/{{ $rent->token }}" class="rent-discard-form" id="form-delete-{{ $rent->id }}" data-rent-id="{{ $rent->id }}">
                     @csrf
                     <button type="button" class="discard-rent-button" data-room-id="{{ $rent->id }}">
                         <div class=" bg-red-600 hover:bg-red-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">Discard</div>

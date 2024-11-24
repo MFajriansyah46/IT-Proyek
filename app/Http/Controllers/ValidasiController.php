@@ -84,14 +84,4 @@ class ValidasiController extends Controller
         return redirect('/');
     }
 
-    public function logoutOwner(Request $request) {
-
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/owner-login');
-    }
 }

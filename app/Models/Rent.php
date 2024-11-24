@@ -25,6 +25,14 @@ class Rent extends Model
                 $rent->tanggal_keluar = Carbon::parse($rent->tanggal_masuk)->addMonth();
             }
         });
+
+        // Event yang dijalankan saat record akan dibuat
+        static::updating(function ($rent) {
+            if ($rent->tanggal_masuk) {
+                // Set tanggal_keluar menjadi satu bulan setelah tanggal_masuk
+                $rent->tanggal_keluar = Carbon::parse($rent->tanggal_masuk)->addMonth();
+            }
+        });
     }
 
     public function room(): BelongsTo {

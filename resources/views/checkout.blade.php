@@ -4,10 +4,6 @@
     <!-- Section Detail Penyewaan -->
     <h2 class="text-xl font-semibold text-gray-700 mb-2">Rental Details.</h2>
     <div class="mb-6">
-        <!-- <div class="flex mb-2">
-            <p class="text-gray-600 w-72"><strong>ID</strong></p>
-            <p class="text-gray-600">: {{ $transaction->snap_token }}</p>
-        </div> -->
         <div class="flex mb-2">
             <p class="text-gray-600 w-72"><strong>Room Number</strong></p>
             <p class="text-gray-600">: {{ $transaction->room->building->unit_bangunan }}{{ $transaction->room->no_kamar }}</p>
@@ -33,7 +29,7 @@
         snap.pay('{{ $transaction->snap_token }}', {
           // Optional
           onSuccess: function(result){
-            window.location.href= '/checkout/success/{{ $transaction->snap_token }}';
+            window.location.href= '/checkout/success/{{ $transaction->snap_token }}?user={{ $transaction->tenant_id }}';
           },
           // Optional
           onPending: function(result){
@@ -48,7 +44,9 @@
     </script>
     <script>
       if({{ $transaction->status }}) {
-        window.location.href= '/?c=1';
+        window.location.href= '/myroom';
+        const paymentConfirmElement = document.getElementById('payment-confirm');
+        paymentConfirmElement.classList.remove('hidden');
       }
     </script>
   </div>

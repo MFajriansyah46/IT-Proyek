@@ -8,7 +8,6 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
-use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
@@ -20,8 +19,6 @@ use App\Http\Controllers\DashboardController;
 Route::middleware('auth:owner')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'read']);
-
-    Route::post('/owner-logout', [ValidasiController::class, 'logoutOwner']);
 
     // tenant/user controller
     Route::get('/users', [TenantController::class,'read']);
@@ -71,13 +68,6 @@ Route::middleware('auth:owner')->group(function(){
         return view('transaction.transactions',['transactions' => $transactions]);
     });
 
-    Route::get('/active-rental/timeout/{token}', function($token) {
-
-        $rent = Rent::where('token',$token)->first();
-        $rent->delete();
-        return redirect('/active-rental');
-    });
-
     Route::get('/confirm/payment/{snap_token}', function($snap_token){
 
         $transaction = Transaction::where('snap_token',$snap_token)->first();
@@ -96,44 +86,15 @@ Route::middleware('auth:owner')->group(function(){
     });
 });
 
-
 Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/edit-profile', [ProfileController::class, 'editProfile']);
-
-    Route::post('/logout', [ValidasiController::class, 'logout']);
 
     Route::post('/checkout', [PaymentController::class, 'pay']);
     
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
-    Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
-
-    Route::get('/timeout/{token}', function($token) {
-
-        $rent = Rent::where('token',$token)->first();
-        $rent->delete();
-        return redirect('/');
-    });
-
-    Route::get('/myroom', function(){
-
-        $id_penyewa = auth('tenant')->user()->id;
-
-        $rent = Rent::firstWhere('id_penyewa', $id_penyewa);
-
-        if($rent){
-
-            $avgRoomRate = number_format(Rate::where('id_kamar', $$rent->room->id_kamar)->avg('rate'),1);
-    
-            $hasRate = Rate::where('id_kamar', $$rent->room->id_kamar)->where('id_penyewa',$id_penyewa)->first();
-    
-            return view('myRoom',['rent' => $rent, 'hasRate' => $hasRate ,'avgRoomRate' => $avgRoomRate]);
-        } else {
-            return view('myRoom',['rent' => $rent]);
-        }
-
-    });
+    Route::get('/myroom', [ProfileController::class,"rentedRoom"]);
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
 }); 
@@ -153,17 +114,18 @@ Route::middleware('guest')->group(function(){
     
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
+    Route::post('/logout', [ValidasiController::class, 'logout']);
+
     Route::get('/', function(){
 
-        if(isset($_GET['c'])) {
-            return redirect('/')->with('payment-success','Payment Confirmed! Check your room now.');
-        }
-        else {
-            return view('home');
-        }
+        return redirect('/');
     });
 
     Route::get('/rooms', [RoomController::class,'read']);
 
     Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
+
+    Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
+
+    Route::get('/discard/{token}', [ProfileController::class,"discardRentedRoom"]);
 });

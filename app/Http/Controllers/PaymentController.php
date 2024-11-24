@@ -72,22 +72,44 @@ class PaymentController extends Controller
         return view('checkout',['transaction' => $transaction]);
     }
 
-    public function rent($snap_token) {
+    public function rent( $snap_token, Request $request) {
 
+        if(isset($_GET['user'])){
+            $tenant_id = $_GET['user'];
+        }
+        else {
+            $tenant_id = $request->tenant_id;
+        }
         $transaction = Transaction::where('snap_token',$snap_token)->first();
         $transaction->status = true;
         $transaction->update();
 
         if($transaction->status) {
 
-            $rent = new Rent();
-            $rent->id_kamar = $transaction->room_id;
-            $rent->id_penyewa = $transaction->tenant_id;
-            $rent->tanggal_masuk = now('Asia/Makassar');
-            $rent->token = Str::random(16);
-            $rent->save();
+            $rent = Rent::firstWhere('id_penyewa',$tenant_id);
+            if($rent){
+                $rent->tanggal_keluar = null;
+                $rent->id_kamar = $transaction->room_id;
+                $rent->id_penyewa = $transaction->tenant_id;
+                $rent->tanggal_masuk = now('Asia/Makassar');
+                $rent->token = Str::random(16);
+                $rent->update();
+
+            } else {
+                $rent = new Rent();
+                $rent->id_kamar = $transaction->room_id;
+                $rent->id_penyewa = $transaction->tenant_id;
+                $rent->tanggal_masuk = now('Asia/Makassar');
+                $rent->token = Str::random(16);
+                $rent->save();
+            }
         }
-        return redirect('/')->with('payment-success','Payment Successfull! Check your room now.');
+
+        if(auth('tenant')->user()){
+            return redirect('/myroom')->with('payment-success','Payment Successfull!');
+        } else if( auth('owner')->user()) {
+            return redirect('/transactions');
+        }
     }
 
     public function rate(Request $request) {
