@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Roommate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 class RoommateController extends Controller
 {
     public function store(Request $request)
     {
-        Log::info('Starting roommate creation process');
-        Log::info('Files in request:', $request->allFiles()); // Log semua file yang dikirim
-
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:20',
@@ -23,7 +19,7 @@ class RoommateController extends Controller
         $tenant = auth('tenant')->user();
 
         if ($tenant->roommate) {
-            return back()->with('error', 'You already have a roommate');
+            return back();
         }
 
         $data = [
@@ -32,40 +28,22 @@ class RoommateController extends Controller
             'phone_number' => $request->phone_number,
             'profile_photo' => null
         ];
-
-        if ($request->hasFile('profile_photo')) {
-            Log::info('Profile photo found in request');
-
-            try {
+        if($request->hasFile('profile_photo')){
                 $file = $request->file('profile_photo');
-                Log::info('Original filename: ' . $file->getClientOriginalName());
-                Log::info('File mime type: ' . $file->getMimeType());
-
                 $path = $file->store('roommate-photos', 'public');
-                Log::info('File stored at path: ' . $path);
-
                 $data['profile_photo'] = $path;
-            } catch (\Exception $e) {
-                Log::error('Error uploading file: ' . $e->getMessage());
-                Log::error($e->getTraceAsString());
-                return back()->with('error', 'Failed to upload photo: ' . $e->getMessage());
-            }
-        } else {
-            Log::info('No profile photo in request');
         }
-
-        Log::info('Final data before creating roommate:', $data);
 
         try {
-            $roommate = Roommate::create($data);
-            Log::info('Roommate created successfully:', $roommate->toArray());
+            Roommate::create($data);
+            return back();
         } catch (\Exception $e) {
-            Log::error('Error creating roommate: ' . $e->getMessage());
-            return back()->with('error', 'Failed to create roommate');
+            return back();
         }
 
-        return back()->with('success', 'Roommate added successfully');
+        return back();
     }
+
     public function delete()
     {
         $tenant = auth('tenant')->user();
@@ -74,12 +52,10 @@ class RoommateController extends Controller
             return back()->with('error', 'No roommate found');
         }
 
-        // Delete roommate photo if exists
         if ($tenant->roommate->profile_photo) {
             Storage::disk('public')->delete($tenant->roommate->profile_photo);
         }
 
-        // Delete roommate
         $tenant->roommate->delete();
 
         return back();
