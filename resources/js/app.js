@@ -165,6 +165,24 @@ $(document).ready(function () {
     });
 });
 
+// Modal add building
+$(document).ready(function () {
+    // Saat tombol edit ditekan, tampilkan modal
+    $('#add-building-button').on('click', function () {
+        $('#confirmation-add-building').removeClass('hidden');
+    });
+
+    // Saat tombol "No, cancel" ditekan, sembunyikan modal
+    $('#cancel-add-building, #close-modal-add-building').on('click', function () {
+        $('#confirmation-add-building').addClass('hidden');
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-add-building').on('click', function () {
+        $('#building-add-form').submit();
+    });
+});
+
 // Modal edit building
 $(document).ready(function () {
     // Saat tombol edit ditekan, tampilkan modal
@@ -202,6 +220,24 @@ $(document).ready(function () {
         $('form[data-building-id="' + buildingId + '"]').submit();
     });
 });
+
+$(document).ready(function () {
+    // Saat tombol "Save" pada form ditekan, tampilkan modal konfirmasi
+    $('#add-room-button').on('click', function () {
+        $('#confirmation-add-room').removeClass('hidden');  // Menampilkan modal konfirmasi
+    });
+
+    // Saat tombol "No, cancel" atau tombol close modal ditekan, sembunyikan modal
+    $('#cancel-add-room, #close-modal-add-room').on('click', function () {
+        $('#confirmation-add-room').addClass('hidden');  // Menyembunyikan modal
+    });
+
+    // Saat tombol "Yes, I'm sure" ditekan, kirim form
+    $('#confirm-add-room').on('click', function () {
+        $('#add-room-form').submit();  // Submit form
+    });
+});
+
 
 // Modal edit room
 $(document).ready(function () {
@@ -386,6 +422,24 @@ $(document).ready(function() {
 
     $("#toggle-confirm-password").click(function(){
         $('.eye-slashed-confirm-password').toggleClass('hidden');
+    });
+});
+
+// reset password
+$(document).ready(function() {
+    $('#reset-password').on('click', function() {
+        $('#reset-password-form').removeClass('hidden');
+        $('#hide-form-reset').removeClass('hidden');    
+        $('#reset-password').addClass('hidden');
+    });
+});
+$(document).ready(function() {
+    $('#hide-form-reset').on('click', function() {
+        $('#reset-password-form').addClass('hidden');
+        $('#hide-form-reset').addClass('hidden');    
+        $('#reset-password').removeClass('hidden');
+        $('#password').val('');
+        $('#confirm-password').val('');
     });
 });
 

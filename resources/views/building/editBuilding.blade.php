@@ -28,7 +28,7 @@
         <label class="text-lg font-semibold mb-2">Link Gmap</label>
         <input type="text" name="link_gmap" value="{{ $building->link_gmap }}" class="border border-gray-300 rounded-md p-2 mb-6" required>
 
-        <button type="button" id="edit-building-button" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400">Save</button>
+        <button type="button" id="edit-building-button" class="mt-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
     </form>
 </div>
 </x-layout>

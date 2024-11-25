@@ -182,7 +182,7 @@
             </div>
             <h2 class="text-2xl font-medium mb-2">Description</h2>
             <textarea name="deskripsi" id="room-description" class="min-h-32 border border-gray-300 rounded-md p-2 mb-6" placeholder="Enter a more detailed description of this room">{{ $room->deskripsi }}</textarea>
-            <button type="button" id="edit-room-button" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">Update</button>
+            <button type="button" id="edit-room-button" class="mt-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
         </form>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

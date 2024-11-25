@@ -2,7 +2,7 @@
 
 <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
     <h1 class="text-5xl font-bold text-center text-gray-800">Add Building</h1>
-    <form action="/buildings/submit" method="post" enctype="multipart/form-data" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" onsubmit="return validateForm()"  >
+    <form action="/buildings/submit" id="building-add-form" method="post" enctype="multipart/form-data" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6">
         @csrf
 
         <input type="hidden" name="owner_id" value="{{ auth('owner')->user()->id }}">
@@ -33,7 +33,7 @@
         <label class="text-lg font-semibold mb-2">Description</label>
         <textarea type="text" name="description" class="border border-gray-300 rounded-md p-2 mb-6" required></textarea>
 
-        <button type="submit" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400" onclick="return confirm('Are you sure you want to save this building?');">Save</button>
+        <button type="button" id="add-building-button" class="mt-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
     </form>
 </div>
 </x-layout>

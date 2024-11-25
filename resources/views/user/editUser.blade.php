@@ -1,6 +1,6 @@
 <x-layout>
 
-    <div class="px-8 bg-white shadow-md max-w-lg ml-auto mr-auto mt-4"><br>
+    <div class="px-8 bg-white shadow-md max-w-lg ml-auto mr-auto mt-4 mb-20"><br>
         <h1 class="text-5xl font-bold text-center text-gray-800 mb-8">Edit Users</h1>
         <form method="post" action="/users/update/" id="user-edit-form" enctype="multipart/form-data" class="container flex flex-col gap-4">
             @csrf
@@ -29,14 +29,14 @@
             </div>
 
             <div class="flex gap-4">
-                <div>
+                <div class="w-56">
                     <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div class="mt-2">
                         <input id="username" name="username" type="text" required value="{{ $users->username }}"
                             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
-                <div>
+                <div class="w-52">
                     <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                     <div class="mt-2">
                         <input id="phone_number" name="phone_number" type="number" required
@@ -46,15 +46,30 @@
                 </div>
             </div>
 
-            <div>
-                <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Password <small>(encrypted)</small></label>
-                <div class="mt-2">
-                    <input id="password" name="password" type="password" required value="{{ $users->password }}"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <p id="reset-password" class="text-center text-primary-500 cursor-pointer">Reset password</p>
+            <p id="hide-form-reset" class="text-center text-primary-500 cursor-pointer hidden">Cancel Reset Password</p>
+
+            <div id="reset-password-form" class="hidden">   
+                <div>
+                    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">New Password</label>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                    <div class="mt-2">
+                        <input id="confirm-password" name="confirm-password" type="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
                 </div>
             </div>
- 
-            <button type="button" id="edit-user-button" class="mr-auto mb-4 py-2 px-4 rounded-md text-white text-lg font-medium bg-primary-500 hover:bg-primary-400">Save</button>
+
+            <script>
+
+            </script>
+
+
+            <button type="button" id="edit-user-button" class="mt-4 mb-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
         </form>
     </div>
 </x-layout>

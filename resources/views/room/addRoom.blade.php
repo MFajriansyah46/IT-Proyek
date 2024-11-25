@@ -2,7 +2,7 @@
     <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
 
         <h1 class="text-5xl font-bold text-center text-gray-800 mt-8 mb-6">Add Rooms</h1>
-        <form action="/rooms/submit" method="POST" enctype="multipart/form-data" class="mb-16 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" onsubmit="return validateForm()" >
+        <form action="/rooms/submit" id="add-room-form" method="POST" enctype="multipart/form-data" class="mb-16 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" >
             @csrf
             <h2 class="text-2xl font-medium">Main Information</h2>
             <div class="container mt-5 mb-5">
@@ -122,7 +122,7 @@
             </div>
             <h2 class="text-2xl font-medium mb-2">Description</h2>
             <textarea name="deskripsi" id="room-description" class="min-h-32 border border-gray-300 rounded-md p-2 mb-6" placeholder="Enter a more detailed description of this room"></textarea>
-            <button type="submit" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">Save</button>
+            <button type="button" id="add-room-button" class="mt-4 bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none">Save</button>
         </form>
     </div>
 </x-layout>
