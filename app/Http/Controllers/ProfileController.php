@@ -38,7 +38,11 @@ class ProfileController extends Controller
 
         if($rent){
 
-            $avgRoomRate = number_format(Rate::firstWhere('id_kamar', $rent->room->id_kamar)->avg('rate'),1);
+            if(Rate::firstWhere('id_kamar', $rent->room->id_kamar)){
+                $avgRoomRate = number_format(Rate::firstWhere('id_kamar', $rent->room->id_kamar)->avg('rate'),1);
+            } else {
+                $avgRoomRate = '0.0';
+            }
     
             $hasRate = Rate::where('id_kamar', $rent->room->id_kamar)->where('id_penyewa',$id_penyewa)->first();
     
@@ -52,6 +56,6 @@ class ProfileController extends Controller
     public function discardRentedRoom($token)  {
         $rent = Rent::where('token',$token)->first();
         $rent->delete();
-        return redirect('/');
+        return redirect('/myroom');
     }
 }

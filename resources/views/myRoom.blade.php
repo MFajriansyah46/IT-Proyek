@@ -37,7 +37,7 @@
             <div class="flex justify-between items-center mx-4 -mb-4">
                 <p class="text-green-600 text-2xl font-medium w-60 ">Rp {{ number_format($rent->room->harga_kamar, 2, ',', '.') }}</p>
                 <div class="flex items-center justify-center bg-gray-900 hover:bg-gray-600 rounded-2xl gap-1 w-16 px-2 py-1">
-                    <button id="rate-button" class="flex items-center justify-center">
+                    <button id="rate-button" class="flex items-center justify-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.1rem" height="1.1rem" viewBox="0 0 64 64"><path fill="#ffc70f" d="M62 25.2H39.1L32 3l-7.1 22.2H2l18.5 13.7l-7 22.1L32 47.3L50.5 61l-7.1-22.2z"/></svg>
                         <p class="text-white text-sm">{{ $avgRoomRate }}</p>
                     </button>
@@ -225,7 +225,7 @@
                 <input type="hidden" name="id_kamar" value="{{ $rent->room->id }}">
                 <input type="hidden" name="id_penyewa" value="{{ auth()->user()->id }}">
                 <div class="flex justify-center px-52">
-                    <button type="button" id="discard-button" class="mb-6 w-full rounded-md min-w-28 bg-red-600 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">Discard</button>
+                    <button type="button" id="discard-button" class="mb-6 w-full rounded-md min-w-28 border-2 border-red-600 py-1.5 text-sm font-semibold leading-6 text-red-600 shadow-sm hover:bg-red-600 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">Discard</button>
                 </div>
             </form>
         </div>
