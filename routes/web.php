@@ -118,7 +118,7 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/', function(){
 
-        return redirect('/');
+        return view('home');
     });
 
     Route::get('/rooms', [RoomController::class,'read']);
