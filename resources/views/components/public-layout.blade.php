@@ -37,8 +37,8 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline" aria-current="page">Home</a>
                 <a href="/rooms-list" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Rooms</a>
-                <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
-                <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Help</a>
+                <a href="/about" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
+                <a href="/help" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Help</a>
               </div>
             </div>
           </div>

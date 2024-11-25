@@ -2,8 +2,10 @@
 
 use App\Models\Rent;
 use App\Models\Room;
+use App\Models\About;
 use App\Models\Building;
 use App\Models\Transaction;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\OwnerController;
@@ -125,10 +127,22 @@ Route::middleware('guest')->group(function(){
     Route::get('/owner-login', [ValidasiController::class, 'formLoginOwner']);
     
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
+    
 
     Route::get('/', function(){
 
         return view('home');
+    });
+    
+    Route::get('/about', function(){
+
+        return view('about');
+        
+    });
+
+    Route::get('help', function(){
+
+        return view('help');
     });
 
     Route::get('/rooms-list',[function(){
