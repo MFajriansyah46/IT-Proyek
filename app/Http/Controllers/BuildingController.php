@@ -8,21 +8,28 @@ use Illuminate\Http\Request;
 
 class BuildingController extends Controller
 {
+    protected $b; // Properti untuk inisialisasi model Building
+
+    // Konstruktor untuk inisialisasi properti
+    public function __construct(Building $building)
+    {
+        $this->b = $building;
+    }
+
     public function read()
     {
-        $buildings = Building::all();
-        return view('building.buildings', compact('buildings'));
+        $b = $this->b->all(); // Menggunakan properti inisialisasi
+        return view('building.buildings', ['buildings' => $b]);
     }
 
     public function add()
     {
         return view('building.addBuilding');
-        
     }
 
     public function submit(Request $request)
     {
-        $building = $request->validate([
+        $validated = $request->validate([
             'owner_id' => 'required',
             'unit_bangunan' => 'required|max:1',
             'gambar_bangunan' => 'required|image',
@@ -30,43 +37,56 @@ class BuildingController extends Controller
             'alamat_bangunan' => 'required|max:255',
         ]);
 
-        $building['token'] = Str::random(16);
-        
-        if($request->gambar_bangunan){
-            $building['gambar_bangunan'] = $request->file('gambar_bangunan')->store('building-images');
-        }
-        
-        Building::create($building);
-        $request->session()->flash('building-add-success','Building data has been successfully added.');
+        $gambarPath = $request->file('gambar_bangunan')->store('building-images');
+
+        $this->b->create([
+            'owner_id' => $validated['owner_id'],
+            'unit_bangunan' => $validated['unit_bangunan'],
+            'gambar_bangunan' => $gambarPath,
+            'link_gmap' => $validated['link_gmap'],
+            'alamat_bangunan' => $validated['alamat_bangunan'],
+            'token' => Str::random(16),
+        ]);
+
+        $request->session()->flash('building-add-success', 'Building data has been successfully added.');
         return redirect('/buildings');
     }
 
     public function edit($token)
     {
-        $building = Building::where('token',$token)->first();
-
-        return view('building.editBuilding', compact('building'));
+        $b = $this->b->where('token', $token)->first();
+        return view('building.editBuilding', ['building' => $b]);
     }
 
     public function update(Request $request)
     {
-        $building = Building::where('token',$request->token)->first();
-        $building->unit_bangunan = $request->unit_bangunan;
-        $building->alamat_bangunan = $request->alamat_bangunan;
-        $building->link_gmap = $request->link_gmap;
+        $validated = $request->validate([
+            'unit_bangunan' => 'required|max:1',
+            'gambar_bangunan' => 'nullable|image',
+            'link_gmap' => 'required',
+            'alamat_bangunan' => 'required|max:255',
+        ]);
 
-        if($request->gambar_bangunan){
-            $building->gambar_bangunan = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
+        $b = $this->b->where('token', $request->token)->first();
+
+        $b->unit_bangunan = $validated['unit_bangunan'];
+        $b->alamat_bangunan = $validated['alamat_bangunan'];
+        $b->link_gmap = $validated['link_gmap'];
+
+        if ($request->gambar_bangunan) {
+            $b->gambar_bangunan = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
         }
-        $building->save();
+
+        $b->save();
 
         return redirect('/buildings')->with('success', 'Bangunan berhasil diperbarui.');
     }
 
     public function delete(Request $request)
     {
-        $building = Building::where('token',$request->token)->first();
-        $building->delete();
-        return redirect('/buildings')->with('deleted-building', "Building ''$building->unit_bangunan - $building->alamat_bangunan'' had been deleted.");
+        $b = $this->b->where('token', $request->token)->first();
+        $b->delete();
+
+        return redirect('/buildings')->with('deleted-building', "Building ''$b->unit_bangunan - $b->alamat_bangunan'' had been deleted.");
     }
 }
