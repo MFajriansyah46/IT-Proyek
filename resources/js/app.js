@@ -921,3 +921,139 @@ $(document).ready(function() {
     });
 });
 
+function toggleModal() {
+    const modal = document.getElementById("addRoommateModal");
+    if (modal) {
+        modal.classList.toggle("hidden");
+    }
+}
+
+
+// Modal AddRoommate Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Modal toggle function
+    function toggleModal() {
+        const modal = document.getElementById('addRoommateModal');
+        if (modal) {
+            modal.classList.toggle('hidden');
+        }
+    }
+    const addRoommateBtn = document.getElementById("addRoommate");
+    if (addRoommateBtn) {
+        addRoommateBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleModal();
+        });
+    }
+    // Event listener untuk menutup modal ketika klik di luar
+    const modal = document.getElementById("addRoommateModal");
+    if (modal) {
+        modal.addEventListener("click", function(event) {
+            if (event.target === this) {
+                toggleModal();
+            }
+        });
+    }
+    // Event listener untuk tombol close
+    const closeBtn = document.getElementById("closeModalButton");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            toggleModal();
+        });
+    }
+    // Preview image functionality
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('previewProfilePhoto');
+        if (input.files && input.files[0] && preview) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    // Event listener untuk preview foto
+    const photoInput = document.getElementById("profile_photo");
+    if (photoInput) {
+        photoInput.addEventListener("change", previewImage);
+    }
+    // Image preview function
+    window.previewImage = function(event) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const preview = document.getElementById('previewProfilePhoto');
+        preview.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+    }
+});
+
+// Roommate Delete Modal Management
+const DeleteRoommateModal = {
+    elements: {
+        modal: '#deleteRoommateModal',
+        deleteBtn: '#deleteRoommateBtn',
+        cancelBtn: '#cancelDelete',
+        closeBtn: '#closeDeleteModal',
+        modalContent: '.bg-white'
+    },
+
+    init() {
+        // Show modal
+        $(this.elements.deleteBtn).on('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.showModal();
+        });
+
+        // Hide modal - Cancel button
+        $(this.elements.cancelBtn).on('click', () => {
+            this.hideModal();
+        });
+
+        // Hide modal - Close (X) button
+        $(this.elements.closeBtn).on('click', () => {
+            this.hideModal();
+        });
+
+        // Hide modal - Click outside
+        $(this.elements.modal).on('click', (e) => {
+            if (e.target === e.currentTarget) {
+                this.hideModal();
+            }
+        });
+
+        // Prevent modal content clicks from closing modal
+        $(`${this.elements.modal} ${this.elements.modalContent}`).on('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Escape key to close modal
+        $(document).on('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.hideModal();
+            }
+        });
+
+        // Prevent dropdown from closing
+        $(this.elements.deleteBtn).parent().on('click', (e) => {
+            e.stopPropagation();
+        });
+    },
+
+    showModal() {
+        $(this.elements.modal).removeClass('hidden');
+    },
+
+    hideModal() {
+        $(this.elements.modal).addClass('hidden');
+    }
+};
+
+// Initialize when document is ready
+$(document).ready(() => {
+    DeleteRoommateModal.init();
+});

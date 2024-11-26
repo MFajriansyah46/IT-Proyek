@@ -14,8 +14,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RoommateController;
 
-
+// Aktor: Pemilik Kost
 Route::middleware('auth:owner')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'read']);
@@ -51,7 +52,7 @@ Route::middleware('auth:owner')->group(function(){
     Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
 
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
-    
+
     Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
 
     Route::get('/active-rental', function() {
@@ -60,7 +61,7 @@ Route::middleware('auth:owner')->group(function(){
 
         return view('rent.rents',['rents' => $rents]);
     });
-    
+
     Route::get('/transactions', function() {
 
         $transactions = Transaction::orderBy('id', 'desc')->get();
@@ -91,13 +92,16 @@ Route::middleware('auth:tenant')->group(function(){
     Route::post('/edit-profile', [ProfileController::class, 'editProfile']);
 
     Route::post('/checkout', [PaymentController::class, 'pay']);
-    
+
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
     Route::get('/myroom', [ProfileController::class,"rentedRoom"]);
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
-}); 
+
+    Route::post('/roommate', [RoommateController::class, 'store'])->name('roommate.store');
+    Route::delete('/roommate', [RoommateController::class, 'delete'])->name('roommate.delete');
+});
 
 
 Route::middleware('guest')->group(function(){
@@ -111,7 +115,7 @@ Route::middleware('guest')->group(function(){
     Route::post('/login', [ValidasiController::class, 'authenticate']);
 
     Route::get('/owner-login', [ValidasiController::class, 'formLoginOwner']);
-    
+
     Route::post('/owner-login', [ValidasiController::class, 'authenticateOwner']);
 
     Route::post('/logout', [ValidasiController::class, 'logout']);
@@ -129,3 +133,4 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/discard/{token}', [ProfileController::class,"discardRentedRoom"]);
 });
+
