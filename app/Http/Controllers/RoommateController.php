@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class RoommateController extends Controller
 {
+    protected $M;
+    public function __construct()
+    {
+        $this->M = new Roommate();
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -28,6 +34,7 @@ class RoommateController extends Controller
             'phone_number' => $request->phone_number,
             'profile_photo' => null
         ];
+        
         if($request->hasFile('profile_photo')){
                 $file = $request->file('profile_photo');
                 $path = $file->store('roommate-photos', 'public');
@@ -35,7 +42,7 @@ class RoommateController extends Controller
         }
 
         try {
-            Roommate::create($data);
+            $this->M->create($data);
             return back();
         } catch (\Exception $e) {
             return back();
@@ -47,10 +54,6 @@ class RoommateController extends Controller
     public function delete()
     {
         $tenant = auth('tenant')->user();
-
-        if (!$tenant->roommate) {
-            return back()->with('error', 'No roommate found');
-        }
 
         if ($tenant->roommate->profile_photo) {
             Storage::disk('public')->delete($tenant->roommate->profile_photo);
