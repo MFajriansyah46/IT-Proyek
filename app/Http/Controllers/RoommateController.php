@@ -24,17 +24,12 @@ class RoommateController extends Controller
 
         $tenant = auth('tenant')->user();
 
-        if ($tenant->roommate) {
-            return back();
-        }
-
         $data = [
             'tenant_id' => $tenant->id,
             'name' => $request->name,
             'phone_number' => $request->phone_number,
             'profile_photo' => null
         ];
-        
         if($request->hasFile('profile_photo')){
                 $file = $request->file('profile_photo');
                 $path = $file->store('roommate-photos', 'public');
@@ -54,11 +49,7 @@ class RoommateController extends Controller
     public function delete()
     {
         $tenant = auth('tenant')->user();
-
-        if ($tenant->roommate->profile_photo) {
-            Storage::disk('public')->delete($tenant->roommate->profile_photo);
-        }
-
+        
         $tenant->roommate->delete();
 
         return back();
