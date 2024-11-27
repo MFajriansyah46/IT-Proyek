@@ -25,40 +25,51 @@ class TenantController extends Controller {
     }
 
     public function edit($remember_token){
-        $users = Tenant::where('remember_token', $remember_token)->first();
-        return view('user.editUser',compact('users'));
+        
+        return view('user.editUser',['users' => $this->t->firstWhere('remember_token', $remember_token)]);
     }
     
-    public function update(Request $request){
+    public function update(Request $request)
+    {
+        $tenant = $this->t->firstWhere('remember_token',$request->remember_token);
 
-        $user = Tenant::where('remember_token', $request->remember_token)->first();
-        $user->name = $request->name;
-        $user->phone_number = $request->phone_number;
-        $user->username = $request->username;
-        $user->password = Hash::make($request->password);
-
-        if($request->image){
-            $user->image = $request->file('image')->store('profile-images');
+        if($tenant->username == $request->username){
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'phone_number' => 'required|min:11',
+            ]);
+        } else {
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'username' => 'required|max:255|unique:tenants,username',
+                'phone_number' => 'required|min:11',
+            ]);
         }
-        
-        $user->update();
-        return redirect('/users');
+
+        if($request->password){
+            if($request->password == $request->confirm_password){
+                $validated['password'] = $request->password;
+            } else{
+                return back()->with('password-confirm-error','The password and confirmation password do not match.');
+            }
+        }
+
+        if($tenant->update($validated)){
+            return redirect('/users')->with('success', 'The user profile has been successfully updated.');
+        } else {
+            return redirect('/users')->with('failed', 'The user profile update was fail.');
+        }
     }
     
     public function delete(Request $request){
-        $user = Tenant::where('remember_token', $request->remember_token)->first();
-        $user->delete();
-        return redirect('/users')->with('deleted-user', "User ''$user->name'' had been deleted");
-    }
 
-    public function logout(Request $request) {
+        $tenant = $this->t->firstWhere('remember_token', $request->remember_token);
 
-        Auth::logout();
+        if($tenant->delete()){
+            return redirect('/users')->with('success', "User ''$tenant->username'' had been deleted");
+        } else {
+            return redirect('/users')->with('failed', "Failed to delete the user.");
+        }
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
     }
 }

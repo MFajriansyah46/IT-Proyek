@@ -12,12 +12,12 @@ class BuildingController extends Controller
 
     public function __construct(Building $building)
     {
-        $this->b = $building->all();
+        $this->b = $building;
     }
 
     public function read()
     {
-        return view('building.buildings', ['buildings' => $this->b]);
+        return view('building.buildings', ['buildings' => $this->b->all()]);
     }
 
     public function add()
@@ -37,18 +37,18 @@ class BuildingController extends Controller
 
         $validated['token'] = Str::random(16);
 
-        $gambarPath = $request->file('gambar_bangunan')->store('building-images');
+        $validated['gambar_bangunan'] = $request->file('gambar_bangunan')->store('building-images');
 
-        $this->b->create($validated);
-
-        $request->session()->flash('building-add-success', 'Building data has been successfully added.');
-        
-        return redirect('/buildings');
+        if($this->b->create($validated)){
+            return redirect('/buildings')->with('success', 'The building has been successfully added.');
+        } else {
+            return redirect('/buildings')->with('failed', 'The building failed to be added.');
+        }
     }
 
     public function edit($token)
     {
-        return view('building.editBuilding', ['building' => $this->b->where('token', $token)->first()]);
+        return view('building.editBuilding', ['building' => $this->b->firstWhere('token', $token)]);
     }
 
     public function update(Request $request)
@@ -64,15 +64,30 @@ class BuildingController extends Controller
             $validated ['gambar_bangunan'] = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
         }
 
-        $this->b->firstWhere('token', $request->token)->update($validated);
-
-        return redirect('/buildings')->with('success', 'Bangunan berhasil diperbarui.');
+        if($this->b->firstWhere('token', $request->token)->update($validated)) {
+            return redirect('/buildings')->with('success', 'The building has been successfully updated.');
+        } else {
+            return redirect('/buildings')->with('failed', 'The building update was fail.');
+        }
     }
 
     public function delete(Request $request)
     {
-        $b = $this->b->firstWhere('token', $request->token)->delete();
-
-        return redirect('/buildings')->with('deleted-building', "Building ''$b->unit_bangunan - $b->alamat_bangunan'' had been deleted.");
+        $building = $this->b->firstWhere('token', $request->token);
+        if ($building) {
+            // Periksa apakah building tidak memiliki relasi dengan tabel rooms
+            if ($building->rooms()->exists()) {
+                return redirect('/buildings')->with('failed', "The building has related rooms and cannot be deleted.");
+            }
+        
+            // Jika tidak ada relasi dengan rooms, hapus building
+            if ($building->delete()) {
+                return redirect('/buildings')->with('success', "Building '{$building->unit_bangunan} - {$building->alamat_bangunan}' has been deleted.");
+            } else {
+                return redirect('/buildings')->with('failed', "Failed to delete the building.");
+            }
+        } else {
+            return redirect('/buildings')->with('failed', "Building not found or deletion failed.");
+        }
     }
 }

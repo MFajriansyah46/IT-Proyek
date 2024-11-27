@@ -23,26 +23,25 @@
             <div>
                 <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <div class="mt-2">
-                    <input id="name" name="name" type="text" required value="{{ $users->name }}"
-                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input id="name" name="name" type="text" required value="{{ $users->name }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
+                @error('name') <small class="text-red-500">{{ $message }}</small> @enderror
             </div>
 
             <div class="flex gap-4">
                 <div class="w-56">
                     <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div class="mt-2">
-                        <input id="username" name="username" type="text" required value="{{ $users->username }}"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input id="username" name="username" type="text" required value="{{ $users->username }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    @error('username') <small class="text-red-500">{{ $message }}</small> @enderror
                 </div>
                 <div class="w-52">
                     <label for="phone_number" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
                     <div class="mt-2">
-                        <input id="phone_number" name="phone_number" type="number" required
-                            value="{{ $users->phone_number }}"
-                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input id="phone_number" name="phone_number" type="number" required value="{{ $users->phone_number }}" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
+                    @error('phone_number') <small class="text-red-500">{{ $message }}</small> @enderror
                 </div>
             </div>
 
@@ -57,18 +56,15 @@
                     </div>
                 </div>
                 <div>
-                    <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+                    <label for="confirm-password" class="block text-sm font-medium leading-6 text-gray-900 mt-4">Confirm Password</label>
                     <div class="mt-2">
-                        <input id="confirm-password" name="confirm-password" type="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <input id="confirm-password" name="confirm_password" type="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
             </div>
-
-            <script>
-
-            </script>
-
-
+            @if (session()->has('password-confirm-error'))
+            @endif
+            <small class="text-center text-red-500">{{ session('password-confirm-error') }}</small>
             <button type="button" id="edit-user-button" class="mt-4 mb-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
         </form>
     </div>

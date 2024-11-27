@@ -19,17 +19,7 @@
         </li>
     </ul>
 
-    <!-- @if ($errors->any())
-        <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif -->
-
-    <x-table.header :headers="['No Kamar',  'Harga Kamar', 'Kecepatan Internet','Gambar Kamar', 'Aksi']">
+    <x-table.header :headers="['Room number',  'Price', 'Internet speed','Image', 'Action']">
         @foreach ($rooms as $i=>$room)
             <tr class="hover:bg-yellow-100">
                 <x-table.data class="text-center">{{ $i+1 }}</x-table.data>
@@ -38,14 +28,14 @@
                 <x-table.data>{{ $room->kecepatan_internet }}</x-table.data>
                 <x-table.data class="text-center">
                     @if ($room->gambar_kamar)
-                        <img src="{{ asset('storage/' . $room->gambar_kamar) }}" class="w-28 h-16 object-cover" alt="Gambar Kamar">
+                        <img src="{{ asset('storage/' . $room->gambar_kamar) }}" class="w-28 h-16 object-cover" alt="Room image">
                     @else
                         <span>Tidak ada</span>
                     @endif
                 </x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
-                    <a href="/rooms/edit/{{ $room->id_kamar }}">
+                    <a href="/rooms/edit/{{ $room->token }}">
                         <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                             <!-- Icon Edit -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" viewBox="0 0 32 32">

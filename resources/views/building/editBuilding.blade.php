@@ -11,6 +11,7 @@
                     @if($building->gambar_bangunan)
                         <img id="preview-added-building-image" src="/storage/{{ $building->gambar_bangunan }}" alt="" class="w-full h-auto">
                     @else
+                        <img id="preview-added-building-image" src="/storage/{{ $building->gambar_bangunan }}" alt="" class="w-full h-auto">
                         <p id="preview-added-building-text" class="text-gray-500 py-12">Click or drag building image here to upload</p>
                     @endif
                     <input type="file" id="update-building-Image" name="gambar_bangunan" accept="image/*" class="hidden">

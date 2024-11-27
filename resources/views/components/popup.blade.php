@@ -63,7 +63,7 @@
       <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 32 32"><path fill="#999999" d="M25 4.031c-.766 0-1.516.297-2.094.875L13 14.781l-.219.219l-.062.313l-.688 3.5l-.312 1.468l1.469-.312l3.5-.688l.312-.062l.219-.219l9.875-9.906A2.968 2.968 0 0 0 25 4.03zm0 1.938c.234 0 .465.12.688.343c.445.446.445.93 0 1.375L16 17.376l-1.719.344l.344-1.719l9.688-9.688c.222-.222.453-.343.687-.343zM4 8v20h20V14.812l-2 2V26H6V10h9.188l2-2z"/></svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to edit data this user?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-edit-user" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-edit-user" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-800">Yes, I'm sure</button>
         <button id="cancel-edit-user" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>
@@ -115,7 +115,7 @@
       </svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure to add the new building?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-add-building" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-add-building" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-800">Yes, I'm sure</button>
         <button id="cancel-add-building" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>
@@ -136,7 +136,7 @@
       <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 32 32"><path fill="#999999" d="M25 4.031c-.766 0-1.516.297-2.094.875L13 14.781l-.219.219l-.062.313l-.688 3.5l-.312 1.468l1.469-.312l3.5-.688l.312-.062l.219-.219l9.875-9.906A2.968 2.968 0 0 0 25 4.03zm0 1.938c.234 0 .465.12.688.343c.445.446.445.93 0 1.375L16 17.376l-1.719.344l.344-1.719l9.688-9.688c.222-.222.453-.343.687-.343zM4 8v20h20V14.812l-2 2V26H6V10h9.188l2-2z"/></svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to edit data this building?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-edit-building" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-edit-building" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-800">Yes, I'm sure</button>
         <button id="cancel-edit-building" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>
@@ -183,7 +183,7 @@
       </svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to add this room?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-add-room" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-add-room" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-800">Yes, I'm sure</button>
         <button id="cancel-add-room" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>
@@ -204,7 +204,7 @@
       <svg class="text-gray-400 dark:text-gray-500 w-16 h-auto my-6 mx-auto" xmlns="http://www.w3.org/2000/svg" width="1.8rem" height="1.8rem" viewBox="0 0 32 32"><path fill="#999999" d="M25 4.031c-.766 0-1.516.297-2.094.875L13 14.781l-.219.219l-.062.313l-.688 3.5l-.312 1.468l1.469-.312l3.5-.688l.312-.062l.219-.219l9.875-9.906A2.968 2.968 0 0 0 25 4.03zm0 1.938c.234 0 .465.12.688.343c.445.446.445.93 0 1.375L16 17.376l-1.719.344l.344-1.719l9.688-9.688c.222-.222.453-.343.687-.343zM4 8v20h20V14.812l-2 2V26H6V10h9.188l2-2z"/></svg>
       <p class="mb-4 text-lg text-gray-600 dark:text-gray-300">Are you sure you want to edit this room data?</p>
       <div class="flex justify-center items-center space-x-4">
-        <button id="confirm-edit-room" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">Yes, I'm sure</button>
+        <button id="confirm-edit-room" type="button" class="py-2 px-3 text-sm font-medium text-center text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-800">Yes, I'm sure</button>
         <button id="cancel-edit-room" type="button" class="py-2 px-3 text-sm font-medium text-gray-600 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
       </div>
     </div>
@@ -272,36 +272,6 @@
   </div>
 </div>
 
-@if (session()->has('deleted-user'))
-  <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
-    <li class="my-auto text-lg">
-      {{ session('deleted-user') }}
-    </li>
-    <li class="my-auto ml-auto">
-      <button class="ml-auto text-gray-400 hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
-        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </li>
-  </ul>
-@endif
-
-@if (session()->has('building-add-success'))
-  <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
-    <li class="my-auto text-lg">
-      {{ session('building-add-success') }}
-    </li>
-    <li class="my-auto ml-auto">
-      <button class="ml-auto text-gray-400 hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
-        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </li>
-  </ul>
-@endif
-
 @if (session()->has('success-room-update'))
   <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
     <li class="my-auto text-lg">
@@ -317,13 +287,35 @@
   </ul>
 @endif
 
-@if (session()->has('deleted-building'))
+
+
+
+
+
+
+
+@if (session()->has('success'))
   <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
     <li class="my-auto text-lg">
-      {{ session('deleted-building') }}
+      {{ session('success') }}
     </li>
     <li class="my-auto ml-auto">
-      <button class="ml-auto hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
+      <button class="ml-auto text-gray-400 hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
+        <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </li>
+  </ul>
+@endif
+
+@if (session()->has('failed'))
+  <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="login-eror">
+    <li class="my-auto text-lg text-red-600">
+      {{ session('failed') }}
+    </li>
+    <li class="my-auto ml-auto">
+      <button class="ml-auto text-gray-400 hover:bg-gray-200 rounded-md justify-center" id="button-login-eror">
         <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
         </svg>

@@ -2,52 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Condition;
-use App\Models\Criteria;
-use App\Models\Facility;
+use App\Models\Rate;
 use App\Models\Room;
 use App\Models\Building;
+use App\Models\Criteria;
+use App\Models\Facility;
+use App\Models\Condition;
+use App\Models\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Expr\List_;
+use Illuminate\Support\Facades\Log;
 
 
 class RoomController extends Controller {
 
+    protected $r;
+    public function __construct(Room $r){
+        $this->r = $r;
+    }
     public function read() {
 
         if(auth('owner')->user()){
-            $rooms = Room::all();
-            return view('room.rooms', compact('rooms'));
+            return view('room.rooms', ['rooms' => $this->r->all()]);
         }
         else {
-            $rooms = Room::doesntHave('rents')->get();
-            $roomRanking = Room::with(['rates', 'facilities.condition'])
+            $roomRanking = $this->r->with(['rates', 'facilities.condition'])
                 ->doesntHave('rents')
                 ->withAvg('rates', 'rate')
                 ->get();
         
-            // Tambahkan rata-rata indeks kondisi fasilitas ke setiap kamar
             $roomsArray = $roomRanking->map(function ($room) {
                 $averageConditionIndex = $room->facilities->avg(function ($facility) {
                     return $facility->condition['index']; 
                 });
-        
                 $roomArray = $room->toArray();
                 $roomArray['average_condition_index'] = $averageConditionIndex;
                 return $roomArray;
             })->toArray();
         
-            // Bobot untuk setiap kriteria
+            $criteria = Criteria::all();
             $criteriaWeights = [
-                'harga_kamar' => Criteria::firstWhere('criteria_name','harga_kamar')->weight,    
-                'kecepatan_internet' => Criteria::firstWhere('criteria_name','kecepatan_internet')->weight,
-                'rates_avg_rate' => Criteria::firstWhere('criteria_name','rates_avg_rate')->weight,
-                'average_condition_index' => Criteria::firstWhere('criteria_name','average_condition_index')->weight,
+                'harga_kamar' => $criteria->firstWhere('criteria_name','harga_kamar')->weight,    
+                'kecepatan_internet' => $criteria->firstWhere('criteria_name','kecepatan_internet')->weight,
+                'rates_avg_rate' => $criteria->firstWhere('criteria_name','rates_avg_rate')->weight,
+                'average_condition_index' => $criteria->firstWhere('criteria_name','average_condition_index')->weight,
             ];
         
-            // Hitung total kuadrat (pembagi) untuk setiap kriteria
             $squareSums = [
                 'harga_kamar' => sqrt(array_sum(array_map(fn($room) => pow($room['harga_kamar'], 2), $roomsArray))),
                 'kecepatan_internet' => sqrt(array_sum(array_map(fn($room) => pow($room['kecepatan_internet'], 2), $roomsArray))),
@@ -135,19 +136,18 @@ class RoomController extends Controller {
             // Dapatkan detail kamar teratas
             $topRooms = Room::whereIn('id_kamar', $topRoomIds)->get();
     
-            return view('roomPublicList', ['rooms' => $rooms,'topRooms' => $topRooms]);
+            return view('roomPublicList', ['rooms' => $this->r->all(),'topRooms' => $topRooms]);
         }
     }
 
     public function add() {
-        $room = Room::all();
-        $conditions = Condition::all();
-        return view('room.addRoom',['room' => $room, 'conditions' => $conditions]);
+
+        return view('room.addRoom',['conditions' => Condition::all()]);
     }
 
     public function submit(Request $request) {
 
-        $room = $request->validate([
+        $validate = $request->validate([
             'no_kamar' => 'required|integer',
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
@@ -155,68 +155,72 @@ class RoomController extends Controller {
             'gambar_kamar' => 'required|image|max:100000',
             'deskripsi' => 'required',
         ]);
-        $room['token'] = Str::random(16);
+        $validate['token'] = Str::random(16);
         
         if($request->gambar_kamar){
-            $room['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
+            $validate['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
         }
 
-        Room::create($room);
-
-        $data = [
-            [
-                'condition' => $request->bedroom_condition_id,
-                'name' => 'Bedroom',
-                'image' => $request->file('bedroom_image'),
-            ],
-            [
-                'condition' => $request->bathroom_condition_id,
-                'name' => 'Bathroom',
-                'image' => $request->file('bathroom_image'),
-            ],
-            [
-                'condition' => $request->kitchen_condition_id,
-                'name' => 'Kitchen',
-                'image' => $request->file('kitchen_image'),
-            ],
-            [
-                'condition' => $request->security_condition_id,
-                'name' => 'Security',
-                'image' => $request->file('security_image'),
-            ]
-        ];
+        if($this->r->create($validate)){
+            $data = [
+                [
+                    'condition' => $request->bedroom_condition_id,
+                    'name' => 'Bedroom',
+                    'image' => $request->file('bedroom_image'),
+                ],
+                [
+                    'condition' => $request->bathroom_condition_id,
+                    'name' => 'Bathroom',
+                    'image' => $request->file('bathroom_image'),
+                ],
+                [
+                    'condition' => $request->kitchen_condition_id,
+                    'name' => 'Kitchen',
+                    'image' => $request->file('kitchen_image'),
+                ],
+                [
+                    'condition' => $request->security_condition_id,
+                    'name' => 'Security',
+                    'image' => $request->file('security_image'),
+                ]
+            ];
         
-        foreach ($data as $i) {
-            $facility = new Facility();
-            $facility->room_id = Room::firstWhere('token', $room['token'])->id_kamar;
-            $facility->condition_id = $i['condition'];
-            $facility->name = $i['name'];
-            if($i['image']) {
-                $facility->image = $i['image']->store('room-images');
+            foreach ($data as $i) {
+                $facility = new Facility();
+                $facility->room_id = $this->r->firstWhere('token', $validate['token'])->id_kamar;
+                $facility->condition_id = $i['condition'];
+                $facility->name = $i['name'];
+                if($i['image']) {
+                    $facility->image = $i['image']->store('room-images');
+                }
+                $facility->save();
             }
-            $facility->save();
+            return redirect('/rooms')->with('success', 'The room has been successfully added.');
+        } else {
+            return redirect('/rooms')->with('failed', 'The room failed to be added.');
         }
-
-        return redirect('/rooms')->with('success-add-room', 'Kamar berhasil ditambahkan.');
     }
 
-    public function edit($id_kamar) {
+    public function edit($token) {
         
-        $room = Room::where('id_kamar',$id_kamar)->first();
-        $bathroom = Facility::where('room_id',$id_kamar)->where('name','Bathroom')->first();
-        $bedroom = Facility::where('room_id',$id_kamar)->where('name','Bedroom')->first();
-        $kitchen = Facility::where('room_id',$id_kamar)->where('name','Kitchen')->first();
-        $security = Facility::where('room_id',$id_kamar)->where('name','Security')->first();
-        $conditions = Condition::all();
-        
-        return view('room.editRoom', compact('room','bedroom','bathroom','kitchen','security','conditions'));
+        $room = $this->r->firstWhere('token',$token);
+        $facility = Facility::all()->Where('room_id',$room->id_kamar);
+
+        return view('room.editRoom', [
+            'room' => $this->r->firstWhere('id_kamar',$room->id_kamar),
+            'bedroom' => $facility->firstWhere('name','Bedroom'),
+            'bathroom' => $facility->firstWhere('name','Bathroom'),
+            'kitchen' => $facility->firstWhere('name','Kitchen'),
+            'security' => $facility->firstWhere('name','Security'),
+            'conditions' => Condition::all()
+        ]);
     }
 
     public function update(Request $request, $id_kamar) {
 
         $room = Room::findOrFail($id_kamar);
     
-        $validatedData = $request->validate([
+        $validate = $request->validate([
             'no_kamar' => 'required|integer',
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
@@ -228,65 +232,85 @@ class RoomController extends Controller {
         if ($request->hasFile('gambar_kamar')) {
             $file = $request->file('gambar_kamar');
             $path = $file->store('room-images', 'public');
-            $validatedData['gambar_kamar'] = $path;
+            $validate['gambar_kamar'] = $path;
         }
-        $room->update($validatedData);
 
-        $facilities = [
-            [
-                'condition' => $request->bedroom_condition_id,
-                'name' => 'Bedroom',
-                'image' => $request->file('bedroom_image'),
-            ],
-            [
-                'condition' => $request->bathroom_condition_id,
-                'name' => 'Bathroom',
-                'image' => $request->file('bathroom_image'),
-            ],
-            [
-                'condition' => $request->kitchen_condition_id,
-                'name' => 'Kitchen',
-                'image' => $request->file('kitchen_image'),
-            ],
-            [
-                'condition' => $request->security_condition_id,
-                'name' => 'Security',
-                'image' => $request->file('security_image'),
-            ]
-        ];
+        if($this->r->firstWhere('id_kamar',$id_kamar)->update($validate)) {
 
-        foreach ($facilities as $data) {
-            $facility = Facility::where('room_id',$room->id_kamar)->where('name',$data['name'])->first();
-            if($facility) {
-                $facility->condition_id = $data['condition'];
-                if($data['image']) {
-                    $facility->image = $data['image']->store('room-images');
+            $facilities = [
+                [
+                    'condition' => $request->bedroom_condition_id,
+                    'name' => 'Bedroom',
+                    'image' => $request->file('bedroom_image'),
+                ],
+                [
+                    'condition' => $request->bathroom_condition_id,
+                    'name' => 'Bathroom',
+                    'image' => $request->file('bathroom_image'),
+                ],
+                [
+                    'condition' => $request->kitchen_condition_id,
+                    'name' => 'Kitchen',
+                    'image' => $request->file('kitchen_image'),
+                ],
+                [
+                    'condition' => $request->security_condition_id,
+                    'name' => 'Security',
+                    'image' => $request->file('security_image'),
+                ]
+            ];
+
+            foreach ($facilities as $data) {
+                $facility = Facility::where('room_id',$room->id_kamar)->where('name',$data['name'])->first();
+                if($facility) {
+                    $facility->condition_id = $data['condition'];
+                    if($data['image']) {
+                        $facility->image = $data['image']->store('room-images');
+                    }
+                    $facility->update();
                 }
-                $facility->update();
-            }
-            else {
-                $facility = new Facility();
-                $facility->room_id = $room->id_kamar;
-                $facility->condition_id = $data['condition'];
-                $facility->name = $data['name'];
-                if($data['image']) {
-                    $facility->image = $data['image']->store('room-images');
+                else {
+                    $facility = new Facility();
+                    $facility->room_id = $room->id_kamar;
+                    $facility->condition_id = $data['condition'];
+                    $facility->name = $data['name'];
+                    if($data['image']) {
+                        $facility->image = $data['image']->store('room-images');
+                    }
+                    $facility->save();
                 }
-                $facility->save();
             }
+            return redirect('/rooms')->with('success', 'The room has been successfully updated.');
+        } else {
+            return redirect('/rooms')->with('failed', 'The room update was fail.');
         }
-        return redirect('/rooms')->with('success-room-update', 'Room Successfully Update.');
     }
 
     public function delete($id_kamar) {
-        $room = Room::findOrFail($id_kamar);
-        if ($room) {
-            $facilities = Facility::where('room_id',$room->id_kamar);
-            if($facilities){
-                $facilities->delete();
+
+        $room = $this->r->firstWhere('id_kamar',$id_kamar);
+
+        if($room){
+            if(!$room->rents()->exists()) {
+                if($room->facilities()->exists()){
+                    Facility::Where('room_id',$room->id_kamar)->delete();
+                }
+                if($room->rates()->exists()){
+                    Rate::Where('id_kamar',$room->id_kamar)->delete();
+                }
+                if($room->transaction()->exists()) {
+                    Transaction::Where('room_id',$room->id_kamar)->delete();
+                }
+                if($room->delete()){
+                    return redirect('/rooms')->with('success', "Room '{$room->building->unit_bangunan}{$room->no_kamar} - {$room->building->alamat_bangunan}' has been deleted.");
+                } else {
+                    return redirect('/rooms')->with('failed', "Failed to delete the room.");
+                }
+            } else {
+                return redirect('/rooms')->with('failed', "The room is currently under active rental.");
             }
-            $room->delete();
+        } else {
+            return redirect('/buildings')->with('failed', "Room not found or deletion failed.");
         }
-        return redirect('/rooms')->with('success', 'Kamar berhasil dihapus.'); // Menggunakan flash message
     }
 }

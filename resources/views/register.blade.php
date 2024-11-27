@@ -46,7 +46,6 @@
           <small class="text-center text-red-500">{{ session('password-confirm-error') }}</small>
       @endif
       
-
       <button class="bg-[#002D74] rounded-xl text-white py-2 mt-4 hover:scale-105 duration-300">Register</button>
   </form>
 

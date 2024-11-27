@@ -26,7 +26,7 @@ class Room extends Model
     }
 
     public function transaction(): HasMany {
-        return $this->HasMany(Transaction::class,'id_kamar');
+        return $this->HasMany(Transaction::class,'room_id');
     }
     
     public function rates(): HasMany {

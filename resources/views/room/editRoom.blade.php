@@ -150,7 +150,7 @@
                     <div class="flex flex-col w-80">
                         <label>Security</label>
                         <select name="security_condition_id" class="border border-gray-300 rounded-md p-2 mt-1 mb-4" required>
-                            @if(isset($kitchen))
+                            @if(isset($security))
                                 <option value="{{ $security->condition->id }}">{{ $security->condition->name }}</option>
                             @else
                                 <option value=""></option>

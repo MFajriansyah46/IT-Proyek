@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OwnerController extends Controller
 {
-    public function updateProfile() {
+    public function  update() {
         
     }
 }

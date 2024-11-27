@@ -36,7 +36,7 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/rooms/submit', [RoomController::class, 'submit'])->name('rooms.submit');
 
-    Route::get('/rooms/edit/{id_kamar}', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::get('/rooms/edit/{token}', [RoomController::class, 'edit'])->name('rooms.edit');
 
     Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update'])->name('rooms.update');
 
