@@ -11,10 +11,17 @@ use Laravel\Sail\Console\AddCommand;
 
 class TenantController extends Controller {
     //
-    public function read(){
-        $users = Tenant::get();
 
-        return view('user.users',compact('users'));
+    protected $t;
+
+    public function __construct(Tenant $tenant)
+    {
+        $this->t = $tenant;
+    }
+
+    public function read(){
+
+        return view('user.users',['users' => $this->t->all()]);
     }
 
     public function edit($remember_token){

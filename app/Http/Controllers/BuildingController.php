@@ -8,18 +8,16 @@ use Illuminate\Http\Request;
 
 class BuildingController extends Controller
 {
-    protected $b; // Properti untuk inisialisasi model Building
+    protected $b;
 
-    // Konstruktor untuk inisialisasi properti
     public function __construct(Building $building)
     {
-        $this->b = $building;
+        $this->b = $building->all();
     }
 
     public function read()
     {
-        $b = $this->b->all(); // Menggunakan properti inisialisasi
-        return view('building.buildings', ['buildings' => $b]);
+        return view('building.buildings', ['buildings' => $this->b]);
     }
 
     public function add()
@@ -37,25 +35,20 @@ class BuildingController extends Controller
             'alamat_bangunan' => 'required|max:255',
         ]);
 
+        $validated['token'] = Str::random(16);
+
         $gambarPath = $request->file('gambar_bangunan')->store('building-images');
 
-        $this->b->create([
-            'owner_id' => $validated['owner_id'],
-            'unit_bangunan' => $validated['unit_bangunan'],
-            'gambar_bangunan' => $gambarPath,
-            'link_gmap' => $validated['link_gmap'],
-            'alamat_bangunan' => $validated['alamat_bangunan'],
-            'token' => Str::random(16),
-        ]);
+        $this->b->create($validated);
 
         $request->session()->flash('building-add-success', 'Building data has been successfully added.');
+        
         return redirect('/buildings');
     }
 
     public function edit($token)
     {
-        $b = $this->b->where('token', $token)->first();
-        return view('building.editBuilding', ['building' => $b]);
+        return view('building.editBuilding', ['building' => $this->b->where('token', $token)->first()]);
     }
 
     public function update(Request $request)
@@ -67,25 +60,18 @@ class BuildingController extends Controller
             'alamat_bangunan' => 'required|max:255',
         ]);
 
-        $b = $this->b->where('token', $request->token)->first();
-
-        $b->unit_bangunan = $validated['unit_bangunan'];
-        $b->alamat_bangunan = $validated['alamat_bangunan'];
-        $b->link_gmap = $validated['link_gmap'];
-
         if ($request->gambar_bangunan) {
-            $b->gambar_bangunan = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
+            $validated ['gambar_bangunan'] = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
         }
 
-        $b->save();
+        $this->b->firstWhere('token', $request->token)->update($validated);
 
         return redirect('/buildings')->with('success', 'Bangunan berhasil diperbarui.');
     }
 
     public function delete(Request $request)
     {
-        $b = $this->b->where('token', $request->token)->first();
-        $b->delete();
+        $b = $this->b->firstWhere('token', $request->token)->delete();
 
         return redirect('/buildings')->with('deleted-building', "Building ''$b->unit_bangunan - $b->alamat_bangunan'' had been deleted.");
     }
