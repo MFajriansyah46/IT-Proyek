@@ -14,6 +14,7 @@
 
         <form action="/login" method="POST" class="flex flex-col gap-4">
           @csrf
+          <input type="hidden" name="guard" value="tenant">
           <input class="p-2 mt-8 rounded-xl border" type="text" name="username" placeholder="Username">
           <div class="relative">
             <input id="password-field" class="p-2 rounded-xl border w-full" type="password" name="password" placeholder="Password">

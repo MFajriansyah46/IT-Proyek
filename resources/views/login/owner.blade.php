@@ -9,7 +9,7 @@
     <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="flex flex-col gap-6 w-full mt-8" action="/owner-login" method="POST">
         @csrf
-
+        <input type="hidden" name="guard" value="owner">
         <input class="p-2 rounded-xl border" type="text" name="username" placeholder="Username" required>
         <div class="relative">
             <input id="password-field-owner-login" class="p-2 rounded-xl border w-full" type="password" name="password" placeholder="Password" required>

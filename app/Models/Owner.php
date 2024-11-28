@@ -2,19 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Owner extends User
+class Owner extends User implements JWTSubject
 {
     use HasFactory;
-    
+
     protected $guarded = ['id'];
-    
-    public function buildings(): HasMany {
-        return $this->HasMany(Building::class, 'owner_id');
+
+    // Implementasi JWTSubject
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // Mengembalikan primary key (id) sebagai identifier token
     }
-    public function criteries(): HasMany {
-        return $this->HasMany(Criteria::class, 'owner_id');
+
+    public function getJWTCustomClaims()
+    {
+        return []; // Custom claims (opsional, kosongkan jika tidak diperlukan)
+    }
+
+    public function buildings()
+    {
+        return $this->hasMany(Building::class, 'owner_id');
+    }
+
+    public function criteries()
+    {
+        return $this->hasMany(Criteria::class, 'owner_id');
     }
 }
