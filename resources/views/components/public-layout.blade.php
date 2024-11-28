@@ -190,4 +190,31 @@
     </div>
   @endauth
   <x-public-popup></x-public-popup>
+  <footer class="bg-gray-900 text-white py-12">
+                <div class="container mx-auto px-4">
+                    <div class="grid md:grid-cols-3 gap-10">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Kos Bang Raja</h3>
+                            <p class="text-gray-300">Tempat tinggal nyaman dan aman untuk mahasiswa dan profesional muda.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Kontak Kami</h4>
+                            <p>📍 Jalan Kos Bang Raja No. 123</p>
+                            <p>☎️ +62 812-3456-7890</p>
+                            <p>✉️ info@kosbangraja.com</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Ikuti Kami</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="hover:text-indigo-300">Instagram</a>
+                                <a href="#" class="hover:text-indigo-300">WhatsApp</a>
+                                <a href="#" class="hover:text-indigo-300">Facebook</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-10 border-t border-gray-700 pt-6">
+                        <p>© 2024 Kos Bang Raja. Hak Cipta Dilindungi.</p>
+                    </div>
+                </div>
+            </footer>
 </html>
