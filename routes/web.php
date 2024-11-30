@@ -110,9 +110,9 @@ Route::middleware('guest')->group(function(){
 
     Route::post('/register', [ValidasiController::class, 'register']);
 
-    Route::get('/owner-login', [ValidasiController::class, 'formLoginOwner']);
+    Route::get('/owner-login', [ValidasiController::class, 'loginOwner']);
     
-    Route::get('/login', [ValidasiController::class, 'formLogin'])->name('login');
+    Route::get('/login', [ValidasiController::class, 'login'])->name('login');
 
     Route::post('/authentication', [ValidasiController::class, 'authenticate']);
 

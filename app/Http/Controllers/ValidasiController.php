@@ -36,11 +36,11 @@ class ValidasiController extends Controller
         return back()->with('password-confirm-error','The password and confirmation password do not match. Please try again.');
     }
 
-    public function formLogin() {
+    public function login() {
         return view('login.tenant');
     }
 
-    public function formLoginOwner() {
+    public function loginOwner() {
         return view('login.owner');
     }
 
@@ -55,14 +55,14 @@ class ValidasiController extends Controller
 
             Auth::shouldUse('owner');
             if ($token = JWTAuth::attempt($credentials)) {
-                return redirect()->intended('/dashboard')->cookie('token', $token, 60, '/', null, true, true)->with('success','login berhasil dengan jwt');
+                return redirect()->intended('/dashboard')->cookie('token', $token, 180, '/', null, true, true);
             }
 
         } else if($request->guard == 'tenant') {
 
             Auth::shouldUse('tenant');
             if($token = JWTAuth::attempt($credentials)){
-                return redirect('/')->cookie('token', $token, 60, '/', null, true, true)->with('failed','anyah');
+                return redirect('/')->cookie('token', $token, 1440, '/', null, true, true);
             }
         }
 
