@@ -106,7 +106,7 @@ class PaymentController extends Controller
         }
 
         if(auth('tenant')->user()){
-            return redirect('/myroom')->with('payment-success','Payment Successfull!');
+            return redirect('/myroom')->with('success','Payment Successfull!');
         } else if( auth('owner')->user()) {
             return redirect('/transactions');
         }
