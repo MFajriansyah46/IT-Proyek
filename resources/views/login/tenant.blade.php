@@ -12,9 +12,10 @@
         <h2 class="font-bold text-4xl text-center text-[#002D74]">Login</h2>
         <p class="text-xs mt-4 text-center text-[#002D74]">If you are already a member, easily log in</p>
 
-        <form action="/login" method="POST" class="flex flex-col gap-4">
+        <form action="/authentication" method="POST" class="flex flex-col gap-4">
           @csrf
           <input type="hidden" name="guard" value="tenant">
+          <input class="p-2 mt-8 rounded-xl border" type="hidden" name="guard" value="tenant">
           <input class="p-2 mt-8 rounded-xl border" type="text" name="username" placeholder="Username">
           <div class="relative">
             <input id="password-field" class="p-2 rounded-xl border w-full" type="password" name="password" placeholder="Password">

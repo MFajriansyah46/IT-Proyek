@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 
-Route::group([ 'middleware' => 'api', 'prefix' => 'auth'], function($router) {
+Route::group([ 'middleware' => 'api', 'prefix' => 'auth'],function($router) {
     
     Route::post('login', function(Request $request){
                 // Validasi input
@@ -36,9 +36,25 @@ Route::group([ 'middleware' => 'api', 'prefix' => 'auth'], function($router) {
         ], 200);
     });
 
-    Route::get('me', function(Request $request){
-        return response()->json(auth('owner')->user());
+    Route::post('me', function(){
+        return response()->json(auth('tenant')->user());
     });
+
+    Route::post('logout', function (Request $request) {
+        try {
+            // Invalidasi token
+            $token = $request->header('Authorization');
+            JWTAuth::invalidate(JWTAuth::getToken());
     
+            return response()->json([
+                'message' => 'Successfully logged out'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to logout, please try again',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    });
     
 });

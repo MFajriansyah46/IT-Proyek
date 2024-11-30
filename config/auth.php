@@ -47,12 +47,12 @@ return [
         ],
 
         'owner' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'owners',
         ],
 
         'tenant' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'tenants',
         ],
     ],

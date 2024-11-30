@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tenant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,6 +40,10 @@ class ValidasiController extends Controller
         return view('login.tenant');
     }
 
+    public function formLoginOwner() {
+        return view('login.owner');
+    }
+
     public function authenticate(Request $request) {
 
         $credentials = $request->validate([
@@ -46,42 +51,38 @@ class ValidasiController extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::guard('tenant')->attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->intended('/');   
-        } 
+        if($request->guard == 'owner') {
 
-        return back()->with('loginError','Login Gagal!');
-    }
+            Auth::shouldUse('owner');
+            if ($token = JWTAuth::attempt($credentials)) {
+                return redirect()->intended('/dashboard')->cookie('token', $token, 60, '/', null, true, true)->with('success','login berhasil dengan jwt');
+            }
 
-    public function formLoginOwner() {
-        return view('login.owner');
-    }
+        } else if($request->guard == 'tenant') {
 
-    public function authenticateOwner(Request $request) {
-
-        $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
-        if(Auth::guard('owner')->attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            Auth::shouldUse('tenant');
+            if($token = JWTAuth::attempt($credentials)){
+                return redirect('/')->cookie('token', $token, 60, '/', null, true, true)->with('failed','anyah');
+            }
         }
 
-        return back()->with('loginError','Login failed!');
+        return back()->with('loginError','Login Failed!');
     }
 
     public function logout(Request $request) {
 
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        try {
+            // Invalidasi token
+            $token = $request->header('Authorization');
+            JWTAuth::invalidate(JWTAuth::getToken());
+    
+            return redirect('/');
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to logout, please try again',
+                'details' => $e->getMessage()
+            ], 500);
+        }
     }
 
 }
