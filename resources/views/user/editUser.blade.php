@@ -63,8 +63,8 @@
                 </div>
             </div>
             @if (session()->has('password-confirm-error'))
+                <small class="text-center text-red-500">{{ session('password-confirm-error') }}</small>
             @endif
-            <small class="text-center text-red-500">{{ session('password-confirm-error') }}</small>
             <button type="button" id="edit-user-button" class="mt-4 mb-4 bg-primary-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-primary-400 focus:outline-none">Save</button>
         </form>
     </div>

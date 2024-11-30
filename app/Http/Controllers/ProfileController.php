@@ -12,22 +12,56 @@ class ProfileController extends Controller
     
     public function editProfile(Request $request) {
 
-        $tenant = Tenant::firstWhere('id',auth('tenant')->user()->id);
-
-        $data = $request->validate([
-            'image' => 'image',
-            'username' => 'required|min:3|max:255',
-            'name' => 'required|min:3|max:255',
-            'phone_number' => 'required|min:11',
-        ]);
-
-        if($request->image){
-            $data['image'] = $request->file('image')->store('profile-images');
+        if($request->password) {
+            if(auth('tenant')->user()->username == $request->username) {
+                $validate = $request->validate([
+                    'image' => 'image|nullable',
+                    'name' => 'required|min:3|max:255',
+                    'phone_number' => 'required|min:11',
+                    'password' => 'required|min:8',
+                ]);
+            } else {
+                $validate = $request->validate([
+                    'image' => 'image|nullable',
+                    'username' => 'required|min:3|max:255|unique:tenants,username',
+                    'name' => 'required|min:3|max:255',
+                    'phone_number' => 'required|min:11',
+                    'password' => 'required|min:8',
+                ]);
+            }
+        } else {
+            if(auth('tenant')->user()->username == $request->username) {
+                $validate = $request->validate([
+                    'image' => 'image|nullable',
+                    'name' => 'required|min:3|max:255',
+                    'phone_number' => 'required|min:11',
+                ]);
+            } else {
+                $validate = $request->validate([
+                    'image' => 'image|nullable',
+                    'username' => 'required|min:3|max:255|unique:tenants,username',
+                    'name' => 'required|min:3|max:255',
+                    'phone_number' => 'required|min:11',
+                ]);
+            }
         }
 
-        $tenant->update($data);
+        if($request->image){
+            $validate['image'] = $request->file('image')->store('profile-images');
+        }
 
-        return redirect('/');
+        if($request->password == $request->confirm_password) {
+            if(Tenant::firstWhere('id',auth('tenant')->user()->id)->update($validate)) {
+
+                return redirect('/')->with('success','Yout profile has been updated.');
+            } else {
+    
+                return redirect('/')->with('failed','Your profile failed to update.');
+            }
+        } else {
+            return back()->with('password-confirm-error','The password and confirmation password do not match.')->with('failed','Your profile failed to update.');
+        }
+
     }
 
     public function rentedRoom() {

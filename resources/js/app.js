@@ -29,6 +29,12 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+    $('#button-success').click(function(){
+        $('#popup-success').hide();
+    });
+});
+
+$(document).ready(function(){
     $('#buttonBar').click(function(){
         $('#fullBar').fadeToggle(10);
         $(this).toggleClass('bg-gray-200');
