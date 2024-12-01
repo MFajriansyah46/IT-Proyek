@@ -88,8 +88,12 @@ class ProfileController extends Controller
     }
 
     public function discardRentedRoom($token)  {
-        $rent = Rent::where('token',$token)->first();
-        $rent->delete();
-        return redirect('/myroom');
+        if($rent = Rent::firstWhere('token',$token)){
+            if($rent->delete()) {
+                return back()->with('success','The rental has been discarded');
+            }
+            return back()->with('failed','The rental failed to discard');
+        }
+        return back()->with('failed','The rental failed to discard');
     }
 }
