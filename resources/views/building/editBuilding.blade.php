@@ -4,7 +4,7 @@
 <h1 class="text-5xl font-bold text-center text-gray-800">Edit Building</h1>
     <form action="/buildings/update/" method="post" id="building-edit-form" enctype="multipart/form-data" class="mx-auto max-w-xl sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6">
         @csrf
-        <input type="hidden" name="token" value="{{ $building->token }}">
+        <input type="hidden" name="remember_token" value="{{ $building->remember_token }}">
         <div class="container mt-10">
             <div class="flex justify-center">
                 <label for="update-building-Image" class="border-2 border-dashed border-gray-300 p-10 w-full max-w-lg text-center cursor-pointer" id="drop-area">

@@ -46,9 +46,9 @@ class BuildingController extends Controller
         }
     }
 
-    public function edit($token)
+    public function edit($remember_token)
     {
-        return view('building.editBuilding', ['building' => $this->b->firstWhere('token', $token)]);
+        return view('building.editBuilding', ['building' => $this->b->firstWhere('remember_token', $remember_token)]);
     }
 
     public function update(Request $request)
@@ -64,7 +64,7 @@ class BuildingController extends Controller
             $validated ['gambar_bangunan'] = $request->file('gambar_bangunan')->store('gambar-bangunan-images');
         }
 
-        if($this->b->firstWhere('token', $request->token)->update($validated)) {
+        if($this->b->firstWhere('remember_token', $request->remember_token)->update($validated)) {
             return redirect('/buildings')->with('success', 'The building has been successfully updated.');
         } else {
             return redirect('/buildings')->with('failed', 'The building update was fail.');
@@ -73,7 +73,7 @@ class BuildingController extends Controller
 
     public function delete(Request $request)
     {
-        $building = $this->b->firstWhere('token', $request->token);
+        $building = $this->b->firstWhere('remember_token', $request->remember_token);
         if ($building) {
             // Periksa apakah building tidak memiliki relasi dengan tabel rooms
             if ($building->rooms()->exists()) {

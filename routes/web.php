@@ -36,11 +36,11 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/rooms/submit', [RoomController::class, 'submit'])->name('rooms.submit');
 
-    Route::get('/rooms/edit/{token}', [RoomController::class, 'edit'])->name('rooms.edit');
+    Route::get('/rooms/edit/{remember_token}', [RoomController::class, 'edit'])->name('rooms.edit');
 
-    Route::post('/rooms/update/{id_kamar}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::post('/rooms/update/', [RoomController::class, 'update'])->name('rooms.update');
 
-    Route::get('/rooms/delete/{id_kamar}', [RoomController::class, 'delete'])->name('rooms.delete');
+    Route::get('/rooms/delete/', [RoomController::class, 'delete'])->name('rooms.delete');
 
     // building controller
     Route::get('/buildings', [BuildingController::class, 'read']);
@@ -49,7 +49,7 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/buildings/submit', [BuildingController::class, 'submit']);
 
-    Route::get('/buildings/edit/{token}', [BuildingController::class, 'edit']);
+    Route::get('/buildings/edit/{remember_token}', [BuildingController::class, 'edit']);
 
     Route::post('/buildings/update/', [BuildingController::class, 'update']);
 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text ('alamat_bangunan');
             $table->string('gambar_bangunan')->nullable();
             $table->text('link_gmap')->nullable();
-            $table->string('token')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

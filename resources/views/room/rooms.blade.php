@@ -35,7 +35,7 @@
                 </x-table.data>
                 <x-table.data>
                     <div class="flex gap-1 my-1">
-                    <a href="/rooms/edit/{{ $room->token }}">
+                    <a href="/rooms/edit/{{ $room->remember_token }}">
                         <button type="button" class="pl-1 pb-1 text-sm font-medium text-white bg-blue-600 rounded-sm hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                             <!-- Icon Edit -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1.75rem" viewBox="0 0 32 32">
@@ -45,7 +45,7 @@
                     </a>
                     <form action="{{ route('rooms.delete', $room->id_kamar) }}" class="room-delete-form" id="form-delete-{{ $room->id_kamar }}">
                         @csrf
-                        <input type="hidden" name="token" value="{{ $room->token }}">
+                        <input type="hidden" name="remember_token" value="{{ $room->remember_token }}">
                         <button type="button" class="delete-room-button" data-room-id="{{ $room->id_kamar }}">
                             <div class="px-1 text-sm font-medium text-white bg-red-600 rounded-sm hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.75rem" height="2rem" viewBox="0 0 24 24">

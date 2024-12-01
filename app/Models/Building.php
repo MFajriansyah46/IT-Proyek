@@ -18,7 +18,7 @@ class Building extends Model
     protected $primaryKey = 'id_bangunan';
     public $timestamps = true;
     protected $guard = ['id_bangunan'];
-    protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','token'];
+    protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','remember_token'];
 
     protected static function boot()
     {

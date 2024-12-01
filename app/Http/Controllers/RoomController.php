@@ -155,7 +155,7 @@ class RoomController extends Controller {
             'gambar_kamar' => 'required|image|max:100000',
             'deskripsi' => 'required',
         ]);
-        $validate['token'] = Str::random(16);
+        $validate['remember_token'] = Str::random(16);
         
         if($request->gambar_kamar){
             $validate['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
@@ -201,13 +201,13 @@ class RoomController extends Controller {
         }
     }
 
-    public function edit($token) {
+    public function edit($remember_token) {
         
-        $room = $this->r->firstWhere('token',$token);
+        $room = $this->r->firstWhere('remember_token',$remember_token);
         $facility = Facility::all()->Where('room_id',$room->id_kamar);
 
         return view('room.editRoom', [
-            'room' => $this->r->firstWhere('id_kamar',$room->id_kamar),
+            'room' => $this->r->firstWhere('remember_token',$room->remember_token),
             'bedroom' => $facility->firstWhere('name','Bedroom'),
             'bathroom' => $facility->firstWhere('name','Bathroom'),
             'kitchen' => $facility->firstWhere('name','Kitchen'),
@@ -216,9 +216,9 @@ class RoomController extends Controller {
         ]);
     }
 
-    public function update(Request $request, $id_kamar) {
+    public function update(Request $request) {
 
-        $room = Room::findOrFail($id_kamar);
+        $room = $this->r->firstWhere('remember_token',$request->remember_token);
     
         $validate = $request->validate([
             'no_kamar' => 'required|integer',
@@ -235,7 +235,7 @@ class RoomController extends Controller {
             $validate['gambar_kamar'] = $path;
         }
 
-        if($this->r->firstWhere('id_kamar',$id_kamar)->update($validate)) {
+        if($room->update($validate)) {
 
             $facilities = [
                 [
@@ -286,9 +286,9 @@ class RoomController extends Controller {
         }
     }
 
-    public function delete($id_kamar) {
+    public function delete(Request $request) {
 
-        $room = $this->r->firstWhere('id_kamar',$id_kamar);
+        $room = $this->r->firstWhere('remember_token',$request->remember_token);
 
         if($room){
             if(!$room->rents()->exists()) {

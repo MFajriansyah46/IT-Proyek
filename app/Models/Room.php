@@ -15,7 +15,7 @@ class Room extends Model
 
     use HasFactory;
 
-    protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'gambar_kamar','deskripsi','token'];
+    protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'gambar_kamar','deskripsi','remember_token'];
 
     protected static function boot()
     {

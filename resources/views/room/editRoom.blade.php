@@ -2,9 +2,10 @@
     <div class="px-8 bg-white shadow-md max-w-3xl ml-auto mr-auto mt-4 rounded-md"><br>
 
         <h1 class="text-5xl font-bold text-center text-gray-800 mt-4">Edit Room</h1>
-        <form action="/rooms/update/{{ $room->id_kamar }}" id="form-edit-room" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" enctype="multipart/form-data">
+        <form action="/rooms/update/" id="form-edit-room" method="post" class="mb-20 mx-auto max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl flex flex-col bg-white rounded-lg p-6" enctype="multipart/form-data">
             @csrf
             <h2 class="text-2xl font-medium">Main Information</h2>
+            <input type="hidden" name="remember_token" value="{{$room->remember_token}}">
             <div class="container mt-5 mb-5">
                 <div class="flex justify-center">
                     <label for="upload-room-Image" class="p-1 border-2 border-dashed border-gray-300 w-full max-w-lg text-center cursor-pointer" id="drop-area">

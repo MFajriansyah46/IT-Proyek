@@ -18,25 +18,25 @@ class BuildingSeeder extends Seeder
             'owner_id' => 1,
             'unit_bangunan' => 'A',
             'alamat_bangunan' => 'Jl. Pemuda no.2 Blok f KNPI',
-            'token' => Str::random(16),
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'B',
             'alamat_bangunan' => 'Jl. Pemuda no.8 Blok B KNPI',
-            'token' => Str::random(16),
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'C',
             'alamat_bangunan' => 'Jl. A. Yani samping samsat',
-            'token' => Str::random(16),
+            'remember_token' => Str::random(16),
         ]);
         Building::create([
             'owner_id' => 1,
             'unit_bangunan' => 'D',
             'alamat_bangunan' => 'Jl. Karamantih',
-            'token' => Str::random(16),
+            'remember_token' => Str::random(16),
         ]);
     }
 }
