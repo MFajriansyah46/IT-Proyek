@@ -7,7 +7,7 @@
     </div>
   
     <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="flex flex-col gap-6 w-full mt-8" action="/login" method="POST">
+      <form class="flex flex-col gap-6 w-full mt-8" action="/authentication" method="POST">
         @csrf
         <input type="hidden" name="guard" value="owner">
         <input class="p-2 rounded-xl border" type="text" name="username" placeholder="Username" required>

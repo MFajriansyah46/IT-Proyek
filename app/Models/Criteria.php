@@ -15,4 +15,13 @@ class Criteria extends Model
     public function owner(): BelongsTo {
         return $this->belongsTo(Owner::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'criteria','criteries','create'));
+        static::updating(fn($value) => History::log($value, 'criteria','criteries' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'criteria','criteries','delete'));
+    }
 }

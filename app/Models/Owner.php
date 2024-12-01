@@ -11,6 +11,15 @@ class Owner extends User implements JWTSubject
 
     protected $guarded = ['id'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'owner account','owners','create'));
+        static::updating(fn($value) => History::log($value, 'owner account','owners' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'owner account','owners','delete'));
+    }
+
     // Implementasi JWTSubject
     public function getJWTIdentifier()
     {

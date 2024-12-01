@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,6 +13,15 @@ class Tenant extends User implements JWTSubject
     protected $guarded = ['id'];
 
     protected $fillable = ['name', 'phone_number', 'image', 'username', 'password'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'account','tenants','create'));
+        static::updating(fn($value) => History::log($value, 'account','tenants','update'));
+        static::deleting(fn($value) => History::log($value, 'account','tenants','delete'));
+    }
 
     // Implementasi JWTSubject
     public function getJWTIdentifier()

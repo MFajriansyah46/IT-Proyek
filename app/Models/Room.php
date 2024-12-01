@@ -17,6 +17,15 @@ class Room extends Model
 
     protected $fillable = ['no_kamar','id_bangunan', 'harga_kamar', 'kecepatan_internet', 'gambar_kamar','deskripsi','token'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'room','roomms','create'));
+        static::updating(fn($value) => History::log($value, 'room','roomms' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'room','roomms','delete'));
+    }
+
     public function building(): BelongsTo {
         return $this->BelongsTo(Building::class,'id_bangunan');
     }

@@ -19,20 +19,24 @@ class Rent extends Model
         parent::boot();
 
         // Event yang dijalankan saat record akan dibuat
-        static::creating(function ($rent) {
-            if ($rent->tanggal_masuk) {
+        static::creating(function ($value) {
+            if ($value->tanggal_masuk) {
                 // Set tanggal_keluar menjadi satu bulan setelah tanggal_masuk
-                $rent->tanggal_keluar = Carbon::parse($rent->tanggal_masuk)->addMonth();
+                $value->tanggal_keluar = Carbon::parse($value->tanggal_masuk)->addMonth();
             }
         });
 
         // Event yang dijalankan saat record akan dibuat
-        static::updating(function ($rent) {
-            if ($rent->tanggal_masuk) {
+        static::updating(function ($value) {
+            if ($value->tanggal_masuk) {
                 // Set tanggal_keluar menjadi satu bulan setelah tanggal_masuk
-                $rent->tanggal_keluar = Carbon::parse($rent->tanggal_masuk)->addMonth();
+                $value->tanggal_keluar = Carbon::parse($value->tanggal_masuk)->addMonth();
             }
         });
+
+        static::creating(fn($value) => History::log($value, 'rent','rents','create'));
+        static::updating(fn($value) => History::log($value, 'rent','rents' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'rent','rents','delete'));
     }
 
     public function room(): BelongsTo {

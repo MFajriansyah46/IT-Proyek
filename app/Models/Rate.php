@@ -12,6 +12,15 @@ class Rate extends Model
 
     protected $fillable = ['id_kamar','id_penyewa','rate','commentary'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'rate','rates','create'));
+        static::updating(fn($value) => History::log($value, 'rate','rates' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'rate','rates','delete'));
+    }
+
     public function room(): BelongsTo {
         return $this->BelongsTo(Room::class,'id_kamar');
     }

@@ -19,4 +19,13 @@ class Transaction extends Model
     public function tenant(): BelongsTo {
         return $this->BelongsTo(Tenant::class,'tenant_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'transaction','transactions','create'));
+        static::updating(fn($value) => History::log($value, 'transaction','transactions' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'transaction','transactions','delete'));
+    }
 }

@@ -20,6 +20,15 @@ class Building extends Model
     protected $guard = ['id_bangunan'];
     protected $fillable = ['owner_id','unit_bangunan','gambar_bangunan','link_gmap','alamat_bangunan','token'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'building','buildings','create'));
+        static::updating(fn($value) => History::log($value, 'building','buildings' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'building','buildings','delete'));
+    }
+
     
     public function owner(): BelongsTo {
         return $this->belongsTo(Owner::class);

@@ -12,6 +12,15 @@ class Facility extends Model
 
     protected $fillable = ['room_id','condition_id','name','image'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(fn($value) => History::log($value, 'facility','facilities','create'));
+        static::updating(fn($value) => History::log($value, 'facility','facilities' ,'update'));
+        static::deleting(fn($value) => History::log($value, 'facility','facilities','delete'));
+    }
+
     public function room(): BelongsTo {
         return $this->BelongsTo(Room::class,'room_id');
     }
