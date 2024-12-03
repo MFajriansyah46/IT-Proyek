@@ -15,11 +15,9 @@ class PaymentController extends Controller
     public function detail()
     {
 
-        $token = $_GET['r'];
+        $remember_token = $_GET['r'];
 
-        $room = Room::where('token', $token)->first();
-        // $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
-        // dd(auth('tenant')->user()->id);
+        $room = Room::where('remember_token', $remember_token)->first();
 
         if(auth('tenant')->user()){
             $rent = Rent::where('id_penyewa',auth('tenant')->user()->id)->first();
@@ -49,12 +47,19 @@ class PaymentController extends Controller
         // Set 3DS transaction for credit card to true
         \Midtrans\Config::$is3ds = true;
 
+        $price = $request->price;
+        
+        if($countRoommate = auth('tenant')->user()->roommate()->count()){
+            $price = $price + 25000*$countRoommate;
+        }
+
         $params = array(
             'transaction_details' => array(
                 'order_id' => rand(),
-                'gross_amount' => $request->price,
+                'gross_amount' => $price,
             )
         );
+
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
