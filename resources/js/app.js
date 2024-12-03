@@ -429,14 +429,14 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#reset-password').on('click', function() {
         $('#reset-password-form').removeClass('hidden');
-        $('#hide-form-reset').removeClass('hidden');    
+        $('#hide-form-reset').removeClass('hidden');
         $('#reset-password').addClass('hidden');
     });
 });
 $(document).ready(function() {
     $('#hide-form-reset').on('click', function() {
         $('#reset-password-form').addClass('hidden');
-        $('#hide-form-reset').addClass('hidden');    
+        $('#hide-form-reset').addClass('hidden');
         $('#reset-password').removeClass('hidden');
         $('#password').val('');
         $('#confirm-password').val('');
@@ -1057,3 +1057,18 @@ const DeleteRoommateModal = {
 $(document).ready(() => {
     DeleteRoommateModal.init();
 });
+
+// Modal functions
+window.openModal = function(id) {
+    document.getElementById('sendModal' + id).classList.remove('hidden');
+}
+
+window.closeModal = function(id) {
+    document.getElementById('sendModal' + id).classList.add('hidden');
+}
+
+window.sendMessage = function(id) {
+    const message = document.getElementById('message' + id).value;
+    alert('Message sent: ' + message); // Ganti dengan logika pengiriman yang sebenarnya
+    closeModal(id);
+}
