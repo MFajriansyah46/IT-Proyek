@@ -16,7 +16,7 @@ use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoommateController;
 
-// Aktor: Pemilik Kost
+
 Route::middleware('auth:owner')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'read']);
@@ -55,19 +55,9 @@ Route::middleware('auth:owner')->group(function(){
 
     Route::post('/buildings/delete/', [BuildingController::class, 'delete']);
 
-    Route::get('/active-rental', function() {
+    Route::get('/active-rental', function() { return view('rent.rents',['rents' => Rent::all()]); });
 
-        $rents = Rent::all();
-
-        return view('rent.rents',['rents' => $rents]);
-    });
-
-    Route::get('/transactions', function() {
-
-        $transactions = Transaction::orderBy('id', 'desc')->get();
-
-        return view('transaction.transactions',['transactions' => $transactions]);
-    });
+    Route::get('/transactions', function() { return view('transaction.transactions',['transactions' => Transaction::orderBy('id', 'desc')->get()]); });
 
     Route::get('/confirm/payment/{snap_token}', [PaymentController::class,'confirmation']);
 });
@@ -92,6 +82,8 @@ Route::middleware('auth:tenant')->group(function(){
 
 Route::middleware('guest')->group(function(){
 
+    Route::get('/', function(){ return view('home'); });
+
     Route::get('/register', [ValidasiController::class, 'formRegister']);
 
     Route::post('/register', [ValidasiController::class, 'register']);
@@ -103,8 +95,6 @@ Route::middleware('guest')->group(function(){
     Route::post('/authentication', [ValidasiController::class, 'authenticate']);
 
     Route::post('/logout', [ValidasiController::class, 'logout']);
-
-    Route::get('/', function(){ return view('home'); });
 
     Route::get('/rooms', [RoomController::class,'read']);
 
