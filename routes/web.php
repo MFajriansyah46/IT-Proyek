@@ -69,22 +69,7 @@ Route::middleware('auth:owner')->group(function(){
         return view('transaction.transactions',['transactions' => $transactions]);
     });
 
-    Route::get('/confirm/payment/{snap_token}', function($snap_token){
-
-        $transaction = Transaction::where('snap_token',$snap_token)->first();
-        $transaction->status = true;
-        $transaction->update();
-
-        if($transaction->status) {
-            $rent = new Rent();
-            $rent->id_kamar = $transaction->room_id;
-            $rent->id_penyewa = $transaction->tenant_id;
-            $rent->tanggal_masuk = now('Asia/Makassar');
-            $rent->token = Str::random(16);
-            $rent->save();
-        }
-        return redirect('/transactions')->with('payment-success','Payment Confirmed');
-    });
+    Route::get('/confirm/payment/{snap_token}', [PaymentController::class,'confirmation']);
 });
 
 Route::middleware('auth:tenant')->group(function(){
@@ -100,6 +85,7 @@ Route::middleware('auth:tenant')->group(function(){
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
 
     Route::post('/roommate', [RoommateController::class, 'store'])->name('roommate.store');
+
     Route::delete('/roommate', [RoommateController::class, 'delete'])->name('roommate.delete');
 });
 
@@ -118,10 +104,7 @@ Route::middleware('guest')->group(function(){
 
     Route::post('/logout', [ValidasiController::class, 'logout']);
 
-    Route::get('/', function(){
-
-        return view('home');
-    });
+    Route::get('/', function(){ return view('home'); });
 
     Route::get('/rooms', [RoomController::class,'read']);
 
