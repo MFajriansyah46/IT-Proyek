@@ -13,7 +13,7 @@
                     <p class="text-gray-600 mt-2">{{ Str::limit($topRoom->deskripsi,62) }}</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-xl font-semibold">Rp {{ number_format($topRoom->harga_kamar, 2, ',', '.') }} <small>/month</small></span>
-                        <a href="rooms-list/detail?r={{ $topRoom->token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>
+                        <a href="rooms-list/detail?r={{ $topRoom->remember_token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>
                     </div>
                 </div>
                 @endforeach
@@ -35,7 +35,7 @@
                     <p class="text-gray-600 mt-2">{{ Str::limit($room->deskripsi,62) }}</p>
                     <div class="flex justify-between items-center mt-4">
                         <span class="text-xl font-semibold">Rp {{ number_format($room->harga_kamar, 2, ',', '.') }} <small>/month</small></span>
-                        <a href="rooms-list/detail?r={{ $room->token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>
+                        <a href="rooms-list/detail?r={{ $room->remember_token }}" class="bg-blue-500 text-white hover:bg-blue-600 font-medium px-4 py-2 rounded-md">Detail</a>
                     </div>
                 </div>
             @endforeach
