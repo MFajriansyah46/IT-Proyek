@@ -206,6 +206,7 @@
                         $('#countDownTimePublic').addClass("text-red-600");
                         $('#countDownDayArea').addClass("hidden");
                         $('#rent-again-form').removeClass("hidden");
+                        $('#discard-form').removeClass("hidden");
                     }
                     }, 1000);
                   });
@@ -220,7 +221,7 @@
                     <button type="submit" id="rent-again-button" class="mb-4 w-full rounded-md min-w-28 bg-primary-500 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Rent again</button>
                 </div>
             </form>
-            <form id="discard-form" action="/discard/{{ $rent->token }}">
+            <form id="discard-form" action="/discard/{{ $rent->token }}" class="hidden">
                 @csrf
                 <input type="hidden" name="id_kamar" value="{{ $rent->room->id }}">
                 <input type="hidden" name="id_penyewa" value="{{ auth()->user()->id }}">
