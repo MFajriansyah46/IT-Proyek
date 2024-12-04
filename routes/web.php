@@ -105,3 +105,17 @@ Route::middleware('guest')->group(function(){
     Route::get('/discard/{token}', [ProfileController::class,"discardRentedRoom"]);
 });
 
+    // Route::get('/', function () {
+    //     return view('welcome'); // Halaman welcome atau login
+    // })->name('login');
+
+    // Dashboard setelah login berhasil
+    Route::get('/dashboard', function () {
+        return view('dashboard'); // Halaman dashboard
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
+    Route::post('/googleLogout', [ValidasiController::class, 'googleLogout']);
+    // Route untuk Google OAuth
+    Route::get('/auth/redirect', [ValidasiController::class, 'redirect']);
+
+    Route::get('/auth/google/callback', [ValidasiController::class, 'callback']);

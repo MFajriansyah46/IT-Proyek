@@ -12,7 +12,7 @@ class Tenant extends User implements JWTSubject
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['name', 'phone_number', 'image', 'username', 'password'];
+    protected $fillable = ['name', 'email', 'phone_number', 'image', 'username', 'password','google_id','google_token','google_refresh_token'];
 
     protected static function boot()
     {
