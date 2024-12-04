@@ -73,28 +73,28 @@
                             <form id="messageForm" class="mt-4">
                                 <div class="mb-3">
                                     <label for="phone" class="block text-sm text-gray-600">Phone Number</label>
-                                    <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-300" value="{{ $rent->tenant->phone_number }}" required>
+                                    <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" value="{{ $rent->tenant->phone_number }}" required>
                                 </div>
                                 <div class="mb-3">
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="block text-sm text-gray-600">Message</label>
-                                    <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-300" placeholder="Type your message here..." required></textarea>
+                                    <textarea id="message" rows="4" class="w-full px-2 py-2 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" placeholder="Type your message here..." required></textarea>
                                 </div>
                                 <div class="flex gap-2 mb-2">
                                     <button type="button"
                                             onclick="setTemplate('thanks')"
-                                            class="flex-1 px-3 py-2 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
+                                            class="flex-1 px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
                                         🙏 Terima Kasih
                                     </button>
                                     <button type="button"
                                             onclick="setTemplate('reminder')"
-                                            class="flex-1 px-3 py-2 text-sm bg-yellow-100 hover:bg-yellow-200 rounded-lg transition-colors duration-200">
+                                            class="flex-1 px-3 py-1 text-sm bg-yellow-100 hover:bg-yellow-200 rounded-lg transition-colors duration-200">
                                         ⏰ Pengingat
                                     </button>
                                 </div>
                                 <div class="flex justify-end gap-4 mt-4">
-                                    <button type="submit" class="px-4 py-2 bg-orange-300 hover:bg-orange-400 rounded-md">Send</button>
+                                    <button type="submit" class="w-full px-2 py-1 bg-green-500 hover:bg-green-400 rounded-md">Send</button>
                                 </div>
                             </form>
                         </div>
