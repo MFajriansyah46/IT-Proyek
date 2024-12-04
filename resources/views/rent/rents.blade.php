@@ -52,7 +52,7 @@
             </x-table.data>
             <x-table.data>
                 <button type="button" onclick="openModal()" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
-                    Send
+                    Massage
                 </button>
 
                 <!-- Modal -->
