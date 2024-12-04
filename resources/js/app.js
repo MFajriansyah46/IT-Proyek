@@ -1061,7 +1061,7 @@ $(document).ready(() => {
 // API_KEY FONNTE dan Template pesan
 const API_KEY = 'LPVz4fUDJx9ihHrqVgDQ';
 const TEMPLATES = {
-    thanks: `Halo {{ $rent->tenant->name }} Terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
+    thanks: `Halo, terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
     reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
 }
 
