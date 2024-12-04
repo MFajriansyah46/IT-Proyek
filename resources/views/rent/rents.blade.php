@@ -51,29 +51,56 @@
                 </form>
             </x-table.data>
             <x-table.data>
-                <button type="button" onclick="openModal({{ $rent->id }})" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
+                <button type="button" onclick="openModal()" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
                     Send
                 </button>
 
                 <!-- Modal -->
-                <div id="sendModal{{ $rent->id }}" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+                <div id="sendModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
                     <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
                         <div class="mt-3">
-                            <h3 class="text-lg font-medium text-gray-900">Send Message</h3>
-                            <div class="mt-2 mb-4">
-                                <p class="text-sm text-gray-600">Tenant: {{ $rent->tenant->name }}</p>
-                                <p class="text-sm text-gray-600">Room: {{ $rent->room->building->unit_bangunan }}{{ $rent->room->no_kamar }}</p>
+                            <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold">Send Message</h3>
+                            <button type="button" onclick="closeModal()" class=" hover:bg-gray-100 rounded-sm flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
                             </div>
-                            <div class="mt-2">
-                                <textarea id="message{{ $rent->id }}" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-300" placeholder="Type your message..."></textarea>
-                            </div>
-                            <div class="flex justify-end gap-4 mt-4">
-                                <button onclick="closeModal({{ $rent->id }})" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-md">Cancel</button>
-                                <button onclick="sendMessage({{ $rent->id }})" class="px-4 py-2 bg-orange-300 hover:bg-orange-400 rounded-md">Send</button>
-                            </div>
+                            <span id="tenant-name" data-name="{{ $rent->tenant->name }}"></span>
+                            <p class="text-sm text-gray-900">Name: {{ $rent->tenant->name }}</p>
+                            <p class="text-sm text-gray-900">Room: {{ $rent->room->building->unit_bangunan }}{{ $rent->room->no_kamar }} - {{ $rent->room->building->alamat_bangunan }}</p>
+                            <form id="messageForm" class="mt-4">
+                                <div class="mb-3">
+                                    <label for="phone" class="block text-sm text-gray-600">Phone Number</label>
+                                    <input type="tel" id="phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-300" value="{{ $rent->tenant->phone_number }}" required>
+                                </div>
+                                <div class="mb-3">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="block text-sm text-gray-600">Message</label>
+                                    <textarea id="message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-300 focus:border-orange-300" placeholder="Type your message here..." required></textarea>
+                                </div>
+                                <div class="flex gap-2 mb-2">
+                                    <button type="button"
+                                            onclick="setTemplate('thanks')"
+                                            class="flex-1 px-3 py-2 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
+                                        🙏 Terima Kasih
+                                    </button>
+                                    <button type="button"
+                                            onclick="setTemplate('reminder')"
+                                            class="flex-1 px-3 py-2 text-sm bg-yellow-100 hover:bg-yellow-200 rounded-lg transition-colors duration-200">
+                                        ⏰ Pengingat
+                                    </button>
+                                </div>
+                                <div class="flex justify-end gap-4 mt-4">
+                                    <button type="submit" class="px-4 py-2 bg-orange-300 hover:bg-orange-400 rounded-md">Send</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+                <div id="alert-container" class="fixed top-4 right-4 z-50"></div>
             </x-table.data>
         </tr>
         @endforeach

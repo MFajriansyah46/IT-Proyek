@@ -1058,17 +1058,123 @@ $(document).ready(() => {
     DeleteRoommateModal.init();
 });
 
+// API_KEY FONNTE dan Template pesan
+const API_KEY = 'LPVz4fUDJx9ihHrqVgDQ';
+const TEMPLATES = {
+    thanks: `Halo {{ $rent->tenant->name }} Terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
+    reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
+}
+
 // Modal functions
-window.openModal = function(id) {
-    document.getElementById('sendModal' + id).classList.remove('hidden');
+window.openModal = function() {
+    document.getElementById('sendModal').classList.remove('hidden');
 }
 
-window.closeModal = function(id) {
-    document.getElementById('sendModal' + id).classList.add('hidden');
+window.closeModal = function() {
+    document.getElementById('sendModal').classList.add('hidden');
 }
 
-window.sendMessage = function(id) {
-    const message = document.getElementById('message' + id).value;
-    alert('Message sent: ' + message); // Ganti dengan logika pengiriman yang sebenarnya
-    closeModal(id);
+// Load tenant data
+async function loadTenantData() {
+    try {
+        const response = await fetch('/api/tenants/expiring', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.status && data.tenants && data.tenants.length > 0) {
+            // Jika ada data tenant, isi nomor telepon otomatis
+            document.getElementById('phone').value = data.tenants[0].phone_number;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
+// Set template message
+function setTemplate(type) {
+    const messageTextarea = document.getElementById('message');
+    messageTextarea.value = TEMPLATES[type];
+}
+
+// Show alert function
+function showAlert(message, type = 'success') {
+    const alertContainer = document.getElementById('alert-container');
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `p-4 mb-4 rounded-lg ${
+        type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+    }`;
+    alertDiv.textContent = message;
+
+    alertContainer.appendChild(alertDiv);
+    setTimeout(() => alertDiv.remove(), 5000);
+}
+
+// Form submission handler
+document.getElementById('messageForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+
+    if (!phone || !message) {
+        showAlert('Mohon isi semua field', 'error');
+        return;
+    }
+
+    try {
+        const response = await fetch('https://api.fonnte.com/send', {
+            method: 'POST',
+            headers: {
+                'Authorization': API_KEY,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                target: phone,
+                message: message
+            })
+        });
+
+        const data = await response.json();
+        console.log('Response:', data);
+
+        if (data.status === true) {
+            // Reset form
+            document.getElementById('messageForm').reset();
+            // Close modal
+            closeModal();
+            // Show success message
+            showAlert('Pesan berhasil dikirim!', 'success');
+        } else {
+            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('Error mengirim pesan: ' + error.message, 'error');
+    }
+});
+
+// Helper function to calculate days left
+function calculateDaysLeft(endDate) {
+    const end = new Date(endDate);
+    const now = new Date();
+    const diffTime = end - now;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+// Helper function to format date
+function formatDate(dateString) {
+    return new Date(dateString).toLocaleDateString('id-ID', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }).split('/').join('-');
+}
+
+// Initialize
+window.setTemplate = setTemplate;
