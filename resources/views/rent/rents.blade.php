@@ -57,7 +57,7 @@
 
                 <!-- Modal -->
                 <div id="sendModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
-                    <div class="relative top-20 mx-auto w-100 shadow-lg rounded-2xl bg-white">
+                    <div class="relative top-20 mx-auto w-100 shadow-lg rounded-3xl bg-white">
                         <div class="flex justify-between bg-gradient-to-r from-green-600 to-green-500 p-4 rounded-t-2xl">
                             <div class="flex items-center">
                                 <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -70,7 +70,10 @@
                                         </g>
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-bold p-2 text-[#f5f5f5]">Message Center</h3>
+                                <div class="leading-none">
+                                    <p class="text-lg font-bold px-2 text-[#f5f5f5]">Message Center</p>
+                                    <p class="px-2 text-[12px] text-[#f5f5f5]">Kos Bang Raja</p>
+                                </div>
                             </div>
                             <button type="button" onclick="closeModal()" class="p-1 m-2 hover:bg-green-200 rounded flex items-center justify-center transition-all duration-200">
                                 <div class="icon-container text-gray-500">
@@ -107,7 +110,7 @@
                                     </button>
                                 </div>
                                 <div class="flex justify-end gap-4 mt-4">
-                                    <button type="submit" class="p-2 w-full bg-green-600 hover:bg-green-500 rounded-md flex items-center justify-center gap-2">
+                                    <button type="submit" class="p-2 w-full bg-green-500 hover:bg-green-600 rounded-md flex items-center justify-center gap-2">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#f5f5f5">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
