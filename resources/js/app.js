@@ -1058,41 +1058,13 @@ $(document).ready(() => {
     DeleteRoommateModal.init();
 });
 
-// API_KEY FONNTE dan Template pesan
-const API_KEY = 'LPVz4fUDJx9ihHrqVgDQ';
-const TEMPLATES = {
-    thanks: `Halo, terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
-    reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
-}
-
-function setTemplate(templateName) {
-    console.log('Template Name:', templateName); // Debug log
-    console.log('Rent ID:', rentId); // Debug log
-
-    // Cari form yang sesuai dengan rentId
-    const form = document.getElementById(`messageForm-${rentId}`);
-    if (!form) {
-        console.error(`Form with ID messageForm-${rentId} not found`);
-        return;
+$(document).ready(function() {
+    // Pastikan fungsi setTemplate sudah terdefinisi di window
+    if (typeof setTemplate === 'undefined') {
+        console.error('setTemplate function is not defined');
     }
+});
 
-    // Cari textarea message dalam form tersebut
-    const messageInput = form.querySelector('#message');
-    if (!messageInput) {
-        console.error('Message textarea not found in form');
-        return;
-    }
-
-    // Pastikan template ada
-    if (!TEMPLATES[templateName]) {
-        console.error(`Template "${templateName}" not found`);
-        return;
-    }
-    messageInput.value = TEMPLATES[templateName];
-}
-
-// Expose function ke window
-window.setTemplate = setTemplate;
 
 
 // Modal functions
@@ -1110,6 +1082,36 @@ window.closeModal = function(rentId) {
     }
 }
 
+// API_KEY FONNTE dan Template pesan
+const API_KEY = 'LPVz4fUDJx9ihHrqVgDQ';
+const TEMPLATES = {
+    thanks: `Halo, terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
+    reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
+}
+
+function setTemplate(type, rentId) {
+    // Coba cari message textarea dengan berbagai selector
+    const form = document.getElementById(`messageForm-${rentId}`);
+    if (!form) {
+        console.error(`Form with ID messageForm-${rentId} not found`);
+        return;
+    }
+
+    // Cari textarea dalam form tersebut
+    const messageTextarea = form.querySelector('#message');
+    if (!messageTextarea) {
+        console.error('Message textarea not found in form');
+        return;
+    }
+
+    // Set nilai template
+    if (TEMPLATES[type]) {
+        messageTextarea.value = TEMPLATES[type];
+    }
+}
+
+// Expose function ke window
+window.setTemplate = setTemplate;
 
 // Fungsi untuk mengirim pesan
 window.sendMessage = function(event, rentId) {

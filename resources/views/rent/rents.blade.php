@@ -84,12 +84,13 @@
                             </button>
                     </div>
                         <div class="p-5">
-                            <p class="text-sm text-gray-900">Name: {{ $rent->tenant->name }}</p>
-                            <p class="text-sm text-gray-900">Room: {{ $rent->room->building->unit_bangunan }}{{ $rent->room->no_kamar }} - {{ $rent->room->building->alamat_bangunan }}</p>
+                            <p class="text-sm text-gray-900">Name : {{ $rent->tenant->name }}</p>
+                            <p class="text-sm text-gray-900">Room : {{ $rent->room->building->unit_bangunan }}{{ $rent->room->no_kamar }} - {{ $rent->room->building->alamat_bangunan }}</p>
+                            <p class="text-sm text-gray-900">Phone: {{ $rent->tenant->phone_number }}</p>
                             <form id="messageForm-{{ $rent->id }}" class="mt-4" onsubmit="sendMessage(event, '{{ $rent->id }}')">
                                 <div class="mb-3">
                                     <label for="phone" class="block text-sm text-gray-600">Phone Number</label>
-                                    <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" placeholder="Example: 628***********" value="{{ old('phone', $rent->tenant->phone_number) }}" required>
+                                    <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" placeholder="Using number and no character" value="{{ old('phone', $rent->tenant->phone_number) }}" required>
                                 </div>
                                 <div class="mb-3">
                                 </div>
@@ -99,8 +100,8 @@
                                 </div>
                                 <div class="flex gap-2 mb-2">
                                     <button type="button"
-                                            onclick="setTemplate('thanks', '{{ $rent->id }}')"
-                                            class="flex-1 px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
+                                    onclick="setTemplate('thanks', '{{ $rent->id }}')"
+                                    class="flex-1 px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
                                         🙏 Terima Kasih
                                     </button>
                                     <button type="button"
