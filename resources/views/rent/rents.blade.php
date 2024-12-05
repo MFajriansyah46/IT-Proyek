@@ -89,7 +89,7 @@
                             <form id="messageForm" class="mt-4">
                                 <div class="mb-3">
                                     <label for="phone" class="block text-sm text-gray-600">Phone Number</label>
-                                    <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" value="{{ $rent->tenant->phone_number }}" required>
+                                    <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" placeholder="Example: 628***********" value="{{ old('phone', $rent->tenant->phone_number) }}" required>
                                 </div>
                                 <div class="mb-3">
                                 </div>
