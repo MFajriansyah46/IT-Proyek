@@ -1065,41 +1065,91 @@ const TEMPLATES = {
     reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
 }
 
+function setTemplate(templateName) {
+    console.log('Template Name:', templateName); // Debug log
+    console.log('Rent ID:', rentId); // Debug log
+
+    // Cari form yang sesuai dengan rentId
+    const form = document.getElementById(`messageForm-${rentId}`);
+    if (!form) {
+        console.error(`Form with ID messageForm-${rentId} not found`);
+        return;
+    }
+
+    // Cari textarea message dalam form tersebut
+    const messageInput = form.querySelector('#message');
+    if (!messageInput) {
+        console.error('Message textarea not found in form');
+        return;
+    }
+
+    // Pastikan template ada
+    if (!TEMPLATES[templateName]) {
+        console.error(`Template "${templateName}" not found`);
+        return;
+    }
+    messageInput.value = TEMPLATES[templateName];
+}
+
+// Expose function ke window
+window.setTemplate = setTemplate;
+
+
 // Modal functions
-window.openModal = function() {
-    document.getElementById('sendModal').classList.remove('hidden');
-}
-
-window.closeModal = function() {
-    document.getElementById('sendModal').classList.add('hidden');
-}
-
-// Load tenant data
-async function loadTenantData() {
-    try {
-        const response = await fetch('/api/tenants/expiring', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        });
-
-        const data = await response.json();
-
-        if (data.status && data.tenants && data.tenants.length > 0) {
-            // Jika ada data tenant, isi nomor telepon otomatis
-            document.getElementById('phone').value = data.tenants[0].phone_number;
-        }
-    } catch (error) {
-        console.error('Error:', error);
+window.openModal = function(rentId) {
+    const modal = document.getElementById(`sendModal-${rentId}`);
+    if (modal) {
+        modal.classList.remove('hidden');
     }
 }
 
-// Set template message
-function setTemplate(type) {
-    const messageTextarea = document.getElementById('message');
-    messageTextarea.value = TEMPLATES[type];
+window.closeModal = function(rentId) {
+    const modal = document.getElementById(`sendModal-${rentId}`);
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+
+// Fungsi untuk mengirim pesan
+window.sendMessage = function(event, rentId) {
+    event.preventDefault();
+
+    const form = document.getElementById(`messageForm-${rentId}`);
+    const phone = form.querySelector('#phone').value;
+    const message = form.querySelector('#message').value;
+
+    if (!phone || !message) {
+        showAlert('Mohon isi semua field', 'error');
+        return;
+    }
+
+    // Kirim pesan menggunakan API Fonnte
+    fetch('https://api.fonnte.com/send', {
+        method: 'POST',
+        headers: {
+            'Authorization': API_KEY,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            target: phone,
+            message: message
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === true) {
+            form.reset();
+            closeModal(rentId);
+            showAlert('Pesan berhasil dikirim!', 'success');
+        } else {
+            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showAlert('Error mengirim pesan: ' + error.message, 'error');
+    });
 }
 
 // Show alert function
@@ -1158,23 +1208,3 @@ document.getElementById('messageForm').addEventListener('submit', async function
         showAlert('Error mengirim pesan: ' + error.message, 'error');
     }
 });
-
-// Helper function to calculate days left
-function calculateDaysLeft(endDate) {
-    const end = new Date(endDate);
-    const now = new Date();
-    const diffTime = end - now;
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-}
-
-// Helper function to format date
-function formatDate(dateString) {
-    return new Date(dateString).toLocaleDateString('id-ID', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    }).split('/').join('-');
-}
-
-// Initialize
-window.setTemplate = setTemplate;

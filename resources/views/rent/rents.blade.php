@@ -51,12 +51,12 @@
                 </form>
             </x-table.data>
             <x-table.data>
-                <button type="button" onclick="openModal()" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
+                <button type="button" onclick="openModal('{{ $rent->id }}')" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
                     Massage
                 </button>
 
                 <!-- Modal -->
-                <div id="sendModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
+                <div id="sendModal-{{ $rent->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
                     <div class="relative top-20 mx-auto w-100 shadow-lg rounded-3xl bg-white">
                         <div class="flex justify-between bg-gradient-to-r from-green-600 to-green-500 p-4 rounded-t-2xl">
                             <div class="flex items-center">
@@ -75,7 +75,7 @@
                                     <p class="px-2 text-[12px] text-[#f5f5f5]">Kos Bang Raja</p>
                                 </div>
                             </div>
-                            <button type="button" onclick="closeModal()" class="p-1 m-2 hover:bg-green-200 rounded flex items-center justify-center transition-all duration-200">
+                            <button type="button" onclick="closeModal('{{ $rent->id }}')" class="p-1 m-2 hover:bg-green-200 rounded flex items-center justify-center transition-all duration-200">
                                 <div class="icon-container text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -86,7 +86,7 @@
                         <div class="p-5">
                             <p class="text-sm text-gray-900">Name: {{ $rent->tenant->name }}</p>
                             <p class="text-sm text-gray-900">Room: {{ $rent->room->building->unit_bangunan }}{{ $rent->room->no_kamar }} - {{ $rent->room->building->alamat_bangunan }}</p>
-                            <form id="messageForm" class="mt-4">
+                            <form id="messageForm-{{ $rent->id }}" class="mt-4" onsubmit="sendMessage(event, '{{ $rent->id }}')">
                                 <div class="mb-3">
                                     <label for="phone" class="block text-sm text-gray-600">Phone Number</label>
                                     <input type="tel" id="phone" class="w-full px-2 py-1 border rounded-lg focus:ring-1 focus:ring-green-500 focus:border-green-400" placeholder="Example: 628***********" value="{{ old('phone', $rent->tenant->phone_number) }}" required>
@@ -99,12 +99,12 @@
                                 </div>
                                 <div class="flex gap-2 mb-2">
                                     <button type="button"
-                                            onclick="setTemplate('thanks')"
+                                            onclick="setTemplate('thanks', '{{ $rent->id }}')"
                                             class="flex-1 px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors duration-200">
                                         🙏 Terima Kasih
                                     </button>
                                     <button type="button"
-                                            onclick="setTemplate('reminder')"
+                                            onclick="setTemplate('reminder', '{{ $rent->id }}')"
                                             class="flex-1 px-3 py-1 text-sm bg-yellow-100 hover:bg-yellow-200 rounded-lg transition-colors duration-200">
                                         ⏰ Pengingat
                                     </button>
