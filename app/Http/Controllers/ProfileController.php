@@ -6,6 +6,7 @@ use App\Models\Rate;
 use App\Models\Rent;
 use App\Models\Tenant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -86,6 +87,17 @@ class ProfileController extends Controller
         }
 
     }
+
+    public function downloadProof($doc)
+    {
+        $filePath = "documents/{$doc}";
+    
+        if (Storage::exists($filePath)) {
+            return Storage::download($filePath, 'example.docx');
+        } else {
+            return redirect('/myroom')->with('failed', 'File not found!');
+        }
+    }    
 
     public function discardRentedRoom($token)  {
         if($rent = Rent::firstWhere('token',$token)){

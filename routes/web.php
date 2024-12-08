@@ -70,7 +70,11 @@ Route::middleware('auth:tenant')->group(function(){
 
     Route::get('/checkout/{snap_token}', [PaymentController::class, 'checkout']);
 
+    Route::get('/proof',[PaymentController::class,'proof']);
+
     Route::get('/myroom', [ProfileController::class,"rentedRoom"]);
+
+    Route::get('/myroom/download-proof/{doc}', [ProfileController::class,"downloadProof"]);
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
 

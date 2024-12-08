@@ -164,6 +164,10 @@
                     <label class="w-72">Exit Date</label>
                     <p>{{ $rent->tanggal_keluar }}</p>
                 </div>
+                <div class="flex mb-6">
+                    <label class="w-72">Rental proof</label>
+                    <a href="/myroom/download-proof/{{ $rent->doc }}">download</a>
+                </div>
                 <div class="flex">
                     <label class="w-72">Ends At</label>
                 </div>
