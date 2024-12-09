@@ -166,7 +166,9 @@
                 </div>
                 <div class="flex mb-6">
                     <label class="w-72">Rental proof</label>
-                    <a href="/myroom/download-proof/{{ $rent->doc }}">download</a>
+                    <a href="/myroom/download-proof/{{ $rent->doc }}" class="px-2 rounded-sm text-sm text-white bg-gray-900 hover:bg-gray-700">
+                        Download
+                    </a>
                 </div>
                 <div class="flex">
                     <label class="w-72">Ends At</label>
