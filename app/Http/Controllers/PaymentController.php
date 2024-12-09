@@ -151,6 +151,7 @@ class PaymentController extends Controller
             'wifi_fee' => 'Rp. ' . number_format($wifi_fee,2,',','.'),
             'admin_fee' => 'Rp. ' . number_format($admin_fee,2,',','.'),
             'total' =>  'Rp. ' . number_format($room_price + $wifi_fee + $admin_fee,2,',','.'),
+            'owner' => $rent->room->building->owner->name,
         ]);
 
         $name = Str::random(32);
