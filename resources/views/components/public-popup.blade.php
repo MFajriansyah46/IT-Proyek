@@ -36,7 +36,7 @@
       </div>
     </div>
   </div>
-  @if (session()->has('payment-success')) 
+  @if (session()->has('payment-success'))
   <ul class="fixed top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-md bg-white text-gray-600 font-medium shadow-lg border max-w-lg flex px-4 py-6 gap-8" id="login-eror">
     <li class="my-auto text-lg">
       {{ session('payment-success') }}
@@ -62,6 +62,7 @@
       </button>
     </li>
   </ul>
+
   <!-- Modal AddRoommate-->
   <div id="addRoommateModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded-lg shadow-lg w-100 relative" onclick="event.stopPropagation()">
@@ -85,7 +86,7 @@
           </div>
           <div class="mb-4">
               <label class="block text-sm font-semibold text-gray-700 mb-1" for="phone_number">Phone Number</label>
-              <input type="text" name="phone_number" id="phone_number" class="w-full border px-3 py-2 rounded-lg" required>
+              <input type="text" name="phone_number" id="phone_number" placeholder="628 . . . " class="w-full border px-3 py-2 rounded-lg" required>
           </div>
 
           <div class="text-center">
