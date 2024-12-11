@@ -1,6 +1,4 @@
 <x-public-layout>
-
-
   <title>Kos Bang Raja - Hunian Impian Anda</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
             <style>
@@ -45,10 +43,10 @@
                     </a>
                 </div>
             </div>
-            <!-- Bagian Gambar -->
+            {{-- <!-- Bagian Gambar -->
             <div class="text-center md:text-right">
-                <img src="{{ asset('storage/image/kosan.png') }}" alt="Ilustrasi Kamar Kos" class="W-64 h-64 rounded-full max-auto md:mx-10 object-cover shadow-lg">
-            </div>  
+                <img src="{{ asset('public/image/kosan.jpeg') }}" alt="Ilustrasi Kamar Kos" class="W-64 h-64 rounded-full max-auto md:mx-10 object-cover shadow-lg">
+            </div>   --}}
         </div>
         <div class="absolute inset-0\\ bg-black opacity-"></div>
     </header>

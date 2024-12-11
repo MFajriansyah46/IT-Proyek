@@ -112,17 +112,18 @@ class ValidasiController extends Controller
                 // Auth::guard('tenant')->login($tenant);
             } else {
                 // Jika Tenant tidak ditemukan, buat akun baru
+                $remember_token = Str::random(16);
                 $tenant = Tenant::create([
                     'name' => $googleUser->getName(),
-                    'username' => 'google_' . $googleUser->getId(), // username unik berbasis Google ID
+                    'username' => 'google_id' . $googleUser->getId(), // username unik berbasis Google ID
                     'email' => $googleUser->getEmail(),
                     'phone_number' => '6280000000', // Default jika tidak ada informasi dari Google
                     'password' => bcrypt('12345678'), // Password default
+                    'remember_token' => $remember_token,
                     'google_id' => $googleUser->getId(),
                     'google_token' => $googleUser->token,
                     'google_refresh_token' => $googleUser->refreshToken ?? null,
                 ]);
-                
                 
             }       
              
