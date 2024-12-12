@@ -2,7 +2,7 @@
 
     <h1 class="my-8 text-5xl font-bold text-gray-800">Active Rentals</h1>
 
-    <x-table.header :headers="['Tenant', 'Room', 'Ends At','','']">
+    <x-table.header :headers="['Tenant', 'Room', 'Ends At','']">
         @foreach ($rents as $i=>$rent)
         <tr>
             <x-table.data class="text-center">{{ $i + 1 }}</x-table.data>
@@ -43,18 +43,16 @@
                 </script>
             </x-table.data>
             <x-table.data>
-                <form action="/discard/{{ $rent->token }}" class="rent-discard-form" id="form-delete-{{ $rent->id }}" data-rent-id="{{ $rent->id }}">
-                    @csrf
-                    <button type="button" class="discard-rent-button" data-room-id="{{ $rent->id }}">
-                        <div class=" bg-red-600 hover:bg-red-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">Discard</div>
-                    </button>
-                </form>
-            </x-table.data>
-            <x-table.data>
-                <button type="button" onclick="openModal('{{ $rent->id }}')" class=" bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">
-                    Massage
-                </button>
-
+                <div class="flex items-center space-x-4">
+                    <button type="button" onclick="openModal('{{ $rent->id }}')" class="bg-green-600 hover:bg-green-500 font-medium text-white text-sm rounded-lg w-20 h-5 flex items-center justify-center cursor-pointer">Massage</button>
+                    <form action="/discard/{{ $rent->token }}" class="rent-discard-form" id="form-delete-{{ $rent->id }}" data-rent-id="{{ $rent->id }}">
+                        @csrf
+                        <button type="button" class="discard-rent-button" data-room-id="{{ $rent->id }}">
+                            <div class="bg-red-600 hover:bg-red-500 font-medium text-white text-sm rounded-lg w-20 text-center cursor-pointer">Discard</div>
+                        </button>
+                    </form>
+                </div>
+    
                 <!-- Modal -->
                 <div id="sendModal-{{ $rent->id }}" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50 backdrop-blur-sm">
                     <div class="relative top-20 mx-auto w-100 shadow-lg rounded-3xl bg-white">

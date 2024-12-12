@@ -141,7 +141,7 @@
   <div id="addRoommateModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded-lg shadow-lg w-100 relative" onclick="event.stopPropagation()">
         <h2 class="text-xl font-semibold text-center mb-4">Add Roommate</h2>
-        <form method="POST" action="{{ route('roommate.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('roommate.submit') }}" enctype="multipart/form-data">
           @csrf
           <div class="flex flex-col items-center justify-center mb-4">
             <div class="relative">

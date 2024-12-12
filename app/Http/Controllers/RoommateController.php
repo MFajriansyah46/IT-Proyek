@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RoommateController extends Controller
 {
-    public function store(Request $request)
+    public function submit(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
