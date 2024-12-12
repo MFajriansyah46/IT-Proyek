@@ -435,14 +435,14 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#reset-password').on('click', function() {
         $('#reset-password-form').removeClass('hidden');
-        $('#hide-form-reset').removeClass('hidden');    
+        $('#hide-form-reset').removeClass('hidden');
         $('#reset-password').addClass('hidden');
     });
 });
 $(document).ready(function() {
     $('#hide-form-reset').on('click', function() {
         $('#reset-password-form').addClass('hidden');
-        $('#hide-form-reset').addClass('hidden');    
+        $('#hide-form-reset').addClass('hidden');
         $('#reset-password').removeClass('hidden');
         $('#password').val('');
         $('#confirm-password').val('');
@@ -1062,4 +1062,157 @@ const DeleteRoommateModal = {
 // Initialize when document is ready
 $(document).ready(() => {
     DeleteRoommateModal.init();
+});
+
+$(document).ready(function() {
+    // Pastikan fungsi setTemplate sudah terdefinisi di window
+    if (typeof setTemplate === 'undefined') {
+        console.error('setTemplate function is not defined');
+    }
+});
+
+
+
+// Modal functions
+window.openModal = function(rentId) {
+    const modal = document.getElementById(`sendModal-${rentId}`);
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
+}
+
+window.closeModal = function(rentId) {
+    const modal = document.getElementById(`sendModal-${rentId}`);
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+// API_KEY FONNTE dan Template pesan
+const API_KEY = 'LPVz4fUDJx9ihHrqVgDQ';
+const TEMPLATES = {
+    thanks: `Halo, terimakasih telah mempercayai Kos Bang Raja. Semoga Anda puas dengan layanan yang kami berikan 🙏`,
+    reminder: `⏰ Pesan Pengingat: Sewa kamar Anda tersisa () hari lagi. Mohon konfirmasi apabila ingin memperpanjang masa sewa. Terimakasih🙏`
+}
+
+function setTemplate(type, rentId) {
+    // Coba cari message textarea dengan berbagai selector
+    const form = document.getElementById(`messageForm-${rentId}`);
+    if (!form) {
+        console.error(`Form with ID messageForm-${rentId} not found`);
+        return;
+    }
+
+    // Cari textarea dalam form tersebut
+    const messageTextarea = form.querySelector('#message');
+    if (!messageTextarea) {
+        console.error('Message textarea not found in form');
+        return;
+    }
+
+    // Set nilai template
+    if (TEMPLATES[type]) {
+        messageTextarea.value = TEMPLATES[type];
+    }
+}
+
+// Expose function ke window
+window.setTemplate = setTemplate;
+
+// Fungsi untuk mengirim pesan
+window.sendMessage = function(event, rentId) {
+    event.preventDefault();
+
+    const form = document.getElementById(`messageForm-${rentId}`);
+    const phone = form.querySelector('#phone').value;
+    const message = form.querySelector('#message').value;
+
+    if (!phone || !message) {
+        showAlert('Mohon isi semua field', 'error');
+        return;
+    }
+
+    // Kirim pesan menggunakan API Fonnte
+    fetch('https://api.fonnte.com/send', {
+        method: 'POST',
+        headers: {
+            'Authorization': API_KEY,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            target: phone,
+            message: message
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === true) {
+            form.reset();
+            closeModal(rentId);
+            showAlert('Pesan berhasil dikirim!', 'success');
+        } else {
+            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showAlert('Error mengirim pesan: ' + error.message, 'error');
+    });
+}
+
+// Show alert function
+function showAlert(message, type = 'success') {
+    const alertContainer = document.getElementById('alert-container');
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `p-4 mb-4 rounded-lg ${
+        type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+    }`;
+    alertDiv.textContent = message;
+
+    alertContainer.appendChild(alertDiv);
+    setTimeout(() => alertDiv.remove(), 5000);
+}
+
+// Form submission handler
+document.getElementById('messageForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+
+    if (!phone || !message) {
+        showAlert('Mohon isi semua field', 'error');
+        return;
+    }
+
+    try {
+        const response = await fetch('https://api.fonnte.com/send', {
+            method: 'POST',
+            headers: {
+                'Authorization': API_KEY,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                target: phone,
+                message: message
+            })
+        });
+
+        const data = await response.json();
+        console.log('Response:', data);
+
+        if (data.status === true) {
+            // Reset form
+            document.getElementById('messageForm').reset();
+            // Close modal
+            closeModal();
+            // Show success message
+            showAlert('Pesan berhasil dikirim!', 'success');
+        } else {
+            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showAlert('Error mengirim pesan: ' + error.message, 'error');
+    }
 });
