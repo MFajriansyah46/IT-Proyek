@@ -99,7 +99,7 @@ Route::middleware('auth:tenant')->group(function(){
 
     Route::post('/myroom/rate', [PaymentController::class,'rate']);
 
-    Route::post('/roommate', [RoommateController::class, 'submit'])->name('roommate.submit');
+    Route::post('/roommate', [RoommateController::class, 'store'])->name('roommate.store');
     Route::delete('/roommate', [RoommateController::class, 'delete'])->name('roommate.delete');
 });
 
