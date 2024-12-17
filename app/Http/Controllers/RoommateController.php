@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class RoommateController extends Controller
 {
+    protected $rm;
+    public function __construct(Roommate $rm){
+        $this->rm = $rm;
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +40,7 @@ class RoommateController extends Controller
         }
 
         try {
-            Roommate::create($data);
+            $this->rm->create($data);
             return back();
         } catch (\Exception $e) {
             return back();
