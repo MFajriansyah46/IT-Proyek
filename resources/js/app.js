@@ -444,8 +444,8 @@ $(document).ready(function() {
         $('#reset-password-form').addClass('hidden');
         $('#hide-form-reset').addClass('hidden');
         $('#reset-password').removeClass('hidden');
-        $('#password').val('');
-        $('#confirm-password').val('');
+        $('#password-field-register').val('');
+        $('#confirm-password-field').val('');
     });
 });
 
