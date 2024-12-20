@@ -10,7 +10,8 @@
       </button>
     </div>
 
-    <form method="post" action="/update-owner-profile" enctype="multipart/form-data">
+    <form method="post" id="edit-profile-form" action="/update-owner-profile" enctype="multipart/form-data">
+      @csrf
       <div class="flex flex-col items-center justify-center">
         <div class="relative">
             @if (auth('owner')->user()->image)

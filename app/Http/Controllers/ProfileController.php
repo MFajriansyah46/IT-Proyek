@@ -54,7 +54,7 @@ class ProfileController extends Controller
         if($request->password == $request->confirm_password) {
             if(Tenant::firstWhere('id',auth('tenant')->user()->id)->update($validate)) {
 
-                return redirect('/')->with('success','Yout profile has been updated.');
+                return redirect('/')->with('success','Your profile has been updated.');
             } else {
     
                 return redirect('/')->with('failed','Your profile failed to update.');

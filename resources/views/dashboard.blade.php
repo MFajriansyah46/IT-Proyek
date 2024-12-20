@@ -20,9 +20,9 @@
     </div>
 
     <div>
-        <div class="mt-8 mb-20" style="height: 320px;">
-            <h2 class="text-3xl font-semibold text-gray-800 mb-4">Monthly Revenue</h2>
-            <canvas id="revenueChart"></canvas>
+        <div class="mt-8 mb-20 pt-4 bg-white" style="height:360px; width:640px;">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4 mx-8">Monthly Revenue</h2>
+            <canvas id="revenueChart" class="mx-8"></canvas>
         </div>
     </div>
 

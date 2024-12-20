@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OwnerController;
 use App\Models\Rate;
 use App\Models\Rent;
 use App\Models\Room;
@@ -20,6 +21,8 @@ use App\Http\Controllers\RoommateController;
 Route::middleware('auth:owner')->group(function(){
 
     Route::get('/dashboard', [DashboardController::class,'read']);
+
+    Route::post('/update-owner-profile', [OwnerController::class,'update']);
 
     // tenant/user controller
     Route::get('/users', [TenantController::class,'read']);

@@ -37,12 +37,14 @@ class TenantController extends Controller {
             $validated = $request->validate([
                 'name' => 'required|max:255',
                 'phone_number' => 'required|min:11',
+                'image' => 'image|nullable'
             ]);
         } else {
             $validated = $request->validate([
                 'name' => 'required|max:255',
                 'username' => 'required|max:255|unique:tenants,username',
                 'phone_number' => 'required|min:11',
+                'image' => 'image|nullable'
             ]);
         }
 
@@ -52,6 +54,10 @@ class TenantController extends Controller {
             } else{
                 return back()->with('password-confirm-error','The password and confirmation password do not match.');
             }
+        }
+
+        if($request->image) {
+            $validated['image'] = $request->file('image')->store('profile-images');
         }
 
         if($tenant->update($validated)){
