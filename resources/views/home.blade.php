@@ -33,7 +33,7 @@
                     Tempat Tinggal Nyaman, Aman, dan Inspiratif untuk Mahasiswa dan Profesional Muda
                 </p>
                 <div class="space-x-4">
-                    <a href="#" class="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold 
+                    <a href="/rooms" class="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold 
                         hover:bg-indigo-50 transition transform hover:scale-105 inline-block 
                         animate__animated animate__pulse animate__delay-2s">
                         Pesan Sekarang
@@ -47,7 +47,7 @@
             </div>
             <!-- Bagian Gambar -->
             <div class="text-center md:text-right">
-                <img src="{{ asset('storage/image/kosan.png') }}" alt="Ilustrasi Kamar Kos" class="W-64 h-64 rounded-full max-auto md:mx-10 object-cover shadow-lg">
+                <img src="\images\caption_image.jpg" alt="Ilustrasi Kamar Kos" class="W-64 h-64 rounded-full max-auto md:mx-10 object-cover shadow-lg">
             </div>  
         </div>
         <div class="absolute inset-0\\ bg-black opacity-"></div>

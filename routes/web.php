@@ -104,7 +104,7 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/rooms', [RoomController::class,'read']);
 
-    Route::get('/rooms-list/detail', [PaymentController::class, 'detail']);
+    Route::get('/rooms/detail', [PaymentController::class, 'detail']);  
 
     Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
 
