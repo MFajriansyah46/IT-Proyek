@@ -47,7 +47,7 @@
         </div>
         <br>
         <div id="desc-area-my-room" class="p-4 overflow-hidden">
-            <p class="text-gray-600" >Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni veniam dolorum ab ut placeat laborum corporis incidunt, alias veritatis adipisci neque animi minus nobis saepe. sunt est ad rem non excepturi modi error nisi sint inventore sed? Temporibus voluptatum odit reiciendis magnam minima doloribus in provident totam exercitationem, nemo nisi! Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni veniam dolorum ab ut placeat laborum corporis incidunt, alias veritatis adipisci neque animi minus nobis saepe, sunt est ad rem non excepturi modi error nisi sint inventore sed? Temporibus voluptatum odit reiciendis magnam minima doloribus in provident totam exercitationem, nemo nisi!</p>
+            <p class="text-gray-600" >{{ $room->deskripsi }}</p>
         </div>
         <div class="flex justify-center items-center mt-2">
             <button type="button" id="more-desc-my-room" class="flex items-center gap-1 text-blue-600 hover:text-blue-400">
