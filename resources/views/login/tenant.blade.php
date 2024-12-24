@@ -86,13 +86,12 @@
         </div>
 
         <!-- Login with Google -->
-        <a href="{{ url('/auth/redirect')  }}" class="mt-3 bg-red-500 rounded-xl text-white py-2 hover:scale-105 duration-300 flex items-center justify-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
-            <path d="M8.16 6.92v2.28h3.72c-.16 1.2-1.16 3.48-3.72 3.48-2.24 0-4.08-1.84-4.08-4.08s1.84-4.08 4.08-4.08c1.28 0 2.12.56 2.6 1.04l1.92-1.88C11.52 2.12 10.04 1.5 8.16 1.5 4.76 1.5 2 4.26 2 7.66s2.76 6.16 6.16 6.16c3.68 0 6.12-2.56 6.12-6.16 0-.4 0-.72-.08-1.08H8.16z"/>
-          </svg>
-          <span>Login with Google</span>
+        <a href="{{ url('/auth/redirect') }}" 
+          class="mt-3 bg-white border border-gray-300 rounded-xl text-gray-700 py-2 px-4 hover:shadow-md duration-300 flex items-center justify-center gap-2">
+            <img src="https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png" 
+                alt="Google Logo" class="w-5 h-5">
+            <span class="font-semibold">Login with Google</span>
         </a>
-
         <!-- Register Link -->
         <div class="mt-3 text-xs flex justify-between items-center text-[#002D74]">
           <p>Don't have an account?</p>

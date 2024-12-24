@@ -1,6 +1,6 @@
 <x-public-layout>
-    <body class="bg-gradient-to-b from-gray-50 to-gray-200">
-        <main class="space-y-20">
+    <body class="bg-gradient-to-b from-gray-90 to-gray-200">
+        <main class="space-y-10">
             <!-- Section: Help Center -->
             <section class="relative bg-gradient-to-r from-teal-400 to-blue-500 text-white rounded-xl shadow-2xl p-16">
                 <h2 class="text-5xl font-extrabold text-center mb-12">
@@ -11,7 +11,7 @@
                     <div class="space-y-8">
                         <div class="bg-white text-gray-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2">
                             <h3 class="text-3xl font-bold mb-4">Apa itu Kos Bang Raja?</h3>
-                            <p class="text-gray-600 leading-relaxed">
+                            <p class="text-gray-400 leading-relaxed">
                                 Kos Bang Raja adalah tempat tinggal mahasiswa yang menyediakan fasilitas modern, keamanan tinggi, dan komunitas aktif untuk mendukung kebutuhan Anda.
                             </p>
                         </div>
@@ -19,6 +19,14 @@
                             <h3 class="text-3xl font-bold mb-4">Bagaimana cara memesan kamar?</h3>
                             <p class="text-gray-600 leading-relaxed">
                                 Anda dapat memesan kamar melalui website resmi kami dengan langkah sederhana: pilih kamar, isi detail, dan lakukan pembayaran.
+                            </p>
+                        </div>
+                        <div class="bg-white text-gray-800 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2">
+                            <h1 class="text-2xl font-extrabold mb-3 text-red-700">Info Penting!!!</h1>
+                            <h3 class="text-3xl font-bold mb-4">Kenapa tidak bisa memesan kamar menggunakan akun google yang sudah didaftarkan?</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                  Akun google didaftarkan karena kebutuhan INTEGRASI SISTEM pada perkuliahan, ketika ingin digunakan untuk mengakses halaman lain maka akan dikembalikan ke halaman login, apabila anda ingin memesan kamar dan mengklik "Pesan Sekarang" maka akan ditampilkan halaman tidak ditemukan, karena ini merupakan batasan hak akses jika menggunakan akun google. 
+                                  jadi ketika mau melakukan pembayaran kamar gunakan akun yang telah registrasikan saja, agar bisa mengakses semua halaman.
                             </p>
                         </div>
                     </div>

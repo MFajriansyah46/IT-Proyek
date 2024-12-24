@@ -15,6 +15,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoommateController;
+use App\Http\Middleware\GoogleTenantAccess;
 
 
 Route::middleware('auth:owner')->group(function(){
@@ -107,15 +108,26 @@ Route::middleware('guest')->group(function(){
 
 
     Route::post('/googleLogout', [ValidasiController::class, 'googleLogout']);
-    // Route untuk Google OAuth
+
     Route::get('/auth/redirect', [ValidasiController::class, 'redirect']);
 
     Route::get('/auth/google/callback', [ValidasiController::class, 'callback']);
+    
 
-    Route::get('/about', function () {
-        return view('about');
-    });
+    Route::middleware('auth:tenant' )->group(function () {
 
-    Route::get('/help', function () {
-        return view('help');
+        Route::get('/about', function () {
+
+            return view('about');
+        });
+    
+        Route::get('/help', function () {
+
+            return view('help');
+        });
+
+        // Route::get('/rooms', function () {
+            
+        //     return view('rooms');
+        // });
     });
