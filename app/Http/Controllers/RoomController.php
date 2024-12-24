@@ -62,6 +62,12 @@ class RoomController extends Controller {
             'average_condition_index' => sqrt(array_sum(array_map(fn($room) => pow($room['average_condition_index'], 2), $roomsArray))),
         ];
 
+        if( !$squareSums['harga_kamar']) {
+            $squareSums['harga_kamar'] = 1;
+        }
+        if( !$squareSums['kecepatan_internet']) {
+            $squareSums['kecepatan_internet'] = 1;
+        }
         if( !$squareSums['rates_avg_rate']) {
             $squareSums['rates_avg_rate'] = 1;
         }
