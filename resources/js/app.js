@@ -1058,16 +1058,8 @@ $(document).ready(() => {
     DeleteRoommateModal.init();
 });
 
-$(document).ready(function() {
-    // Pastikan fungsi setTemplate sudah terdefinisi di window
-    if (typeof setTemplate === 'undefined') {
-        console.error('setTemplate function is not defined');
-    }
-});
-
-
-
-// Modal functions
+// API SEND MASSAGE
+// Modal functions API Kirim pesan
 window.openModal = function(rentId) {
     const modal = document.getElementById(`sendModal-${rentId}`);
     if (modal) {
@@ -1090,21 +1082,16 @@ const TEMPLATES = {
 }
 
 function setTemplate(type, rentId) {
-    // Coba cari message textarea dengan berbagai selector
     const form = document.getElementById(`messageForm-${rentId}`);
     if (!form) {
-        console.error(`Form with ID messageForm-${rentId} not found`);
         return;
     }
 
-    // Cari textarea dalam form tersebut
     const messageTextarea = form.querySelector('#message');
     if (!messageTextarea) {
-        console.error('Message textarea not found in form');
         return;
     }
 
-    // Set nilai template
     if (TEMPLATES[type]) {
         messageTextarea.value = TEMPLATES[type];
     }
@@ -1113,7 +1100,7 @@ function setTemplate(type, rentId) {
 // Expose function ke window
 window.setTemplate = setTemplate;
 
-// Fungsi untuk mengirim pesan
+// Send function
 window.sendMessage = function(event, rentId) {
     event.preventDefault();
 
@@ -1122,11 +1109,10 @@ window.sendMessage = function(event, rentId) {
     const message = form.querySelector('#message').value;
 
     if (!phone || !message) {
-        showAlert('Mohon isi semua field', 'error');
         return;
     }
 
-    // Kirim pesan menggunakan API Fonnte
+    // API Fonnte
     fetch('https://api.fonnte.com/send', {
         method: 'POST',
         headers: {
@@ -1143,15 +1129,12 @@ window.sendMessage = function(event, rentId) {
         if (data.status === true) {
             form.reset();
             closeModal(rentId);
-            showAlert('Pesan berhasil dikirim!', 'success');
+            showAlert('Message sent successfully!', 'success');
         } else {
-            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
+            showAlert('Failed to send message: ' + data.message, 'error');
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        showAlert('Error mengirim pesan: ' + error.message, 'error');
-    });
+
 }
 
 // Show alert function
@@ -1166,47 +1149,3 @@ function showAlert(message, type = 'success') {
     alertContainer.appendChild(alertDiv);
     setTimeout(() => alertDiv.remove(), 5000);
 }
-
-// Form submission handler
-document.getElementById('messageForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const phone = document.getElementById('phone').value;
-    const message = document.getElementById('message').value;
-
-    if (!phone || !message) {
-        showAlert('Mohon isi semua field', 'error');
-        return;
-    }
-
-    try {
-        const response = await fetch('https://api.fonnte.com/send', {
-            method: 'POST',
-            headers: {
-                'Authorization': API_KEY,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                target: phone,
-                message: message
-            })
-        });
-
-        const data = await response.json();
-        console.log('Response:', data);
-
-        if (data.status === true) {
-            // Reset form
-            document.getElementById('messageForm').reset();
-            // Close modal
-            closeModal();
-            // Show success message
-            showAlert('Pesan berhasil dikirim!', 'success');
-        } else {
-            showAlert('Gagal mengirim pesan: ' + data.message, 'error');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        showAlert('Error mengirim pesan: ' + error.message, 'error');
-    }
-});
