@@ -1,0 +1,46 @@
+git clone https://github.com/MFajriansyah46/IT-Proyek.git
+
+cd IT-Proyek
+
+composer install
+
+cp .env.example .env
+
+php artisan key:generate
+
+php artisan migrate
+
+php artisan db:seed
+
+npm install
+
+install -D flowbite
+
+composer require midtrans/midtrans-php
+
+npm run dev
+
+*tambah bash baru
+php artisan serve
+
+*jalankan di web
+http://127.0.0.1:8000
+
+------------------------------------
+Untuk upload/download file:
+
+*tambahkan di .env
+FILESYSTEM_DISK=public
+
+php artisan storage:link 
+
+
+
+---------------------
+login pemilik (http://127.0.0.1:8000/owner-login)
+username	: rusida443
+password	: rusida123
+
+login penyewa
+username	: fazzar.yusuf
+password	: barabaidangers

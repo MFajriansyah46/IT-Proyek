@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#login-image{
+    height: 580px;
+    width:  365px;
+}
+
+div[role="menu"] {
+    display: none;
+}
+
+.right-3\/8 {
+    right: 38%;
+}
+
+.w-100 {
+    width: 30rem;
+}
+
+.max-h-22 {
+    max-height: 5.4rem /* 96px */;
+}
+
+.focus\:disoutline:focus {
+    border-width: 0px;
+    outline: 0; /* Pastikan outline tetap hilang saat fokus */
+    border: none; /* Pastikan border tetap hilang saat fokus */
+    box-shadow: none; /* Pastikan tidak ada shadow saat fokus */
+}
