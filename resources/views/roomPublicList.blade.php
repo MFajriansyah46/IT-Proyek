@@ -18,8 +18,7 @@
                 </div>
                 @endforeach
             </div>
-        </div>
-        
+        </div>   
         <!-- Str :: limit($room->deskripsi,62) -->
     <h1 class="text-2xl font-bold text-center mt-8">All Room</h1>
     <div class="container mx-auto py-8">

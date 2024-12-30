@@ -33,8 +33,8 @@
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="/" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline" aria-current="page">Home</a>
                 <a href="/rooms" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Rooms</a>
-                <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
-                <a href="/#" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Help</a>
+                <a href="/about" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
+                <a href="/help" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Help</a>
               </div>
             </div>
           </div>
@@ -73,8 +73,10 @@
                         </div>
                     </li>
                     <li>
-                        <form method="post" action="/logout" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">
+                        <form method="post" @if(auth('tenant')->user()->google_token) action="/googleLogout" @else action="/logout" @endif class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">
                             @csrf
+                            <input type="hidden" name="id" value="{{ auth('tenant')->user()->id }}">
+                            <input type="hidden" name="google_token" value="{{ auth('tenant')->user()->google_token }}">
                             <button type="submit" class="flex pr-28">
                                 <svg class="mr-3 h-6 w-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" width="1.6rem" height="1.6rem" viewBox="0 0 24 24"><g fill="none" stroke="#969696" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="48" stroke-dashoffset="48" d="M16 5v-1c0 -0.55 -0.45 -1 -1 -1h-9c-0.55 0 -1 0.45 -1 1v16c0 0.55 0.45 1 1 1h9c0.55 0 1 -0.45 1 -1v-1"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="48;0"/></path><path stroke-dasharray="12" stroke-dashoffset="12" d="M10 12h11"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.7s" dur="0.2s" values="12;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M21 12l-3.5 -3.5M21 12l-3.5 3.5"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.9s" dur="0.2s" values="6;0"/></path></g></svg>
                                 <h1 class="text-base">Logout</h1>

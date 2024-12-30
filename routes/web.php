@@ -16,6 +16,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ValidasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoommateController;
+use App\Http\Middleware\GoogleTenantAccess;
 
 
 Route::middleware('auth:owner')->group(function(){

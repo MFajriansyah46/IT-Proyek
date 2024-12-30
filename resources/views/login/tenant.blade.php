@@ -28,6 +28,21 @@
           <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300">Login</button>
         </form>
 
+        <!-- Divider -->
+        <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
+          <hr class="border-gray-400">
+          <p class="text-center text-sm">OR</p>
+          <hr class="border-gray-400">
+        </div>
+
+        <!-- Login with Google -->
+        <a href="{{ url('/auth/redirect') }}" 
+          class="mt-3 bg-white border border-gray-300 rounded-xl text-gray-700 py-2 px-4 hover:shadow-md duration-300 flex items-center justify-center gap-2">
+            <img src="https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png" 
+                alt="Google Logo" class="w-5 h-5">
+            <span class="font-semibold">Login with Google</span>
+        </a>
+
         <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
           <hr class="border-gray-400">
           <p class="text-center text-sm">OR</p>

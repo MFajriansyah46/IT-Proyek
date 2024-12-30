@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use App\Models\Tenant;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Laravel\Socialite\Facades\Socialite;
 
 class ValidasiController extends Controller
 {
@@ -30,7 +34,6 @@ class ValidasiController extends Controller
 
         if($request->password == $request->confirm_password){
             Tenant::create($validatedData);
-            $request->session()->flash('registration-success','Registration successfull! Please login');
             return redirect('/login');
         }
         return back()->with('password-confirm-error','The password and confirmation password do not match. Please try again.');
@@ -84,5 +87,114 @@ class ValidasiController extends Controller
             ], 500);
         }
     }
+
+    public function redirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callback(){
+            // Ambil data user dari Google
+            $googleUser = Socialite::driver('google')->user();
+
+            // dd($googleUser->getEmail());
+    
+            // Cari Tenant berdasarkan email
+            $tenant = Tenant::where('email', $googleUser->getEmail())->first();
+    
+            if ($tenant) {
+                // Jika Tenant ditemukan, update token Google
+                $tenant->update([
+                    'google_id' => $googleUser->getId(),
+                    'google_token' => $googleUser->token,
+                    'google_refresh_token' => $googleUser->refreshToken ?? $tenant->google_refresh_token,
+                ]);
+
+                // Auth::guard('tenant')->login($tenant);
+            } else {
+                // Jika Tenant tidak ditemukan, buat akun baru
+                $remember_token = Str::random(16);
+                $tenant = Tenant::create([
+                    'name' => $googleUser->getName(),
+                    'username' => 'google_id' . $googleUser->getId(), // username unik berbasis Google ID
+                    'email' => $googleUser->getEmail(),
+                    'phone_number' => '6280000000', // Default jika tidak ada informasi dari Google
+                    'password' => bcrypt('12345678'), // Password default
+                    'remember_token' => $remember_token,
+                    'google_id' => $googleUser->getId(),
+                    'google_token' => $googleUser->token,
+                    'google_refresh_token' => $googleUser->refreshToken ?? null,
+                ]);
+
+                // Buat token JW     
+         }   
+
+            auth()->guard('tenant')->login($tenant);
+    
+            return view('home'); // Arahkan ke dashboard setelah login
+    }
+
+    public function googleLogout(Request $request)
+    {
+        // Hapus token dari database jika ingin menghapus permanen
+        Tenant::firstWhere('id', $request->id)->update([
+            'google_token' => null,
+            'google_refresh_token' => null,
+        ]);
+
+        // Revoke token Google jika disimpan
+        $token = $request->google_token;
+
+        if ($token) {
+            Http::post('https://accounts.google.com/o/oauth2/revoke', [
+                'token' => $token,
+            ]);
+        }
+        // Logout dari aplikasi Laravel
+        Auth::logout();
+
+        // Redirect ke halaman login dengan pesan
+        return redirect('/')->with('success', 'Berhasil logout dari Google!');
+    }
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+        // public function pageOne()
+        // {
+        //     if (!Auth::guard('googletenant')->check()) {
+        //         return redirect('/auth/google')->with('error', 'You must log in with Google to access this page.');
+        //     }
+    
+        //     return view('roomPublicList');
+        // }
+    
+        // public function pageTwo()
+        // {
+        //     if (!Auth::guard('googletenant')->check()) {
+        //         return redirect('/auth/google')->with('error', 'You must log in with Google to access this page.');
+        //     }
+    
+        //     return view('about');
+        // }
+    
+        // public function pageThree()
+        // {
+        //     if (!Auth::guard('googletenant')->check()) {
+        //         return redirect('/auth/google')->with('error', 'You must log in with Google to access this page.');
+        //     }
+    
+        //     return view('help');
+        // }
+    
 
 }
