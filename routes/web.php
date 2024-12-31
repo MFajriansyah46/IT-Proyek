@@ -110,5 +110,9 @@ Route::middleware('guest')->group(function(){
     Route::get('/checkout/success/{snap_token}', [PaymentController::class, 'rent']);
 
     Route::get('/discard/{token}', [ProfileController::class,"discardRentedRoom"]);
+
+    Route::get('/about', function () { return view('about'); });
+
+    Route::get('/help', function () { return view('help'); });
 });
 
