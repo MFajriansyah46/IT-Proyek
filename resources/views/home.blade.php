@@ -1,11 +1,9 @@
 <x-public-layout>
-
-
   <title>Kos Bang Raja - Hunian Impian Anda</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
             <style>
                 .hero-gradient {
-                    background: linear-gradient(135deg, #210d0d, #122f5e, #044c6b);
+                    background-color: #111827;
                     background-size: 400% 400%;
                     animation: gradientBG 15s ease infinite;
                 }
@@ -22,36 +20,48 @@
                 }
             </style>
             <!-- Hero Section -->
-    <header class="hero-gradient text-white relative overflow-hidden">
-        <div class="container mx-auto px-5 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <!-- Bagian Teks -->
-            <div>
-                <h1 class="text-6xl font-extrabold mb-7 animate__animated animate__fadeInDown">
-                    Kos Bang Raja
-                </h1>
-                <p class="text-2xl mb-10 text-light max-w-xl animate__animated animate__fadeInUp">
-                    Tempat Tinggal Nyaman, Aman, dan Inspiratif untuk Mahasiswa dan Profesional Muda
-                </p>
-                <div class="space-x-4">
-                    <a href="/rooms" class="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold 
-                        hover:bg-indigo-50 transition transform hover:scale-105 inline-block 
-                        animate__animated animate__pulse animate__delay-2s">
-                        Pesan Sekarang
-                    </a>
-                    <a href="#fasilitas" class="bg-transparent border-2 border-white text-white px-10 py-4 
-                        rounded-full font-bold hover:bg-white hover:text-indigo-600 
-                        transition transform hover:scale-105 inline-block">
-                        Lihat Fasilitas
-                    </a>
+            <header class="hero-gradient text-white relative overflow-hidden">
+                <div class="container mx-auto px-5 py-24 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <!-- Bagian Teks -->
+                    <div>
+                        <h1 class="text-8xl font-extrabold mb-7 animate__animated animate__fadeInDown">
+                            Kos Bang Raja
+                        </h1>
+                        <p class="text-3xl mb-10 text-light max-w-xl animate__animated animate__fadeInUp">
+                            Tempat Tinggal Nyaman, Aman, dan Inspiratif untuk Mahasiswa dan Profesional Muda
+                        </p>
+                        <div class="space-x-4">
+                            <a href="rooms" class="bg-white text-indigo-600 px-10 py-4 rounded-full font-bold 
+                                hover:bg-indigo-50 transition transform hover:scale-105 inline-block 
+                                animate__animated animate__pulse animate__delay-2s">
+                                Pesan Sekarang
+                            </a>
+                            <a href="#fasilitas" class="bg-transparent border-2 border-white text-white px-10 py-4 
+                                rounded-full font-bold hover:bg-white hover:text-indigo-600 
+                                transition transform hover:scale-105 inline-block">
+                                Lihat Fasilitas
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Bagian Gambar -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Gambar 1 -->
+                        <img src="{{ asset('public/image/kosan1.jpeg') }}" alt="Kamar Kos 1" 
+                            class="w-full h-64 rounded-lg object-cover shadow-lg transform -rotate-6 transition duration-300 hover:rotate-0">
+                        <!-- Gambar 2 -->
+                        <img src="{{ asset('public/image/kosan2.jpeg') }}" alt="Kamar Kos 2" 
+                            class="w-full h-64 rounded-lg object-cover shadow-lg transform rotate-3 transition duration-300 hover:rotate-0">
+                        <!-- Gambar 3 -->
+                        <img src="{{ asset('public/image/kosan3.jpeg') }}" alt="Kamar Kos 3" 
+                            class="w-full h-64 rounded-lg object-cover shadow-lg transform -rotate-12 transition duration-300 hover:rotate-0">
+                        <!-- Gambar 4 -->
+                        <img src="{{ asset('public/image/kosan3.jpeg') }}" alt="Kamar Kos 4" 
+                            class="w-full h-64 rounded-lg object-cover shadow-lg transform rotate-6 transition duration-300 hover:rotate-0">
+                    </div>
+                    
                 </div>
-            </div>
-            <!-- Bagian Gambar -->
-            <div class="text-center md:text-right">
-                <img src="\images\caption_image.jpg" alt="Ilustrasi Kamar Kos" class="W-64 h-64 rounded-full max-auto md:mx-10 object-cover shadow-lg">
-            </div>  
-        </div>
-        <div class="absolute inset-0\\ bg-black opacity-"></div>
-    </header>
+                <div class="absolute inset-0\\ bg-black opacity-"></div>
+            </header>
             <!-- Section Daftar Kamar Rekomendasi -->
     <section class="py-16 bg-gradient-to-b from-gray-100 to-gray-200" id="kamar-rekomendasi">
         <div class="container mx-auto px-6">

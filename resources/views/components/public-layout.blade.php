@@ -18,7 +18,7 @@
         <h1 class="text-sm tracking-tight">v1.0</h1>
       </div>
     </header>
-    <nav class="bg-gray-900 py-2">
+    <nav class="sticky top-0 bg-gray-900 py-2 z-50">
       <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
@@ -26,11 +26,12 @@
               <img class="h-14 w-auto" src="/images/logo bang raja3.png" alt="Your Company">
             </div>
             <div class="rounded-md px-4 py-2 text-sm font-medium text-white">
-              <svg width="10" height="24" xmlns="http://www.w3.org/2000/svg"> <rect x="4" y="0" width="1" height="100" fill="white" /></svg>
+              <svg width="10" height="24" xmlns="http://www.w3.org/2000/svg"> 
+                <rect x="4" y="0" width="1" height="100" fill="white" />
+              </svg>
             </div>
             <div class="hidden md:block">
-              <div class=" flex items-baseline space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <div class="flex items-baseline space-x-4">
                 <a href="/" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline" aria-current="page">Home</a>
                 <a href="/rooms" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">Rooms</a>
                 <a href="/about" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline">About</a>
@@ -38,7 +39,7 @@
               </div>
             </div>
           </div>
-
+          <!-- Bagian lainnya tetap sama -->
           <div class="hidden md:block">
 
             @auth('tenant')
@@ -124,13 +125,13 @@
             @else
               <a href="/login" class="rounded-md px-3 py-2 text-lg font-medium text-white hover:underline" aria-current="page">Login</a>
             @endauth
-          </div>
+            </div>
             <div class="block md:hidden">
               <div class=" flex flex-col items-baseline space-x-4">
                 <!-- <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:underline" aria-current="page">Login</a> -->
-                 <button class="px-1 rounded-md hover:bg-slate-600">
+                <button class="px-1 rounded-md hover:bg-slate-600">
                   <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="white" fill-rule="evenodd" d="M3 16h18v2H3zm0-5h18v2H3zm0-5h18v2H3z"/></svg>
-                 </button>
+                </button>
               </div>
             </div>
           </div>
