@@ -111,6 +111,12 @@ Route::middleware('guest')->group(function(){
 
     Route::get('/discard/{token}', [ProfileController::class,"discardRentedRoom"]);
 
+    Route::post('/googleLogout', [ValidasiController::class, 'googleLogout']);
+
+    Route::get('/auth/redirect', [ValidasiController::class, 'redirect']);
+
+    Route::get('/auth/google/callback', [ValidasiController::class, 'callback']);
+
     Route::get('/about', function () { return view('about'); });
 
     Route::get('/help', function () { return view('help'); });
