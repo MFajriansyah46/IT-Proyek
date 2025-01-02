@@ -71,7 +71,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Card Kamar 1 -->
                 <div class="bg-white shadow-lg rounded-3xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-500">
-                    <img src="https://via.placeholder.com/400x250" alt="Kamar Deluxe" class="w-full h-56 object-cover">
+                    <img src="/images/gedung1.jpg" alt="Kamar Deluxe" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-800 mb-2">Gedung A</h3>
                         <p class="text-gray-500 text-sm mb-4">Harga: <span class="font-semibold text-indigo-600">Rp 1.500.000/bulan</span></p>
@@ -89,7 +89,7 @@
 
                 <!-- Card Kamar 2 -->
                 <div class="bg-white shadow-lg rounded-3xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-500">
-                    <img src="https://via.placeholder.com/400x250" alt="Kamar Standard" class="w-full h-56 object-cover">
+                    <img src="/images/kosan1.jpg" alt="Kamar Standard" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-800 mb-2">Gedung B</h3>
                         <p class="text-gray-500 text-sm mb-4">Harga: <span class="font-semibold text-indigo-600">Rp 1.000.000/bulan</span></p>
@@ -107,7 +107,7 @@
 
                 <!-- Card Kamar 3 -->
                 <div class="bg-white shadow-lg rounded-3xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-500">
-                    <img src="https://via.placeholder.com/400x250" alt="Kamar Ekonomi" class="w-full h-56 object-cover">
+                    <img src="/images/gedung3.jpg" alt="Kamar Ekonomi" class="w-full h-56 object-cover">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold text-gray-800 mb-2">Gedung C</h3>
                         <p class="text-gray-500 text-sm mb-4">Harga: <span class="font-semibold text-indigo-600">Rp 750.000/bulan</span></p>
