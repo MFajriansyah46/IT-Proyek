@@ -35,7 +35,7 @@ class BuildingController extends Controller
             'alamat_bangunan' => 'required|max:255',
         ]);
 
-        $validated['token'] = Str::random(16);
+        $validated['remember_token'] = Str::random(16);
 
         $validated['gambar_bangunan'] = $request->file('gambar_bangunan')->store('building-images');
 
