@@ -162,14 +162,14 @@ class RoomController extends Controller {
             'no_kamar' => 'required|integer',
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
-            'kecepatan_internet' => 'required|integer',
-            'gambar_kamar' => 'required|image|max:100000',
+            'kecepatan_internet' => 'required',
+            'gambar_kamar' => 'required|image',
             'deskripsi' => 'required',
         ]);
         $validate['remember_token'] = Str::random(16);
         
         if($request->gambar_kamar){
-            $validate['gambar_kamar'] = $request->file('gambar_kamar')->submit('room-images');
+            $validate['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
         }
 
         if($this->r->create($validate)){
@@ -198,7 +198,7 @@ class RoomController extends Controller {
 
             foreach ($data as $i) {
                 $facility = new Facility();
-                $facility->room_id = $this->r->firstWhere('token', $validate['token'])->id_kamar;
+                $facility->room_id = $this->r->firstWhere('remember_token', $validate['remember_token'])->id_kamar;
                 $facility->condition_id = $i['condition'];
                 $facility->name = $i['name'];
                 if($i['image']) {

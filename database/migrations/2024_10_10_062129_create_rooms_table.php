@@ -13,7 +13,7 @@ class CreateRoomsTable extends Migration
             $table->foreignId('id_bangunan')->constrained('buildings', 'id_bangunan')->indexName('rooms_id_bangunan');
             $table->char('no_kamar');
             $table->bigInteger('harga_kamar');
-            $table->integer('kecepatan_internet');
+            $table->float('kecepatan_internet');
             $table->string('gambar_kamar')->nullable();
             $table->text(column: 'deskripsi')->nullable();
             $table->rememberToken();
