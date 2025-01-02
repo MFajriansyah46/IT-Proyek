@@ -210,7 +210,7 @@
     </div>
   </div>
 @if (session()->has('success'))
-  <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="popup-success">
+  <ul class="fixed z-50 top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="popup-success">
     <li class="my-auto text-lg">
       {{ session('success') }}
     </li>
@@ -225,7 +225,7 @@
 @endif
 
 @if (session()->has('failed'))
-  <ul class="fixed top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="popup-success">
+  <ul class="fixed z-50 top-16 left-1/2 transform -translate-x-1/2 rounded-md bg-white text-gray-600 font-medium shadow-sm max-w-md flex px-4 py-6 gap-8" id="popup-success">
     <li class="my-auto text-lg text-red-600">
       {{ session('failed') }}
     </li>
