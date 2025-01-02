@@ -46,16 +46,16 @@
                     <!-- Bagian Gambar -->
                     <div class="grid grid-cols-2 gap-4">
                         <!-- Gambar 1 -->
-                        <img src="{{ asset('public/image/kosan1.jpeg') }}" alt="Kamar Kos 1" 
+                        <img src="/images/kosan1.jpg" alt="Kamar Kos 1" 
                             class="w-full h-64 rounded-lg object-cover shadow-lg transform -rotate-6 transition duration-300 hover:rotate-0">
                         <!-- Gambar 2 -->
-                        <img src="{{ asset('public/image/kosan2.jpeg') }}" alt="Kamar Kos 2" 
+                        <img src="/images/kosan2.jpg" alt="Kamar Kos 2" 
                             class="w-full h-64 rounded-lg object-cover shadow-lg transform rotate-3 transition duration-300 hover:rotate-0">
                         <!-- Gambar 3 -->
-                        <img src="{{ asset('public/image/kosan3.jpeg') }}" alt="Kamar Kos 3" 
+                        <img src="/images/kosan3.jpg" alt="Kamar Kos 3" 
                             class="w-full h-64 rounded-lg object-cover shadow-lg transform -rotate-12 transition duration-300 hover:rotate-0">
                         <!-- Gambar 4 -->
-                        <img src="{{ asset('public/image/kosan3.jpeg') }}" alt="Kamar Kos 4" 
+                        <img src="/images/kosan4.jpg" alt="Kamar Kos 4" 
                             class="w-full h-64 rounded-lg object-cover shadow-lg transform rotate-6 transition duration-300 hover:rotate-0">
                     </div>
                     
