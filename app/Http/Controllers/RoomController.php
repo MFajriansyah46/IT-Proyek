@@ -146,7 +146,7 @@ class RoomController extends Controller {
         $topRoomIds = array_slice(array_keys($preferences), 0, 3);
 
         // Dapatkan detail kamar teratas
-        $topRooms = Room::whereIn('id_kamar', $topRoomIds)->get();
+        $topRooms = Room::whereIn('id_kamar', $topRoomIds)->get()->sortBy(fn($room) => array_search($room->id_kamar, $topRoomIds))->values(); // Mengatur ulang indeks array
 
         return $topRooms;
     }
