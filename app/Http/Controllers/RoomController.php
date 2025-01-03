@@ -235,15 +235,13 @@ class RoomController extends Controller {
             'no_kamar' => 'required|integer',
             'id_bangunan' => 'required',
             'harga_kamar' => 'required|numeric',
-            'kecepatan_internet' => 'required|integer',
+            'kecepatan_internet' => 'required',
             'gambar_kamar' => 'nullable|image',
             'deskripsi'=> 'nullable',
         ]);
 
-        if ($request->hasFile('gambar_kamar')) {
-            $file = $request->file('gambar_kamar');
-            $path = $file->submit('room-images', 'public');
-            $validate['gambar_kamar'] = $path;
+        if($request->gambar_kamar) {
+            $validate['gambar_kamar'] = $request->file('gambar_kamar')->store('room-images');
         }
 
         if($room->update($validate)) {
