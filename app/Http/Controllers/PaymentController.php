@@ -172,20 +172,4 @@ class PaymentController extends Controller
         $rating->save();
         return redirect('/myroom');
     }
-
-    public function confirmation($snap_token){
-        $transaction = Transaction::where('snap_token',$snap_token)->first();
-        $transaction->status = true;
-        $transaction->update();
-
-        if($transaction->status) {
-            $rent = new Rent();
-            $rent->id_kamar = $transaction->room_id;
-            $rent->id_penyewa = $transaction->tenant_id;
-            $rent->tanggal_masuk = now('Asia/Makassar');
-            $rent->token = Str::random(16);
-            $rent->save();
-        }
-        return redirect('/transactions')->with('payment-success','Payment Confirmed');
-    }
 } 

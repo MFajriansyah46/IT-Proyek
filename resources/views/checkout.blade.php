@@ -18,7 +18,11 @@
         </div>
         <div class="flex">
             <p class="text-gray-600 w-72"><strong>Total Price</strong></p>
-            <p class="text-gray-600">: Rp {{ number_format($transaction->room->harga_kamar, 2, ',', '.') }}</p>
+            @if (auth()->user()->roommate()->count() > 0)
+              <p class="text-gray-600">: Rp {{ number_format($transaction->room->harga_kamar + 25000 * auth()->user()->roommate()->count(), 2, ',', '.') }}</p>
+            @else
+              <p class="text-gray-600">: Rp {{ number_format($transaction->room->harga_kamar, 2, ',', '.') }}</p>
+            @endif
         </div>
     </div>
     <button type="button" id="pay-button" class="mt-24 w-full bg-green-500 text-white font-semibold py-2 rounded-md hover:bg-green-600 transition duration-300">Confirm Payment</button>
