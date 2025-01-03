@@ -124,13 +124,20 @@ class PaymentController extends Controller
         
         $doc = new \PhpOffice\PhpWord\TemplateProcessor("storage/documents/buktiSewa.docx");
 
-        $tenant = auth('tenant')->user();
+        $tenant = $rent->tenant;
         $tenant_email = $tenant->email ?? '-';
-        $roommate_name = $tenant->roommate->name ?? '-';
-        $roommate_phone_number = $tenant->roommate->phone_number ?? '-';
+        
+        $roommate_name = '-';
+        $roommate_phone_number = '-';
+        $wifi_fee = 0;
+        
+        if (!empty($tenant->roommate)) {
+            $roommate_name = $tenant->roommate->name ?? '-';
+            $roommate_phone_number = $tenant->roommate->phone_number ?? '-';
+            $wifi_fee = 25000 * $tenant->roommate->count();
+        }
 
         $room_price = $transaction->price;
-        $wifi_fee = 25000 * $tenant->roommate()->count();
         $admin_fee = 5000;
 
 
