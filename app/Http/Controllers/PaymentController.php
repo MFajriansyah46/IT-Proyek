@@ -122,7 +122,7 @@ class PaymentController extends Controller
 
     private function proof($rent, $transaction){
         
-        $doc = new \PhpOffice\PhpWord\TemplateProcessor("storage/documents/buktiSewa.docx");
+        $doc = new \PhpOffice\PhpWord\TemplateProcessor("assets/buktiSewa.docx");
 
         $tenant = $rent->tenant;
         $tenant_email = $tenant->email ?? '-';
